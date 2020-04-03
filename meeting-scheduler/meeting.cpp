@@ -46,6 +46,7 @@ Meeting::Meeting (char **argv)
     start_time_ (atoi (argv[2])),
     finish_time_ (atoi (argv[3]))
 {
+  // std::cout << title_ << " " << "" << day_ << " " << start_time_ << " " << finish_time_ << std::endl;
 }
 
 Meeting::Day_Of_Week
@@ -183,6 +184,23 @@ struct print_conflicts
   std::ostream &os_;
 };
 
+template <typename Input_Iterator, typename Output_Iterator>
+void check_for_conflicts (Input_Iterator begin, Output_Iterator end) {
+#if 1  
+  for (auto iter = begin; iter != end; ++iter) {
+    if (iter != end - 1 && *iter == *(iter + 1))
+      std::cout << "CONFLICT:" << std::endl << " " << *iter << std::endl
+          << " " << *(iter + 1) << std::endl << std::endl;
+  }
+#else
+  // Find & print out any conflicts.
+  std::transform (begin, end - 1,
+                  begin + 1,
+                  begin,
+                  print_conflicts (std::cout));
+#endif
+}
+
 int 
 main (int argc, char *argv[]) 
 {
@@ -191,25 +209,15 @@ main (int argc, char *argv[])
   std::copy (argv_iterator<Meeting> (argc - 1, argv + 1, 4),
              argv_iterator<Meeting> (),
              std::back_inserter (schedule));
-
+             
   std::sort (schedule.begin (), schedule.end ());
 
-  // Find & print out any conflicts.
-  std::transform (schedule.begin (), schedule.end () - 1,
-                  schedule.begin () + 1, 
-                  schedule.begin (),
-                  print_conflicts (std::cout));
+  check_for_conflicts (schedule.begin (), schedule.end ());
 
   // Print out schedule, using STL output stream iterator adapter.
-  std::copy (schedule.begin (), schedule.end (), 
+  std::copy (schedule.begin (),
+             schedule.end (), 
              std::ostream_iterator<Meeting> (std::cout, "\n"));
+
   return 0;
 }
-
-#if 0
-  for (auto &iter : schedule)
-    if (iter != schedule.end () && iter == iter + 1)
-      os_ << "CONFLICT:" << std::endl << " " << lhs << std::endl
-          << " " << rhs << std::endl << std::endl;
-#endif
-
