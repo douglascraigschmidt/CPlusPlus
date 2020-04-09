@@ -9,7 +9,7 @@ CFILES		= main.cpp \
 		  Array.cpp 
 OFILES		= main.o Array.o
 DFLAGS		= -ggdb
-CFLAGS		= $(DFLAGS) -std=c++0x # -DRVALUE_REFERENCES # -fno-elide-constructors # -DUSE_TEMPLATES -D__INLINE__ -DUSE_EXCEPTIONS
+CFLAGS		= $(DFLAGS) -std=c++0x -DRVALUE_REFERENCES # -fno-elide-constructors # -DUSE_TEMPLATES -D__INLINE__ -DUSE_EXCEPTIONS
 
 #############################################################################
 # C++ directives

@@ -41,21 +41,23 @@ int main ()
   for (auto const &i : word_map)
     std::cout << i.second << " " << i.first << std::endl; 
 
-#if 
+#if 0
   std::vector<std::pair <std::string, int>> v;
 
   for (auto const &i : word_map)
     v.push_back (i);
 
+  // std::copy (word_map.begin (), word_map.end (), std::back_inserter (v));
+
   std::sort (v.begin (), v.end (), std::greater<std::pair <std::string, int>> ());
 
   std::cout << std::endl;
-#endif
 
   // Print out the sorted vector.  Note auto type deduction.
 
   for (auto const &i : v) 
     std::cout << i.second << " " << i.first << std::endl; 
+#endif
 
   // Note auto type deduction.
   auto total = 0;

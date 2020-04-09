@@ -21,7 +21,7 @@ Array<T>::Array (size_t size)
     default_value_ (nullptr),
     array_ (new T[size])
 {
-  std::cout << "Array(size_t)" << std::endl;  
+  std::cout << "Array(size_t) with size " << size << std::endl;
 }
 
 template <typename T> 
@@ -33,7 +33,7 @@ Array<T>::Array (size_t size,
     default_value_ (new T (default_value)),
     array_ (new T[size])
 {
-  std::cout << "Array(size_t, const T)" << std::endl;  
+  std::cout << "Array(size_t, const T) with size " << size << std::endl;
   std::fill_n (array_.get (),
                size,
                default_value);
@@ -51,7 +51,7 @@ Array<T>::Array (const Array<T> &rhs)
                      : nullptr),
      array_ (new T[rhs.cur_size_])
 {
-  std::cout << "Array(const Array<T> &)" << std::endl;
+  std::cout << "Array(const Array<T> &) with size " << rhs.cur_size_ << std::endl;
 
   // If an exception is thrown here the destructors of the data
   // members clean everything up.
@@ -72,7 +72,7 @@ Array<T>::Array (Array<T> &&rhs)
     default_value_ (rhs.default_value_.release()),
     array_ (rhs.array_.release())
 {
-  std::cout << "Array(Array<T> &&)" << std::endl;  
+  std::cout << "Array(Array<T> &&) with size " << rhs.cur_size_ << std::endl;
 }
 
 #endif /* RVALUE_REFERENCES */
@@ -142,7 +142,7 @@ Array<T>::swap (Array<T> &new_array)
 template <typename T> Array<T> &
 Array<T>::operator= (const Array<T> &rhs)
 {
-  std::cout << "operator=(const Array<T> &)" << std::endl;  
+  std::cout << "operator=(const Array<T> &) with size " << rhs.cur_size_ << std::endl;
   // Check for "self-assignment".
   if (this != &rhs)
     {
@@ -158,8 +158,8 @@ Array<T>::operator= (const Array<T> &rhs)
 template <typename T> Array<T> &
 Array<T>::operator= (Array<T> &&rhs)
 {
-  std::cout << "operator=(Array<T> &&)" << std::endl;  
-  // Simply swap the rsh with this!
+  std::cout << "operator=(Array<T> &&) with size " << rhs.cur_size_ << std::endl;
+  // Simply swap the rhs with this!
   swap(rhs);
 }
 #endif /* RVALUE_REFERENCES */
@@ -172,7 +172,7 @@ Array<T>::~Array (void)
   if (array_.get() == 0)
     std::cout << "null ~Array" << std::endl;  
   else
-    std::cout << "~Array" << std::endl;  
+    std::cout << "~Array with size " << cur_size_ << std::endl;  
 }
 
 // Set an item in the array at location index.  

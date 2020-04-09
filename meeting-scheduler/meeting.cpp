@@ -154,7 +154,7 @@ public:
     return argv_ != (base_argv_ + argc_);
   }
 
-  T operator *()  
+  T operator *()
   { 
     return T (argv_);
   }
@@ -190,7 +190,7 @@ void check_for_conflicts (Input_Iterator begin, Output_Iterator end) {
   for (auto iter = begin; iter != end; ++iter) {
     if (iter != end - 1 && *iter == *(iter + 1))
       std::cout << "CONFLICT:" << std::endl << " " << *iter << std::endl
-          << " " << *(iter + 1) << std::endl << std::endl;
+                << " " << *(iter + 1) << std::endl << std::endl;
   }
 #else
   // Find & print out any conflicts.
