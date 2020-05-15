@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+// #define RVALUE_REFERENCES
 #include "Array.h"
 
 static const char PROMPT[] = "please enter your name..: ";
@@ -19,28 +20,23 @@ static const Array<char>::value_type DEFAULT_VALUE = 'D';
  * Prompt the user to enter their name.  Note value semantics for both
  * param and return value.
  */
-static Array<char> 
+static Array<char>
 get_name(Array<char> prompt) {
-  // Prompt the user.
-  for (Array<char>::iterator i = prompt.begin ();
-       i != prompt.end ();
-       ++i)
-    std::cout << *i;
+    // Prompt the user.
+    std::copy (prompt.begin(),
+               prompt.end(),
+               std::ostream_iterator<char> (std::cout));
 
-  std::copy (prompt.begin(),
-             prompt.end(),
-             std::ostream_iterator<char> (std::cout));
+    std::string name;
 
-  std::string name;
+    std::getline (std::cin, name);
 
-  std::getline (std::cin, name);
+    Array<char> a;
 
-  Array<char> a;
-
-  std::copy (name.begin(),
-             name.end(),
-             std::back_inserter (a));
-  return a;
+    std::copy (name.begin(),
+               name.end(),
+               std::back_inserter (a));
+    return a;
 }
 
 #if defined(RVALUE_REFERENCES)
@@ -50,37 +46,36 @@ get_name(Array<char> prompt) {
 #endif /* RVALUE_REFERENCES */
 
 int
-main (int argc, char *argv[]) 
+main (int argc, char *argv[])
 {
-  Array<char> prompt (PROMPT_LENGTH);
-      
-  std::copy(PROMPT,
-            PROMPT + PROMPT_LENGTH,
-            prompt.begin());
+    Array<char> prompt (PROMPT_LENGTH);
 
-  // Pass param by value and return result by value (may or may not be
-  // optimized).
-  Array<char> a = get_name(moveit(prompt));
+    std::copy(PROMPT,
+              PROMPT + PROMPT_LENGTH,
+              prompt.begin());
 
-  std::cout << "your name backwards is..: ";
+    // Pass param by value and return result by value (may or may not be
+    // optimized).
+    Array<char> a = get_name(moveit(prompt));
 
-  std::reverse_copy(a.begin(),
-                    a.end(),
-                    std::ostream_iterator<char> (std::cout));
+    std::cout << "your name backwards is..: ";
 
-  std::cout << std::endl;
+    std::reverse_copy(a.begin(),
+                      a.end(),
+                      std::ostream_iterator<char> (std::cout));
 
-  // Perform an assignment (may or may not be optimized).
-  prompt = moveit(a);
+    std::cout << std::endl;
 
-  std::cout << "your name forwards is..: ";
+    // Perform an assignment (may or may not be optimized).
+    prompt = moveit(a);
 
-  std::copy(prompt.begin(),
-            prompt.end(),
-            std::ostream_iterator<char> (std::cout));
+    std::cout << "your name forwards is..: ";
 
-  std::cout << std::endl;
+    std::copy(prompt.begin(),
+              prompt.end(),
+              std::ostream_iterator<char> (std::cout));
 
-  return 0;     
+    std::cout << std::endl;
+
+    return 0;
 }
-
