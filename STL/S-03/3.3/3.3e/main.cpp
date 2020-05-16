@@ -4,23 +4,42 @@
 #include <numeric>
 using namespace std;
 
+/**
+ * Efficiency Tips for vectors
+ * 
+ * . Provides rapid indexed access with the overloaded subscript
+ *   operator[], because they are stored in contiguous memory like a C
+ *   or C++ raw array.
+ *
+ * . Supports random-access iterators. All STL algorithms can operate
+ *   on a vector. The iterators for a vector are normally implemented as
+ *   pointers to elements of the vector.  
+ *
+ * . It is faster to insert many elements at once than one at a time.
+ * 
+ * . Vector is the type of sequenced template that should be used by
+ *   default if you don¡¯t need to access both ends of the collection
+ *   and you don't need to traverse it backwards.
+ *
+ * This example shows how to sum the contents in a vector by
+ * deferencing an iterator.
+ */
 int main() {
-    vector<int> aVector;
+  vector<int> aVector ({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
 
-    for( int i=0; i < 10; ++i)			// put some values in vector
-        aVector.push_back(i);
+  auto total = 0;
+  for (auto anIterator = aVector.begin(); // set iterator at start
+       anIterator != aVector.end();
+       ++anIterator)  	                  // process vector  using iterator
+    total += *anIterator;                 // add up values stored
 
-    int total = 0;
-    for (auto anIterator = aVector.begin();  // set iterator at start
-         anIterator != aVector.end();
-         ++anIterator)  	// process vector  using iterator
-        total += *anIterator;			// add up values stored
+  cout << "Total = " << total << endl;     // display the total of values
 
-    cout << "Total=" << total << endl;	// display the total of values
+  // Same results via an STL algorithm.
+  cout << "Total = "
+       << std::accumulate(aVector.begin(), aVector.end(), 0)
+       << endl;
 
-    cout << "Total=" << std::accumulate(aVector.begin(), aVector.end(), 0)
-         << endl;
-
-    return 0;
+  return 0;
 }
 

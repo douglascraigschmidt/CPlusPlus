@@ -5,8 +5,15 @@
 
 using namespace std;
 
+/**
+ * This example shows how easy it is to switch from a vector of ints
+ * to a vector of doubles.
+ */
 int main() {
+  // Create an empty vector.
   vector<double> aVector;
+
+  // Add several elements.
   aVector.push_back(1.2);
   aVector.push_back(4.5);
 
