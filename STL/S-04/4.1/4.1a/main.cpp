@@ -30,12 +30,39 @@ using namespace std;
  * or writing. In between are the bi-directional, reverse, insertion,
  * stream and forward iterators. Each is a class with its own member
  * functions, overloaded operators and data.
+ *
+ * The following overloaded operators are defined for more iterators:
+ *
+ * *it;	Use dereference (*) op to get/set value
+ * ++it;	Points to next element. Value after update
+ * it++;	Points to next element. Value before update
+ * it2 = it2;	Assignment
+ * it1 == it2;	Equality comparison
+ * it1 != it2;	Inequality
+ * 
+ * Additional operators for bidirectional iterators include:
+ * 
+ * --it;	Pre-decrement
+ * it--;	Post-decrement. May be less efficient
+ * 
+ * Additional operators for random-access iterators include:
+ * 
+ * it += i;	Increments it by i positions
+ * it -= i;	Decrements it by i positions
+ * it2 + I;	Increments it by i positions
+ * it2 – I;	Decrements it by i positions
+ * it[i];	Returns reference to ith element after it
+ * it1 < it2;	Comparison
+ * it1 <= it2;	Comparison
+ * it1 > it2;	Comparison
+ * it1 <= it2;	Comparison
  * 
  * Each predefined standard STL container comes with its own iterator,
  * and that might be a random access iterator, a bidirectional
- * iterator or another type. But one can always use an additional type
- * of iterator if the predefined one doesn't work as needed.  Or one
- * can define a custom iterator based on the STL predefined classes.
+ * iterator or another type. But you can always use an additional type
+ * of iterator if the predefined one doesn't work as needed.
+ * Likewise, you can define a custom iterator based on the STL
+ * predefined classes.
  * 
  * Iterators are central to generic programming because they are an
  * interface between containers and algorithms. Algorithms usually
@@ -46,8 +73,9 @@ using namespace std;
 
 namespace my_copy {
     /**
-     * This function shows a typical implementation of the copy() template
-     * function, which is a common STL algorithm that uses iterators.
+     * This function shows a typical implementation of the copy()
+     * template function, which is a common STL algorithm that uses
+     * iterators.
      */
     template<typename InputIterator, typename OutputIterator>
     OutputIterator copy(InputIterator first,

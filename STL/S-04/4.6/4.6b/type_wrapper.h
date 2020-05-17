@@ -5,13 +5,6 @@
 using namespace std;
 
 /**
- * The declaration of C++ class templates must begin with the keyword
- * template.  A parameter must be included inside angle brackets using
- * either the keyword class or typename. Additional parameters can be
- * incuded within the angle brackets, including non-typed parameters
- * and other templates as parameters.  Just like any class, the class
- * body declaration with its member data and member functions follows.
- *
  * This template class is used to demonstrate the difference between
  * pass-by-value and pass-by-reference semantics in C++.
  */
@@ -22,7 +15,7 @@ public:
     cout << "type_wrapper::type_wrapper()" << endl; 
   }
 
-  explicit type_wrapper(T i): i_(i) {
+  type_wrapper(T i): i_(i) {
     cout << "type_wrapper::type_wrapper(T)" << endl; 
   }
 
@@ -38,7 +31,7 @@ public:
     if (&rhs == this)
         return *this;
     else {
-        T(rhs).swap(*this);
+        T(rhs).swap(*this->i_);
         cout << "type_wrapper::operator=(const &)" << endl;
         return *this;
     }
