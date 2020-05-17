@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * Here is an example of vectors being created using a C-style array
+ * and char pointer, as well as a C++ initializer list.
+ */
 int  main() {
   int ar[10] = {12, 45, 234, 64, 12, 35, 63, 23, 12, 55};
   const char* str = "Hello World";

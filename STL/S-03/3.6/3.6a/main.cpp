@@ -2,15 +2,20 @@
 #include <string>
 using namespace std;
 
+/**
+ * The STL string class is not part of the STL.  However, it often
+ * acts much like a form of a container of char data and can use the
+ * STL iterators, algorithms and functions.
+ */
 int main() {
-    string myLetters="abcdefghijklmnopqrstuvwxyz";
+  string my_letters = "abcdefghijklmnopqrstuvwxyz";
 
-    int i = 0;
+  int i = 0;
 
-    for(char myLetter : myLetters)
-        cout << ++i << " " << myLetter << endl;
+  for(char my_letter : my_letters)
+    cout << ++i << " " << my_letter << endl;
 
-    return 0;
+  return 0;
 }
 
 

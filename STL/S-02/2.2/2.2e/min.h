@@ -1,3 +1,8 @@
+/**
+ * Here is an example using two function templates, one that has two
+ * parameters of a given datatype and the other that has three of a
+ * given datatype.
+ */
 template <typename T>
 T min (T p1, T p2) {
   if (p1 < p2)

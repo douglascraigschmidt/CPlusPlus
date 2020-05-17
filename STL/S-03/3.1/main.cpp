@@ -1,21 +1,66 @@
-/* Sequential containers 
+/**
+ * STL containers are classes whose objects can be used to build
+ * collections of data of same type, like built-in C++ arrays.
+ * However, these collections also have data and functions because
+ * they are objects.
+ * 
+ * Common characteristics of STL containers include the following:
+ *
+ * 1. They copy the values of their elements when inserted rather than
+ *    maintaining references to these elements. This is called ‚Äòvalue
+ *    semantics‚Äô. Thus anything added to an STL container must be able
+ *    to be copied; a user defined class must define a public copy
+ *    constructor or to use the class objects with an STL container,
+ *    pointers to the objects must be stored in the container.
+ *
+ * 2. All elements added to ‚Äúclassic‚Äù STL containers have an order; in
+ *    sequential containers this is maintained by the order added to
+ *    the container; in associative containers, a key value provides
+ *    the ordering.
+ *
+ * 3. Operations on the elements of an STL container are not tested by
+ *    the container for being correct or safe: a program using the STL
+ *    must provide its own exception handling code for any errors that
+ *    might occur. 
+ *
+ * Common operations of STL contains include the following:
+ *
+ * 1. Initialization constructors: Each container supports both
+ *    default and copy constructors, plus a destructor. Containers can be
+ *    initialized with a range of values as well. 
+ * 
+ * 2. Size functions: There are 3 functions related to a container‚Äôs
+ *    size. They are: size(), which returns the actual number of
+ *    elements in the container, empty(), checks whether there are any
+ *    elements at all in the container, and max_size(), which returns
+ *    the maximum number of elements the container can contain.
+ *
+ * 3. Comparison operators: The equality and relational operators, ==, 
+ *    !=, <, <=, >, >= are defined for containers holding the same
+ *    datatype as elements. Two containers are equal if all elements
+ *    are equal and in the same order. The relational operators work
+ *    by comparing the containers element-by-element. If one container
+ *    has fewer elements it is ‚Äòless than‚Äô the other. If a container‚Äôs
+ *    element value is less than the value of that element at the same
+ *    index in the other container this contain is also ‚Äòless than‚Äô
+ *    the other one. If the comparison test runs thru both containers
+ *    and they are of equal size with identical elements in the same
+ *    order, they are equal and the < or > relational operator returns
+ *    false for whatever it is testing for.
+ *
+ * 4. Assignments and swap() function: When one container is assigned
+ *    to another one, all elements in the source container are copied
+ *    by value into the destination container, and all old elements
+ *    are removed. This takes time.  A faster way to get this done if
+ *    the source container will not be needed afterward, is to use the
+ *    swap() function instead. This will swap the internal pointers to
+ *    the container‚Äôs elements, allocator and sorting criteria, and is
+ *    very fast and exception-safe.
+ */
 
-Sequential containers are collections of data elements placed in some
-order, usually according to when the element was added to the
-container. The order of the elements has nothing to do with their
-value. The non-vector sequential containers are something like arrays,
-but don°¶t have to be physically contiguous in storage.
-
-Sequential containers are better than simple C/C++ arrays because:
-
-. They have a size() member function
-. They provide a past end entry iterator
-. They provide copy constructors
-. They allow assignment
-. Can be passed by value
-. They grow and shrink dynamically, i.e., they know how to cleanup
-  after themselves because they have destructors
-*/
+/**
+ * Sequential containers.
+ */ 
 
 // vector - Linear and contiguous storage like an array that allows
 // fast insertions and removals at the end only.
@@ -33,36 +78,9 @@ Sequential containers are better than simple C/C++ arrays because:
 // insertions and removals at both ends.
 #include <deque>
 
-/* Ordered associative containers 
-
-An ordered associative container is a container that supports
-efficient insertion, removal, and lookup of elements (values) based on
-keys. It supports insertion and removal of elements, but differs from
-a sequential container because it doesn°¶t let one insert an element at
-a specific position or remove an element from a given position based
-on the position itself °V all access is done to the °•value°¶ using a
-key.  And once one adds the elements to the container, the key cannot
-change, although the element and its key can be removed. The STL
-provides four ordered associative containers.
-
-For sets and multisets there are only a group of values stored, but
-they are stored in some kind of order keyed by the values. So if the
-values are numbers, the ordering is by numeric value. If they are
-letters, the collection is ordered by alphabetical order, OR the
-values can be classes and the programmer can define a function to base
-the key order upon.
-
-For maps and multimaps there are actually two series of data that go
-together hand in hand. One is the values and the other is called the
-key. These are called pair associative containers because each value
-is paired with a key. The keys cannot be changed by iterators once
-they are assigned (you can, of course, erase a key).
-
-Associative containers are implemented as binary trees. This means
-that each element has a parent element and can have up to two child
-elements. In addition, all ancestors to the left of an element have
-lesser values and all ancestors to the right of an element have
-greater values. */
+/**
+ * Ordered associative containers 
+ */
 
 // set - Defines where the elements' values are the keys and
 // duplicates are not allowed. It has fast lookup using the key.
@@ -80,7 +98,9 @@ greater values. */
 // many values.
 #include <map>
 
-/* Unordered associative containers */
+/**
+ * Unordered associative containers 
+ */
 
 // set - Defines where the elements' values are the keys and
 // duplicates are not allowed. It has fast lookup using the key.
@@ -98,7 +118,9 @@ greater values. */
 // many values.
 #include <unordered_map>
 
-/* Adapter containers */
+/**
+ * Adapter containers 
+ */
 
 // stack - First in, last out data structure.
 #include <stack>

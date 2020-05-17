@@ -1,38 +1,45 @@
 #include <iostream>
 
+/**
+ * Class templates can be partly specialized, as shown by this
+ * template class that takes two type parameters.
+ */
 template <typename T, typename U>
-struct aClass
+struct Class
 {
-  aClass () { std::cout << "aClass <T, U>\n"; }
+  Class () { std::cout << "Class <T, U>\n"; }
 };
 	
+/**
+ * The following are partial specializations of the template Class.
+ */
 template <typename T>   	//specialize so that both are same datatype
-struct aClass <T, T> {
-  aClass () { std::cout << "aClass<T, T>\n"; }
+struct Class <T, T> {
+  Class () { std::cout << "Class<T, T>\n"; }
 };
 
 template <typename T>   	//specialize so that second datatype is int
-struct aClass <T, int > {
-  aClass () { std::cout << "aClass<T, int>\n"; }
+struct Class <T, int > {
+  Class () { std::cout << "Class<T, int>\n"; }
 };
 
 template <typename T, typename U>   // both are now pointers
-struct aClass <T *, U *> {
-  aClass () { std::cout << "aClass<T*, U*>\n"; }
+struct Class <T *, U *> {
+  Class () { std::cout << "Class<T*, U*>\n"; }
 };
 
 int main(void) {
-  aClass <int, double> a;     // prints ¡°aClass<T, U>¡±
-  aClass <double, double> b;  // prints ¡°aClass<T, T>¡±
-  aClass <double, int> c;     // prints ¡°aClass<T, int>¡±
-  aClass <int *, double *> d; // prints ¡°aClass<T*, U*>¡±
+  Class <int, double> a;     // prints "Class<T, U>"
+  Class <double, double> b;  // prints "Class<T, T>"
+  Class <double, int> c;     // prints "Class<T, int>"
+  Class <int *, double *> d; // prints "Class<T*, U*>"
 
-  // aClass <int, int> e;        // prints??
+  // Class <int, int> e;        // prints??
 
   // Can fix ambiguity with 
   // template <>
-  // struct aClass <int, int> {
-  //   aClass () { std::cout << "aClass<int, int>\n"; }
+  // struct Class <int, int> {
+  //   Class () { std::cout << "Class<int, int>\n"; }
   // };
 
   return 0;

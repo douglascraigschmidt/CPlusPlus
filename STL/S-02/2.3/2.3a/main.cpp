@@ -2,41 +2,42 @@
 #include <iterator>
 #include <set>
 #include "type_wrapper.h"
-using namespace std;
+#include "pair.h"
 
-template <typename T>
-class aPair {
-public:
-#if PASS_BY_VALUE==1
-    aPair (T f, T s) {
-        first = f;
-        second = s;
-    }
-#else
-    aPair(const T &f, const T &s)
-            : first (f),
-              second (s)
-    {}
-#endif /* PASS_BY_VALUE */
-
-  T max();		
-
-  T first; 
-  T second;  
-};
-
-template <typename T>					 
-T aPair<T>::max() {
-  return first < second ? second : first;
-}
-
+/**
+ * This example shows the use of class templates and also demonstrates
+ * the difference between pass-by-value and pass-by-reference
+ * semantics for C++ parameters and return values.
+ */
 int main () {
-  type_wrapper<int> f1(10);
-  type_wrapper<int> f2(20);
+  {
+    type_wrapper<int> p1(10);
+    type_wrapper<int> p2(20);
 
-  aPair<type_wrapper<int>> myPair(f1, f2);
+    // Chose "my_pair" rather than std::pair.
+    my_pair::pair<type_wrapper<int>> i_pair(p1, p2);
 
-  cout << "the max of " << f1 << " and " << f2 << " = " << myPair.max() << endl;
+    std::cout << "the max of "
+              << p1 << " and "
+              << p2 << " = "
+              << i_pair.max()
+              << std::endl;
+  }
+
+  // It's easy to switch from one type parameter to another.
+  {
+    double d1 = 100.4;
+    double d2 = 200.8;
+
+    // Again, chose "my_pair" rather than std::pair.
+    my_pair::pair<double> d_pair(d1, d2);
+
+    std::cout << "the max of "
+              << d1 << " and "
+              << d2 << " = "
+              << d_pair.max()
+              << std::endl;
+  }
 
   return 0;
 }

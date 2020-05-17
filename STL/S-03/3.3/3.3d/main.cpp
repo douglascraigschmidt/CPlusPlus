@@ -9,28 +9,33 @@ using namespace std;
  *
  * . Random access to elements
  * . Constant time insertion and removal of elements at end
- * . Linear time insertion of elements at beginning or middle because other elements have to be moved
+ * . Linear time insertion of elements at beginning or middle because
+ *   other elements have to be moved  
  * . Number of elements can vary dynamically
  * . Simplest and most efficient type of STL container
  * . Member function reserve() can pre-allocate all memory needed
  * . Assignment,  copy constructor, and destructor supported 
-
+ *
  * A vector can be used like an ordinary C array, except that vector
- * eliminates the chore of managing dynamic memory allocation.  This
- * example shows how vectors can be nested.
+ * eliminates the chore of managing dynamic memory allocation.  
+ *
+ * This example shows how to create and use a vector that contains
+ * another vector inside it, i.e., a vector-of-vectors similar (but
+ * not identical) to C/C++ 2-dimensional array.
  */
 int main() {
   vector< vector<int>> myVec2D;     	// create 2D int vector
   vector<int> oneVec, twoVec;		// create two int vectors
 
   oneVec.push_back(1); oneVec.push_back(2); oneVec.push_back(3);
-  twoVec.push_back(4); twoVec.push_back(5);  twoVec.push_back(6);
+  twoVec.push_back(4); twoVec.push_back(5); twoVec.push_back(6);
 
-  myVec2D.push_back(oneVec); myVec2D.push_back(twoVec);
+  myVec2D.push_back(oneVec); 
+  myVec2D.push_back(twoVec);
 
   cout << endl << "Using Iterator:" << endl;
 
-  for(vector< vector<int>>::iterator iter2D = myVec2D.begin();
+  for (vector< vector<int>>::iterator iter2D = myVec2D.begin();
       iter2D != myVec2D.end();
       ++iter2D)
     for(vector<int>::iterator iter = iter2D->begin();

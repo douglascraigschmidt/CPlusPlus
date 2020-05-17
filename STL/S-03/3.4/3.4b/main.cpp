@@ -2,6 +2,25 @@
 #include <deque>
 using namespace std;
 
+/**
+ * Efficiency of deque vs. vector:
+ *
+ * . When performing a large number of push_back() calls, use
+ *   vector::reserve().
+ * 
+ * . When performing many de-allocations, deque takes longer to
+ *   reclaim memory than vector since it is allocated using multiple
+ *   "chunks."
+ * 
+ * . When using insert() or pop_front() with a deque is more efficient
+ *   than vector.
+ * 
+ * . For element access, vector::at() or vector[] is better than
+ *   deque's at() or deque[] methods.
+ *
+ * Here is another deque example that uses dequeâ€™s random access
+ * iterators.
+ */
 int main()  {
     deque<char> aDeck;
 
@@ -13,23 +32,24 @@ int main()  {
         cout << i << " ";
     cout << endl;
 
-    deque<char>::iterator It1 = aDeck.begin() + 2; // Note random access
-    auto It2 = aDeck.begin() + 3; // iterators here
-    cout << "*It1: " << *It1 << ", ";
-    cout << "*It2: " << *It2 << endl;
+    deque<char>::iterator it1 = aDeck.begin() + 2; // Note random access
+    auto it2 = aDeck.begin() + 3; // iterators here
+
+    cout << "*it1: " << *it1 << ", ";
+    cout << "*it2: " << *it2 << endl;
     cout << endl;
 
-    aDeck.insert(It1, 'X');
+    aDeck.insert(it1, 'X');
 
     cout << "Sequence after insert: ";
     for(char i : aDeck)
         cout << i << " ";
     cout << endl;
 
-    // These iterator dereferences may cause the program to crash since STL
-    // does not implement “robust iterators”..
-    cout << "*It1: " << *It1 << ", ";
-    cout << "*It2: " << *It2 << endl;
+    // These iterator dereferences may cause the program to crash
+    // since STL does not implement "robust iterators" for deques.
+    cout << "*it1: " << *it1 << ", ";
+    cout << "*it2: " << *it2 << endl;
 
     return 0;
 }
