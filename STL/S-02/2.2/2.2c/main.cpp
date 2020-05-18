@@ -5,7 +5,7 @@
  */
 template <typename R, typename T, typename U>
 R max(T a, U b) {
-    return a<b ? b: a;
+    return a < b ? b: a;
 }
 
 /**

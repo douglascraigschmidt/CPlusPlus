@@ -54,7 +54,8 @@ public:
   }
 
   operator T() const {
-    return i_;
+      cout << "type_wrapper::operator T()" << endl;
+      return i_;
   }
 
   ~type_wrapper() { 
