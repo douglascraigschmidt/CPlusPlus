@@ -2,7 +2,7 @@
  * Create a namespace so we can reuse the name "pair", which also
  * appears in the std namespace.
  */
-namespace my_pair  {
+namespace my_pair {
   /**
    * If a set of functions or classes have the same functionality for
    * different data types, this becomes a good class template. The class
@@ -12,26 +12,25 @@ namespace my_pair  {
    * default, whereas data/methods for a class are private by default.
    * This template class stores two elements of any valid datatype.
    */
-    template<typename T>
-    class pair {
-    public:
+  template<typename T>
+  class pair {
+  public:
 #if PASS_BY_VALUE == 1
-        pair (T f, T s) {
-            first = f;
-            second = s;
-        }
+    pair(const T &f, const T &s)
+      : first(f),
+        second(s) {}
 #else
-        pair(const T &f, const T &s)
-                : first(f),
-                  second(s) {}
-
+    pair (T f, T s) {
+      first = f;
+      second = s;
+    }
 #endif /* PASS_BY_VALUE */
 
-        T max();
+    T max();
 
-        T first;
-        T second;
-    };
+    T first;
+    T second;
+  };
 
   /** 
    * Any template functions defined outside the class template body,
@@ -40,9 +39,9 @@ namespace my_pair  {
    * class declaration. Here is the function implemented along with a
    * small program using this class template.
    */
-    template<typename T>
-    T pair<T>::max() {
-        return first < second ? second : first;
-    }
+  template<typename T>
+  T pair<T>::max() {
+    return first < second ? second : first;
+  }
 }
 
