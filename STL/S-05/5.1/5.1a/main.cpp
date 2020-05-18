@@ -1,3 +1,7 @@
+#include <iostream>
+#include <utility>
+using namespace std;
+
 /**
  * An ordered associative container is a container that supports
  * efficient insertion, removal, and lookup of elements (values) based
@@ -28,4 +32,25 @@
  * elements. In addition, all ancestors to the left of an element have
  * lesser values and all ancestors to the right of an element have
  * greater values.
+ * 
+ * The following are STL predefined ordered associative containers:
+ *
+ * set<key>             Supports unique keys only and provides fast key retrieval
+ * multiset<key>        Supports duplicate keys, also fast key retrieval
+ * map<key, value>      Supports unique keys only, and fast retrieval
+ *                      of type T data based on the key  
+ * multimap<key, value> Supports duplicate keys, otherwise performs like map.
+ * 
+ * You can also create a custom associative container and use it with
+ * the STL iterators, algorithms, and functions.
+ *
+ * What are the applications of such containers? Think of a symbolic
+ * debugger. It can use an associative container that maps strings
+ * (variable names) to memory addresses (the variables'
+ * addresses). This way, when one evaluate or modify a variable by its
+ * name, the debugger knows where that variable is stored in memory.
+ * 
+ * Another example is a phone book, in which names serve as keys, and
+ * telephone numbers are their associated values.
  */
+
