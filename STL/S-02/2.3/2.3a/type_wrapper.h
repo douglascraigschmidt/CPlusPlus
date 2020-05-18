@@ -38,7 +38,6 @@ public:
     if (&rhs == this)
         return *this;
     else {
-        T(rhs).swap(*this);
         cout << "type_wrapper::operator=(const &)" << endl;
         return *this;
     }

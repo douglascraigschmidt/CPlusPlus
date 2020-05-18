@@ -15,7 +15,7 @@ namespace my_pair {
   template<typename T>
   class pair {
   public:
-#if PASS_BY_VALUE == 1
+#if PASS_BY_VALUE == 0
     pair(const T &f, const T &s)
       : first(f),
         second(s) {}

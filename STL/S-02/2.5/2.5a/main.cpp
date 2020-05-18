@@ -22,7 +22,7 @@ int main() {
   Stack<double> aStackofdoubles;       
 
   // Don't use default, so Stack now a vector of ints.
-  aStack<> aStackofints;
+  Stack<> aStackofints;
 
   return 0;
 }

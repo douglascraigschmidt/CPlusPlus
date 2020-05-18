@@ -34,7 +34,7 @@ using namespace std;
 template <typename T> 
 class Container { // class template
 public:
-  Container (const T &arg) : element (arg) { }
+  explicit Container (const T &arg) : element (arg) { }
   T increase () {return ++element;}
 private:
   T element;
@@ -43,7 +43,7 @@ private:
 // class template specialization:
 template <> class Container <char> {
 public:
-  Container (char arg): element (arg) { }
+  explicit Container (char arg): element (arg) { }
   char uppercase ();  // note how we've added a totally new method!
 private:
   char element;

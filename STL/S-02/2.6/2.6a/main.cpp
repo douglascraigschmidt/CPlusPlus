@@ -12,8 +12,8 @@ using namespace std;
  * in functions. Typed template parameters are preceded by the keyword
  * typename or class.
  * 
- * Templates can also have regular parameters ¡V these are called ¡¥non
- * type¡¦ template parameters.
+ * Templates can also have regular parameters - these are called "non
+ * type" template parameters.
  * 
  * The syntax of a non-typed template parameter is the same as a
  * declaration of one of the following types:
@@ -28,12 +28,12 @@ using namespace std;
  *
  * Non-type template parameters have restrictions: they must be
  * integral values, enumerations, or instance pointers with external
- * linkage. They can¡¦t be string literals nor global pointers since
+ * linkage. They can't be string literals nor global pointers since
  * both have internal linkage. Nor can they be floating point,
  * typename or void type.
  *
- * Non-type template parameters are not lvalues ¡V i.e., they are
- * simply ¡¥plain old literal data¡¦
+ * Non-type template parameters are not lvalues, i.e., they are
+ * simply "plain old literal data"/
  */
 
 /**
@@ -41,12 +41,22 @@ using namespace std;
  */
 template <typename T, int N>  // typed param T, non-type param N
 class Class { 
-public: 
-    void setmem (int x, T value); 
+public:
+    void setmem (int x, T value);
     T getmem (int x); 
 private:
-   T memblock [N]; 
-}; 
+   T memblock[N] = {0};
+};
+
+template<typename T, int N>
+void Class<T, N>::setmem(int x, T value) {
+  memblock[x] = value;
+}
+
+template<typename T, int N>
+T Class<T, N>::getmem(int x) {
+    return memblock[x];
+}
 
 /**
  * A function can also define non-type function template parameters.
@@ -57,7 +67,7 @@ T add (const T & n) {
 }
 
 int main () { 
-   Class <int,5> myints; 
+   Class <int,5> myints;
    Class <double,15> myfloats; 
    myints.setmem (0,100); 
    myfloats.setmem (3,3.1416); 

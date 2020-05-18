@@ -5,6 +5,11 @@
 #include "semaphore.h"
 
 /**
+ * This example shows the use of C++ variadic templates in the context of
+ * passing a method and its parameters to the std::thread class.
+ */
+
+/**
  * Run the ping/pong algorithm.
  */
 static void
