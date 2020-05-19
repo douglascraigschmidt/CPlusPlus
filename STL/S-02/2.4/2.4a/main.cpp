@@ -86,11 +86,11 @@ int main () {
   container<int> myint (7);
   container<double> mydouble (10.5) ;
   char lowercase[] = "hello world";
-  container<char *> mychar (lowercase);
+  container<char *> mycharstring (lowercase);
 
   cout << myint.increase() << endl;
   cout << mydouble.increase() << endl;
-  cout << mychar.uppercase() << endl;
+  cout << mycharstring.uppercase() << endl;
 
   /*
   container<Foo> myFoo (Foo(10)) ;
