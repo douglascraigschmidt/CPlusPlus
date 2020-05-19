@@ -1,3 +1,6 @@
+#ifndef _PAIR_H
+#define _PAIR_H
+
 /**
  * Create a namespace so we can reuse the name "pair", which also
  * appears in the std namespace.
@@ -16,14 +19,9 @@ namespace my_pair {
   class pair {
   public:
 #if PASS_BY_VALUE == 0
-    pair(const T &f, const T &s)
-      : first(f),
-        second(s) {}
+    pair(const T &f, const T &s);
 #else
-    pair (T f, T s) {
-      first = f;
-      second = s;
-    }
+    pair (T f, T s);
 #endif /* PASS_BY_VALUE */
 
     T max();
@@ -31,17 +29,8 @@ namespace my_pair {
     T first;
     T second;
   };
-
-  /** 
-   * Any template functions defined outside the class template body,
-   * must always use the full template definition statement, and
-   * generally must be in the same logical source file as the template
-   * class declaration. Here is the function implemented along with a
-   * small program using this class template.
-   */
-  template<typename T>
-  T pair<T>::max() {
-    return first < second ? second : first;
-  }
 }
 
+#include "pair.cpp"
+
+#endif /* _PAIR_H */
