@@ -57,7 +57,9 @@ using namespace std;
  * function. For example, consider the following small template
  * function. */
 template <typename T>
-void printDataType (const T& a)  {  cout << typeid(a).name() << endl; }
+void print_data_type (const T& a)  { 
+  cout << typeid(a).name() << endl; 
+}
 
 /** 
  * The following are examples of using this particular function
@@ -65,38 +67,38 @@ void printDataType (const T& a)  {  cout << typeid(a).name() << endl; }
  * instantiated.
  */
 template <typename T>
-struct aClass
+struct example_class
 {
-  aClass () { }
+  example_class () { }
   T result (T t) { return t; }
   void add (const T &t) {}
 };
 
 // explicitly instantiate this function template for types int and double
-template void printDataType<int>(const int &);
-template void printDataType<double>(const double &);
+template void print_data_type<int>(const int &);
+template void print_data_type<double>(const double &);
 
 // explicitly instantiate a template class¡¯ constructor for int data
-template aClass<int>::aClass();
+template example_class<int>::example_class();
 
 // explicitly instantiate an entire template class and all its functions
 // later cannot explicitly instantiate particular functions of this class
 // because ALL are instantiated by this statement
-template struct aClass<double>;
+template struct example_class<double>;
 
 // explicitly instantiate just some member functions 
-template aClass<string>::aClass();
-template void aClass<string>::add(const string  &);
-template string aClass<string>::result(string);
+template example_class<string>::example_class();
+template void example_class<string>::add(const string  &);
+template string example_class<string>::result(string);
 
 /**
- * This function demonstrates the use of printDataType.
+ * This function demonstrates the use of print_data_type.
  */
 int main() {
-  aClass<int> ai;
-  aClass<double> ad;
-  printDataType(ai);
-  printDataType(ad);
+  example_class<int> ai;
+  example_class<double> ad;
+  print_data_type(ai);
+  print_data_type(ad);
 
   return 0;
 }

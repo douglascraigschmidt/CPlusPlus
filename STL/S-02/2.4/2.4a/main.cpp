@@ -31,42 +31,71 @@ using namespace std;
  * specialization can be forward-declared so the declaration_body is
  * optional, at least until the specialization is referenced.
  */
-template <typename T> 
-class Container { // class template
-public:
-  explicit Container (const T &arg) : element (arg) { }
-  T increase () {return ++element;}
-private:
-  T element;
-};
+
+#include "container.h"
 
 // class template specialization:
-template <> class Container <char> {
+template <> class container <char *> {
 public:
-  explicit Container (char arg): element (arg) { }
-  char uppercase ();  // note how we've added a totally new method!
+  explicit container (char *arg): element (arg) {}
+  char *uppercase ();  // note how we've added a totally new method!
+
 private:
-  char element;
+  char *element;
 };
 
-// member of class template specialization:
-char Container<char>::uppercase()  {
-  if ((element >= 'a') && (element <= 'z'))
-    element += 'A' - 'a';
+// Member of class template specialization:
+char *
+container<char *>::uppercase() {
+  for (int i = 0; element[i] != '\0'; ++i)
+    if (element[i] >= 'a' && element[i] <= 'z')
+      element[i] += 'A' - 'a';
+
   return element;
 }
+
+/*
+class Foo {
+public:
+    explicit Foo(int i): i_(i) {}
+    // Foo operator++() { return Foo(++i_); }
+    operator int() { return i_++;}
+
+private:
+    int i_;
+};
+*/
+
+/*
+template<> class container<Foo> {
+public:
+    Foo increase() { return element;}
+
+    explicit container (Foo arg): element (arg) {}
+
+private:
+    Foo element;
+};
+ */
 
 /**
  * The following code shows several examples of template
  * specialization.
  */
 int main () {
-  Container<int> myint (7);
-  Container<double> mydouble (10.5) ;
-  Container<char> mychar ('j');
+  container<int> myint (7);
+  container<double> mydouble (10.5) ;
+  char lowercase[] = "hello world";
+  container<char *> mychar (lowercase);
 
   cout << myint.increase() << endl;
   cout << mydouble.increase() << endl;
   cout << mychar.uppercase() << endl;
+
+  /*
+  container<Foo> myFoo (Foo(10)) ;
+  cout << myFoo.increase() << endl;
+   */
+
   return 0;
 }

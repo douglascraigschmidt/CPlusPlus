@@ -36,46 +36,26 @@ using namespace std;
  * simply "plain old literal data"/
  */
 
-/**
- * In Class below, int N is a non-typed template parameter.
- */
-template <typename T, int N>  // typed param T, non-type param N
-class Class { 
-public:
-    void setmem (int x, T value);
-    T getmem (int x); 
-private:
-   T memblock[N] = {0};
-};
-
-template<typename T, int N>
-void Class<T, N>::setmem(int x, T value) {
-  memblock[x] = value;
-}
-
-template<typename T, int N>
-T Class<T, N>::getmem(int x) {
-    return memblock[x];
-}
+#include "memblock.h"
 
 /**
  * A function can also define non-type function template parameters.
  */
 template <typename T, int V>
-T add (const T & n) {
+T add_const_n (const T &n) {
     return n + V;
 }
 
 int main () { 
-   Class <int,5> myints;
-   Class <double,15> myfloats; 
-   myints.setmem (0,100); 
-   myfloats.setmem (3,3.1416); 
-   cout << myints.getmem(0) << endl; 
-   cout << myfloats.getmem(3) << endl;
+   memblock <int, 5> my_ints;
+   memblock <double, 15> my_floats;
+   my_ints.setmem (0,100); 
+   my_floats.setmem (3,3.1416); 
+   cout << my_ints.getmem(0) << endl; 
+   cout << my_floats.getmem(3) << endl;
 
    int i;
-   i = add<int,6> (10);
+   i = add_const_n<int, 6> (10);
    cout << "i = " << i << endl;
    return 0; 
 } 

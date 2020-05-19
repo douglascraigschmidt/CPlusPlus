@@ -16,8 +16,8 @@ pair<T>::pair (T f, T s) {
 }
 #endif /* PASS_BY_VALUE */
 
-template<typename T>
-T pair<T>::max() {
+template<typename T> T
+pair<T>::max() {
   return first < second ? second : first;
 }
 

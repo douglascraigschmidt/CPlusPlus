@@ -13,14 +13,14 @@ using namespace std;
  * type to adapt into a stack.
  *
  * The first parameter, T, is just the name of a datatype as
- * usual. The second parameter, Container, is a "template template"
+ * usual. The second parameter, container, is a "template template"
  * parameter. It's the name of a class template that has a single type
  * name parameter, and we didn't specify a type of data contained in
  * the original container.
  *
  * The stack template uses its "typename" parameter to instantiate
  * its "template template" parameter. The resulting container type is
- * used to implement the Stack object:
+ * used to implement the stack object:
 */
 template <typename T, template <typename ...> class container = deque>
 class stack {

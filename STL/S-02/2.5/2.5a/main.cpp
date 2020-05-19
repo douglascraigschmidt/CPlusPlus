@@ -6,7 +6,7 @@ using namespace std;
  * template parameters.
  */ 
 template <typename T = int>
-class Stack {
+class stack {
   public:
     // ...
   private:
@@ -18,11 +18,11 @@ class Stack {
  * parameters when instantiating a template.
  */
 int main() {
-  // Use default so Stack is a vector of doubles.
-  Stack<double> aStackofdoubles;       
+  // Use default so stack is a vector of doubles.
+  stack<double> a_stack_of_doubles;       
 
-  // Don't use default, so Stack now a vector of ints.
-  Stack<> aStackofints;
+  // Don't use default, so stack now a vector of ints.
+  stack<> a_stack_of_ints;
 
   return 0;
 }
