@@ -34,7 +34,7 @@ void f(int w, int z) {
 }
 
 /**
- * This exampe demonstrates the use of template functions and
+ * This example demonstrates the use of template functions and
  * non-template functions.
  */
 int main () {

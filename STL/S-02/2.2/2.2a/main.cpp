@@ -49,6 +49,7 @@ int main () {
   std::cout << n << std::endl;
   std::cout << d << std::endl;
 
+  // Use explicit template types.
   k = add<int> (i, j);  
   n = add<long> (l, m);
   d = add<double> (a, b);
@@ -56,5 +57,6 @@ int main () {
   std::cout << k << std::endl;
   std::cout << n << std::endl;
   std::cout << d << std::endl;
+  
   return 0;
 }

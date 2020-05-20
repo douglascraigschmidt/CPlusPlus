@@ -15,7 +15,7 @@ using namespace std;
 template <typename T>		
 class Container {
 public:
-  Container(const T &arg): element (arg) {}
+  explicit Container(const T &arg): element (arg) {}
 
   // template member function
   T increase() {return ++element;}
@@ -37,7 +37,7 @@ private:
  */
 template <typename T> 
 struct Class_A  {
-  Class_A(T *p): p_(p) {
+  explicit Class_A(T *p): p_(p) {
     cout << typeid(p).name() << endl;
   }
 

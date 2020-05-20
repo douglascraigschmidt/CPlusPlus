@@ -36,7 +36,7 @@ int main() {
   std::cout <<"Minimum of Doubles: "<< d << std::endl;
     
   // Compile error since implicit cast not acceptable for templates.
-  d = min(10, 11.3); 	
+  // d = min(10, 11.3);
   std::cout  << "Minimum of Double: "<< d << std::endl;
 
   // Function template will accept an explicit cast though.

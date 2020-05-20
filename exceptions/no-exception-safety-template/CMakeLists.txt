@@ -1,6 +1,9 @@
-# cmake_minimum_required(VERSION <specify CMake version here>)
-project(untitled)
+cmake_minimum_required(VERSION 3.15)
+project(no-exception-safety-template)
+
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled main.cpp)
+add_executable(no-exception-safety-template
+        main.cpp)
