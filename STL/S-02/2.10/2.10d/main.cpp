@@ -50,9 +50,9 @@ int main() {
   print_iterator(cout, di.begin(), di.end());
   print_container(cout, di);
 
-  std::map<string, int> mm {{"larry", 100}, {"curly", 90}, {"moe", 110}};
-  print_iterator(cout, mm.begin(), mm.end());
-  print_container(cout, mm);
+  std::map<string, int> msi {{"larry", 100}, {"curly", 90}, {"moe", 110}};
+  print_iterator(cout, msi.begin(), msi.end());
+  print_container(cout, msi);
 
   return 0;
 }

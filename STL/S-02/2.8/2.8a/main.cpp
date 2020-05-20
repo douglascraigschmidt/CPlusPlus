@@ -45,6 +45,7 @@ int main() {
 
     std::cout << "min = " << min(a++, b++) << std::endl;
     std::cout << "MIN = " << MIN(a++, b++) << std::endl;
+    std::cout << "a = " << a << " b = " << b << std::endl;
 
     return 0;
 }

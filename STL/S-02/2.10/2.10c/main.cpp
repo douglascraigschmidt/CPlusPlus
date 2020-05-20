@@ -30,6 +30,7 @@ ostream& operator <<(std::ostream& os,
 int main() {
   const char *shapes[3] = { "Circle", "Triangle", "Square" };
 
+  // Default to vector.
   container_wrapper<string> b1(3, "words");
   container_wrapper<const char *, deque> b2(shapes, shapes + 3);
 
