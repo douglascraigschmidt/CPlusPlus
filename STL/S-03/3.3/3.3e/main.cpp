@@ -26,14 +26,20 @@ using namespace std;
  */
 int main() {
   // Create a vector using an initializer list.
-  vector<int> aVector ({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+  vector<int> aVector {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-  // 
+  // Auto-deduce the type of total.
   auto total = 0;
   for (auto anIterator = aVector.begin(); // set iterator at start
        anIterator != aVector.end();
-       ++anIterator)  	                  // process vector  using iterator
+       ++anIterator)  	                  // process vector using iterator
     total += *anIterator;                 // add up values stored
+
+  cout << "Total = " << total << endl;    // display the total of values
+
+  total = 0;
+  for (int anIterator : aVector)          // process vector using range-based loop
+       total += anIterator;               // add up values stored
 
   cout << "Total = " << total << endl;    // display the total of values
 

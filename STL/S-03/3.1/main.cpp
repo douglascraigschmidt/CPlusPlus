@@ -128,8 +128,8 @@
 // queue - First in, first out data structure.
 #include <queue>
 
-// Queue that maintains items in a sorted order based on a priority value.
-#include <priority_queue>
+// priority_queue - A queue that maintains items in a sorted order based on a priority value.
+#include <queue>
 
 
 

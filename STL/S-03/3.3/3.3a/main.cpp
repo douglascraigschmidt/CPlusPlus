@@ -71,14 +71,14 @@ using namespace std;
  */
 int main() {
   // Built-in arrays.
-  int array[3];
-  array[0] = 7;
-  array[1] = array[0] + 3;
-  array[2] = array[0] + array[1];
+  int a[3];
+    a[0] = 7;
+    a[1] = a[0] + 3;
+    a[2] = a[0] + a[1];
 
   // Print elements separated by a space
-  for (int i = 0; i < (sizeof(array) / sizeof(array[0])); ++i)
-    cout << array[i] << ' ';
+  for (int i = 0; i < (sizeof(a) / sizeof(a[0])); ++i)
+    cout << a[i] << ' ';
   cout << endl;
 
   vector<int> v(3);
@@ -95,7 +95,7 @@ int main() {
   v.resize(0);
 
   // append elements with values 0-6
-  for (int i=0; i < 7; ++i)
+  for (int i = 0; i < 7; ++i)
     v.push_back(i);
 
   // Another way to print elements separated by a space
