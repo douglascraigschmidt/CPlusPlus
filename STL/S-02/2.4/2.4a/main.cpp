@@ -62,13 +62,14 @@ public:
         cout << "Foo::operator++" << endl;
         return Foo(++i_);
     }
-    explicit operator int() { return i_;} const;
+
+    explicit operator int() const { return i_; }
 
 private:
     int i_;
 };
 
-ostream &operator<<(ostream &os,  Foo foo) {
+ostream &operator<<(ostream &os,  const Foo &foo) {
     return os << int(foo);
 }
 
