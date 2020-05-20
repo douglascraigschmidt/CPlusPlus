@@ -1,63 +1,39 @@
-#include <string>
 #include <iostream>
-#include <thread>
+#include <vector>
+#include <deque>
+#include <list>
 
-#include "semaphore.h"
-
-/**
- * This example shows the use of C++ variadic templates in the context of
- * passing a method and its parameters to the std::thread class.
- */
+using namespace std;
 
 /**
- * Run the ping/pong algorithm.
+ * This is the "base" for the template recursion.
  */
-static void
-play_pingpong (size_t max_iterations,
-               const std::string &string_to_print,
-               semaphore &my_semaphore,
-               semaphore &other_semaphore) {
-  for (int loops_done = 1; loops_done <= max_iterations; ++loops_done) {
-      my_semaphore.acquire();
-      // Print the message.
-      std::cout << string_to_print << "(" << loops_done << ")" << std::endl;
-      other_semaphore.release();
-  }
+template<typename T>
+T adder(T v) {
+  std::cout << __PRETTY_FUNCTION__ << "\n";
+
+  return v;
 }
 
-// Some useful constants.
-static const int num_threads = 2;
-static const size_t max_iterations = 4;
+/**
+ * This function demonstrates variadic templates.
+ */
+template<typename T, typename... Args>
+T adder(T first, Args... args) {
+  std::cout << __PRETTY_FUNCTION__ << "\n";
 
-int 
-main (int argc, char *argv[]) {
-  std::thread threads[num_threads];
-  std::cout << "Ready...Set...Go!" << std::endl;
+  return first + adder(args...);
+}
 
-  // Create the ping and pong semaphores that control alternation
-  // between threads.
-  semaphore ping_semaphore(1); // Starts unlocked
-  semaphore pong_semaphore(0); // Starts locked
+int main() {
+  long sum = adder(1, 2, 3, 8, 7);
 
-  // Create the ping thread, using a variadic template.
-  threads[0] = std::thread(play_pingpong,
-                           max_iterations,
-                           "Ping!",
-                           std::ref (ping_semaphore),
-                           std::ref (pong_semaphore));
+  cout << "sum = " << sum << endl;
 
-  // Create the pong thread, using a variadic template.
-  threads[1] = std::thread(play_pingpong,
-                           max_iterations,
-                           "Pong!",
-                           std::ref (pong_semaphore),
-                           std::ref (ping_semaphore));
+  std::string s1 = "C++", s2 = " ", s3 = "is", s4 = " ", s5 = "cool!";
+  std::string string_sum = adder(s1, s2, s3, s4, s5);
+  
+  cout << "string sum = " << string_sum << endl;
 
-  // Barrier synchronization to join the ping and pong threads with
-  // the main thread.
-  for (auto &t : threads)
-    t.join ();
-
-  std::cout << "Done!" << std::endl;
   return 0;
 }

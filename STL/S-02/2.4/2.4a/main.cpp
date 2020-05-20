@@ -54,24 +54,32 @@ container<char *>::uppercase() {
   return element;
 }
 
-/*
 class Foo {
 public:
     explicit Foo(int i): i_(i) {}
-    // Foo operator++() { return Foo(++i_); }
-    operator int() { return i_++;}
+    /*
+    Foo operator++() {
+        cout << "Foo::operator++" << endl;
+        return Foo(++i_);
+    } */
+    explicit operator int() { return i_++;}
 
 private:
     int i_;
 };
-*/
+
+ostream &operator<<(ostream &os, Foo foo) {
+    return os << int(foo);
+}
 
 /*
 template<> class container<Foo> {
 public:
-    Foo increase() { return element;}
-
     explicit container (Foo arg): element (arg) {}
+    Foo increase() {
+      cout << "container<Foo>::increase()" << endl;
+      return ++element;
+    }
 
 private:
     Foo element;
@@ -92,10 +100,8 @@ int main () {
   cout << mydouble.increase() << endl;
   cout << mycharstring.uppercase() << endl;
 
-  /*
-  container<Foo> myFoo (Foo(10)) ;
+  container<Foo> myFoo (Foo(10));
   cout << myFoo.increase() << endl;
-   */
 
   return 0;
 }
