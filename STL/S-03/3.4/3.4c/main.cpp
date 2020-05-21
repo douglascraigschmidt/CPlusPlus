@@ -13,7 +13,9 @@ void print(const deque<T> &d) {
     cout << "The number of items in the deque:" 
          << d.size() << endl;
 
-    for (auto iter = d.begin(); iter != d.end(); ++iter)
+    for (typename deque<T>::const_iterator iter = d.begin();
+         iter != d.end();
+         ++iter)
         cout << *iter << " ";
 
     cout << endl << endl;

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <list>
+#include <deque>
 using namespace std;
 
 /**
@@ -10,21 +10,44 @@ using namespace std;
  * their elements.
  */
 int main() {
-  list<char> aList;
+  deque<char> myFirstDeck, myNextDeck;
 
-  for(int i = 0; i < 10; i++)
-    aList.push_back('A' + i);
+  for(size_t i = 0; i <26; i++)
+    myFirstDeck.push_back(i+'A');
 
-  cout << "Size = " << aList.size() << endl;
-  cout << "Contents: ";
+  for(size_t i = 0; i <10; i++)
+    myNextDeck.push_front(i+'0');
 
-  while (!aList.empty ()) {
-    auto p = aList.begin();
+  cout << "Size of myFirstDeck and myNextDeck: ";
+  cout << myFirstDeck.size() << " " << myNextDeck.size() << endl;
+  cout << "myFirstDeck: ";
 
-    cout << *p;
+  for(char i : myFirstDeck)
+    cout << i;
+  cout << endl << "myNextDeck: ";
 
-    aList.pop_front();
-  }
+  for(char i : myNextDeck)
+    cout << i;
+  cout << "\n\n";
+
+  // swap deque elements using member function.
+  myFirstDeck.swap(myNextDeck);
+
+  cout << "Size of myFirstDeck and myNextDeck after first swap: ";
+  cout << myFirstDeck.size() << " " << myNextDeck.size() << endl;
+
+  cout << "myFirstDeck after first swap: ";
+  for(char i : myFirstDeck)
+    cout << i;
+  cout << endl;
+
+  cout << "myNextDeck after first swap: ";
+
+  for(char i : myNextDeck)
+    cout << i;
+  cout << "\n\n";
+
+  swap(myFirstDeck, myNextDeck);
 
   return 0;
 }

@@ -72,12 +72,14 @@ using namespace std;
 int main( ) {
     deque <float> myDeck;
 
-    // can also use the push_back()
-    for (size_t i = 0; i < 7; i++)
+    // can use push_front() and push_back() efficiently
+    for (size_t i = 0; i < 7; i++) {
         myDeck.push_front(i * 1.1);
+        myDeck.push_back(i * 1.1);
+    }
 
-    for (size_t i = 0; i < myDeck.size(); i++)
-        cout <<  myDeck[i] << ' ' ;
+    for (float i : myDeck)
+        cout <<  i << ' ' ;
 
     cout << endl;
     return 0;
