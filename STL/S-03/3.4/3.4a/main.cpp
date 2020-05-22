@@ -78,7 +78,7 @@ int main( ) {
         myDeck.push_back(i * 1.1);
     }
 
-    for (float i : myDeck)
+    for (auto i : myDeck)
         cout <<  i << ' ' ;
 
     cout << endl;

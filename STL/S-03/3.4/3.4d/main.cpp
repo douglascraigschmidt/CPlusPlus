@@ -22,11 +22,11 @@ int main() {
   cout << myFirstDeck.size() << " " << myNextDeck.size() << endl;
   cout << "myFirstDeck: ";
 
-  for(char i : myFirstDeck)
+  for(auto i : myFirstDeck)
     cout << i;
   cout << endl << "myNextDeck: ";
 
-  for(char i : myNextDeck)
+  for(auto i : myNextDeck)
     cout << i;
   cout << "\n\n";
 

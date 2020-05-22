@@ -28,7 +28,7 @@ int main()  {
         aDeck.push_back(i + 'A');
 
     cout << "Original sequence: ";
-    for(char i : aDeck)
+    for(auto i : aDeck)
         cout << i << " ";
     cout << endl;
 
@@ -43,7 +43,7 @@ int main()  {
     aDeck.insert(it1, 'X');
 
     cout << "Sequence after insert: ";
-    for(char i : aDeck)
+    for(auto i : aDeck)
         cout << i << " ";
 
     cout << endl;

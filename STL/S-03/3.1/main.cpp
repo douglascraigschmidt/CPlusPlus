@@ -23,7 +23,7 @@
  *    must provide its own exception handling code for any errors that
  *    might occur. 
  *
- * Common operations of STL contains include the following:
+ * Common operations of STL containers include the following:
  *
  * 1. Initialization constructors: Each container supports both
  *    default and copy constructors, plus a destructor. Containers can be

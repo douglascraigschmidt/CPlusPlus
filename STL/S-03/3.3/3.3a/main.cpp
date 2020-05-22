@@ -72,9 +72,9 @@ using namespace std;
 int main() {
   // Built-in arrays.
   int a[3];
-    a[0] = 7;
-    a[1] = a[0] + 3;
-    a[2] = a[0] + a[1];
+  a[0] = 7;
+  a[1] = a[0] + 3;
+  a[2] = a[0] + a[1];
 
   // Print elements separated by a space
   for (int i = 0; i < (sizeof(a) / sizeof(a[0])); ++i)
