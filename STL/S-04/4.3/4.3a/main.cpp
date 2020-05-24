@@ -8,8 +8,8 @@ using namespace std;
  * forward in a sequence or collection of elements. It reads the
  * elements only once and can return the elements when it finds
  * them. One can dereference an Input Iterator to obtain the value it
- * points to, but one can¡¯t assign a new value to the element using
- * the iterator¡¯s functions.  Input iterators can only do these
+ * points to, but one can't assign a new value to the element using
+ * the iterator's functions.  Input iterators can only do these
  * operations:
  *
  * . construct themselves         i(j);
@@ -35,13 +35,18 @@ using namespace std;
 int main () {
   // An initially empty vector.
   vector<int> v;
-    
+
+  // copy contents of cin as "int" and store at
+  // the end of vector v.
   for (istream_iterator<int> i (cin);
        i != istream_iterator<int> ();
        ++i)
+    // Add int to the end of the vector.
     v.push_back (*i);
 
   /*
+    // Use STL copy() algorithm along with
+    // back_inserter()!
     copy (istream_iterator<int> (cin),
           istream_iterator<int>(),
           back_inserter(v));

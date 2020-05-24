@@ -23,18 +23,28 @@ using namespace std;
  * iterator.
  */
 int main() {
-    list<int> my_list;
+  // Create an empty list.
+  list<int> my_list;
 
-    my_list.push_back(0);               // Insert a new element at the end
-    my_list.push_front(0);              // Insert a new element at the start
-    my_list.insert(++my_list.begin(),2); // Insert "2" after first element
-    my_list.push_back(5);
-    my_list.push_back(6);
+  // Insert a new element at the end
+  my_list.push_back(0);               
 
-    for (auto i : my_list)
-      cout << i << ' ';
+  // Insert a new element at the front.
+  my_list.push_front(0);              
 
-    cout << endl;   return 0;
+  // Insert "2" after first element by incrementing the iterator.
+  my_list.insert(++my_list.begin(), 2);
+
+  // Insert two more elements at the end.
+  my_list.push_back(5);
+  my_list.push_back(6);
+
+  // Print the contents of the list.
+  for (auto i : my_list)
+    cout << i << ' ';
+
+  cout << endl;   
+  return 0;
 }
 
 

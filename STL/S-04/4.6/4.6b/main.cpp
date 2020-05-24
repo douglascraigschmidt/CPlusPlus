@@ -15,15 +15,20 @@ using namespace std;
  * the difference between emplace_back() and push_back().
  */
 int main() {
+  // Create an empty list.
   list<type_wrapper<string>> aList;
 
   cout << "starting emplace_back() calls" << endl;
+
+  // Use emplace_back() to add items to the list, which
+  // is more efficient than push_back().
   aList.emplace_back(string("peach"));
   aList.emplace_back(string("apple"));
   aList.emplace_back(string("bananas"));
   cout << "ending emplace_back() calls" << endl;
 
   cout << "starting push_back() calls" << endl;
+  // Use push_back() to add items to the list.
   aList.push_back(string("peach"));
   aList.push_back(string("apple"));
   aList.push_back(string("bananas"));

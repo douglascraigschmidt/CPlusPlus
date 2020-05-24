@@ -41,22 +41,18 @@ using namespace std;
  *   they also have the same risks and inconveniences. For example,
  *   using a pointer we can accidentally modify data that we are not
  *   supposed to.
- *
- * . There are also definitions for a class const_iterator that
- *   provides basically the same functionality as a regular iterator
- *   except that modifying the data "pointed to" by the const_iterator
- *   is not allowed. 
  */
 
+// Create a typedef for a container.
 // typedef list<long> container;
 typedef vector<long> container;
 
 /**
- * This example illustrates some disadvantages with STL iterators outlined above.
+ * This example shows some disadvantages with STL iterators outlined above.
  */
 int main() {
     // Create an empty container.
-    container c(0);
+    container c (0);
 
     // Get an iterator to the beginning of the container.
     container::const_iterator it = c.begin();

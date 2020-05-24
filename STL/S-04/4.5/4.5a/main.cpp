@@ -19,7 +19,7 @@ using namespace std;
  * 
  * Forward Iterators can be either:
  * . constant, in which case one can access the object it points to,
- *   but one can¡¯t assign a new value to the element using this
+ *   but one can't assign a new value to the element using this
  *   iterator
  *
  * . mutable, in which case one can both access the elements pointed
@@ -35,8 +35,8 @@ int main() {
 
     // printing vector elements
     cout << "before replacing, v: ";
-    for (int x : v)
-        cout << x << " ";
+    for (auto i : v)
+        cout << i << " ";
     cout << endl;
 
     // replacing 10 with 42
@@ -45,8 +45,8 @@ int main() {
     // printing vector elements
     cout << "after replacing, v: ";
 
-    for (int x : v)
-        cout << x << " ";
+    for (int i : v)
+        cout << i << " ";
     cout << endl;
 
     return 0;

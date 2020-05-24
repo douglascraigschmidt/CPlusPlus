@@ -72,38 +72,42 @@ using namespace std;
  */
 
 namespace my_copy {
-    /**
-     * This function shows a typical implementation of the copy()
-     * template function, which is a common STL algorithm that uses
-     * iterators.
-     */
-    template<typename InputIterator, typename OutputIterator>
-    OutputIterator copy(InputIterator first,
-                        InputIterator last,
-                        OutputIterator result) {
-        for (; first != last; ++first, ++result)
+  /**
+   * This function shows a typical implementation of the copy()
+   * template function, which is a common STL algorithm that uses
+   * iterators.
+   */
+  template<typename InputIterator, typename OutputIterator>
+  OutputIterator copy(InputIterator first,
+                      InputIterator last,
+                      OutputIterator result) {
+    // Iterate from first to last, incrementing as we go!
+    for (; first != last; ++first, ++result)
 
-            // *result is “written to”, whereas *first is “read from”
-            *result = *first;
-        return result;
-    }
+      // *result is “written to”, whereas *first is “read from”
+      *result = *first;
+    return result;
+  }
 }
 
 /**
- * This example shows how to use the copy() algorithm to copy
- * the contents of one built-in array to another.
+ * This example shows how to use the copy() algorithm to copy the
+ * contents of one built-in array to another.
  */
 int main () {
-    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    const int a_size = sizeof(a) / sizeof(a[0]);
-    int b[a_size];
+  int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  const int a_size = sizeof(a) / sizeof(a[0]);
+  int b[a_size];
 
-    my_copy::copy(a, a + a_size, b);
+  // Perform the copy.
+  my_copy::copy(a, a + a_size, b);
 
-    for (int i : b)
-        cout << i << ' ';
 
-    cout << endl;
+  // Print the results.
+  for (auto i : b)
+    cout << i << ' ';
+
+  cout << endl;
 }
 
 

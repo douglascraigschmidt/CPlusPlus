@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * These are similar to input iterators, except that output iterators
+ * Output iterators are similar to input iterators, except that they
  * perform only write operations.  Output iterators also process a
  * container only in a single pass and do no error checking. So the
  * code itself needs to check that a value to be written is valid and
@@ -13,7 +13,7 @@ using namespace std;
  *
  * . constructor                 i(j);
  * . assignment operator         i=j;
- * . dereference operator        *j=t; *j++=t; // Can write, but can¡¯t read!
+ * . dereference operator        *j=t; *j++=t; // Can write, but can't read!
  * . pre/post increment operator ++j; j++;
  *
  * Many STL algorithms (e.g., copy() and transform()) return an output
@@ -29,21 +29,24 @@ int main () {
   // An initially empty vector.
   vector<int> v;
 
+  // Copy contents of cin as ints to the end of vector v.
   copy (istream_iterator<int> (cin),
         istream_iterator<int>(),
         back_inserter(v));
 
+  // Copy contents of vector v to cout.
   copy (v.begin (),
         v.end (),
         ostream_iterator<int> (cout, "\n"));
 
-  /*
-    for (vector<int>::iterator i = v.begin ();
+  10/*
+    // The same behavior using various loops.
+    for (auto i = v.begin ();
          i != v.end ();
          ++i)
       cout << *i << endl;
 
     for (int i : v)
-      cout << i << endl; 
+      cout << i << endl;
   */
 }

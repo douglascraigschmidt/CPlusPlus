@@ -57,22 +57,49 @@ using namespace std;
  */
 
 int main() {
-    list<char> aList;
+  // Create two empty lists.
+  list<char> list1;
+  list<char> list2;
 
-    for(int i = 0; i <10; i++)
-        aList.push_back('A' + i);
+  // Put 'A' thru 'J' into the back of the list.
+  for (int i = 0; i < 10; i++)
+    list1.push_back('A' + i);
 
-    cout << "Size = " << aList.size() << endl;
-    cout << "Contents: ";
+  // Put '0' thru '9' into the front of the list.
+  for (int i = 0; i < 10; i++)
+    list2.push_front('0' + i);
 
-    while (!aList.empty ()) {
-        auto p = aList.begin();
+  cout << "list1 size = " << list1.size() << endl;
+  cout << "list2 size = " << list2.size() << endl;
+  cout << "Contents: ";
 
-        cout << *p;
+  // Remove each item from listl and print it while the list is not
+  // empty.
+  while (!list1.empty ()) {
+    // Get iterator to the first element.
+    auto p = list1.begin();
 
-        aList.pop_front();
-    }
-    return 0;
+    // Print the first element.
+    cout << *p;
+
+    // Remove the first element.
+    list1.pop_front();
+  }
+
+  // Remove each item from list2 in reverse order and print it while
+  // the list is not empty.
+  while (!list2.empty ()) {
+    // Get iterator to the "last" element.
+    auto p = list2.end();
+
+    // Print the first element (decrementing first).
+    cout << *--p;
+
+    // Remove the last element.
+    list2.pop_back();
+  }
+
+  return 0;
 }
 
 

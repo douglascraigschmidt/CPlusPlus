@@ -1,35 +1,72 @@
 #include <vector>
 #include <iostream>
+
 using namespace std;
+
+/**
+ * Demonstrate random access iterators on STL vector.
+ */
+void
+demonstrate_random_access_iterator() {
+    vector<int> v (1, 1);	//created a vector with one element: 1
+    v.push_back (2);
+    v.push_back (3);
+    v.push_back (4); 			// vector v: 1 2 3 4
+
+    // now create 2 iterators that are random access iterators
+    auto i = v.begin();
+    auto j = i + 2; cout << *j << " ";
+
+    // Perform some "pointer arithmetic".
+    i += 3; cout << *i << " ";
+    j = i - 1; cout << *j << " ";
+    j -= 2;
+    cout << *j << " ";
+    cout << v[1] << endl;
+
+    (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
+    (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
+
+    i = j;
+    i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
+    cout << endl;
+}
+
+/**
+ * Demonstrates pointer arithmetic on a built-in C/C++ array.
+ */
+void
+demonstrate_pointer_arithmetic() {
+    int a[] = {1, 2, 3, 4};
+
+    // now create 2 pointers that are random access pointers.
+    auto i = a;
+    auto j = i + 2; cout << *j << " ";
+
+    // Perform some "pointer arithmetic".
+    i += 3; cout << *i << " ";
+    j = i - 1; cout << *j << " ";
+    j -= 2;
+    cout << *j << " ";
+    cout << a[1] << endl;
+
+    (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
+    (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
+
+    i = j;
+    i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
+    cout << endl;
+}
 
 /**
  * Here is another example using a vector with its random access
  * iterator.
  */
 int main () {
-  vector<int> v (1, 1);	//created a vector with one element: 1
-  v.push_back (2);
-  v.push_back (3);
-  v.push_back (4); 			// vector v: 1 2 3 4
+    demonstrate_pointer_arithmetic();
+    demonstrate_random_access_iterator();
 
-  // now create 2 iterators, they are random access iterators
-  auto i = v.begin();
-  auto j = i + 2; cout << *j << " ";
-
-  i += 3; cout << *i << " ";
-  j = i - 1; cout << *j << " ";
-  j -= 2;
-  cout << *j << " ";
-  cout << v[1] << endl;
-
-  (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
-  (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
-
-  i = j;
-  i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
-  cout << endl;
-
-  return 0;
+    return 0;
 }
 
 

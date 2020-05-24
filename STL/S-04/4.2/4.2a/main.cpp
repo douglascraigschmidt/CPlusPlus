@@ -59,28 +59,30 @@ static void print_const(const vector<int> &v);
  *   the example above is it != v.end().
  */
 int main () {
-  vector<int> v({1, 2, 3, 4, 5, 4, 3, 2, 1});
+  // Create a vector initialized to a set of values.
+  vector<int> v{1, 2, 3, 4, 5, 4, 3, 2, 1};
 
-   // This example shows a vector with its iterator.  The double colon
-   // :: indicates that the iterator is a "trait" of the vector.
+  // This example shows a vector with its iterator.  The double colon
+  // :: indicates that the iterator is a "trait" of the vector.
   for (vector<int>::iterator it = v.begin();
        // The iterator returned by a container's end() member function
-       // represents a logical element that's one past the last
+       // represents a logical element that's one *past* the last
        // element in a container, not the physical memory location
        // that's just beyond the last element.
        it != v.end(); 
        ++it) 
-   cout << *it << endl;
+    cout << *it << endl;
 
   // Never dereference the value returned by v.end(), because it is
   // just a marker and holds nothing of value. The point of such a
   // construct is to provide a logical end marker for a range,
-  // regardless of the context in which that range is used. Standard
-  // algorithms and all member functions that work with a range of
-  // iterators use this convention, which is why standard algorithms
-  // like sort in <algorithm> work this way to sort every element
-  // within the given range, but not including the iterator used as
-  // the second argument to sort().
+  // regardless of the context in which that range is used. 
+  //
+  // Standard algorithms and all member functions that work with a
+  // range of iterators use this convention, which is why standard
+  // algorithms like sort in <algorithm> work this way to sort every
+  // element within the given range, but not including the iterator
+  // used as the second argument to sort().
   sort(v.begin(), v.end());
 
   // Print the sorted results.
@@ -89,10 +91,17 @@ int main () {
   // Create a vector of string.
   std::vector<std::string> sv({"hello", "world"});
 
+  // Print the contents of the vector using an iterator.
   for (std::vector<std::string>::iterator itr = sv.begin();
        itr != sv.end();
        ++itr) 
     std::cout << "(" << itr->size() << ") " << *itr << ' ';
+
+  std::cout << endl;
+
+  // Print the contents of the vector using a range-based for loop.
+  for (auto &str : sv)
+    std::cout << "(" << str.size() << ") " << str << ' ';
 }  
 
 /**
