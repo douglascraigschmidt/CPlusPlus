@@ -69,7 +69,7 @@ void print_data_type (const T& a)  {
 template <typename T>
 struct example_class
 {
-  example_class () { }
+  example_class () {}
   T result (T t) { return t; }
   void add (const T &t) {}
 };

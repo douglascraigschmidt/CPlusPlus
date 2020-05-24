@@ -28,15 +28,22 @@ using namespace std;
  * example below to print the list’s elements backwards.
  */
 int main()   {
+    // Create a list with one element whose value is 1.
     list<int> aList (1, 1);
-    aList.push_back (2);
 
+    // Add a couple of new elements at the beginning and end of the list.
+    aList.push_back (2);
+    aList.push_front(0);
+
+    // Use an explicit iterator to first item.
     list<int>::iterator first = aList.begin();
+
+    // Use auto to define iterator to last item.
     auto last = aList.end();
 
-    while (last != first) {
-        --last;
-        cout << *last << ' '; // Could also be: cout << *--last << ' '
+    // Print the list's contents out in reverse order.
+    while (last-- != first) {
+        cout << *last << ' ';
     }
 
     return 0;

@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  * The valarray template class is a vector-like container that is
- * optimized for efficient numeric computation. It doesn¡¦t provide
+ * optimized for efficient numeric computation. It doesn't provide
  * iterators.
  *
  * Although one can instantiate a valarray with nonnumeric types,
@@ -13,7 +13,7 @@ using namespace std;
  * operate directly on the numeric data elements, this might not be
  * the most efficient container for non-numeric data.  Most of
  * valarray functions and operators appear to operate on a valarray as
- * a whole ¡V but they actually do their work element-by-element.
+ * a whole, but they actually do their work element-by-element.
  *
  * Useful Functions  
  *

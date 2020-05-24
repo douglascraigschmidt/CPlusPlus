@@ -36,13 +36,20 @@ using namespace std;
 int main() {
     list<double> dList({10.1, 20.2, 30.3, 40.4, 50.5});
     list<double>::iterator dListIter = dList.begin();
+    // could use
+    // auto dListIter = dList.begin();
     *dListIter = 100.1;
 
     for (auto d : dList)
         cout << d << endl;
 
     list<double>::const_iterator dListConstIter = dList.begin();
+    // could use
+    // auto dListConstIter = dList.begin();
+
     list<double>::value_type d = *dListConstIter;
+    // could use
+    // auto d = *dListConstIter;
 
     // Compile error!
     // *dListConstIter = d;

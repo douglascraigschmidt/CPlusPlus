@@ -24,7 +24,7 @@ using namespace std;
  * not identical) to C/C++ 2-dimensional array.
  */
 int main() {
-  vector< vector<int>> myVec2D;     	// create 2D int vector
+  vector<vector<int>> myVec2D;     	// create 2D int vector
   vector<int> oneVec, twoVec;		// create two int vectors
 
   oneVec.push_back(1); oneVec.push_back(2); oneVec.push_back(3);
@@ -35,7 +35,7 @@ int main() {
 
   cout << endl << "Using Iterator:" << endl;
 
-  for (vector< vector<int>>::iterator iter2D = myVec2D.begin();
+  for (vector<vector<int>>::iterator iter2D = myVec2D.begin();
       iter2D != myVec2D.end();
       ++iter2D)
     for(vector<int>::iterator iter = iter2D->begin();

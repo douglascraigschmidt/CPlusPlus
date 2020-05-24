@@ -1,7 +1,6 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
-#include <string.h>
 
 using namespace std;
 
@@ -24,6 +23,8 @@ int main() {
   // for loop and the auto keyword.
   for (auto d : aVector)
     cout << d << ' ';
+
+  cout << endl;
 
   return 0;
 }

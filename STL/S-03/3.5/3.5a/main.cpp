@@ -1,5 +1,5 @@
-#include <deque>
 #include <iostream>
+#include <list>
 using namespace std;
 
 /**
@@ -55,18 +55,52 @@ using namespace std;
  *
  * Here's an example that uses an STL list.
  */
-int main( ) {
-    deque <float> myDeck;
 
-    // can also use the push_back( )
-    for (size_t i = 0; i < 7; i++)
-        myDeck.push_front(i * 1.1);
+int main() {
+  // Create two empty lists.
+  list<char> list1;
+  list<char> list2;
 
-    for (size_t i = 0; i < myDeck.size(); i++)
-        cout << myDeck[i] << ' ';
+  // Put 'A' thru 'J' into the back of the list.
+  for (int i = 0; i < 10; i++)
+    list1.push_back('A' + i);
 
-    cout << endl;
-    return 0;
+  // Put '0' thru '9' into the front of the list.
+  for (int i = 0; i < 10; i++)
+    list2.push_front('0' + i);
+
+  cout << "list1 size = " << list1.size() << endl;
+  cout << "list2 size = " << list2.size() << endl;
+  cout << "Contents: ";
+
+  // Remove each item from listl and print it while the list is not
+  // empty.
+  while (!list1.empty ()) {
+    // Get iterator to the first element.
+    auto p = list1.begin();
+
+    // Print the first element.
+    cout << *p;
+
+    // Remove the first element.
+    list1.pop_front();
+  }
+
+  // Remove each item from list2 in reverse order and print it while
+  // the list is not empty.
+  while (!list2.empty ()) {
+    // Get iterator to the "last" element.
+    auto p = list2.end();
+
+    // Print the first element (decrementing first).
+    cout << *--p;
+
+    // Remove the last element.
+    list2.pop_back();
+  }
+
+  return 0;
 }
+
 
 

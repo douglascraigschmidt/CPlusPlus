@@ -4,7 +4,7 @@ Sequential containers are collections of data elements placed in some
 order, usually according to when the element was added to the
 container. The order of the elements has nothing to do with their
 value. The non-vector sequential containers are something like arrays,
-but don¡¦t have to be physically contiguous in storage.
+but don't have to be physically contiguous in storage.
 
 Sequential containers are better than simple C/C++ arrays because:
 

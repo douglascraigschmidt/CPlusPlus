@@ -4,7 +4,7 @@ using namespace std;
 
 /**
  * The C++ Standard Library contains several classes that work
- * similarly to the STL¡¯s predefined container classes.
+ * similarly to the STL's predefined container classes.
  *
  * A bitset provides a set of bits as a data structure. They can be
  * manipulated by various binary operators such as logical AND, OR,
@@ -30,7 +30,7 @@ int main() {
   bitset<16> aFewBits(32);
   cout << "Bits:" << aFewBits << endl;
 
-  aFewBits[0] = true; aFewBits[2] = false;
+  aFewBits[0] = true; aFewBits[5] = false;
   aFewBits[10] = true; aFewBits[12] = true;
 
   cout << "Bits:" << aFewBits << endl;

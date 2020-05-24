@@ -26,15 +26,20 @@ using namespace std;
  * as follows:
  */
 int main() {
+  // Create a vector of 10 numbers.
   vector<int> v({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-  int total_even = 0;
-   
+
+  // Keep track of the total number of even values.
+  auto total_even = 0;
+
+  // Iterate through the vector summing the values of even numbers.
   for (auto iter = v.begin();
        iter != v.end();
+       // Skip over odd numbers.
        iter += 2) 
     total_even += *iter;
 
-  cout << "Total even = " << total_even << endl;
+  cout << "Sum of even numbers = " << total_even << endl;
   return 0;
 }
 

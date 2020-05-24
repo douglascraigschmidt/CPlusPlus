@@ -28,10 +28,11 @@ int main()  {
         aDeck.push_back(i + 'A');
 
     cout << "Original sequence: ";
-    for(char i : aDeck)
+    for(auto i : aDeck)
         cout << i << " ";
     cout << endl;
 
+    // Note two different ways to define an iterator!
     deque<char>::iterator it1 = aDeck.begin() + 2; // Note random access
     auto it2 = aDeck.begin() + 3; // iterators here
 
@@ -42,8 +43,9 @@ int main()  {
     aDeck.insert(it1, 'X');
 
     cout << "Sequence after insert: ";
-    for(char i : aDeck)
+    for(auto i : aDeck)
         cout << i << " ";
+
     cout << endl;
 
     // These iterator dereferences may cause the program to crash

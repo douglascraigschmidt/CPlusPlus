@@ -57,22 +57,22 @@ container<char *>::uppercase() {
 class Foo {
 public:
     explicit Foo(int i): i_(i) {}
-    /*
+
     Foo operator++() {
         cout << "Foo::operator++" << endl;
         return Foo(++i_);
-    } */
-    explicit operator int() { return i_++;}
+    }
+
+    explicit operator int() const { return i_; }
 
 private:
     int i_;
 };
 
-ostream &operator<<(ostream &os, Foo foo) {
+ostream &operator<<(ostream &os,  const Foo &foo) {
     return os << int(foo);
 }
 
-/*
 template<> class container<Foo> {
 public:
     explicit container (Foo arg): element (arg) {}
@@ -84,7 +84,6 @@ public:
 private:
     Foo element;
 };
- */
 
 /**
  * The following code shows several examples of template
