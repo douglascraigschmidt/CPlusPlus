@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.15)
-project(2_10d)
+project(5_6a)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(2_10d
+add_executable(5_6a
         main.cpp)

@@ -6,25 +6,40 @@
 
 using namespace std;
 
+/**
+ * This extraction operator prints the contents of pair {@code p}
+ * param to ostream {@code os} param.
+ */
 template <typename T, typename U>
-std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
-    out << "[" << p.first << ", " << p.second << "]";
-    return out;
+std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p) {
+    os << "[" << p.first << ", " << p.second << "]";
+    return os;
 }
 
+/**
+ * This method prints the contents of a wrapped sequential or
+ * associative container to the ostream {@code os} param.
+ */
 template<template<typename, typename...> class container,
          typename valueType,
          typename... Args>
 void print_container(ostream &os,
                      const container<valueType, Args...>& objs) {
+  // Print out method name and arguments.
   os << __PRETTY_FUNCTION__ << '\n';
 
+  // Print the contents of the wrapper sequential or associative
+  // container.
   for (auto const &obj : objs)
     os << obj << ' ';
 
   os << '\n';
 }
 
+/**
+ * This method prints the contents of a container using its {@code
+ * start} and {@code end} iterators to the ostream {@code os} param.
+ */
 template<typename input_iterator>
 void print_iterator(ostream &os,
                     input_iterator start,
@@ -37,6 +52,10 @@ void print_iterator(ostream &os,
     os << '\n';
 }
 
+/**
+ * This example shows how to use C++ template template parameters and
+ * variadic templates to wrap sequential and associative containers.
+ */
 int main() {
   std::vector<float> vf { 1.1, 2.2, 3.3, 4.4 };
   print_iterator(cout, vf.begin(), vf.end());

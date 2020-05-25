@@ -1,5 +1,5 @@
 #include <iostream>
-#include "type_wrapper.h"
+#include "simple_string.h"
 #include "pair.h"
 
 /**
@@ -9,15 +9,15 @@
  */
 int main () {
   {
-    type_wrapper<int> p1(10);
-    type_wrapper<int> p2(20);
+    simple_string s1("hello");
+    simple_string s2("world");
 
     // Chose "my_pair" rather than std::pair.
-    my_pair::pair<type_wrapper<int>> i_pair(p1, p2);
+    my_pair::pair<simple_string> i_pair(s1, s2);
 
     std::cout << "the max of "
-              << p1 << " and "
-              << p2 << " = "
+              << s1 << " and "
+              << s2 << " = "
               << i_pair.max()
               << std::endl;
   }
