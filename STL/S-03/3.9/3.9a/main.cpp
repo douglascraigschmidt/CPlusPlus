@@ -44,7 +44,8 @@ ostream& operator <<(std::ostream& os,
 }
 
 /**
- * This example
+ * This example shows how to use C++ template template parameters and
+ * variadic templates to wrap sequential containers.
  */
 int main() {
   // Create an array of four shape names.
