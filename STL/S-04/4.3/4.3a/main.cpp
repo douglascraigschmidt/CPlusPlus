@@ -15,7 +15,7 @@ using namespace std;
  * . construct themselves         i(j);
  * . assignment operator          i=j;
  * . equality/inequality operator i==j; i!=j;
- * . dereference operator         *j; j->m; // Can¡¯t write, but can read
+ * . dereference operator         *j; j->m; // Can't write, but can read
  * . pre/post increment operator  ++j; j++; *j++;
  *
  * Input Iterators are used by non-modifying algorithms. For example,
@@ -36,6 +36,7 @@ int main () {
   // An initially empty vector.
   vector<int> v;
 
+  /*
   // copy contents of cin as "int" and store at
   // the end of vector v.
   for (istream_iterator<int> i (cin);
@@ -43,14 +44,13 @@ int main () {
        ++i)
     // Add int to the end of the vector.
     v.push_back (*i);
+    */
 
-  /*
     // Use STL copy() algorithm along with
     // back_inserter()!
     copy (istream_iterator<int> (cin),
           istream_iterator<int>(),
           back_inserter(v));
-  */
 }
 
 

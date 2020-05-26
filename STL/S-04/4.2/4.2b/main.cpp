@@ -34,14 +34,20 @@ using namespace std;
  * Here is an example of using a vector and various traits.
  */
 int main() {
-    list<double> dList({10.1, 20.2, 30.3, 40.4, 50.5});
+    list<double> dList{10.1, 20.2, 30.3, 40.4, 50.5};
+
+    for (auto d : dList)
+        cout << d << ' ';
+    cout << endl;
+
     list<double>::iterator dListIter = dList.begin();
     // could use
     // auto dListIter = dList.begin();
     *dListIter = 100.1;
 
     for (auto d : dList)
-        cout << d << endl;
+        cout << d << ' ';
+    cout << endl;
 
     list<double>::const_iterator dListConstIter = dList.begin();
     // could use

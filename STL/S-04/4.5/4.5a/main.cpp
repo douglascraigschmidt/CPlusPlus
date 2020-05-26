@@ -30,6 +30,25 @@ using namespace std;
  * with other values, as shown in the example below.
  */
 int main() {
+    // built-in array
+    int a[] = {10, 20, 10, 20, 10, 30, 40, 50, 60, 70};
+
+    // printing vector elements
+    cout << "before replacing, a: ";
+    for (auto i : a)
+        cout << i << " ";
+    cout << endl;
+
+    // replacing 10 with 42
+    replace(a, a + (sizeof(a)/sizeof(*a)), 10, 42);
+
+    // printing a elements
+    cout << "after replacing, a: ";
+
+    for (auto i : a)
+        cout << i << " ";
+    cout << endl;
+
     // vector
     vector<int> v{10, 20, 10, 20, 10, 30, 40, 50, 60, 70};
 
@@ -45,7 +64,7 @@ int main() {
     // printing vector elements
     cout << "after replacing, v: ";
 
-    for (int i : v)
+    for (auto i : v)
         cout << i << " ";
     cout << endl;
 
