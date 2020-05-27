@@ -27,7 +27,7 @@ using namespace std;
  */
 int main() {
   // Create a vector of 10 numbers.
-  vector<int> v({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+  vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
   // Keep track of the total number of even values.
   auto total_even = 0;
@@ -35,7 +35,7 @@ int main() {
   // Iterate through the vector summing the values of even numbers.
   for (auto iter = v.begin();
        iter != v.end();
-       // Skip over odd numbers.
+       // Use iter's += operator to skip over odd numbers.
        iter += 2) 
     total_even += *iter;
 
