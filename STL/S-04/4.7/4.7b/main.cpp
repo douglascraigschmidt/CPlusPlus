@@ -6,8 +6,8 @@ using namespace std;
 /**
  * Forward declarations.
  */
-void demonstrate_random_access_iterator();
 void demonstrate_pointer_arithmetic();
+void demonstrate_random_access_iterator();
 
 /**
  * Here is another example of accessing the contents of a built-in C++
@@ -43,8 +43,8 @@ demonstrate_pointer_arithmetic() {
     cout << *j << " ";
     cout << a[1] << endl;
 
-    (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
-    (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
+    j < i ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
+    j > i ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
 
     i = j;
     i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
@@ -72,8 +72,8 @@ demonstrate_random_access_iterator() {
     cout << *j << " ";
     cout << v[1] << endl;
 
-    (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
-    (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
+    j < i ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
+    j > i ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
 
     i = j;
     i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";

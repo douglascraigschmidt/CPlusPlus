@@ -32,7 +32,7 @@ int main() {
   list<int> aList (1, 1);
 
   // Add new elements at the beginning and end of the list.
-  aList.push_back (2);
+  aList.push_back(2);
   aList.push_front(0);
 
   // Explicitly define an iterator to first item.

@@ -3,6 +3,12 @@
 using namespace std;
 
 /**
+ * Forward declarations.
+ */
+static void demonstrate_pointer_arithmetic();
+static void demonstrate_random_access_iterators();
+
+/**
  * Random Access Iterators allow the operations of pointer arithmetic:
  * addition of arbitrary offsets, subscripting, and subtraction of one
  * iterator from another to find a distance.  These are the most
@@ -22,10 +28,42 @@ using namespace std;
  * . operator >= (random access iterator) 
  * . operator <= (random access iterator) 
  *
- * The vector class provides a random access iterator that can be used
- * as follows:
+ * This example demonstrates how the STL vector class provides a
+ * random access iterator that can be used in a manner that's nearly
+ * identical to pointer arithmetic on a C++ built-in array.
  */
 int main() {
+  demonstrate_pointer_arithmetic();
+  demonstrate_random_access_iterators();
+
+  return 0;
+}
+
+/**
+ * Demonstrate pointer arithmetic with a C++ built-in array.
+ */
+static void demonstrate_pointer_arithmetic() {
+  // Create a array of 10 numbers.
+  int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int a_size = sizeof(a) / sizeof(*a);
+
+  // Keep track of the total number of even values.
+  auto total_even = 0;
+
+  // Iterate through the vector summing the values of even numbers.
+  for (auto ip = a;
+       ip != a + a_size;
+       // Use pointer's += operator to skip over odd numbers.
+       ip += 2)
+    total_even += *ip;
+
+  cout << "Sum of even numbers = " << total_even << endl;
+}
+
+/**
+ * Demonstrate random access iterators with a vector.
+ */
+static void demonstrate_random_access_iterators() {
   // Create a vector of 10 numbers.
   vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -40,8 +78,4 @@ int main() {
     total_even += *iter;
 
   cout << "Sum of even numbers = " << total_even << endl;
-  return 0;
 }
-
-
-
