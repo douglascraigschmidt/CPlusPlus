@@ -11,8 +11,8 @@ using namespace std;
 
 /**
  * This example uses a list's bidirectional iterator with the
- * algorithms copy() and reverse_copy().  It also demonstrates
- * the difference between emplace_back() and push_back().
+ * algorithms copy() and reverse_copy().  It also demonstrates the
+ * difference between emplace_back() and push_back().
  */
 int main() {
   // Create an empty list.
@@ -34,24 +34,25 @@ int main() {
   aList.push_back("bananas");
   cout << "ending push_back() calls" << endl;
 
-  // Make y the same size - creates empty strings for y's elements.
-  list<simple_string> y(aList.size());
+  // Make bList the same size as aList.  The constructor simple
+  // creates empty strings for bList's elements.
+  list<simple_string> bList(aList.size());
 
   // This is the STL algorithm reverse_copy(), where the source is
-  // aList and the target is y.
+  // aList and the target is bList.
   reverse_copy(aList.begin(),
                aList.end(),
-               y.begin());  
+               bList.begin());  
 
   // Print result forwards.
-  copy (y.begin(),
-        y.end(),
+  copy (bList.begin(),
+        bList.end(),
         ostream_iterator<simple_string>(cout, " "));
   cout << endl;
 
   // Print result backwards.
-  copy (y.rbegin(),
-        y.rend(),
+  copy (bList.rbegin(),
+        bList.rend(),
         ostream_iterator<simple_string>(cout, " "));
   cout << endl;
   return 0;
