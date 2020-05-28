@@ -23,12 +23,15 @@ int main () {
     myset.insert(it, 24); // max efficiency inserting
     myset.insert(it, 26); // no max efficiency inserting
 
-    // 10 already in set, not inserted.
+    // 10 is already in set, not inserted.
     myset.insert({5, 10, 15});
 
     cout << "myset contains:" << endl;
-    copy(myset.begin(), myset.end(),
-         ostream_iterator<int>(cout, "\n"));
+    copy(myset.begin(),
+         myset.end(),
+         ostream_iterator<int>(cout, " "));
+
+    cout << endl;
   }
   
   return 0;

@@ -1,9 +1,26 @@
 #include <algorithm>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+struct throw_exception {
+  throw_exception &operator=(const throw_exception &rhs) {
+    if (++i_ == 10) {
+        throw std::out_of_range("index out of range");
+    }
+    return *this;
+  }
+
+  static int i_;
+};
+
+int throw_exception::i_ = 0;
 
 template <typename T>
 class Array {
 public:
-  Array(int size)
+  explicit Array(int size)
     : size_ (size),
       array_ (new T[size]) {
   }
@@ -46,14 +63,16 @@ private:
 };
 
 int main() {
-  Array<int> a1 (1000);
-  Array<int> a2 (10);
-  Array<int> a3 (a1); // Copy constructor.
+  try {
+    Array<throw_exception> a1(1000);
+    Array<throw_exception> a2(10);
+    Array<throw_exception> a3(a1); // Copy constructor.
 
-  // ...
-
-  a2 = a1; // Assignment operator.
-  a1 = a2;
+    a2 = a1; // Assignment operator.
+    a1 = a2;
+  } catch (std::out_of_range &range_error) {
+    cout << "caught range error" << endl;
+  }
 
   return 0;
 }

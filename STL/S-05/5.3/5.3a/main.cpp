@@ -29,7 +29,7 @@ using namespace std;
  */
 int main() {
   // Arrange the set in descending order.
-  set<int, greater<>> setof_nums({1, 2, 3});
+  set<int, greater<>> setof_nums({2, 1, 3, 0, 7});
   auto index = setof_nums.find (9);
 
   if (index == setof_nums.end())
@@ -41,6 +41,7 @@ int main() {
 
   cout << setof_nums.size() << " elements in the set" << endl;
 
+  // Use generic find() algorithm.
   index = find(setof_nums.begin(), setof_nums.end(), 9);
 
   if (index == setof_nums.end())

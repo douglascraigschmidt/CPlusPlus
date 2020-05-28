@@ -2,9 +2,11 @@
 
 class Array {
 public:
-  Array(int size)
+  typedef char T;
+
+  explicit Array(int size)
     : size_ (size),
-      array_ (new char[size]) {
+      array_ (new T[size]) {
   }
 
   ~Array() {
@@ -13,7 +15,7 @@ public:
 
   Array(const Array &rhs)
     : size_ (rhs.size_),
-      array_ (new char[rhs.size_]) {
+      array_ (new T[rhs.size_]) {
     for (int i = 0;
          i < rhs.size_;
          ++i)
@@ -22,7 +24,7 @@ public:
 
   Array &operator= (const Array &rhs) {
     if (this != &rhs) { // Check for self-assignment.
-      char *temp = new T[rhs.size_];
+      T *temp = new T[rhs.size_];
       for (int i = 0;
            i < rhs.size_;
            ++i)
@@ -37,15 +39,13 @@ public:
 
 private:
   int size_;
-  char *array_;
+  T *array_;
 };
 
 int main() {
   Array a1 (1000);
   Array a2 (10);
   Array a3 (a1); // Copy constructor.
-
-  // ...
 
   a2 = a1; // Assignment operator.
   a1 = a2;

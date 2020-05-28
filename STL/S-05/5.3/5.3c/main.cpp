@@ -9,13 +9,13 @@ using namespace std;
  * This example creates a few sets and uses swap().
  */
 int main() {
-  // Defaults to less<int>.
-  set<int> firstSet ({5, 4, 6, 7, 8, 2, 1, 3});
+  // Defaults to less<int>, so elements appear in ascending order.
+  set<int> firstSet {5, 4, 6, 7, 8, 2, 1, 3};
 
   // Store a reference to the first set.
   const set<int> &secondSet = firstSet;
 
-  // Copy the set into a list.
+  // Copy the set into a list via an iterator range.
   list<int> aList (secondSet.begin (), secondSet.end ());
 
   // Create a new set that's arranged in descending order.
@@ -25,12 +25,15 @@ int main() {
   // Swap the contents of the first and forth sets.
   fourthSet.swap (firstSet);
 
-  copy (thirdSet.begin (), thirdSet.end (),
+  copy (thirdSet.begin (),
+        thirdSet.end (),
         ostream_iterator<int> (cout, " "));
   cout << endl;
 
-  copy (fourthSet.begin (), fourthSet.end (),
+  copy (fourthSet.begin (),
+        fourthSet.end (),
         ostream_iterator<int> (cout, " "));
+  cout << endl;
 
   return 0;
 }

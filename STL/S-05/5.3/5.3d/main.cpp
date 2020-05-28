@@ -21,6 +21,7 @@ int main() {
   // Insert an element with value of 55
   firstSet.insert(55);
 
+  // This call will fail since 55 is already a member of the set.
   if (firstSet.insert(55).second)
     cout << "element was inserted" << endl;
   else
