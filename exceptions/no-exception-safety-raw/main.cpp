@@ -4,7 +4,7 @@ class Array {
 public:
   typedef char T;
 
-  explicit Array(int size)
+  explicit Array(size_t size)
     : size_ (size),
       array_ (new T[size]) {
   }
@@ -38,7 +38,7 @@ public:
   }
 
 private:
-  int size_;
+  size_t size_;
   T *array_;
 };
 

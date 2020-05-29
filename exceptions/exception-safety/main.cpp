@@ -32,15 +32,18 @@ public:
   Array(const Array<T> &rhs) // strong exception guarantees
     : size_ (rhs.size_),
       array_ (new T[rhs.size_]) {
+      /*
     for (int i = 0;
          i < rhs.size_;
          ++i)
       // If T.operator=() throws exception we can handle it cleanly
       // since array_'s destructor deletes the memory.
-      array_.get()[i] = rhs.array_.get()[i];
+      array_.get()[i] = rhs.array_.get()[i]; */
 
     // STL programmers would to this:
-    // std::copy(rhs.array_.get(), rhs.array_.get() + rhs.size_, array_.get());
+    std::copy(rhs.array_.get(),
+            rhs.array_.get() + rhs.size_,
+            array_.get());
   }
 
   Array<T> &operator= (const Array<T> &rhs) {
@@ -61,7 +64,7 @@ private:
   size_t size_;
   
   // replaced char * or T * with
-  std::unique_ptr<T> array_;
+  std::unique_ptr<T[]> array_;
 };
 
 int main() {
