@@ -29,8 +29,8 @@ stack::operator=(const stack &rhs) {
     stack_ = nullptr;
 
     for (size_t i = 0; i < rhs.size_; ++i)
+      // Subtle bug when generalized to arbitrary type T.
       temp[i] = rhs.stack_[i];
-    // Subtle bug when generalized to arbitrary type T.
 
     delete[] stack_;
     stack_ = temp;
@@ -53,7 +53,7 @@ stack::operator=(stack &&rhs)  noexcept {
 }
 
 stack::~stack() {
-  delete[] stack_;
+  delete [] stack_;
 }
 
 bool

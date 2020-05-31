@@ -7,4 +7,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(CPP-templates-4_b
         main.cpp
-        simple_string.cpp)
+        throw_exception.cpp)

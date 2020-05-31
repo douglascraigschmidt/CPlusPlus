@@ -13,15 +13,15 @@ public:
 
   explicit stack(size_t size = DEFAULT_SIZE);
 
-  stack(const stack<T> &rhs);
+  stack(const stack &rhs);
 
-  stack(stack<T> &&rhs) noexcept;
+  stack(stack &&rhs) noexcept;
 
-  stack &operator=(const stack<T> &rhs);
+  stack &operator=(const stack &rhs);
 
-  stack &operator=(stack<T> &&rhs) noexcept;
+  stack &operator=(stack &&rhs) noexcept;
 
-  ~stack();
+  ~stack() = default;
 
   void push(const value_type &item);
 
@@ -40,10 +40,12 @@ public:
 
   bool is_full() const;
 
+  void swap(stack &rhs) noexcept;
+
 private:
   size_t top_;
   size_t size_;
-  value_type *stack_;
+  std::unique_ptr<value_type[]> stack_;
 };
 
 #include "stack.cpp"

@@ -5,8 +5,7 @@ template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
     size_(size),
-    stack_(new T[size]) {
-}
+    stack_(new T[size]) {}
 
 template<typename T>
 stack<T>::stack(const stack<T> &rhs)
@@ -14,36 +13,22 @@ stack<T>::stack(const stack<T> &rhs)
     size_(rhs.size_),
     stack_(new T[rhs.size_]) {
   for (size_t i = 0; i < rhs.size_; ++i)
-    // Yikes, there's a memory leak of T.operator=() throws an
-    // exception!
     stack_[i] = rhs.stack_[i];
 }
 
 template<typename T>
-stack<T>::stack(stack<T> &&rhs) noexcept
-        : top_(rhs.top_),
-          size_(rhs.size_),
-          stack_(rhs.stack_) {
-  rhs.stack_ = nullptr;
-  rhs.size_ = rhs.top_ = 0;
+stack<T>::stack(stack &&s) noexcept
+        : top_(s.top_),
+          size_(s.size_),
+          stack_(s.stack_.release()) {
+  s.size_ = s.top_ = 0;
 }
 
 template<typename T>
 stack<T> &
 stack<T>::operator=(const stack<T> &rhs) {
   if (this != &rhs) {
-    T *temp = new T[rhs.size_];
-    stack_ = nullptr;
-
-    for (size_t i = 0; i < rhs.size_; ++i)
-      // Yikes, there's a memory leak of T.operator=() throws an
-      // exception!
-      temp[i] = rhs.stack_[i];
-
-    delete [] stack_;
-    stack_ = temp;
-    top_ = rhs.top_;
-    size_ = rhs.size_;
+    stack<T>(rhs).swap(*this);
   }
   return *this;
 }
@@ -54,16 +39,18 @@ stack<T>::operator=(stack<T> &&rhs)  noexcept {
   if (this != &rhs) {
     top_ = rhs.top_;
     size_ = rhs.size_;
-    stack_ = rhs.stack_;
-    rhs.stack_ = nullptr;
+    stack_.reset(rhs.stack_.release());
     rhs.size_ = rhs.top_ = 0;
   }
   return *this;
 }
 
 template<typename T>
-stack<T>::~stack() {
-  delete [] stack_;
+void
+stack<T>::swap(stack<T> &rhs) noexcept {
+  std::swap(top_, rhs.top_);
+  std::swap(size_, rhs.size_);
+  stack_.swap(rhs.stack_);
 }
 
 template<typename T>
