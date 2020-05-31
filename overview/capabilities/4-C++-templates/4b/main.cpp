@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 #include "stack.h"
 #include "throw_exception.h"

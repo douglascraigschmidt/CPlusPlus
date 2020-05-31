@@ -33,7 +33,6 @@ stack<T> &
 stack<T>::operator=(const stack<T> &rhs) {
   if (this != &rhs) {
     T *temp = new T[rhs.size_];
-    stack_ = nullptr;
 
     for (size_t i = 0; i < rhs.size_; ++i)
       // Yikes, there's a memory leak of T.operator=() throws an
