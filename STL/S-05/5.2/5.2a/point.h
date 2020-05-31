@@ -10,7 +10,7 @@
  * mathematical idea of a Cartesian point. A pair is used to construct
  * maps and other associative data structures.
  *
- * Here we create a Point class that wraps a pair.
+ * Here we create a point class that wraps a pair.
  */
 template<typename T1, typename T2>
 class point {

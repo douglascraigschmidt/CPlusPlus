@@ -7,6 +7,7 @@ using namespace std;
  * This example shows how set::insert() works.
  */
 int main () {
+  // Implicitly use less<int>.
   set<int> myset;
 
   for (int i = 1; i <= 5; i++)
@@ -17,6 +18,7 @@ int main () {
 
   // No new element inserted.
   if (!ret.second) {
+    // auto is set<int>::iterator
     auto it = ret.first;  // "it" now points to element 20
 
     myset.insert(it, 25); // max efficiency inserting

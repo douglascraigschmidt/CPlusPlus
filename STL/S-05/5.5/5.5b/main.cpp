@@ -1,36 +1,46 @@
-#include <vector>
+#include <utility>
 #include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+#include <memory>
+
 using namespace std;
 
-int main () {
-  // Created a vector with one element: 1
-  vector<int> v (1, 1);	
-  v.push_back (2);
-  v.push_back (3);
-  v.push_back (4); 		
-  // vector v now contains 1 2 3 4
+struct print { // Iterator value is a key-value pair.
+  void operator () (const map<string, string>::value_type &p) { 
+    cout << p.first << "=" << p.second << endl; 
+  }
+};
 
-  // Now create 2 iterators, they are random access iterators.
-  auto i = v.begin();
-  auto j = i + 2; cout << *j << " ";
+/**
+ * This program demonstrates several other capabilities of STL map.
+ */ 
+int main() {
+  pair<string, int> pr1, pr2("heaven", 7);
+  cout << pr2.first << "=" << pr2.second << endl;    // Prints heaven=7
+        
+  // Declare and initialize pair pointer.
+  unique_ptr<pair<string, int>> prp (new pair<string,
+                                                int>("yards", 9));
+  cout << prp->first << "=" << prp->second << endl;      // Prints yards=9
+        
+  // Declare map and assign value to keys.
+  map<string, string> engGerDict;
+  engGerDict["shoe"] = "Schuh"; engGerDict["head"] = "Kopf";
+    
+  // Iterate over map in sorted order.  
+  for_each (engGerDict.begin(),
+            engGerDict.end(),
+            print ());
 
-  // Perform some random accesses via the iterators.
-  i += 3; cout << *i << " ";
-  j = i - 1; cout << *j << " ";
-  j -= 2;
-  cout << *j << " ";
-  cout << v[1] << endl;
-
-  (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
-  (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
-
-  i = j;
-  i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
-  cout << endl;
-
+  // Iterate over map in sorted order.  
+  for_each (engGerDict.begin(),
+            engGerDict.end(),
+            // Use a lambda function.
+            [](const map<string, string>::value_type &p) { 
+              cout << p.first << "=" << p.second << endl; 
+            });
+            
   return 0;
 }
-
-
-
-

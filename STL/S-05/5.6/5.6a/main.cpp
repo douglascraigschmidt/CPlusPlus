@@ -7,71 +7,109 @@
 using namespace std;
 
 /**
- * This extraction operator prints the contents of pair {@code p}
- * param to ostream {@code os} param.
+ * A multimap is an ordered associative container that associates key
+ * objects with value objects.  It is called a pair associative
+ * container because its value type is actually implemented as
+ * pair<const Key, Value>.
+ *
+ * For a multimap keys don't have to be unique. Nor do the keys have
+ * to be integers, so maps are multimaps are more general than a
+ * sequential container such as vector, deque, or list.
+ * 
+ * template <typename Key,
+ *           typename Value, 
+ *           typename Compare = less<Key>,
+ *           typename Allocator = allocator <pair<const Key, Value>>
+ * class multimap;
  */
-template <typename T, typename U>
-std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p) {
-    os << "[" << p.first << ", " << p.second << "]";
-    return os;
+
+#include <string>
+#include <map>
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <functional>
+
+using namespace std;
+
+typedef multimap <string, string> names_type;
+typedef names_type::value_type value_type;
+
+/**
+ * Functor.
+ */
+struct print {
+  explicit print(ostream& out) : os (out) {}
+
+  void operator() (const names_type::value_type &p) {
+    os << p.first << " belongs to the " << p.second << " family\n";
+  }
+
+  ostream& os;
+};
+
+/**
+ * Insertion operator prints out contents of a multimap.
+ */
+ostream& operator<<(ostream& out, const names_type &l) {
+  for_each (l.begin (), l.end (), print (out));
+
+  return out;
 }
 
 /**
- * This method prints the contents of a wrapped sequential or
- * associative container to the ostream {@code os} param.
+ * Insertion operator prints out contents of a pair.
  */
-template<template<typename, typename...> class container,
-         typename valueType,
-         typename... Args>
-void print_container(ostream &os,
-                     const container<valueType, Args...>& objs) {
-  // Print out method name and arguments.
-  os << __PRETTY_FUNCTION__ << '\n';
+ostream &operator << (ostream &out, 
+                      const pair<names_type::iterator,
+                                 names_type::iterator> &p) {
+  for_each (p.first, p.second, print (out));
 
-  // Print the contents of the wrapper sequential or associative
-  // container.
-  for (auto const &obj : objs)
-    os << obj << ' ';
-
-  os << '\n';
+  return out;
 }
 
-/**
- * This method prints the contents of a container using its {@code
- * start} and {@code end} iterators to the ostream {@code os} param.
- */
-template<typename input_iterator>
-void print_iterator(ostream &os,
-                    input_iterator start,
-                    input_iterator end) {
-    os << __PRETTY_FUNCTION__ << '\n';
+int main(int argc, char* argv[]) {
+  names_type names;  // create a multimap of names
 
-    while (start != end)
-        os << *start++ << ' ';
+  // Put the names in the multimap
+  names.insert(value_type("Kim", "Smith"));
+  names.insert(value_type("Jane", "Smith"));
+  names.insert(value_type("Kay", "Smith"));
 
-    os << '\n';
-}
+  auto iter = names.end();
+  names.insert(iter, value_type("Kurt", "Jones"));
+  names.insert(iter, value_type("John", "Jones"));
+  names.insert(iter, value_type("Kim", "Jones"));
 
-/**
- * This example shows how to use C++ template template parameters and
- * variadic templates to wrap sequential and associative containers.
- */
-int main() {
-  std::vector<float> vf { 1.1, 2.2, 3.3, 4.4 };
-  print_iterator(cout, vf.begin(), vf.end());
-  print_container(cout, vf);
+  vector<value_type> mackay_names{ value_type("Sophie", "Mackay"),
+                                   value_type("Steve", "Mackay"),
+                                   value_type("Kim", "Mackay") };
 
-  std::list<char> lc { 'a', 'b', 'c', 'd' };
-  print_iterator(cout, lc.begin(), lc.end());
-  print_container(cout, lc);
+  names.insert(mackay_names.begin(), mackay_names.end());
 
-  std::deque<int> di { 1, 2, 3, 4 };
-  print_iterator(cout, di.begin(), di.end());
-  print_container(cout, di);
+  // print out the names
+  cout << "All the names:" << endl << names << endl;
 
-  std::map<string, int> msi {{"larry", 100}, {"curly", 90}, {"moe", 110}};
-  print_iterator(cout, msi.begin(), msi.end());
-  print_container(cout, msi);
+  // Find the people named Kim
+  pair<names_type::iterator,names_type::iterator> p =
+    names.equal_range ("Kim");
 
-  return 0;
+  // print them out 
+  cout << names.count("Kim") << " People called Kim:"
+       << endl << p << endl;
+
+  // Erase all people called Sue.
+  names.erase(p.first, p.second);
+
+  // print out the names
+  cout << "All the names:" << endl << names << endl;
+
+  iter = names.find("Kurt");
+
+  if (iter == names.end())
+    cout << "Kurt not found" << endl;
+  else
+    cout << "Kurt's last name is " << iter->second << endl;
+
+  return 0; 
 }
