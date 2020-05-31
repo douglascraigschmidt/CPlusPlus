@@ -74,6 +74,11 @@ stack<T>::push(const value_type &item) {
 }
 
 template<typename T>
+void stack<T>::push(T &&rval) {
+  emplace(std::forward<T>(rval));
+}
+
+template<typename T>
 template<typename... Args>
 void
 stack<T>::emplace(Args &&... args) {
@@ -96,11 +101,6 @@ template<typename T>
 typename stack<T>::value_type &
 stack<T>::top() {
   return stack_[top_ - 1];
-}
-
-template<typename T>
-void stack<T>::push(T &&rval) {
-  emplace(std::forward<T>(rval));
 }
 
 #endif /* _STACK_CPP */
