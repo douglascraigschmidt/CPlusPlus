@@ -35,10 +35,10 @@
  * map <key_type, data_type [, comparison_function]>
  */
 int main () {
-  std::vector<std::string> word_list ({"now", "is", "the", "time", 
-                                       "for", "all", "good", "people",
-                                       "to", "come", "to", "the", 
-                                       "aid", "of", "their", "party"});
+  std::vector<std::string> word_list {"now", "is", "the", "time", 
+                                      "for", "all", "good", "people",
+                                      "to", "come", "to", "the", 
+                                      "aid", "of", "their", "party"};
 
   typedef std::map<std::string, int> WORD_MAP;
   WORD_MAP word_map; // Map of words and their frequencies.
@@ -48,10 +48,27 @@ int main () {
   for (auto const &word : word_list)
     ++word_map[word];
 
-  // Print out the word_map.  Note auto type deduction.
+#if 0  
+  // Use an explicit iterator to count the number of times each word
+  // appears in the word_list.
+  for (WORD_MAP::iterator word_iter = word_list.begin ();
+       word_iter != word_list.end ();
+       ++word_iter)
+    ++word_map[*word_iter];
+
+  // Use an auto iterator to count the number of times each word
+  // appears in the word_list.
+  for (auto const &word_iter = word_list.begin ();
+       word_iter != word_list.end ();
+       ++word_iter)
+    ++word_map[*word_iter];
+#endif
+
+  // Print out the word_map.
   for (auto const &i : word_map)
     std::cout << i.second << " " << i.first << std::endl; 
 
+  // Create a functor.
   struct total_it {
     explicit total_it (int i): i_ (i) {}
 
