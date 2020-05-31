@@ -6,7 +6,7 @@ throw_exception::throw_exception(int j)
 
 throw_exception &
 throw_exception::operator=(const throw_exception &rhs) {
-  if (++i_ == 15) {
+  if (++i_ == 3) {
     throw std::out_of_range("index out of range");
   }
   return *this;
