@@ -36,23 +36,23 @@ typedef multimap <string, string> names_type;
 typedef names_type::value_type value_type;
 
 /**
- * Functor.
+ * Functor that prints a value type.
  */
 struct print {
-  explicit print(ostream& out) : os (out) {}
+  explicit print(ostream& out): os (out) {}
 
   void operator() (const names_type::value_type &p) {
     os << p.first << " belongs to the " << p.second << " family\n";
   }
 
-  ostream& os;
+  ostream &os;
 };
 
 /**
  * Insertion operator prints out contents of a multimap.
  */
-ostream& operator<<(ostream& out, const names_type &l) {
-  for_each (l.begin (), l.end (), print (out));
+ostream& operator<<(ostream &out, const names_type &l) {
+  for_each (l.begin(), l.end(), print(out));
 
   return out;
 }
@@ -60,15 +60,18 @@ ostream& operator<<(ostream& out, const names_type &l) {
 /**
  * Insertion operator prints out contents of a pair.
  */
-ostream &operator << (ostream &out, 
-                      const pair<names_type::iterator,
-                                 names_type::iterator> &p) {
-  for_each (p.first, p.second, print (out));
+ostream &operator<<(ostream &out,
+                    const pair<names_type::iterator,
+                               names_type::iterator> &p) {
+  for_each (p.first, p.second, print(out));
 
   return out;
 }
 
-int main(int argc, char* argv[]) {
+/**
+ * This example illustrates how to use various STL multimap features.
+ */
+int main(int argc, char *argv[]) {
   names_type names;  // create a multimap of names
 
   // Put the names in the multimap
@@ -76,10 +79,9 @@ int main(int argc, char* argv[]) {
   names.insert(value_type("Jane", "Smith"));
   names.insert(value_type("Kay", "Smith"));
 
-  auto iter = names.end();
-  names.insert(iter, value_type("Kurt", "Jones"));
-  names.insert(iter, value_type("John", "Jones"));
-  names.insert(iter, value_type("Kim", "Jones"));
+  names.insert(names.end(), value_type("Kurt", "Jones"));
+  names.insert(names.end(), value_type("Mike", "Jones"));
+  names.insert(names.end(), value_type("Kim", "Jones"));
 
   vector<value_type> mackay_names{ value_type("Sophie", "Mackay"),
                                    value_type("Steve", "Mackay"),
@@ -98,13 +100,13 @@ int main(int argc, char* argv[]) {
   cout << names.count("Kim") << " People called Kim:"
        << endl << p << endl;
 
-  // Erase all people called Sue.
+  // Erase all people called Kim.
   names.erase(p.first, p.second);
 
   // print out the names
   cout << "All the names:" << endl << names << endl;
 
-  iter = names.find("Kurt");
+  auto iter = names.find("Kurt");
 
   if (iter == names.end())
     cout << "Kurt not found" << endl;

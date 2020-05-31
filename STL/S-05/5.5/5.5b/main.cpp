@@ -17,8 +17,8 @@ struct print { // Iterator value is a key-value pair.
  * This program demonstrates several other capabilities of STL map.
  */ 
 int main() {
-  pair<string, int> pr1, pr2("heaven", 7);
-  cout << pr2.first << "=" << pr2.second << endl;    // Prints heaven=7
+  pair<string, int> pr("heaven", 7);
+  cout << pr.first << "=" << pr.second << endl;    // Prints heaven=7
         
   // Declare and initialize pair pointer.
   unique_ptr<pair<string, int>> prp (new pair<string,
@@ -27,12 +27,20 @@ int main() {
         
   // Declare map and assign value to keys.
   map<string, string> engGerDict;
-  engGerDict["shoe"] = "Schuh"; engGerDict["head"] = "Kopf";
+  engGerDict["shoe"] = "Schuh";
+  engGerDict["head"] = "Kopf";
+
+  map<string, string>::value_type vt("yes", "Ja");
+  engGerDict.insert(vt);
     
   // Iterate over map in sorted order.  
   for_each (engGerDict.begin(),
             engGerDict.end(),
             print ());
+
+  auto iter = engGerDict.find("yes");
+  if (iter != engGerDict.end())
+    engGerDict.erase(iter);
 
   // Iterate over map in sorted order.  
   for_each (engGerDict.begin(),

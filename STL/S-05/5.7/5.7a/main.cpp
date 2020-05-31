@@ -15,7 +15,8 @@
  * unordered_map is more general than a sequential container such as
  * vector, deque, or list.
  *
- * template <typename Key, typename Value,
+ * template <typename Key,
+ *           typename Value,
  *           class Hash = hash<Key>,
  *           class Pred = std::equal_to<Key>,
  *           typename Allocator = allocator <pair<const Key, Value>> >

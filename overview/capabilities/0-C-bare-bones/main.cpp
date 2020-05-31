@@ -8,14 +8,13 @@ typedef int T;
 
 int main() {
   T stack[MAX_STACK];
+  int top;
 
-  T item = 1;
-
-  for (int top = 0; top < MAX_STACK; ++top)
-    stack[top] = item * top; // push
+  for (top = 0; top < MAX_STACK; ++top)
+    stack[top] = top; // push
 
   while (--top >= 0)
-    printf("top item = %d", stack[top]); // pop
+    printf("top item = %d\n", stack[top]); // pop
 
   return 0;
 }
