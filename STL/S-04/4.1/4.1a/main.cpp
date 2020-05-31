@@ -57,12 +57,13 @@ using namespace std;
  * it1 > it2;	Comparison
  * it1 <= it2;	Comparison
  * 
- * Each predefined standard STL container comes with its own iterator,
- * and that might be a random access iterator, a bidirectional
- * iterator or another type. But you can always use an additional type
- * of iterator if the predefined one doesn't work as needed.
- * Likewise, you can define a custom iterator based on the STL
- * predefined classes.
+ * Each predefined standard STL container comes with its own iterator
+ * accessible via its *begin() and *end() factory methods.  STL
+ * container iterators can a random access iterator, a bidirectional
+ * iterator, or some another type.  However, you can always use an
+ * additional type of iterator if the predefined one doesn't work as
+ * needed.  Likewise, you can define a custom iterator based on the
+ * STL predefined classes.
  * 
  * Iterators are central to generic programming because they are an
  * interface between containers and algorithms. Algorithms usually
@@ -95,16 +96,28 @@ namespace my_copy {
  * contents of one built-in array to another.
  */
 int main () {
-  int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  const int a_size = sizeof(a) / sizeof(a[0]);
-  int b[a_size];
+  // Create built-in arrays.
+  int a1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  const int a1_size = sizeof(a1) / sizeof(a1[0]);
+  int a2[a1_size];
 
   // Perform the copy.
-  my_copy::copy(a, a + a_size, b);
-
+  my_copy::copy(a1, a1 + a1_size, a2);
 
   // Print the results.
-  for (auto i : b)
+  for (auto i : a2)
+    cout << i << ' ';
+  cout << endl;
+
+  // Create STL vectors.
+  vector<int> v1{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  vector<int> v2(v1.size());
+
+  // Perform the copy.
+  my_copy::copy(v1.begin(), v1.end(), v2.begin());
+
+  // Print the results.
+  for (auto i : v2)
     cout << i << ' ';
 
   cout << endl;

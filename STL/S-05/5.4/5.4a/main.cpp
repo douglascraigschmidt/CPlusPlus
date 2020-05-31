@@ -32,45 +32,53 @@ using namespace std;
  *   invalidate iterators that point to existing elements; only
  *   iterators pointing to elements being erased are invalid.
  *
- * The following is an example of multiset using several STL
- * algorithms. The copy algorithm copies each element from the
- * specified range (given by its first two arguments), into a place
- * pointed to by the third argument.
+ * The following example of multiset uses several STL algorithms. The
+ * copy() algorithm copies each element from the specified range
+ * (given by its first two input iterator arguments) into a location
+ * pointed to by the third argument output iterator argument.
 */
 int main() {
-  multiset<int> A({4, 1, 1, 1, 1, 1, 0, 5, 1, 0});
-  multiset<int> B({4, 4, 2, 4, 2, 4, 0, 1, 5, 5});
-  multiset<int> C;
+  multiset<int> a {4, 1, 1, 1, 1, 1, 0, 5, 1, 0};
+  multiset<int> b {4, 4, 2, 4, 2, 4, 0, 1, 5, 5};
+  multiset<int> c;
 
-  cout << "Set A: ";
-  copy(A.begin(), A.end(),
+  cout << "Set a: ";
+  copy(a.begin(),
+       a.end(),
        ostream_iterator<int>(cout, " ")); 
   cout << endl;
-  
-  cout << "Set B: ";
-  copy(B.begin(), B.end(),
+
+  cout << "Set b: ";
+  copy(b.begin(),
+       b.end(),
        ostream_iterator<int>(cout, " ")); 
   cout << endl;
 
   cout << "Union: ";
-  set_union(A.begin(), A.end(),
-            B.begin(), B.end(),
+  // Find elements that are in set a, set b, or both sets a and b.
+  set_union(a.begin(), a.end(),
+            b.begin(), b.end(),
             ostream_iterator<int>(cout, " "));
   cout << endl;  
  
   cout << "Intersection: ";
-  set_intersection(A.begin(), A.end(),
-                   B.begin(), B.end(),
+  // Find elements that are in both set a and set b.
+  set_intersection(a.begin(), a.end(),
+                   b.begin(), b.end(),
                    ostream_iterator<int>(cout, " "));
-  cout << endl;  
-  set_difference(A.begin(), A.end(),
-                 B.begin(), B.end(),
-                 // essentially back_inserter(C)
-                 inserter(C, C.end()));
-  cout << "Set C (difference of A and B): ";
+  cout << endl;
 
-  copy(C.begin(), C.end(),
+  // Find elements in set a that are not in set b.
+  set_difference(a.begin(), a.end(),
+                 b.begin(), b.end(),
+                 // essentially back_inserter(c)
+                 inserter(c, c.end()));
+  cout << "Set c (difference of set a and set b): ";
+
+  copy(c.begin(), 
+       c.end(),
        ostream_iterator<int>(cout, " "));
   cout << endl;
+
   return 0;
 }

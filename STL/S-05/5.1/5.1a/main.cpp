@@ -6,10 +6,10 @@ using namespace std;
  * An ordered associative container is a container that supports
  * efficient insertion, removal, and lookup of elements (values) based
  * on keys. It supports insertion and removal of elements, but differs
- * from a sequential container because it doesn't let one insert an
- * element at a specific position or remove an element from a given
- * position based on the position itself -- all access is done to the
- * value using a key.  And once one adds the elements to the
+ * from a sequential container because it doesn't allow the insertion
+ * of an element at a specific position or remove an element from a
+ * given position based on the position itself -- all access is done
+ * to the value using a key.  After an element has been added to a
  * container, the key cannot change, although the element and its key
  * can be removed. The STL provides four ordered associative
  * containers.

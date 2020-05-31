@@ -1,3 +1,6 @@
+#ifndef _POINT_H
+#define _POINT_H
+
 /**
  * The concept of a pair is essential for understanding how
  * associative containers work. A pair binds a key (known as the first
@@ -7,7 +10,7 @@
  * mathematical idea of a Cartesian point. A pair is used to construct
  * maps and other associative data structures.
  *
- * Here we create a Point class that wraps a pair.
+ * Here we create a point class that wraps a pair.
  */
 template<typename T1, typename T2>
 class point {
@@ -15,10 +18,7 @@ public:
   /**
    * Pair constructor.
    */
-  point(T1 x, T2 y)
-    : pair_(std::move(x), std::move(y)),
-      x(pair_.first),
-      y(pair_.second) { }
+  point(T1 x, T2 y);
 
   /**
    * x coordinate.
@@ -32,6 +32,9 @@ public:
 
 private:
   // Represent the point as an STL pair.
-  pair<T1, T2> pair_;
+  std::pair<T1, T2> pair_;
 };
 
+#include "point.cpp"
+
+#endif /* _POINT_H */

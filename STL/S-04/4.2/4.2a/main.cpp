@@ -70,8 +70,13 @@ int main () {
        // element in a container, not the physical memory location
        // that's just beyond the last element.
        it != v.end(); 
-       ++it) 
-    cout << *it << endl;
+       ++it) {
+      cout << *it << ' ';
+      // you can change the element(s) you're iterating over
+      *it -= 1;
+  }
+
+  cout << endl;
 
   // Never dereference the value returned by v.end(), because it is
   // just a marker and holds nothing of value. The point of such a
@@ -89,10 +94,10 @@ int main () {
   print_const(v);
 
   // Create a vector of string.
-  std::vector<std::string> sv({"hello", "world"});
+  std::vector<std::string> sv{"hello", "world"};
 
   // Print the contents of the vector using an iterator.
-  for (std::vector<std::string>::iterator itr = sv.begin();
+  for (std::vector<std::string>::const_iterator itr = sv.begin();
        itr != sv.end();
        ++itr) 
     std::cout << "(" << itr->size() << ") " << *itr << ' ';
@@ -114,9 +119,14 @@ int main () {
  */
 static void print_const(const vector<int> &v) {
   for (vector<int>::const_iterator it = v.begin();
-       it != v.end(); 
-       ++it) 
-    cout << *it << endl;
+       it != v.end();
+       ++it) {
+    cout << *it << ' ';
+    // this is illegal with a const iterator:
+    // *it = 100;
+  }
+
+  cout << endl;
 }
 
 

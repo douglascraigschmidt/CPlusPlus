@@ -1,20 +1,24 @@
 #include <iostream>
-#include <algorithm>
 #include <memory>
+
+#include "throw_exception.h"
+
+using namespace std;
+
 
 template <typename T>
 class Array
 {
 public:
-  explicit Array(int size)
+  explicit Array(size_t size)
     : size_ (size),
       array_ (new T[size]) {
   }
 
-  // No-op - can remove!
+  // No-op!
   ~Array() = default;
 
-  Array(const Array<T> &rhs) noexcept // strong exception guarantees
+  Array(const Array<T> &rhs) // strong exception guarantees
     : size_ (rhs.size_),
       array_ (new T[rhs.size_]) {
     for (int i = 0;
@@ -22,19 +26,20 @@ public:
          ++i)
       // If T.operator=() throws exception we can handle it cleanly
       // since array_'s destructor deletes the memory.
-      array_.get()[i] = rhs.array_.get()[i];
+      array_[i] = rhs.array_[i];
 
+    /*
     // STL programmers would to this:
-    // std::copy(rhs.array_.get(), rhs.array_.get() + rhs.size_, array_.get());
+    std::copy(rhs.array_.get(),
+            rhs.array_.get() + rhs.size_,
+            array_.get()); */
   }
 
-  Array<T> &operator= (const Array<T> &rhs) noexcept { // strong exception guarantees
-    if (this != &rhs) // Check for self-assignment
-      {
-        // Copy constructor.
-        Array<T> temp(rhs);
-        swap(temp);
-      }
+  Array<T> &operator= (const Array<T> &rhs) {
+    if (this != &rhs) { // Check for self-assignment
+      // Copy constructor and swap().
+      Array<T>(rhs).swap(*this);
+    }
 
     return *this;
   }
@@ -45,20 +50,23 @@ public:
   }
 
 private:
-  int size_;
+  size_t size_;
+  
   // replaced char * or T * with
-  std::unique_ptr<T> array_;
+  std::unique_ptr<T[]> array_;
 };
 
 int main() {
-    Array<int> a1 (100000000);
-    Array<int> a2 (10);
-    Array<int> a3 (a1); // Copy constructor.
-
-    // ...
+  try {
+    Array<throw_exception> a1(1000);
+    Array<throw_exception> a2(10);
+    Array<throw_exception> a3(a1); // Copy constructor.
 
     a2 = a1; // Assignment operator.
     a1 = a2;
+  } catch (std::out_of_range &range_error) {
+    cout << "caught range error" << endl;
+  }
 
-    return 0;
+  return 0;
 }

@@ -13,7 +13,8 @@ using namespace std;
  * otherwise. In a set, an element will not be inserted if it matches
  * an existing element.
  *
- * Here is an example of inserting a value in a set.
+ * This example inserts a value in a set and shows what happens when
+ * the same value is inserted again.
  */
 int main() {
   set<int> firstSet;
@@ -21,6 +22,7 @@ int main() {
   // Insert an element with value of 55
   firstSet.insert(55);
 
+  // This call will fail since 55 is already a member of the set.
   if (firstSet.insert(55).second)
     cout << "element was inserted" << endl;
   else

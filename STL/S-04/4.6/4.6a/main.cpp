@@ -1,5 +1,6 @@
 #include <list>
 #include <iostream>
+
 using namespace std;
 
 /**
@@ -27,25 +28,25 @@ using namespace std;
  * A list’s default iterator is bidirectional, which we use in the
  * example below to print the list’s elements backwards.
  */
-int main()   {
-    // Create a list with one element whose value is 1.
-    list<int> aList (1, 1);
+int main() {
+  // Create a list with one element whose value is 1.
+  list<int> aList (1, 1);
 
-    // Add a couple of new elements at the beginning and end of the list.
-    aList.push_back (2);
-    aList.push_front(0);
+  // Add new elements at the beginning and end of the list.
+  aList.push_back(2);
+  aList.push_front(0);
 
-    // Use an explicit iterator to first item.
-    list<int>::iterator first = aList.begin();
+  // Explicitly define an iterator to first item.
+  list<int>::iterator first = aList.begin();
 
-    // Use auto to define iterator to last item.
-    auto last = aList.end();
+  // Use auto to implicitly define an iterator to last item.
+  auto last = aList.end();
 
-    // Print the list's contents out in reverse order.
-    while (last-- != first) {
-        cout << *last << ' ';
-    }
+  // Print the list's contents out in reverse order.
+  while (last-- != first) {
+    cout << *last << ' ';
+  }
 
-    return 0;
+  return 0;
 }
 

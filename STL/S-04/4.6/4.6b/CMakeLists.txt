@@ -6,4 +6,5 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(4_6b
-        main.cpp)
+        main.cpp
+        simple_string.cpp)

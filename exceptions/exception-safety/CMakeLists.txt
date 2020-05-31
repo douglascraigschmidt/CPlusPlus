@@ -6,4 +6,5 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(exception-safety
-        main.cpp)
+        main.cpp
+        throw_exception.cpp)

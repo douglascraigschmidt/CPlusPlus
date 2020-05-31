@@ -1,32 +1,54 @@
-#include <vector>
+#include <utility>
 #include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+#include <memory>
+
 using namespace std;
-int main ()    {
-    vector<int> v (1, 1);	//created a vector with one element: 1
-    v.push_back (2);
-    v.push_back (3);
-    v.push_back (4); 			// vector v: 1 2 3 4
 
-    // now create 2 iterators, they are random access iterators
-    auto i = v.begin();
-    auto j = i + 2; cout << *j << " ";
+struct print { // Iterator value is a key-value pair.
+  void operator () (const map<string, string>::value_type &p) { 
+    cout << p.first << "=" << p.second << endl; 
+  }
+};
 
-    i += 3; cout << *i << " ";
-    j = i - 1; cout << *j << " ";
-    j -= 2;
-    cout << *j << " ";
-    cout << v[1] << endl;
+/**
+ * This program demonstrates several other capabilities of STL map.
+ */ 
+int main() {
+  pair<string, int> pr("heaven", 7);
+  cout << pr.first << "=" << pr.second << endl;    // Prints heaven=7
+        
+  // Declare and initialize pair pointer.
+  unique_ptr<pair<string, int>> prp (new pair<string,
+                                                int>("yards", 9));
+  cout << prp->first << "=" << prp->second << endl;      // Prints yards=9
+        
+  // Declare map and assign value to keys.
+  map<string, string> engGerDict;
+  engGerDict["shoe"] = "Schuh";
+  engGerDict["head"] = "Kopf";
 
-    (j < i) ? cout << "j < i" : cout << "not (j < i)"; cout << endl;
-    (j > i) ? cout << "j > i" : cout << "not (j > i)"; cout << endl;
+  map<string, string>::value_type vt("yes", "Ja");
+  engGerDict.insert(vt);
+    
+  // Iterate over map in sorted order.  
+  for_each (engGerDict.begin(),
+            engGerDict.end(),
+            print ());
 
-    i = j;
-    i <= j && j <= i ? cout << "i and j equal" : cout << "i and j not equal";
-    cout << endl;
+  auto iter = engGerDict.find("yes");
+  if (iter != engGerDict.end())
+    engGerDict.erase(iter);
 
-    return 0;
+  // Iterate over map in sorted order.  
+  for_each (engGerDict.begin(),
+            engGerDict.end(),
+            // Use a lambda function.
+            [](const map<string, string>::value_type &p) { 
+              cout << p.first << "=" << p.second << endl; 
+            });
+            
+  return 0;
 }
-
-
-
-
