@@ -27,7 +27,7 @@ public:
 
   const char &operator[](size_t index) const;
 
-  bool operator<(const simple_string &rhs);
+  bool operator<(const simple_string &rhs) const;
 
   size_t length() const;
 

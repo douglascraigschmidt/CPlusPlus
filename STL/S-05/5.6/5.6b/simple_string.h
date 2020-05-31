@@ -45,5 +45,4 @@ private:
 
 std::ostream &
 operator<<(std::ostream &os, const simple_string &string);
-
 #endif /* _SIMPLE_STRING_H */

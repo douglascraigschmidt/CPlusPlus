@@ -23,13 +23,13 @@ simple_string::simple_string()
 }
 
 simple_string::simple_string(const char *s)
-  : len_(strlen(s)),
+  : len_(0),
     str_(strnew(s)) {
   cout << "simple_string::simple_string(const char *)" << endl;
 }
 
 simple_string::simple_string(const simple_string &rhs) noexcept
-  : len_(strlen(rhs.str_)),
+  : len_(0),
     str_(strnew(rhs.str_)) {
   cout << "simple_string::simple_string(const &)" << endl; 
 }
@@ -44,24 +44,23 @@ simple_string::simple_string(simple_string &&rhs) noexcept
 
 simple_string &
 simple_string::operator=(const simple_string &rhs) noexcept {
-    cout << "simple_string::operator=(const &)" << endl;
-  if (&rhs == this)
-    return *this;
-  else {
+  cout << "simple_string::operator=(const simple_string &)" << endl;
+  if (&rhs != this) {
     simple_string(rhs).swap(*this);
-    return *this;
   }
+  return *this;
 }
 
 simple_string &
 simple_string::operator=(simple_string &&rhs) noexcept {
     cout << "simple_string::operator=(simple_string &&)" << endl;
-  if (&rhs == this)
-    return *this;
-  else {
-    rhs.swap(*this);
-    return *this;
+  if (&rhs != this) {
+    len_ = rhs.len_;
+    str_ = rhs.str_;
+    rhs.len_ = 0;
+    rhs.str_ = nullptr;
   }
+  return *this;
 }
 
 void 
@@ -87,7 +86,7 @@ simple_string::length() const {
 }
 
 bool
-simple_string::operator<(const simple_string &rhs) {
+simple_string::operator<(const simple_string &rhs) const {
     return strcmp(str_, rhs.str_) < 0;
 }
 
@@ -107,7 +106,10 @@ simple_string::~simple_string() {
 }
 
 char *simple_string::strnew(const char *s) {
+  if (s != nullptr) {
     len_ = strlen(s);
     return strcpy(new char[len_ + 1], s);
+  } else
+    return nullptr;
 }
 

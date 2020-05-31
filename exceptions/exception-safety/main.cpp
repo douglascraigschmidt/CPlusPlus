@@ -37,7 +37,7 @@ public:
          ++i)
       // If T.operator=() throws exception we can handle it cleanly
       // since array_'s destructor deletes the memory.
-      array_.get()[i] = rhs.array_.get()[i];
+      array_[i] = rhs.array_[i];
 
     /*
     // STL programmers would to this:
