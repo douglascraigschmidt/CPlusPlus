@@ -22,24 +22,24 @@ int main() {
       int item = 0;
 
       cout << "begin push()" << endl;
-      while (!s1.is_full())
+      while (!s1.full())
           s1.push(item++);
       cout << "end push()" << endl;
 
       cout << "begin pop()" << endl;
-      while (!s1.is_empty()) {
+      while (!s1.empty()) {
           cout << "top item = " << s1.top() << endl;
           s1.pop();
       }
       cout << "end pop()" << endl;
 
       cout << "begin emplace()" << endl;
-      while (!s1.is_full())
+      while (!s1.full())
           s1.emplace(item++);
       cout << "end emplace()" << endl;
 
       cout << "begin pop()" << endl;
-      while (!s1.is_empty()) {
+      while (!s1.empty()) {
           cout << "top item = " << s1.top() << endl;
           s1.pop();
       }

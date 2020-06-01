@@ -12,10 +12,10 @@ int main() {
   /* create(MAX_STACK); */
   /* Oops, forgot to call create()! */
 
-  while (!is_full())
+  while (!full())
     push(item++);
 
-  while (!is_empty()) {
+  while (!empty()) {
     T i;
     top (&i);
     printf("top item = %d\n", i);

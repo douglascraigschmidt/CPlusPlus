@@ -27,10 +27,10 @@ void top (T *item) {
   *item = stack_[top_ - 1]; 
 }
 
-int is_empty (void) {
+int empty (void) {
   return top_ == 0; 
 }
 
-int is_full (void) { 
+int full (void) { 
   return top_ == size_; 
 }

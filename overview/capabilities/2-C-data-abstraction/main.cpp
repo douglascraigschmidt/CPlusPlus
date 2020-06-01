@@ -16,10 +16,10 @@ int main() {
   /* stack_create(&s1, MAX_STACK); */
   /* Oops, forgot to call stack_create()! */
 
-  while (!stack_is_full(&s1))
+  while (!stack_full(&s1))
     stack_push(&s1, item++);
 
-  while (!stack_is_empty(&s1)) {
+  while (!stack_empty(&s1)) {
     T i;
     stack_top (&s1, &i);
     printf("top item = %d\n", i);

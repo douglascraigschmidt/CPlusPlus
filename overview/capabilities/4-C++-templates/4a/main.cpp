@@ -13,10 +13,10 @@ int main() {
 
     int item = 0;
 
-    while (!s1.is_full())
+    while (!s1.full())
       s1.push(item++);
 
-    while (!s1.is_empty()) {
+    while (!s1.empty()) {
       printf("top item = %d\n", s1.top());
       s1.pop();
     }

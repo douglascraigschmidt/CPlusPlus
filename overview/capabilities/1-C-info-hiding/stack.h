@@ -7,5 +7,5 @@ void destroy();
 void push(T new_item);
 void pop();
 void top(T *cur_top);
-int is_empty();
-int is_full();
+int empty();
+int full();

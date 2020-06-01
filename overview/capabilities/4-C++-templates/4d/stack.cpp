@@ -1,17 +1,19 @@
 #ifndef _STACK_CPP
 #define _STACK_CPP
 
+#include <memory>
+
 template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
     size_(size),
-    stack_(new T[size]) {}
+    stack_(std::make_unique<T[]>(size)) {}
 
 template<typename T>
 stack<T>::stack(const stack<T> &rhs)
   : top_(rhs.top_),
     size_(rhs.size_),
-    stack_(new T[rhs.size_]) {
+    stack_(std::make_unique<T[]>(rhs.size_)) {
   for (size_t i = 0; i < rhs.size_; ++i)
     stack_[i] = rhs.stack_[i];
 }
@@ -55,13 +57,13 @@ stack<T>::swap(stack<T> &rhs) noexcept {
 
 template<typename T>
 bool
-stack<T>::is_empty() const {
+stack<T>::empty() const {
   return top_ == 0;
 }
 
 template<typename T>
 bool
-stack<T>::is_full() const {
+stack<T>::full() const {
   return top_ == size_;
 }
 
@@ -86,7 +88,7 @@ stack<T>::emplace(Args &&... args) {
 template<typename T>
 void
 stack<T>::pop() {
-  --top_;
+  stack_[--top_].~T();
 }
 
 template<typename T>

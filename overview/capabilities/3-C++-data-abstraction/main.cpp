@@ -11,10 +11,10 @@ int main() {
 
   T item = 0;
 
-  while (!s1.is_full())
+  while (!s1.full())
     s1.push(item++);
 
-  while (!s1.is_empty()) {
+  while (!s1.empty()) {
     T i;
     s1.top(i);
 

@@ -36,9 +36,9 @@ public:
 
   void pop();
 
-  bool is_empty() const;
+  bool empty() const;
 
-  bool is_full() const;
+  bool full() const;
 
   void swap(stack &rhs) noexcept;
 

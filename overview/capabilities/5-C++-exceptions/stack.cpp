@@ -57,20 +57,20 @@ stack<T>::swap(stack<T> &rhs) noexcept {
 
 template<typename T>
 bool
-stack<T>::is_empty() const {
+stack<T>::empty() const {
   return top_ == 0;
 }
 
 template<typename T>
 bool
-stack<T>::is_full() const {
+stack<T>::full() const {
   return top_ == size_;
 }
 
 template<typename T>
 void
 stack<T>::push(const T &item) {
-  if (is_full())
+  if (full())
     throw overflow();
   else
     stack_[top_++] = item;
@@ -78,7 +78,7 @@ stack<T>::push(const T &item) {
 
 template<typename T>
 void stack<T>::push(T &&rval) {
-  if (is_full())
+  if (full())
     throw overflow();
   else
     emplace(std::forward<T>(rval));
@@ -88,7 +88,7 @@ template<typename T>
 template<typename... Args>
 void
 stack<T>::emplace(Args &&... args) {
-  if (is_full())
+  if (full())
     throw overflow();
   else
     stack_[top_++] = std::move(T(std::forward<Args>(args) ...));
@@ -97,7 +97,7 @@ stack<T>::emplace(Args &&... args) {
 template<typename T>
 void
 stack<T>::pop() {
-  if (is_empty())
+  if (empty())
     throw underflow();
   else
     --top_;
@@ -106,7 +106,7 @@ stack<T>::pop() {
 template<typename T>
 void
 stack<T>::top(T &item) const {
-  if (is_empty())
+  if (empty())
     throw underflow();
   else
     item = stack_[top_ - 1];

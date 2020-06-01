@@ -10,7 +10,7 @@ void stack_top (Stack *s, T *item);
 void stack_pop (Stack *s);
 
 /* Must call before pop'ing */
-int stack_is_empty (Stack *);
+int stack_empty (Stack *);
 
 /* Must call before push'ing */
-int stack_is_full (Stack *);
+int stack_full (Stack *);

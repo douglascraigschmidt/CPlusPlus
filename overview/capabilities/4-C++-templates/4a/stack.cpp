@@ -67,13 +67,13 @@ stack<T>::~stack() {
 
 template<typename T>
 bool
-stack<T>::is_empty() const {
+stack<T>::empty() const {
   return top_ == 0;
 }
 
 template<typename T>
 bool
-stack<T>::is_full() const {
+stack<T>::full() const {
   return top_ == size_;
 }
 

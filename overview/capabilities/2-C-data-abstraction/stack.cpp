@@ -25,10 +25,10 @@ void stack_top (Stack *s, T *item) {
   *item = s->stack_[s->top_ - 1]; 
 }
 
-int stack_is_empty (Stack *s) {
+int stack_empty (Stack *s) {
   return s->top_ == 0; 
 }
 
-int stack_is_full (Stack *s) {
+int stack_full (Stack *s) {
   return s->top_ == s->size_;
 }

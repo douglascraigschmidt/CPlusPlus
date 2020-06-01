@@ -57,12 +57,12 @@ stack::~stack() {
 }
 
 bool
-stack::is_empty() const {
+stack::empty() const {
   return top_ == 0;
 }
 
 bool
-stack::is_full() const {
+stack::full() const {
   return top_ == size_;
 }
 
