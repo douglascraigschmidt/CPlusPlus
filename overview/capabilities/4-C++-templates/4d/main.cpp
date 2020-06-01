@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(2); // , s2(10);
+  stack<simple_string> s1(3), s2(10);
 
 #if 0  
   cout << "begin copy constructor" << endl;
@@ -47,11 +47,13 @@ int main() {
     s1.pop();
   }
   cout << "end pop()" << endl;
+#endif
 
   cout << "begin copy assignment operator" << endl;
   s1 = s2; // No aliasing problem with assignment
   cout << "end copy assignment operator" << endl;
 
+#if 0
   cout << "begin move assignment operator" << endl;
   s1 = std::move(s2); // move assignment.
   cout << "end move assignment operator" << endl;
