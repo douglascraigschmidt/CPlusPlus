@@ -41,7 +41,8 @@ stack<T>::operator=(stack<T> &&rhs)  noexcept {
   if (this != &rhs) {
     top_ = rhs.top_;
     size_ = rhs.size_;
-    stack_.reset(rhs.stack_.release());
+    stack_ = std::move(rhs.stack_);
+    // stack_.reset(rhs.stack_.release());
     rhs.size_ = rhs.top_ = 0;
   }
   return *this;
