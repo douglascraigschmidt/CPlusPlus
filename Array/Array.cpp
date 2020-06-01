@@ -144,13 +144,11 @@ Array<T>::operator= (const Array<T> &rhs)
 {
   std::cout << "operator=(const Array<T> &)" << std::endl;  
   // Check for "self-assignment".
-  if (this != &rhs)
-    {
-      // Create a temp array and then perform a swap to ensure strong
-      // exception safety guarantees.
-      Array<T> temp (rhs);
-      swap (temp);
-    }
+  if (this != &rhs) {
+    // Create a temp array and then perform a swap to ensure strong
+    // exception safety guarantees.
+    Array<T>(rhs).swap(*this);
+  }
   return *this;
 }
 

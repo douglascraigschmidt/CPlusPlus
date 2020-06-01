@@ -9,8 +9,9 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(3), s2(10);
+  stack<simple_string> s1(2); // , s2(10);
 
+#if 0  
   cout << "begin copy constructor" << endl;
   stack<simple_string> s3(s2);
   cout << "end copy constructor" << endl;
@@ -18,6 +19,7 @@ int main() {
   cout << "begin move constructor" << endl;
   stack<simple_string> s4(std::move(s2));
   cout << "end move constructor" << endl;
+#endif
 
   int item = 0;
 
@@ -33,6 +35,7 @@ int main() {
   }
   cout << "end pop()" << endl;
 
+#if 0
   cout << "begin emplace()" << endl;
   while (!s1.full())
     s1.emplace(std::to_string(item++).c_str());
@@ -52,6 +55,7 @@ int main() {
   cout << "begin move assignment operator" << endl;
   s1 = std::move(s2); // move assignment.
   cout << "end move assignment operator" << endl;
+#endif
 
   // Termination is handled automatically.
 
