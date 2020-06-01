@@ -23,10 +23,10 @@ int main() {
 
   int item = 0;
 
-  cout << "begin emplace()" << endl;
+  cout << "begin push()" << endl;
   while (!s1.full())
-    s1.emplace(std::to_string(item++).c_str());
-  cout << "end emplace()" << endl;
+    s1.push(std::to_string(item++).c_str());
+  cout << "end push()" << endl;
 
   cout << "begin pop()" << endl;
   while (!s1.empty()) {
@@ -35,10 +35,10 @@ int main() {
   }
   cout << "end pop()" << endl;
 
-  cout << "begin push()" << endl;
+  cout << "begin emplace()" << endl;
   while (!s1.full())
-    s1.push(std::to_string(item++).c_str());
-  cout << "end push()" << endl;
+    s1.emplace(std::to_string(item++).c_str());
+  cout << "end emplace()" << endl;
 
   cout << "begin pop()" << endl;
   while (!s1.empty()) {
