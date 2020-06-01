@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(3); //, s2(10);
+  stack<simple_string> s1(2); //, s2(10);
 
 #if 0  
   cout << "begin copy constructor" << endl;
@@ -60,6 +60,7 @@ int main() {
 #endif
 
   // Termination is handled automatically.
+  cout << "calling destructors" << endl;
 
   return 0;
 }
