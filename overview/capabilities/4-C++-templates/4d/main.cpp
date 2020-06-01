@@ -7,11 +7,6 @@
 
 using namespace std;
 
-simple_string
-make_ss(int number) {
-  return simple_string(std::to_string(number).c_str());
-}
-
 int main() {
   // Multiple stacks that are created automatically.
   stack<simple_string> s1(2); //, s2(10);
@@ -30,7 +25,7 @@ int main() {
 
   cout << "begin push()" << endl;
   while (!s1.full())
-    s1.push(make_ss(item++));
+    s1.push(std::to_string(item++).c_str());
   cout << "end push()" << endl;
 
   cout << "begin pop()" << endl;
@@ -40,10 +35,9 @@ int main() {
   }
   cout << "end pop()" << endl;
 
-#if 0
   cout << "begin emplace()" << endl;
   while (!s1.full())
-    s1.emplace(make_ss(item));
+    s1.push(std::to_string(item++).c_str());
   cout << "end emplace()" << endl;
 
   cout << "begin pop()" << endl;
@@ -52,7 +46,6 @@ int main() {
     s1.pop();
   }
   cout << "end pop()" << endl;
-#endif
 
 #if 0
   cout << "begin copy assignment operator" << endl;
