@@ -17,14 +17,11 @@ int main() {
   while (!s1.empty()) {
     T i;
     s1.top(i);
-
     cout << "top item = " << i << endl;
-
     s1.pop();
   }
 
   s3 = s2; // No aliasing problem with assignment
-
   s1 = std::move(s2); // move assignment.
 
   // s1.top_ = 10; // Access problem caught at compile-time!
