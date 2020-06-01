@@ -56,6 +56,7 @@ simple_string::operator=(simple_string &&rhs) noexcept {
     cout << "simple_string::operator=(simple_string &&)" << endl;
   if (&rhs != this) {
     len_ = rhs.len_;
+    delete [] str_;
     str_ = rhs.str_;
     rhs.len_ = 0;
     rhs.str_ = nullptr;
