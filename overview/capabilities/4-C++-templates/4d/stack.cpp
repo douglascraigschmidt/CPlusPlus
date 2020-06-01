@@ -88,8 +88,8 @@ stack<T>::emplace(Args &&... args) {
 template<typename T>
 void
 stack<T>::pop() {
-  // --top_;
-  stack_[--top_].~T();
+  --top_;
+  // stack_[--top_].~T();
 }
 
 template<typename T>
