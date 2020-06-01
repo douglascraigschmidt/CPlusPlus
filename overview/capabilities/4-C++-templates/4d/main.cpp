@@ -35,7 +35,7 @@ int main() {
 
   cout << "begin emplace()" << endl;
   while (!s1.full())
-    s1.push(std::to_string(item++).c_str());
+    s1.emplace(std::to_string(item++).c_str());
   cout << "end emplace()" << endl;
 
   cout << "begin pop()" << endl;
