@@ -35,7 +35,7 @@ int main() {
         aVect1.end (),
         ostream_iterator<int> (cout, "\n"));
 
-  back_insert_iterator<vector<int> > bck_i_itr(aVect1);    
+  back_insert_iterator<vector<int>> bck_i_itr(aVect1);
   *bck_i_itr++ = 100;        // insert rather than overwrite at end
   *bck_i_itr++ = 200;
 

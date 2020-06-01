@@ -14,7 +14,7 @@ int main() {
   list<int>::iterator itr;
   int i;
 
-  for(i = 0; i <5; i++)
+  for(i = 0; i < 5; i++)
     aList1.push_back(i);
 
   cout << "Original contents of aList:\n";
@@ -22,7 +22,7 @@ int main() {
         aList1.end (),
         ostream_iterator<int> (cout, "\n"));  
 
-  front_insert_iterator<list<int> > frnt_i_itr(aList1);  
+  front_insert_iterator<list<int>> frnt_i_itr(aList1);
   // create a front_insert_iterator to aList
 
   *frnt_i_itr++ = 100;   // insert rather than overwrite at front
@@ -41,7 +41,7 @@ int main() {
 
   cout << "Size of aList2 after copy: " << aList2.size() << endl;
 
-  cout << "Contents of aList2 after insertion: ";
+  cout << "Contents of aList2 after insertion: \n";
   copy (aList2.begin (),
         aList2.end (),
         ostream_iterator<int> (cout, "\n"));  

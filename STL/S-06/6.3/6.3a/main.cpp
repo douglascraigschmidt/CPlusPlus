@@ -12,13 +12,14 @@ using namespace std;
 
 int main()    {
   vector <int> aVect;
-  back_insert_iterator<vector <int>>  n (aVect);
+  back_insert_iterator<vector <int>> n (aVect);
 
   for (int i; cin >> i; *n++ = i)
     continue;
 
-  // copy (istream_iterator<int>(cin), istream_iterator<int>(),
-  //           back_inserter (aVect));
+  copy (istream_iterator<int>(cin),
+          istream_iterator<int>(),
+          back_inserter (aVect));
 
   copy (aVect.begin (),
         aVect.end (),

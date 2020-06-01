@@ -33,7 +33,7 @@ int main() {
   vector<int>::iterator itr;
   int i;
 
-  for (i = 0; i <5; i++)
+  for (i = 0; i < 5; i++)
     aVect.push_back( i );
 
   cout << "Original contents of aVect:\n";

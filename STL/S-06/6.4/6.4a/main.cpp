@@ -30,14 +30,14 @@ using namespace std;
  * -- operator (int)	advances the iterator to the integer next item
  *                      (++current) and returns a copy to the previous item. 
  * 
- * == operator    	This returns true only if the iterators x and
+ * == operator    	    This returns true only if the iterators x and
  *                      y point to the same item. 
  */
 int main() {
   deque<int> aDeck;
 
   for (int i = 0;
-       i <10;
+       i < 10;
        i++)
     aDeck.push_back(i);
 
@@ -45,21 +45,23 @@ int main() {
 
   copy (aDeck.rbegin (),
         aDeck.rend (),
-        ostream_iterator<int> (cout, "\n"));
+        ostream_iterator<int> (cout, " "));
 
-  cout << "Contents printed backwards with reverse iterator adapter:\n";
+  cout << "\nContents printed backwards with reverse iterator adapter:\n";
 
   reverse_iterator<deque<int>::iterator> rfirst(aDeck.end());
   reverse_iterator<deque<int>::iterator> rlast(aDeck.begin());
 
   copy (rfirst,
         rlast,
-        ostream_iterator<int> (cout, "\n"));
+        ostream_iterator<int> (cout, " "));
 
-  cout << "Contents printed backwards with reverse_copy:\n";
+  cout << "\nContents printed backwards with reverse_copy:\n";
   reverse_copy (aDeck.begin (),
                 aDeck.end (), 
-                ostream_iterator<int> (cout, "\n"));
+                ostream_iterator<int> (cout, " "));
+
+  cout << endl;
 
   return 0;
 }
