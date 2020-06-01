@@ -8,6 +8,21 @@ using namespace std;
  * push_front() operator to be invoked. This inserter can be used only
  * with the list and deque containers, because one cannot add to the
  * front of a vector.
+ *
+ * Here is the front_inserter() function template:
+ *
+ * template <typename Container>
+ * front_insert_iterator<Container> front_inserter(Container& x) {
+ *   return front_insert_iterator<Container>(x);
+ * }
+ *
+ * template <typename Container, typename Iterator>
+ * insert_iterator<Container> inserter(Container& x, Iterator i) {
+ *   return insert_iterator<Container>(x, Container::iterator(i));
+ * }
+ * 
+ * This function adapter leverages C++¡¯s implicit type inference
+ * feature for functions.
  */
 int main() {
   list<int> aList1, aList2;

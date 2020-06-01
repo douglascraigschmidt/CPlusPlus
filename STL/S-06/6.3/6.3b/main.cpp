@@ -4,25 +4,8 @@
 using namespace std;
 
 /**
- * Here are the inserter function templates:
- *
- * template <typename Container>
- * back_insert_iterator<Container> back_inserter(Container& x) {
- *   return back_insert_iterator<Container>(x);
- * }
- * 
- * template <typename Container>
- * front_insert_iterator<Container> front_inserter(Container& x) {
- *   return front_insert_iterator<Container>(x);
- * }
- *
- * template <typename Container, typename Iterator>
- * insert_iterator<Container> inserter(Container& x, Iterator i) {
- *   return insert_iterator<Container>(x, Container::iterator(i));
- * }
- * 
- * These functions adapters (e.g., back_inserter()) leverage C++’s
- * implicit type inference feature for functions.
+ * Here's another example showing how to use a back_insert_iterator to
+ * add elements to a container rather than overwrite them.
  */
 int main() {
   vector<int> aVect1, aVect2;

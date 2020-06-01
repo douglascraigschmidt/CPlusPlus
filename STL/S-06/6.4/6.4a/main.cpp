@@ -10,7 +10,6 @@ using namespace std;
  * and reverse_bidirectional_iterator, which can go backward and
  * forward.
  *
- * Useful Operators
  * These iterators can be created using a default constructor or by a
  * single argument constructor which initializes the new
  * reverse_iterator with a random_access_iterator.  Here are some of

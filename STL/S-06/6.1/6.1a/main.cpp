@@ -1,13 +1,12 @@
 /*
- * Iterator Adaptors are types of iterators that operate on more than
+ * Iterator adaptors are types of iterators that operate on more than
  * just STL containers; they can also ‘adapt’ the standard containers’
  * iterators to work differently if that is desired.
  * 
- * Iterator adaptors turn the standard iterators into things that can
- * operate in reverse, in insertion mode, and with streams.
- * 
- * So we take the input, output, forward, bidirectional iterators and
- * make them into the following adapted iterators:
+ * Iterator adaptors turn the standard iterators into objects that can
+ * operate in reverse, in insertion mode, and with streams.  In
+ * particular, input, output, forward, bidirectional iterators can be
+ * converted via the following adapted iterators:
  *
  * . Insert iterators 
  * . Reverse iterators 
@@ -32,8 +31,6 @@
  * 
  * insert_iterator   	  insert(value, position)  vectors, deques, lists, 
  *                                                 maps, and sets
- * 
- * Why use inserters? 
  * 
  * STL algorithms that copy elements, such as copy(), unique_copy(),
  * copy_backwards(), remove_copy(), & replace_copy(), are passed an

@@ -18,12 +18,23 @@ using namespace std;
  * deque<int> aDeck;
  * insert_iterator<deque<int> (aDeck, aDeck.end() );
  *
- * One can also declare back and front inserters like this using a deque:
+ * One can also declare back and front inserters like this using a
+ * deque:
  * 
  * deque<int> aDeck;
  * back_insert_iterator<deque<int>>	backItr (aDeck);
  * front_insert_iterator<deque<int>>	forwardItr (aDeck);
  *
+ * Here is the inserter() function template:
+ *
+ * template <typename Container, typename Iterator>
+ * insert_iterator<Container> inserter(Container& x, Iterator i) {
+ *   return insert_iterator<Container>(x, Container::iterator(i));
+ * }
+ * 
+ * This function iterator adapter leverages C++¡¯s implicit type
+ * inference feature for functions.
+
  * Here is an example using an insert iterator for vector (note that
  * this inefficient due to the copying overhead of inserting into a
  * vector anywhere but at the end).
@@ -34,7 +45,7 @@ int main() {
   int i;
 
   for (i = 0; i < 5; i++)
-    aVect.push_back( i );
+    aVect.push_back(i);
 
   cout << "Original contents of aVect:\n";
   copy (aVect.begin (),
@@ -45,8 +56,8 @@ int main() {
   itr += 2; // point to element 2
 
   insert_iterator<vector<int>> i_itr(aVect, itr);   
-  *i_itr = 100;    // insert rather than overwrite
-  *i_itr = 200;
+  *i_itr++ = 100;    // insert rather than overwrite
+  *i_itr++ = 200;
 
   cout << "aVect after insertion:\n";
   copy (aVect.begin (),
