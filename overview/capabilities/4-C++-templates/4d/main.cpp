@@ -7,6 +7,11 @@
 
 using namespace std;
 
+simple_string
+make_ss(int number) {
+  return simple_string(std::to_string(number).c_str());
+}
+
 int main() {
   // Multiple stacks that are created automatically.
   stack<simple_string> s1(2); //, s2(10);
@@ -25,7 +30,7 @@ int main() {
 
   cout << "begin push()" << endl;
   while (!s1.full())
-    s1.push(std::to_string(item++).c_str());
+    s1.push(make_ss(item++));
   cout << "end push()" << endl;
 
   cout << "begin pop()" << endl;
@@ -37,7 +42,7 @@ int main() {
 
   cout << "begin emplace()" << endl;
   while (!s1.full())
-    s1.emplace(std::to_string(item++).c_str());
+    s1.emplace(make_ss(item));
   cout << "end emplace()" << endl;
 
   cout << "begin pop()" << endl;
