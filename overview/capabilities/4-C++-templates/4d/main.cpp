@@ -23,6 +23,7 @@ int main() {
 
   int item = 0;
 
+#if 0
   cout << "begin push()" << endl;
   while (!s1.full())
     s1.push(std::to_string(item++).c_str());
@@ -34,6 +35,7 @@ int main() {
     s1.pop();
   }
   cout << "end pop()" << endl;
+#endif
 
   cout << "begin emplace()" << endl;
   while (!s1.full())
