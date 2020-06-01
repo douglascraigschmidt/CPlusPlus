@@ -47,9 +47,11 @@ int main() {
   }
   cout << "end pop()" << endl;
 
+#if 0
   cout << "begin copy assignment operator" << endl;
   s1 = s2; // No aliasing problem with assignment
   cout << "end copy assignment operator" << endl;
+#endif
 
 #if 0
   cout << "begin move assignment operator" << endl;
