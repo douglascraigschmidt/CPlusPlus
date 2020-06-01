@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(3), s2(10);
+  stack<simple_string> s1(3); //, s2(10);
 
 #if 0  
   cout << "begin copy constructor" << endl;
@@ -35,7 +35,6 @@ int main() {
   }
   cout << "end pop()" << endl;
 
-#if 0
   cout << "begin emplace()" << endl;
   while (!s1.full())
     s1.emplace(std::to_string(item++).c_str());
@@ -47,7 +46,6 @@ int main() {
     s1.pop();
   }
   cout << "end pop()" << endl;
-#endif
 
 #if 0
   cout << "begin copy assignment operator" << endl;
