@@ -40,6 +40,7 @@ int main() {
   }
   cout << "end pop()" << endl;
 
+#if 0
   cout << "begin emplace()" << endl;
   while (!s1.full())
     s1.emplace(make_ss(item));
@@ -51,6 +52,7 @@ int main() {
     s1.pop();
   }
   cout << "end pop()" << endl;
+#endif
 
 #if 0
   cout << "begin copy assignment operator" << endl;
