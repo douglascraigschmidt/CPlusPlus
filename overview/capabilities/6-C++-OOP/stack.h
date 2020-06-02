@@ -30,18 +30,15 @@ public:
 
   virtual void push(T &&rval) = 0;
 
-  virtual template <typename ... Args>
-  void emplace(Args&& ... args);
+  virtual const T &top() const = 0;
 
-  virtual void top(T &item) const;
+  virtual T &top() = 0;
 
-  virtual void pop();
+  virtual void pop() = 0;
 
-  virtual bool empty() const;
+  virtual bool empty() const = 0;
 
-  virtual bool full() const;
+  virtual bool full() const = 0;
 };
-
-#include "stack.cpp"
 
 #endif /* _STACK_H */

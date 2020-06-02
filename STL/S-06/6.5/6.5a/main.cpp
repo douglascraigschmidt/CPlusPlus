@@ -2,14 +2,30 @@
 #include <set>
 #include <algorithm>
 #include <string>
+#include <list>
 #include <iterator>
 
-int main (void) {
+using namespace std;
+
+/**
+ * Instead of extracting and inserting data explicitly from the passed
+ * streams, we can use the stream adaptors to make the streams appear as
+ * STL containers, and the copy() algorithm to manage the process of building
+ * the container (which in our example below will ultimately be sorted).
+ * There are three stream adaptors: istream, ostream, and stream buffers.
+ *
+ * Here is a function using both istream and ostream adaptors.
+ */
+int main () {
   list<string> my_list;
+
   copy(istream_iterator<string>(cin),
        istream_iterator<string>(),
-       // Essentially front_inserter()
-       inserter(my_list, my_list.begin())); 
+       // Essentially back_inserter()
+       inserter(my_list, my_list.end()));
+
+  // Sort the list.
+  my_list.sort();
 
   copy(my_list.begin(),
        my_list.end(),

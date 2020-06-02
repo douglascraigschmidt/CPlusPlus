@@ -1,10 +1,29 @@
-#include <algorithm>  			// for copy algorithm
-#include <iostream>   			// for cin, cout, endl
-#include <iterator>   			// for stream_iterators and inserter
-#include <vector>     			// for vector
-#include <numeric>    			// for accumulate algorithm
+#include <algorithm>  			
+#include <iostream>   			
+#include <iterator>   			
+#include <vector>     			
+#include <numeric>    			
 using namespace std; 
 
+/**
+ * The class template istream_iterator reads elements from an input
+ * stream using operator >>(). A value of type T is retrieved and
+ * stored when the iterator is constructed and each time operator++()
+ * is called.
+ *
+ * The iterator is equal to the end-of-stream iterator value if the
+ * end-of-file is reached. The constructor with no arguments can be
+ * used to create an end-of-stream iterator. The only valid use of
+ * this iterator is to compare to other iterators when checking for
+ * end of file. Do not attempt to dereference the end-of-stream
+ * iterator; it plays the same role as the past-the-end iterator of
+ * the end() function of containers.
+ * 
+ * Since an istream_iterator is an input iterator, one cannot assign
+ * to the value returned by dereferencing the iterator. This also
+ * means that istream_iterators can only be used for single pass
+ * algorithms.
+*/
 int main () {
   typedef vector<int> Vector;
 
@@ -12,7 +31,6 @@ int main () {
   typedef ostream_iterator<Vector::value_type> os_iter;
 
   Vector v;
-  Vector::value_type sum = 0;
 
   // Default constructor to get ending iterator; get values from cin
   // until EOF
@@ -26,10 +44,13 @@ int main () {
         v.end () - 1,
         os_iter (std::cout, " + "));
 
-  if (v.size () != 0)
+    Vector::value_type sum = 0;
+
+    if (!v.empty())
     cout << v.back () 
          << " = "  
          << accumulate (v.begin (), v.end (), sum)
          << endl;
+
   return 0;
 }

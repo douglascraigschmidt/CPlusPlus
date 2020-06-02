@@ -17,7 +17,7 @@ using namespace std;
  * }
  *
  * This function is useful since it uses the C++ compiler's type
- * deduction mechanism.
+ *10uction mechanism.
  */
 int main() {
   vector <int> aVect;

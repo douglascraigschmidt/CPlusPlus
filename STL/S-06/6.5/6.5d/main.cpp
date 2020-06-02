@@ -1,22 +1,57 @@
-#include <iterator>
-#include <numeric>
-#include <deque>
-#include <iostream>
+#include <iostream>   	// for cout, endl
+#include <fstream>    	// for ofstream, istreambuf_iterator
+#include <cstdio>    	// for tmpnam () and remove ()
 using namespace std;
 
+/**
+ * A third type of stream iterator adaptor is the stream buffer
+ * iterator, and there are two types, istreambuf_iterator for reading
+ * and ostreambuf_iterator for writing streams.  These template class
+ * objects can read or write individual characters from or to
+ * basic_streambuf objects.
+ *
+ * The class template istreambuf_iterator reads successive characters
+ * from the stream buffer for which it was constructed. operator*()
+ * gives access to the current input character, if any, and
+ * operator++() advances to the next input character. If the end of
+ * stream is reached, the iterator becomes equal to the end of stream
+ * iterator value, which is constructed by the default constructor,
+ * istreambuf_iterator(). An istreambuf_iterator object can be used
+ * only for one-pass-algorithms.
+*/
 int main () {
-  int total = 0;
-  deque<int> d{3,4,7,8};
+  const char *fname = tmpnam (0);    // temp filename
+  if (!fname)
+    return 1;
+  ofstream out (fname, ios::out | ios::in | ios::trunc);
+ 
+  // output the example sentence into the file
+  out << "Here is a sample sentence for output.\n"
+    "I hope that you like this sentence out there.";
+  // go to the beginning of the file
+  out.seekp (0);
 
-  // stream the whole deque and a sum to cout
+  // construct an istreambuf_iterator pointing to the ofstream object
+  // underlying streambuffer
+#if 0
+  istreambuf_iterator<char> iter (out.rdbuf ());
 
-  copy(d.begin(),
-       d.end() - 1,
-       ostream_iterator<int>(cout," + "));
+  // construct an end of stream iterator
+  const istreambuf_iterator<char> end;
+  cout << endl;
+  // output the content of the file
+  while (iter != end)
+    cout << *iter++;
+#endif
 
-  cout << *(d.end() - 1) << " = " <<
-    accumulate(d.begin(),
-               d.end(),
-               total) << endl;
+  // Alternative more concise approach is:
+  copy (istreambuf_iterator<char> (out.rdbuf ()),
+  		istreambuf_iterator<char> (),
+  	    ostream_iterator<char> (cout));
+
+  cout << endl;
+
+  remove (fname);     // remove the temp file
+
   return 0;
 }
