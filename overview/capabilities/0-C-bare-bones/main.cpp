@@ -1,20 +1,28 @@
 #include <stdio.h>
 
-// Type of elements in the stack.
-typedef int T;
-
 // Max size of the stack.
 #define MAX_STACK 10
 
+/**
+ * This program shows a "bare-bones" C implementation of the stack
+ * ADT, which clearly isn't very abstract here!
+ */
 int main() {
-  T stack[MAX_STACK];
-  int top;
+  // Define a stack of ints.
+  int stack[MAX_STACK];
 
-  for (top = 0; top < MAX_STACK; ++top)
-    stack[top] = top; // push
+  // Keep track of the current "top" of the stack.
+  int top = 0;
 
+  // Keep looping until the stack is "full".
+  while (top < MAX_STACK)
+    // Push items onto the stack;
+    stack[top] = top++;
+
+  // Keep looping until the stack is "empty".
   while (--top >= 0)
-    printf("top item = %d\n", stack[top]); // pop
+    // Pop items off the stack and print them.
+    printf("top item = %d\n", stack[top]); 
 
   return 0;
 }

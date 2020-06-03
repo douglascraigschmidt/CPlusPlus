@@ -45,7 +45,9 @@ public:
   template <typename ... Args>
   void emplace(Args&& ... args);
 
-  void top(T &item) const;
+  const T &top() const;
+
+  T &top();
 
   void pop();
 

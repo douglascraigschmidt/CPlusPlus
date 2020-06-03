@@ -104,12 +104,21 @@ stack<T>::pop() {
 }
 
 template<typename T>
-void
-stack<T>::top(T &item) const {
+const T &
+stack<T>::top() const {
   if (empty())
     throw underflow();
   else
-    item = stack_[top_ - 1];
+    return stack_[top_ - 1];
+}
+
+template<typename T>
+T &
+stack<T>::top() {
+  if (empty())
+    throw underflow();
+  else
+    return stack_[top_ - 1];
 }
 
 #endif /* _STACK_CPP */

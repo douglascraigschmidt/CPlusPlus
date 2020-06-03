@@ -9,8 +9,7 @@
 #include <functional>
 #include <set>
 
-struct Meeting 
-{
+struct Meeting {
   enum Day_Of_Week {MO, TU, WE, TH, FR, SA, SU};
 
   static Day_Of_Week day_of_week (char c);

@@ -20,8 +20,7 @@ int main() {
   try {
     for (;;) {
       int i;
-      s1.top(i);
-      printf("top item = %d\n", i);
+      cout << "top item = " << s1.top() << endl;
       s1.pop();
     }
   } catch (stack<int>::underflow &ex) {
