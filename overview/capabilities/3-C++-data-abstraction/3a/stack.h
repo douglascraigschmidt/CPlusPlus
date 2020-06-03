@@ -12,9 +12,9 @@ typedef int T;
  */
 class stack {
 public:
-  static const int DEFAULT_SIZE = 20;
+  enum { DEFAULT_SIZE = 20 };
 
-  explicit stack(size_t size = DEFAULT_SIZE);
+  stack(size_t size = DEFAULT_SIZE);
 
   stack(const stack &rhs);
 
@@ -24,7 +24,7 @@ public:
 
   void push(const T &item);
 
-  const T& top() const;
+  const T &top() const;
 
   T &top();
 

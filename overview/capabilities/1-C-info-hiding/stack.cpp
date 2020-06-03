@@ -19,7 +19,7 @@ void push (T item) {
   stack_[top_++] = item;
 }
 
-void pop (void) {
+void pop () {
   --top_; 
 }
 
@@ -27,10 +27,10 @@ void top (T *item) {
   *item = stack_[top_ - 1]; 
 }
 
-int empty (void) {
+int empty () {
   return top_ == 0; 
 }
 
-int full (void) { 
+int full () { 
   return top_ == size_; 
 }

@@ -34,6 +34,8 @@ int main() {
   queue<string> aCue;
   cout << "Pushing one two three \n";
 
+  // Note the curious methods for putting and getting elements
+  // into and from a queue!
   aCue.push("one");
   aCue.push("two");
   aCue.push("three");

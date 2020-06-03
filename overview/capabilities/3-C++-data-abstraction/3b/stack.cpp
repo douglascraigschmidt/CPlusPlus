@@ -14,10 +14,10 @@ stack::stack(const stack &s)
     stack_[i] = s.stack_[i];
 }
 
-stack::stack(stack &&s) noexcept
-        : top_(s.top_),
-          size_(s.size_),
-          stack_(s.stack_) {
+stack::stack(stack &&s) noexcept 
+  : top_(s.top_),
+    size_(s.size_),
+    stack_(s.stack_) {
   s.stack_ = nullptr;
   s.size_ = s.top_ = 0;
 }
@@ -57,37 +57,4 @@ stack::~stack() {
   delete [] stack_;
 }
 
-bool
-stack::empty() const {
-  return top_ == 0;
-}
-
-bool
-stack::full() const {
-  return top_ == size_;
-}
-
-void
-stack::push(const T &item) {
-  stack_[top_++] = item;
-}
-
-void stack::push(T &&rval) {
-  stack_[top_++] = std::move(rval);
-}
-
-const T &
-stack::top() const {
-  return stack_[top_ - 1];
-}
-
-T &
-stack::top() {
-  return stack_[top_ - 1];
-}
-
-void
-stack::pop() {
-  --top_;
-}
 

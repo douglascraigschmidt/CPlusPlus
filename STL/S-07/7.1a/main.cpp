@@ -4,14 +4,15 @@
  * example, stack restricts vector and queue restricts deque.
  * 
  * Member functions can be added or hidden or can be combined to
- * achieve new functionality.
+ * achieve new functionality.  In particular, container adapters
+ * don't support iterators.
  * 
  * Adaptor containers change ordinary containers such as vector,
- * deque, and list into stack and queue, by ¡®adapting¡¯ them to reflect
- * a user¡¯s expectations (i.e., limiting what their underlying
+ * deque, and list into stack and queue, by "adapting" them to reflect
+ * a user's expectations (i.e., limiting what their underlying
  * container can do).
  *
- * An adaptor allows the standard algorithms to be used on a subset or
+ * An adaptor allows the standard STL algorithms to be used on a subset or
  * to modify the data without having to copy the data elements into a
  * new container.
  */

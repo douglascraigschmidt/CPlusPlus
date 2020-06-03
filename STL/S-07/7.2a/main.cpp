@@ -7,7 +7,7 @@
  * First Out) data structure. For example, think about people entering
  * the back seat of a car that has only one door: the last person to
  * enter is the first to exit. It is implemented with a deque by
- * default, but one can change that.
+ * default, but that can easily be changed.
  *
  * Here's the typical implementation for class stack in STL:
  *
@@ -25,7 +25,7 @@
  *
  * private :
  *   Container container_ ;
- *   //бн
+ *   //...
  * };
  *
  * Here is a simple example using the STL stack class.

@@ -15,6 +15,9 @@ struct place {
   {   return dist < right.dist;  }
 };
 
+/**
+ * Prints the contents of a place.
+ */
 ostream & operator << (ostream& os, const place& p) {
   return os << p.dest << " " << p.dist; 
 }
@@ -75,11 +78,13 @@ ostream & operator << (ostream& os, const place& p) {
 int main() {
   priority_queue <place> pque;
 
-  pque.push(place("Poway",   10));
-  pque.push(place("El Cajon",  20));
+  // Three different ways to put an item into the priority_queue.
+  place poway ("Poway",   10);
+  pque.push(poway);
   pque.push(place("La Jolla", 3));
+  pque.emplace("El Cajon",  20);
 
-  while (!pque.empty()) {		
+  while (!pque.empty()) {
     cout << pque.top() << endl;
 
     // remove top entry from queue

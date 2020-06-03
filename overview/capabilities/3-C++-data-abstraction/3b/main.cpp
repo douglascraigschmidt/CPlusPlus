@@ -7,8 +7,10 @@
 using namespace std;
 
 /**
- * This example demonstrates the difference between copy semantics and
- * move semantics for constructors and assignment operators.
+ * This example of the stack shows how to implement it as a C++ ADT.
+ * https://en.wikipedia.org/wiki/Abstract_data_type.  It also demonstrates
+ * the C++ "Rule of 5", as well as demonstrates the difference between copy
+ * semantics and move semantics for constructors and assignment operators.
  */
 int main() {
   // Multiple stacks that are created automatically.
