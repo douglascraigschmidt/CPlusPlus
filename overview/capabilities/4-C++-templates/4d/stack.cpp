@@ -1,8 +1,6 @@
 #ifndef _STACK_CPP
 #define _STACK_CPP
 
-#include <memory>
-
 template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
@@ -46,63 +44,6 @@ stack<T>::operator=(stack<T> &&rhs)  noexcept {
     rhs.size_ = rhs.top_ = 0;
   }
   return *this;
-}
-
-template<typename T>
-void
-stack<T>::swap(stack<T> &rhs) noexcept {
-  std::swap(top_, rhs.top_);
-  std::swap(size_, rhs.size_);
-  stack_.swap(rhs.stack_);
-}
-
-template<typename T>
-bool
-stack<T>::empty() const {
-  return top_ == 0;
-}
-
-template<typename T>
-bool
-stack<T>::full() const {
-  return top_ == size_;
-}
-
-template<typename T>
-void
-stack<T>::push(const value_type &item) {
-  stack_[top_++] = item;
-}
-
-template<typename T>
-void stack<T>::push(T &&rval) {
-  emplace(std::forward<T>(rval));
-}
-
-template<typename T>
-template<typename... Args>
-void
-stack<T>::emplace(Args &&... args) {
-  stack_[top_++] = std::move(T(std::forward<Args>(args) ...));
-}
-
-template<typename T>
-void
-stack<T>::pop() {
-  --top_;
-  // stack_[--top_].~T();
-}
-
-template<typename T>
-const typename stack<T>::value_type &
-stack<T>::top() const {
-  return stack_[top_ - 1];
-}
-
-template<typename T>
-typename stack<T>::value_type &
-stack<T>::top() {
-  return stack_[top_ - 1];
 }
 
 #endif /* _STACK_CPP */

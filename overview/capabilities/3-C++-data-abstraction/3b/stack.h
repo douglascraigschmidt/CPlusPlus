@@ -49,6 +49,6 @@ private:
   T *stack_;
 };
 
-#include "stack.i"
+#include "stack.inl"
 
 #endif /* _STACK_H */

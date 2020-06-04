@@ -11,8 +11,4 @@
  * deque, and list into stack and queue, by "adapting" them to reflect
  * a user's expectations (i.e., limiting what their underlying
  * container can do).
- *
- * An adaptor allows the standard STL algorithms to be used on a subset or
- * to modify the data without having to copy the data elements into a
- * new container.
  */

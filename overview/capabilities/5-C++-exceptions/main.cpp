@@ -5,10 +5,13 @@
 
 using namespace std;
 
+/**
+ * This example demonstrates the use of C++ exceptions to report errors
+ * with our stack ADT.
+ */
 int main() {
   stack<int> s1(10);
-
-  int item = 0;
+  auto item = 0;
 
   try {
     for (;;)

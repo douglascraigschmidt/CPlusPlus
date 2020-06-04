@@ -46,6 +46,7 @@ private:
   value_type *stack_;
 };
 
+#include "stack.inl"
 #include "stack.cpp"
 
 #endif /* _STACK_H */

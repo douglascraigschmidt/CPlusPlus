@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <list>
 using namespace std;
 
 /**
@@ -31,7 +32,7 @@ using namespace std;
  * Here is an example program that uses an STL queue.
  */
 int main() {
-  queue<string> aCue;
+  queue<string, std::list<string>> aCue;
   cout << "Pushing one two three \n";
 
   // Note the curious methods for putting and getting elements

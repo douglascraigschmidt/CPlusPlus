@@ -65,53 +65,5 @@ stack<T>::~stack() {
   delete [] stack_;
 }
 
-template<typename T>
-bool
-stack<T>::empty() const {
-  return top_ == 0;
-}
-
-template<typename T>
-bool
-stack<T>::full() const {
-  return top_ == size_;
-}
-
-template<typename T>
-void
-stack<T>::push(const value_type &item) {
-  stack_[top_++] = item;
-}
-
-template<typename T>
-template<typename... Args>
-void
-stack<T>::emplace(Args &&... args) {
-  stack_[top_++] = std::move(T(std::forward<Args>(args) ...));
-}
-
-template<typename T>
-void
-stack<T>::pop() {
-  --top_;
-}
-
-template<typename T>
-const typename stack<T>::value_type &
-stack<T>::top() const {
-  return stack_[top_ - 1];
-}
-
-template<typename T>
-typename stack<T>::value_type &
-stack<T>::top() {
-  return stack_[top_ - 1];
-}
-
-template<typename T>
-void stack<T>::push(T &&rval) {
-  emplace(std::forward<T>(rval));
-}
-
 #endif /* _STACK_CPP */
 

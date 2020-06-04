@@ -7,7 +7,12 @@ namespace my_pair {
 template<typename T>
 pair<T>::pair(const T &f, const T &s)
   : first(f),
-    second(s) {}
+    second(s) {
+/*
+        first = f;
+        second = s;
+        */
+    }
 #else
 template<typename T>
 pair<T>::pair (T f, T s) {

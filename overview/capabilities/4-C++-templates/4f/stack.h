@@ -49,6 +49,7 @@ private:
   sequential_container<T> stack_;
 };
 
+#include "stack.inl"
 #include "stack.cpp"
 
 #endif /* _STACK_H */

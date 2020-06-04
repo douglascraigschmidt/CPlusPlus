@@ -1,24 +1,34 @@
 #include <queue> // priority_queue
 #include <string>
 #include <iostream>
+#include <utility>
 using namespace std;
 
 /**
  * This struct defines operator< so it can be used with priority_queue.
  */
 struct place {
-  unsigned int dist;  string dest;
+  unsigned int dist;
+  string dest;
+
   friend ostream& operator<<(ostream &, const place &) ;
-  place (const string dt, unsigned int ds) : dist(ds), dest(dt) {}
+
+  place (string dt, unsigned int ds)
+    : dist(ds), dest(std::move(dt)) {}
+
   // This method is needed to order the priority queue properly.
-  bool operator< (const place & right) const
+  bool operator< (const place &right) const
   {   return dist < right.dist;  }
+
+  // This method is needed to order the priority queue properly.
+  bool operator> (const place &right) const
+  {   return dist > right.dist;  }
 };
 
 /**
  * Prints the contents of a place.
  */
-ostream & operator << (ostream& os, const place& p) {
+ostream &operator <<(ostream& os, const place &p) {
   return os << p.dest << " " << p.dist; 
 }
 
@@ -37,8 +47,8 @@ ostream & operator << (ostream& os, const place& p) {
  * queue to track processes running in the operating system.
  *
  * Its template is found in the <queue> header file. It uses the less
- * functor to compare its keys.  Internally it is implemented from a
- * vector that has been "heapified"
+ * functor to compare its keys by default, but you can change this!
+ * Internally it is implemented from a vector that has been "heapified"
  *
  * Here's a typical implementation of a priority_queue in STL:
  * 
@@ -76,7 +86,8 @@ ostream & operator << (ostream& os, const place& p) {
  * 	La Jolla  3
  */
 int main() {
-  priority_queue <place> pque;
+  priority_queue<place> pque;
+  // priority_queue<place, std::vector<place>, std::greater<>> pque;
 
   // Three different ways to put an item into the priority_queue.
   place poway ("Poway",   10);

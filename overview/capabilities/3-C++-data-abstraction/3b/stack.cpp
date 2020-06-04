@@ -32,7 +32,7 @@ stack::operator=(const stack &rhs) {
       // Subtle bug when generalized to arbitrary type T.
       temp[i] = rhs.stack_[i];
 
-    delete[] stack_;
+    delete [] stack_;
     stack_ = temp;
     top_ = rhs.top_;
     size_ = rhs.size_;
@@ -47,7 +47,7 @@ stack::operator=(stack &&rhs)  noexcept {
     size_ = rhs.size_;
     delete [] stack_;
     stack_ = rhs.stack_;
-    stack_ = nullptr;
+    rhs.stack_ = nullptr;
     rhs.size_ = rhs.top_ = 0;
   }
   return *this;

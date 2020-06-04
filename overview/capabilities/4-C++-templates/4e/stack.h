@@ -39,6 +39,7 @@ private:
   value_type stack_[SIZE];
 };
 
+#include "stack.inl"
 #include "stack.cpp"
 
 #endif /* _STACK_H */

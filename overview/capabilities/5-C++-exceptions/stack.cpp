@@ -1,8 +1,6 @@
 #ifndef _STACK_CPP
 #define _STACK_CPP
 
-#include "stack.h"
-
 template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
@@ -45,80 +43,6 @@ stack<T>::operator=(stack<T> &&rhs)  noexcept {
     rhs.size_ = rhs.top_ = 0;
   }
   return *this;
-}
-
-template<typename T>
-void
-stack<T>::swap(stack<T> &rhs) noexcept {
-  std::swap(top_, rhs.top_);
-  std::swap(size_, rhs.size_);
-  stack_.swap(rhs.stack_);
-}
-
-template<typename T>
-bool
-stack<T>::empty() const {
-  return top_ == 0;
-}
-
-template<typename T>
-bool
-stack<T>::full() const {
-  return top_ == size_;
-}
-
-template<typename T>
-void
-stack<T>::push(const T &item) {
-  if (full())
-    throw overflow();
-  else
-    stack_[top_++] = item;
-}
-
-template<typename T>
-void stack<T>::push(T &&rval) {
-  if (full())
-    throw overflow();
-  else
-    emplace(std::forward<T>(rval));
-}
-
-template<typename T>
-template<typename... Args>
-void
-stack<T>::emplace(Args &&... args) {
-  if (full())
-    throw overflow();
-  else
-    stack_[top_++] = std::move(T(std::forward<Args>(args) ...));
-}
-
-template<typename T>
-void
-stack<T>::pop() {
-  if (empty())
-    throw underflow();
-  else
-    --top_;
-}
-
-template<typename T>
-const T &
-stack<T>::top() const {
-  if (empty())
-    throw underflow();
-  else
-    return stack_[top_ - 1];
-}
-
-template<typename T>
-T &
-stack<T>::top() {
-  if (empty())
-    throw underflow();
-  else
-    return stack_[top_ - 1];
 }
 
 #endif /* _STACK_CPP */

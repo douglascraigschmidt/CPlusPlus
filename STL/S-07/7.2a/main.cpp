@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stack>
-    using namespace std;
+#include <iostream>
+#include <vector>
+using namespace std;
 
 /**
  * A stack is an ideal choice when one need to use a LIFO (Last In,

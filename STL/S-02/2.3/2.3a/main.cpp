@@ -13,12 +13,12 @@ int main () {
     simple_string s2("world");
 
     // Chose "my_pair" rather than std::pair.
-    my_pair::pair<simple_string> i_pair(s1, s2);
+    my_pair::pair<simple_string> string_pair(s1, s2);
 
     std::cout << "the max of "
               << s1 << " and "
               << s2 << " = "
-              << i_pair.max()
+              << string_pair.max()
               << std::endl;
   }
 
