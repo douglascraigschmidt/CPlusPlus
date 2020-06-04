@@ -34,32 +34,31 @@ using namespace std;
  * designed to perform the four basic arithmetic operations as
  * function calls.
  */
-float Plus (float a, float b) { return a+b; }
-float Minus (float a, float b) { return a-b; }
-float Multiply(float a, float b) { return a*b; }
-float Divide (float a, float b) { return a/b; }
+float plus (float a, float b) { return a+b; }
+float minus (float a, float b) { return a-b; }
+float multiply(float a, float b) { return a*b; }
+float divide (float a, float b) { return a/b; }
 
 /**
  * The char variable opCode specifies which operation to execute.
  */
-void Switch(float a, float b, char opCode)  {
+float switchOpCode(float a, float b, char opCode)  {
     float result;
     switch(opCode)   {
     case '+' :
-      result = Plus (a, b); 
+      result = plus (a, b); 
       break;
     case '-' :
-      result = Minus (a, b); 
+      result = minus (a, b); 
       break;
     case '*' :
-      result = Multiply (a, b); 
+      result = multiply (a, b); 
       break;
     case '/' :
-      result = Divide (a, b); 
+      result = divide (a, b); 
       break; 
     }
-    cout << "Switch: 2 + 5 = ";
-    cout << result << endl;
+    return result;
 }
 
 /**
@@ -68,20 +67,25 @@ void Switch(float a, float b, char opCode)  {
  * returns a float. The function pointer "specifies" which arithmetic
  * operation is executed.
  */
-void SwitchFunctPtr(float a, float b, float (*pt2Func)(float, float))  {
-  float result = pt2Func(a, b); // call using function pointer
-  cout << "Switch replaced by function pointer: 2 - 5 = ";
-  cout << result << endl;
+float switchFunctPtr(float a, float b, float (*pt2Func)(float, float))  {
+  return pt2Func(a, b); // call using function pointer
+
 }
 
 /**
  * This program demonstrates how to call the two functions defined above.
  */
 int main() {
-  Switch(2.0,
-          5.0, /* '+' specifies function 'Plus' will be executed */
-          '+');
+  cout << "Switch: 2.0 + 5.0 = "
+       << switchOpCode(2.0,
+                       5.0, // '+' specifies function 'plus' to run.
+                       '+')
+       << endl;
 
-  SwitchFunctPtr (2.0, 5.0, /* pointer to function 'Minus' */ &Minus);
-
+  cout << "Switch: 2.0 - 5.0 = "
+       << switchFunctPtr (2.0,
+                          5.0,
+                          // pointer to function 'minus'.
+                          &minus.
+       << endl;
 }

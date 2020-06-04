@@ -15,8 +15,12 @@ public:
         return i_ += a + b + c;
     }
 
+    float bFun(float a, char b, char c) {
+        return i_ += a - b + c;
+    }
+
     float anotherFun(float a, char b, char c) const {
-        return i_ + a - b +c;
+        return i_ + a - b + c;
     }
 
     static float aStaticFun (float a, char b, char c) {
@@ -28,27 +32,26 @@ private:
 };
 
 /**
- * Since a function pointer is a variable, it must be declared. This
- * example   defines some function pointers named pt2Function,
- * pt2Member and pt2ConstMember. They all point to functions, which
- * take one float and two char and return an int. In the C++ examples
- * it is assumed that the functions pointed to are non-static member
- * functions. 
- */
-float (*pt2Function)(float, char, char) = nullptr; // C
-float (example_class::*pt2Member)(float, char, char) = nullptr; // C++
-float (example_class::*pt2ConstMember)(float, char, char) const = nullptr; // C++
-
-/**
  * This program demonstrates how to use the pointers to functions and pointers
  * to member functions, as defined above.
  */
-int main() {
+int main(int argc, char *argv[]) {
+  // Since a function pointer is a variable, it must be declared. This
+  // example defines function pointers named pt2Function, pt2Member
+  // and pt2ConstMember that all point to functions taking one float
+  // and two char and return an int.
+  float (*pt2Function)(float, char, char) = nullptr; 
+  float (example_class::*pt2Member)(float, char, char) = nullptr; 
+  float (example_class::*pt2ConstMember)(float, char, char) const = nullptr;
+
   // Correct assignment using address operator.
   pt2ConstMember = &example_class::anotherFun; 
 
   // <pt2Member> may also legally point to &anotherFun.
-  pt2Member = &example_class::aFun; 
+  if (argc > 1)
+    pt2Member = &example_class::aFun; 
+  else
+    pt2Member = &example_class::bFun;
 
   pt2Function = &example_class::aStaticFun;
 

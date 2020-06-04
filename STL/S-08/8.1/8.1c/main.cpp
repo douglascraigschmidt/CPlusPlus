@@ -2,8 +2,8 @@
 
 using namespace std;
 
-float Plus (float a, float b) { return a+b; }
-float Minus (float a, float b) { return a-b; }
+float plus (float a, float b) { return a + b; }
+float minus (float a, float b) { return a - b; }
 
 /**
  * A function pointer can be provided as a function's calling
@@ -12,10 +12,19 @@ float Minus (float a, float b) { return a-b; }
  * which returns an int and takes a float and two chars.
  */
 void 
-pass_ptr(float (*pt2Func)(float, char, char))  {
-  float result = (*pt2Func)(12, 'a', 'b');     // call using function pointer
+pass_ptf(float (*pt2Func)(float, char, char))  {
+  // Call using function pointer.
+  float result = (*pt2Func)(12, 'a', 'b');     
 
   cout << result << endl;
+}
+
+/**
+ * A function that can be passed to pass_ptf().
+ */
+static float
+aFun(float f, char a, char b) {
+    return f + a + b;
 }
 
 /**
@@ -35,15 +44,12 @@ typedef float(*pt2Func)(float, float);
 
 static pt2Func 
 get_ptf (char opCode) {
-  if(opCode == '+')
-    return &Plus;
+  if (opCode == '+')
+    return &plus;
+  else if (opCode == '-')
+    return &minus;
   else
-    return &Minus;
-}  
-
-static float 
-aFun(float f, char a, char b) {
-  return f + a + b;
+    return nullptr;
 }
 
 /**
@@ -52,7 +58,7 @@ aFun(float f, char a, char b) {
  */
 int main() {
   // Pass a function as a parameter.
-  pass_ptr(&aFun);
+  pass_ptf(&aFun);
 
   // Define a function pointer and initialize it to NULL.
   float (*pt2Function)(float, float) = nullptr;
