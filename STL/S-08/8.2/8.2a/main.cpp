@@ -14,17 +14,16 @@ using namespace std;
  * the function call operator, which is simply a pair of parentheses:
  * '()'.
  *
- * Functors are the STL's improvement over traditional C function
- * pointers.  One could use regular function pointers with the correct
- * argument signature, but the STL¡¯s predefined functors offer some
- * advantages, such as the ability to optimize the functors via inline
+ * Functors are STL's improvement over traditional C function pointers.
+ * While you can still use regular function pointers with the correct
+ * argument signature, STL's predefined functors offer some significant
+ * benefits, such as the ability to optimize the functors via inline
  * method calls and/or the ability to maintain state within the
  * functor.
  *
- * Below is a simple functor.
+ * Below is a simple (stateless) functor.
  */
-class simple_function_object
-{
+class simple_function_object {
 public:
   int operator()(int i) { return i; }
 };

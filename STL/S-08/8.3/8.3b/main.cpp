@@ -5,7 +5,7 @@ using namespace std;
 /**
  * STL functors are classified based on their capabilities in various
  * ways.  For example, they can be categorized by whether the
- * functor¡¯s operator( ) takes zero, one or two arguments.  See the
+ * functor's operator( ) takes zero, one or two arguments.  See the
  * new few pages for other classifications.
  * 
  * #1. Functors classified based on number of arguments:
@@ -14,7 +14,7 @@ using namespace std;
  *   type. (A RandomNumberGenerator is a special case of a generator
  *   because it takes no arguments but returns a specific thing: a
  *   number.)  But generators can be defined to return any type of
- *   data; they just don¡¯t take any arguments as input.
+ *   data; they just don't take any arguments as input.
  * 
  * . UnaryFunction - Takes a single argument of any type and returns a
  *   value which may be of a different type. 
@@ -55,7 +55,7 @@ using namespace std;
  * the STL provides templates in the <utility> header file so they can
  * use the !=, the >=, and <= operators.
  * 
- * #4. Functors classified based whether they can carry a ¡®state¡¯:
+ * #4. Functors classified based whether they can carry a ï¿½ï¿½stateï¿½ï¿½:
  * 
  * Having a state means having member variables that can take on
  * values. For example a class named Rectangle can have a fillColor

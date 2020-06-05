@@ -44,12 +44,28 @@ using namespace std;
  *    typedef Arg2 second_argument_type;
  *    typedef Result result_type;
  * };
- * 
+ */
+
+/** 
+ * Forward declarations.
+ */ 
+static void demonstrate_on_string();
+static void demonstrate_on_array();
+
+/** 
  * Here is an example to remove spaces in a string that uses the
  * equal_to<> and bind2nd<> functors. It says perform remove_if when
  * the equal to function finds a blank char in the string.
  */
 int main() {
+  demonstrate_on_string();
+  demonstrate_on_array();
+
+  return 0;
+}
+
+static void
+demonstrate_on_string() {
   string s = "spaces in text";
   cout << s << endl;
   auto new_end = remove_if(s.begin(),
@@ -62,5 +78,17 @@ int main() {
   s.erase(new_end, s.end());
 
   cout << s << endl;
-  return 0;
 }
+
+static void
+demonstrate_on_array() {
+  char s[] = "spaces in text";
+  auto s_end = s + sizeof(s) / sizeof(*s);
+  cout << s << endl;
+  auto new_end = remove_if(s,
+                           s_end,
+                           bind2nd(equal_to<char>(), ' '));
+
+  cout << s << endl; // Note the "xt" characters are removed at the end!
+}
+

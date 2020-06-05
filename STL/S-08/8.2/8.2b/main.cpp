@@ -6,8 +6,8 @@
 using namespace std;
 
 /**
- * From those base classes, also found in <functional> are the
- * following functor classes. These are used in the STL for working as
+ * From binary_function and unary_function base classes, also found in <functional>
+ * are the following functor classes. These are used in the STL for working as
  * parameters to both containers and algorithms.
  * 
  * // Arithmetic functors
@@ -56,12 +56,12 @@ using namespace std;
  * 
  * template <typename T>
  * struct multiplies : public binary_function<T,T,T> {
- *   T operator()(const T&  x, const T&  y) const { return  x *  y; }
+ *   T operator()(const T&  x, const T&  y) const { return  x * y; }
  * };
  * 
  * template <typename T>
  * struct divides : public binary_function<T,T,T> {
- *   T operator()(const T&  x, const T&  y) const { return  x /  y; }
+ *   T operator()(const T&  x, const T&  y) const { return  x / y; }
  * };
  */
 
@@ -87,9 +87,8 @@ using namespace std;
  */
 class is_even : public unary_function<int, bool> {
 public:
-  bool operator()(int i)
-  { 
-    return (result_type) !(i%2);
+  bool operator()(int i) {
+    return (result_type) !(i % 2);
   }
 };
 
@@ -105,7 +104,7 @@ int main() {
      aVect.push_back(i);
 
   cout << "Sequence:";
-  for(int i : aVect)
+  for(auto i : aVect)
     cout << i << " ";
   cout << endl;
 
