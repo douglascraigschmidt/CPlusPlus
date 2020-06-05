@@ -18,9 +18,9 @@ stack<T>::stack(const stack<T> &rhs)
 
 template<typename T>
 stack<T>::stack(stack &&s) noexcept
-        : top_(s.top_),
-          size_(s.size_),
-          stack_(s.stack_.release()) {
+  : top_(s.top_),
+    size_(s.size_),
+    stack_(s.stack_.release()) {
   s.size_ = s.top_ = 0;
 }
 

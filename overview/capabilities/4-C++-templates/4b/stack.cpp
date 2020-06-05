@@ -15,15 +15,15 @@ stack<T>::stack(const stack<T> &rhs)
   : top_(rhs.top_),
     size_(rhs.size_),
     stack_(new T[rhs.size_]) {
-    try {
-        for (size_t i = 0; i < rhs.size_; ++i)
-            // Yikes, there's a memory leak of T.operator=() throws an
-            // exception!
-            stack_[i] = rhs.stack_[i];
-    } catch (...) {
-        delete [] stack_;
-        stack_ = 0;
-    }
+  // try {
+  for (size_t i = 0; i < rhs.size_; ++i)
+    // Yikes, there's a memory leak of T.operator=() throws an
+    // exception!
+    stack_[i] = rhs.stack_[i];
+  // } catch (...) {
+  // delete [] stack_;
+  // stack_ = 0;
+  // }
 }
 
 template<typename T>
@@ -40,22 +40,21 @@ stack<T> &
 stack<T>::operator=(const stack<T> &rhs) {
   if (this != &rhs) {
     T *temp = nullptr;
-    try {
-      temp = new T[rhs.size_];
+    // try {
+    temp = new T[rhs.size_];
 
-      for (size_t i = 0; i < rhs.size_; ++i)
-        // Yikes, there's a memory leak of T.operator=() throws an
-        // exception!
-        temp[i] = rhs.stack_[i];
+    for (size_t i = 0; i < rhs.size_; ++i)
+      // Yikes, there's a memory leak of T.operator=() throws an
+      // exception!
+      temp[i] = rhs.stack_[i];
 
-      delete [] stack_;
-      stack_ = temp;
-      top_ = rhs.top_;
-      size_ = rhs.size_;
-    } catch (...) {
-      std::cout << "foo" << std::endl;
-      delete [] temp;
-    }
+    delete [] stack_;
+    stack_ = temp;
+    top_ = rhs.top_;
+    size_ = rhs.size_;
+    // } catch (...) {
+    // delete [] temp;
+    // }
   }
   return *this;
 }
