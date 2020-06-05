@@ -66,6 +66,7 @@ stack<T>::operator=(stack<T> &&rhs)  noexcept {
   if (this != &rhs) {
     top_ = rhs.top_;
     size_ = rhs.size_;
+    delete [] stack_;
     stack_ = rhs.stack_;
     rhs.stack_ = nullptr;
     rhs.size_ = rhs.top_ = 0;
