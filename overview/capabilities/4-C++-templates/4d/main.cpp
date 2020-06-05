@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(3), s2(10);
+  stack<simple_string> s1(3), s2(5);
 
   cout << "begin copy constructor" << endl;
   stack<simple_string> s3(s2);
