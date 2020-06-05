@@ -12,7 +12,7 @@ stack<T>::stack(const stack<T> &rhs)
   : top_(rhs.top_),
     size_(rhs.size_),
     stack_(std::make_unique<T[]>(rhs.size_)) {
-  for (size_t i = 0; i < rhs.size_; ++i)
+  for (size_t i = 0; i < rhs.top_; ++i)
     stack_[i] = rhs.stack_[i];
 }
 

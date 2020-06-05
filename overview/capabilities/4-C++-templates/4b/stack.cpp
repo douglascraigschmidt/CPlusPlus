@@ -1,6 +1,10 @@
 #ifndef _STACK_CPP
 #define _STACK_CPP
 
+#include <exception>
+
+#include "stack.h"
+
 template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
@@ -13,10 +17,14 @@ stack<T>::stack(const stack<T> &rhs)
   : top_(rhs.top_),
     size_(rhs.size_),
     stack_(new T[rhs.size_]) {
-  for (size_t i = 0; i < rhs.size_; ++i)
-    // Yikes, there's a memory leak of T.operator=() throws an
-    // exception!
-    stack_[i] = rhs.stack_[i];
+    try {
+        for (size_t i = 0; i < rhs.size_; ++i)
+            // Yikes, there's a memory leak of T.operator=() throws an
+            // exception!
+            stack_[i] = rhs.stack_[i];
+    } catch (std::exception &ex) {
+        delete [] stack_;
+    }
 }
 
 template<typename T>

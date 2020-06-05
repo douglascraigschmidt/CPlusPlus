@@ -1,10 +1,14 @@
-cmake_minimum_required(VERSION 3.15)
-project(CPP-templates-4_b)
-
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+cmake_minimum_required(VERSION 3.16)
+project(4b)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CPP-templates-4_b
+include_directories(.)
+
+add_executable(4b
         main.cpp
-        throw_exception.cpp)
+        stack.cpp
+        stack.h
+        stack.inl
+        throw_exception.cpp
+        throw_exception.h)

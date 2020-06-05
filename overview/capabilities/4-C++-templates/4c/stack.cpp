@@ -1,6 +1,8 @@
 #ifndef _STACK_CPP
 #define _STACK_CPP
 
+#include "stack.h"
+
 template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),

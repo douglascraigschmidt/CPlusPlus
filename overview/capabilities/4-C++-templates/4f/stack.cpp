@@ -9,9 +9,7 @@ stack<T, sequential_container>::stack(size_t size)
 template<typename T, template <typename ...> class sequential_container>
 stack<T, sequential_container>::stack(const stack<T, sequential_container> &rhs)
   : size_(rhs.size_),
-    stack_(rhs.stack_.size()) {
-  for (size_t i = 0; i < rhs.stack_.size(); ++i)
-    stack_[i] = rhs.stack_[i];
+    stack_(rhs.stack_) {
 }
 
 template<typename T, template <typename ...> class sequential_container>

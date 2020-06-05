@@ -11,6 +11,7 @@ public:
 
 private:
   static int i_;
+
   int j_;
 };
 

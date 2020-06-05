@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <list>
 
 #include "stack.h"
 
@@ -9,14 +10,14 @@ using namespace std;
 
 int main() {
   // Multiple stacks that are created automatically.
-  stack<simple_string> s1(3), s2(10);
+  stack<simple_string, std::list> s1(3), s2(10);
 
   cout << "begin copy constructor" << endl;
-  stack<simple_string> s3(s2);
+  stack<simple_string, std::list> s3(s2);
   cout << "end copy constructor" << endl;
 
   cout << "begin move constructor" << endl;
-  stack<simple_string> s4(std::move(s2));
+  stack<simple_string, std::list> s4(std::move(s2));
   cout << "end move constructor" << endl;
 
   int item = 0;
