@@ -85,9 +85,15 @@ demonstrate_on_array() {
   char s[] = "spaces in text";
   auto s_end = s + sizeof(s) / sizeof(*s);
   cout << s << endl;
+
   auto new_end = remove_if(s,
                            s_end,
                            bind2nd(equal_to<char>(), ' '));
+
+  /*
+   auto new_end = remove_if(s,
+                       s_end,
+                       [](char c) { return c == ' ';}); */
 
   cout << s << endl; // Note the "xt" characters are removed at the end!
 }

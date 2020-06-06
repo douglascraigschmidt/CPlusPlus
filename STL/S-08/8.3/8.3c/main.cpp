@@ -26,24 +26,44 @@ using namespace std;
  * divides<type>()          Binary      Divides supplied parameters (param1 / param2)
  * 
  * modulus<type>()          Binary      Remainder of parameters (param1 % param2)
- *  
+ */
+
+/**
+ * Forward declarations.
+ */
+template<typename InputIterator>
+static void demonstrate_functors(InputIterator first, InputIterator last);
+template<typename InputIterator>
+static void demonstrate_lambdas(InputIterator first, InputIterator last);
+
+/*
  * This example uses the arithmetic functors with the STL transform()
  * algorithm.
  */
 int main() {
   // Use a functor to order set in descending order.
   set<float, std::greater<>> aSet{5.5, 1.1, 3.3, 4.4, 2.2};
+
+  demonstrate_functors(aSet.begin(), aSet.end());
+  demonstrate_lambdas(aSet.begin(), aSet.end());
+
+  return 0;
+}
+
+template<typename InputIterator>
+static void
+demonstrate_functors(InputIterator first, InputIterator last) {
   vector<float> aVect;
 
-  copy (aSet.begin (),
-        aSet.end (),
+  copy (first,
+        last,
         ostream_iterator<float> (cout, " "));
   cout << endl;
 
   // Multiple all float in the vector by themselves (i.e., double
   // themselves) and store them back into the vector.
-  transform(aSet.begin(), aSet.end(),
-            aSet.begin(),
+  transform(first, last,
+            first,
             back_inserter(aVect),
             multiplies<>());
 
@@ -53,7 +73,7 @@ int main() {
   cout << endl;
 
   // Divide all floats in the vector by 3 and store them back into the vector.
-  transform(aSet.begin(), aSet.end(),
+  transform(first, last,
             // This works because aVect retains is values from earlier transform().
             aVect.begin(),
             bind2nd(divides<float>(), 3.0));
@@ -62,6 +82,39 @@ int main() {
         aVect.end (),
         ostream_iterator<float> (cout, " "));
   cout << endl;
-
-  return 0;
 }
+
+template<typename InputIterator>
+static void
+demonstrate_lambdas(InputIterator first, InputIterator last) {
+  vector<float> aVect;
+
+  copy (first,
+        last,
+        ostream_iterator<float> (cout, " "));
+  cout << endl;
+
+  // Multiple all float in the vector by themselves (i.e., double
+  // themselves) and store them back into the vector.
+  transform(first, last,
+            first,
+            back_inserter(aVect),
+            [](float a, float b) { return a * b; });
+
+  copy (aVect.begin (),
+        aVect.end (),
+        ostream_iterator<float> (cout, " "));
+  cout << endl;
+
+  // Divide all floats in the vector by 3 and store them back into the vector.
+  transform(first, last,
+            // This works because aVect retains is values from earlier transform().
+            aVect.begin(),
+            [](float a) { return a / 3.0; });
+
+  copy (aVect.begin (),
+        aVect.end (),
+        ostream_iterator<float> (cout, " "));
+  cout << endl;
+}
+
