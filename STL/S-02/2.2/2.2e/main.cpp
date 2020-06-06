@@ -12,9 +12,9 @@
  *   those datatypes from the template.
  * 
  * . A program can invoke a function template either by explicitly
- *   telling C++ the datatypes to use, or it can simply pass arguments
+ *   telling C++ the data types to use, or it can simply pass arguments
  *   to the function, leaving it up to C++ to deduce the right
- *   datatypes.
+ *   data types.
  * 
  * . Function templates can be overloaded, but this is best done
  *   carefully.
@@ -29,21 +29,25 @@
  *   would also fit.
  */
 int main() {
-  int  i = min(9, 6); 		
-  std::cout <<"Minimum of integers: "<<  i << std::endl;
+  int i = min(9, 6); 		
+  std::cout << "Minimum of integers: " <<  i << std::endl;
                                          
   double d = min(10.5, 11.3); 		 	
-  std::cout <<"Minimum of Doubles: "<< d << std::endl;
+  std::cout <<"Minimum of Doubles: " << d << std::endl;
     
   // Compile error since implicit cast not acceptable for templates.
   // d = min(10, 11.3);
-  std::cout  << "Minimum of Double: "<< d << std::endl;
+  std::cout << "Minimum of Double: " << d << std::endl;
 
   // Function template will accept an explicit cast though.
   d = min<double>(10, 11.3);                        
-  std::cout  << "Minimum of Double: " << d << std::endl;
+  std::cout << "Minimum of Double: " << d << std::endl;
+
+  // Can use type deduction to define the type.
+  auto e = min_ex(10, 11.3);
+  std::cout << "Minimum of " << typeid(e).name() << " " << e << std::endl;
 
   // 3 arguments work to call the overloaded function template.
   i = min(3, 6, 4);			
-  std::cout <<   "Minimum int 3 Parameters: " << i  << std::endl;
+  std::cout << "Minimum int 3 Parameters: " << i  << std::endl;
 }

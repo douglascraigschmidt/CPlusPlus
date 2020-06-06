@@ -24,19 +24,19 @@
  * 
  * To preserve the power of C++’s datatype checking, another way is to
  * use many overloaded functions in a class, each having a different
- * type of data as input. The problem with this comes during the
- * sustainment phase, when the program needs to be enhanced,
- * maintained, fixed, etc. Then the job of keeping all of these
- * functions in sync is very hard. 
+ * type of data as input. The problem with this approach occurs during
+ * the sustainment phase, when the program must be enhanced,
+ * maintained, fixed, etc. The job of keeping all of these functions
+ * in sync then becomes very hard.
  *
- * To address this problem, C++ defines "function template" feature,
- * which enables programmers to write ONE function that takes
+ * To address this problem, C++ defines the "function template"
+ * feature, which enables programmers to write ONE function that takes
  * parameter(s) of any datatype.  C++ also defines "class templates,"
  * which cohesively group together one or more member functions whose
  * types and/or values can be parameterized wholesale.
  *
- * The examples in this section explore the use of function and class
- * templates in C++.  These C++ capabilities form the foundation for
+ * The examples in this section explore the use of C++ function and
+ * class templates.  These C++ capabilities form the foundation for
  * the Standard Template Library (STL), so it's essential to
  * understand how they work.
 */

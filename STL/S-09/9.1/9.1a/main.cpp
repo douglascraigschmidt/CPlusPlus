@@ -14,15 +14,15 @@ using namespace std;
  * . Allow building functions as graphs (especially chains and trees)
  *   of other functions
  * 
- * These functors allow one to combine, transform or manipulate
- * functors with each other, certain values or with special functions.
+ * These functors allow one to combine, transform, or manipulate
+ * functors with each other, certain values, or with special functions.
  * They are divided into the following categories:
  * 
- * Type of adaptor  STL adaptor	       What it does
+ * Type of adaptor  STL adaptor        What it does
  * 
- * binders 	    bind1st, bind2nd   adapt functors by ¡®binding¡¯ one of their arguments
- * negators  	    not1, not2         adapt functor by negating arguments
+ * binders          bind1st, bind2nd   adapt functors by "binding" one of their arguments
+ * negators         not1, not2         adapt functor by negating arguments
  * member functions ptr_fun            allow functors to be class member
- * 		    mem_fun            function adaptors		
+ *                  mem_fun            function adaptors                
  *                  mem_fun_ref
  */

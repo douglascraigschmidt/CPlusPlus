@@ -25,12 +25,13 @@ using namespace std;
 template <typename T, template <typename ...> class container = deque>
 class stack {
 public:
-    void push(const T &t) { s.push_back(t); }
-    void pop() { s.pop_back(); }
-    T top() { return s.back(); }
-    // ...
+  void push(const T &t) { s.push_back(t); }
+  void pop() { s.pop_back(); }
+  T top() { return s.back(); }
+  // ...
+
 private:
-    container<T> s;
+  container<T> s;
 };
 
 /**

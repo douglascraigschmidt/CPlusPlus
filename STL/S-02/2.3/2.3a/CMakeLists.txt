@@ -5,6 +5,10 @@ if (PASS_BY_VALUE)
     add_definitions(-DPASS_BY_VALUE=${PASS_BY_VALUE})
 endif()
 
+if (MOVE)
+    add_definitions(-DMOVE=${MOVE})
+endif()
+
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 set(CMAKE_CXX_STANDARD 14)

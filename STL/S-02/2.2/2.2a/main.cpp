@@ -19,13 +19,14 @@ double plus(double a, double b) {
 
 /**
  * Function templates are special functions that can operate on
- * different data types without separate code for each of them. For a
- * similar operation on several kinds of data types, therefore, it
- * isn’t always as efficient to write several different versions by
- * overloading a function; writing one template function will take
- * care of many cases where overloaded functions might be written.
- * Thus, this template member function generalizes all the overloaded
- * "plus()" methods above.
+ * different data types without duplicating separate code for each of
+ * them, thereby supporting the "Don't Repeat Yourself" (DRY)
+ * principle.  For similar operations on several kinds of data types,
+ * it isn’t always efficient to write several different versions by
+ * overloading a function. Instead, writing one template function will
+ * take care of many cases where overloaded functions might be
+ * written.  This template member function therefore generalizes all
+ * the overloaded "plus()" methods above.
  */
 template <typename T>
 T add(T a, T b) {

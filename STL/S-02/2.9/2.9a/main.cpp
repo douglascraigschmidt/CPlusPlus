@@ -97,6 +97,7 @@ template string example_class<string>::result(string);
 int main() {
   example_class<int> ai;
   example_class<double> ad;
+
   print_data_type(ai);
   print_data_type(ad);
 

@@ -1,8 +1,8 @@
 #include <iostream>
 
 /**
- * example_class templates can be partially specialized, as shown by this
- * template example_class that takes two type parameters.
+ * example_class templates can be partially specialized, as shown by
+ * this template example_class that takes two type parameters.
  */
 template <typename T, typename U>
 struct example_class {
@@ -10,7 +10,8 @@ struct example_class {
 };
 	
 /**
- * The following are partial specializations of the template example_class.
+ * The following are partial specializations of the template
+ * example_class.
  */
 template <typename T>   	//specialize so that both are same datatype
 struct example_class <T, T> {

@@ -16,8 +16,9 @@
 /** 
  * This template function returns the smaller of two parameters.
  */ 
-template<typename T> T min(const T &i, const T &j) {
-    return i < j ? i : j;
+template<typename T>
+T min(const T &i, const T &j) {
+  return i < j ? i : j;
 }
 
 /**
@@ -45,6 +46,7 @@ int main() {
 
     std::cout << "min = " << min(a++, b++) << std::endl;
     std::cout << "MIN = " << MIN(a++, b++) << std::endl;
+
     std::cout << "a = " << a << " b = " << b << std::endl;
 
     return 0;

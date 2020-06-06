@@ -56,33 +56,33 @@ container<char *>::uppercase() {
 
 class Foo {
 public:
-    explicit Foo(int i): i_(i) {}
+  explicit Foo(int i): i_(i) {}
 
-    Foo operator++() {
-        cout << "Foo::operator++" << endl;
-        return Foo(++i_);
-    }
+  Foo operator++() {
+    cout << "Foo::operator++" << endl;
+    return Foo(++i_);
+  }
 
-    explicit operator int() const { return i_; }
+  explicit operator int() const { return i_; }
 
 private:
-    int i_;
+  int i_;
 };
 
 ostream &operator<<(ostream &os,  const Foo &foo) {
-    return os << int(foo);
+  return os << int(foo);
 }
 
 template<> class container<Foo> {
 public:
-    explicit container (Foo arg): element (arg) {}
-    Foo increase() {
-      cout << "container<Foo>::increase()" << endl;
-      return ++element;
-    }
+  explicit container (Foo arg): element (arg) {}
+  Foo increase() {
+    cout << "container<Foo>::increase()" << endl;
+    return ++element;
+  }
 
 private:
-    Foo element;
+  Foo element;
 };
 
 /**
@@ -92,6 +92,7 @@ private:
 int main () {
   container<int> myint (7);
   container<double> mydouble (10.5) ;
+
   char lowercase[] = "hello world";
   container<char *> mycharstring (lowercase);
 

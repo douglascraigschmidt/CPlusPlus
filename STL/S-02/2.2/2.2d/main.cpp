@@ -38,9 +38,9 @@ void f(int w, int z) {
  * non-template functions.
  */
 int main () {
-   f(1, 2);
-   f('a', 'b');
-   f(1, 'b');
+  f(1, 2);
+  f('a', 'b');
+  f(1, 'b');
   
   return 0;
 }

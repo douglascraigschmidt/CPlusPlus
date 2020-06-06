@@ -43,19 +43,20 @@ using namespace std;
  */
 template <typename T, int V>
 T add_const_n (const T &n) {
-    return n + V;
+  return n + V;
 }
 
-int main () { 
-   memblock <int, 5> my_ints;
-   memblock <double, 15> my_floats;
-   my_ints.setmem (0,100); 
-   my_floats.setmem (3,3.1416); 
-   cout << my_ints.getmem(0) << endl; 
-   cout << my_floats.getmem(3) << endl;
+int main () {
+  memblock <int, 5> my_ints;
+  memblock <double, 15> my_floats;
 
-   int i;
-   i = add_const_n<int, 6> (10);
-   cout << "i = " << i << endl;
-   return 0; 
+  my_ints.setmem (0,100); 
+  my_floats.setmem (3,3.1416); 
+
+  cout << my_ints.getmem(0) << endl; 
+  cout << my_floats.getmem(3) << endl;
+
+  auto i = add_const_n<int, 6> (10);
+  cout << "i = " << i << endl;
+  return 0; 
 } 

@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-use-transparent-functors"
 #include <iostream>
 #include <functional>
 #include <algorithm>
@@ -12,7 +14,7 @@ static void contrast_bind1st_and_bind2nd();
 
 /**
  * This example introduces the bind1st() and bind2nd() function
- * adapters.
+ * adapters and compares/contrasts them.
  */
 int main () {
   demonstrate_bind1st();
@@ -64,3 +66,5 @@ contrast_bind1st_and_bind2nd() {
   cout << m1(20) << endl;
   cout << m2(20) << endl;
 }
+
+#pragma clang diagnostic pop

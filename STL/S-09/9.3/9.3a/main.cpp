@@ -22,7 +22,7 @@ using namespace std;
 template<typename T>
 struct is_odd : unary_function<T, bool> {
   bool operator() (T number) const {
-    return (number % 2 != 0); 
+    return number % 2 != 0;
   }
 };
   
@@ -37,22 +37,40 @@ int main() {
   vector<int> vector1{1, 2, 3, 4};
   vector<int> vector2;
 
+  // Remove odd numbers via a functor.
   remove_copy_if(vector1.begin(), vector1.end(),
                  back_inserter(vector2),
                  is_odd<int>());
 
   copy(vector2.begin(),
        vector2.end(),
-       ostream_iterator<int>(cout, "\n"));
+       ostream_iterator<int>(cout, " "));
+  cout << endl;
 
   vector<int> vector3;
+  // Remove even numbers via a negator.
   remove_copy_if(vector1.begin(), vector1.end(),
                  back_inserter(vector3),
                  not1(is_odd<int>()));
 
   copy(vector3.begin(),
        vector3.end(),
-       ostream_iterator<int>(cout, "\n"));
+       ostream_iterator<int>(cout, " "));
+  cout << endl;
+
+  vector3.resize(0);
+
+  // Copy odd numbers using a C++ lambda function.
+  copy_if(vector1.begin(), vector1.end(),
+          back_inserter(vector3),
+          [](int number)  {
+            return number % 2 != 0;
+          });
+
+  copy(vector3.begin(),
+       vector3.end(),
+       ostream_iterator<int>(cout, " "));
+  cout << endl;    
 
   return 0;
 }

@@ -20,7 +20,7 @@ R max(T a, U b) {
  * the return datatype and optionally can provide all datatypes.
  */
 int main () {
-  // must provide return datatype
+  // Must provide return datatype
   double d = max<double>(5.5, 2);
 
   // can provide all datatypes (though int is optional).
