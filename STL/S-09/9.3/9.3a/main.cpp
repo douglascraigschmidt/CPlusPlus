@@ -58,10 +58,12 @@ int main() {
        ostream_iterator<int>(cout, " "));
   cout << endl;
 
+  // Clear the vector.
   vector3.resize(0);
 
   // Copy odd numbers using a C++ lambda function.
-  copy_if(vector1.begin(), vector1.end(),
+  copy_if(vector1.begin(),
+          vector1.end(),
           back_inserter(vector3),
           [](int number)  {
             return number % 2 != 0;

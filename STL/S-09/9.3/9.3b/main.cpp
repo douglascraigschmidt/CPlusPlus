@@ -22,8 +22,8 @@ static void print_results(InputIterator first, InputIterator last);
 
 /** 
  * This example shows functors being used with various combinations
- * the not1() negator, the find_if()/find_if_not() algorithms, and a
- * lambda function.
+ * the not1() and not2() negators, the find_if()/find_if_not() algorithms,
+ * and a lambda function.
  */
 int main() {
   vector<int> v{4, 1, 2, 8, 5, 7};
@@ -52,6 +52,13 @@ int main() {
 
   print_results(itr, v.end());
 
+  // Sort the vector using "not" less (i.e., greater).
+  sort(v.begin(),
+       v.end(),
+       not2(less<int>()));
+
+  print_results(v.begin(), v.end());
+
   return 0;
 }
 
@@ -64,9 +71,8 @@ print_results(InputIterator first, InputIterator last) {
   if (first != last) {
     copy (first,
           last,
+          // Deduce the type of the iterator!
           ostream_iterator<decltype(*first)> (cout, " "));
     cout << endl;
   }
 }
-
-#pragma clang diagnostic pop
