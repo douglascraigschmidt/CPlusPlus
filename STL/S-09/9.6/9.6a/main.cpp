@@ -1,4 +1,6 @@
 #pragma clang diagnostic push
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-avoid-bind"
 #pragma ide diagnostic ignored "modernize-use-transparent-functors"
 #include <iostream>
 #include <vector>
@@ -63,10 +65,17 @@ int main () {
 
   cout << n << endl;
 
-  // Use predefined functor + a binder adapter.
+  // Use predefined functor + bind2nd().
   n = count_if(v.begin(),
                v.end(),
                bind2nd(greater<int>(), 2));
+
+  cout << n << endl;
+
+  // Use predefined functor + bind().
+  n = count_if(v.begin(),
+               v.end(),
+               bind(greater<>(), placeholders::_1, 2));
 
   cout << n << endl;
 
@@ -80,3 +89,4 @@ int main () {
   return 0 ;
 }
 
+#pragma clang diagnostic pop

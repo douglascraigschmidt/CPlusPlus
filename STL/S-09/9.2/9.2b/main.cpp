@@ -43,7 +43,7 @@ int main () {
   // Find the *last* element that's greater than value.
   auto i = find_if(myVector.rbegin(),
                    myVector.rend(),
-                   [value](float f) { return f > value; });
+                   [value](auto f) { return f > value; });
 
   if (i != myVector.rend())
     cout << "the last element greater than "

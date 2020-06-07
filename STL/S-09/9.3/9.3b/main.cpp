@@ -8,22 +8,22 @@
 using namespace std;
 
 /**
+ * Forward declaration. 
+ */
+template<typename InputIterator>
+static void print_results(InputIterator first, InputIterator last);
+
+/**
  * An overly specific functor!
  */
 struct IntGreaterThanThree : public unary_function<int, bool> {
   bool operator() (int x) const { return x > 3; }
 };
 
-/**
- * Forward declaration. 
- */
-template<typename InputIterator>
-static void print_results(InputIterator first, InputIterator last);
-
 /** 
- * This example shows functors being used with various combinations
- * the not1() and not2() negators, the find_if()/find_if_not() algorithms,
- * and a lambda function.
+ * This example shows functors being used with the not1(), not2(), and
+ * not_fn() negators, the find_if()/find_if_not() algorithms, and a
+ * C++ lambda function.
  */
 int main() {
   vector<int> v{4, 1, 2, 8, 5, 7};
@@ -40,7 +40,7 @@ int main() {
   // element in the vector that's not greater than three.
   itr = find_if (v.begin(),
                  v.end(),
-                 not1(bind2nd(greater<int> (), 3)));
+                 not_fn(bind2nd(greater<int> (), 3)));
 
   print_results(itr, v.end());
 
@@ -48,7 +48,7 @@ int main() {
   // element in the vector that's not greater than three.
   itr = find_if_not (v.begin(),
                      v.end(),
-                     [](int i) { return i > 3; });
+                     [](auto i) { return i > 3; });
 
   print_results(itr, v.end());
 
@@ -63,7 +63,7 @@ int main() {
 }
 
 /**
- * Print the range
+ * Print the range from first to last.
  */
 template <typename InputIterator>
 static void

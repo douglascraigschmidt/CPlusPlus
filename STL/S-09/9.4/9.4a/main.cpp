@@ -7,7 +7,7 @@ using namespace std;
 /**
  * A member function adapter can be used to allow class member
  * functions as arguments to the STL predefined algorithms. There are
- * 2 of them:
+ * 3 of them (the first two are deprecated in later C++ standards):
  * 
  * mem_fun(PtrToMember mf); 
  * Converts a pointer to member to a functor whose first arg is a
@@ -18,10 +18,16 @@ using namespace std;
  * Converts a pointer to member to a functor whose first arg is a
  * reference to the object. Unary function if mf takes no arguments,
  * binary function if mf takes one argument.
+ *
+ * mem_fn(PtrToMember mf);
+ * Generates wrapper objects for pointers to members, which can store,
+ * copy, and invoke a pointer to member. Both references and pointers
+ * (including smart pointers) to an object can be used when invoking a
+ * mem_fn().
  * 
- * This example shows the member function reference function adaptor
- * mem_fun_ref, plus examples using several STL algorithm functions
- * and some lambda functions.
+ * This example shows the member function reference function adaptors
+ * mem_fun_ref() and mem_fn(), plus examples using several STL algorithm
+ * functions and some lambda functions.
  */
 class WrapInt {
 public:
@@ -32,7 +38,7 @@ public:
     cout << val << " "; 
   }
 
-  bool isPrime() const {
+  [[nodiscard]] bool isPrime() const {
     for (int i = 2; i <= (val / 2); i++)
       if (!(val % i))
         return false;
@@ -40,9 +46,9 @@ public:
     return true;
   }
 
-  bool isEven() const { return !(val % 2); }
+  [[nodiscard]] bool isEven() const { return !(val % 2); }
 
-  bool isOdd() const { return val % 2; }
+  [[nodiscard]] bool isOdd() const { return val % 2; }
 
 private:
   int val;
@@ -50,6 +56,9 @@ private:
 
 int main() {
   vector<WrapInt> aVect(10);
+
+  WrapInt wi (10);
+  wi.isEven();
 
   for (int i = 0; i < 10; i++)
     aVect[i] = WrapInt(i + 1);
@@ -77,13 +86,13 @@ int main() {
   // Remove even numbers.
   end_p = remove_if(aVect.begin(),
                     aVect.end(), 
-                    mem_fun_ref(&WrapInt::isEven));
+                    mem_fn(&WrapInt::isEven));
 
   cout << "Sequence after removing even values: ";
 
   for_each(aVect.begin(),
            end_p,
-           mem_fun_ref(&WrapInt::showval));
+           mem_fn(&WrapInt::showval));
 
   cout << endl;
 

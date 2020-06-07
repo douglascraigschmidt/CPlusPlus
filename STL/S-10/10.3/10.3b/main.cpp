@@ -9,7 +9,8 @@ using namespace std;
 /**
  * Define a is_greater_than functor that takes any type of numeric
  * data or even a class if the > operator has been defined for it.
- * This functor stores state that's used in operator().
+ * This is a "stateful functor" since it stores state that's used in
+ * operator().
  */
 template <typename T>
 class is_greater_than {
@@ -25,12 +26,13 @@ private:
 };
 
 /**
- * Demonstrate the is_creater_than functor and an alternative approach
+ * Demonstrate the is_greater_than functor and an alternative approach
  * using bind2nd() and greater<>.
  */
 int main() {
   deque<int> values {10, 20, -30, 40, -50, 60};
 
+  // Use custom functor to find first value > 5.
   auto itr = find_if (values.begin(),
                       values.end(),
                       is_greater_than<int>(5));
@@ -38,6 +40,7 @@ int main() {
   if (itr != values.end()) 
     cout << *itr << " is greater than 5" << endl;
 
+  // Use bind2nd() and greater<> functor to find first value > 20.
   itr = find_if (values.begin(),
                  values.end(),
                  bind2nd (greater<int>(), 20));

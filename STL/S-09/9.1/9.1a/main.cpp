@@ -21,7 +21,7 @@ using namespace std;
  * Type of adaptor  STL adaptor        What it does
  * 
  * binders          bind1st, bind2nd   adapt functors by "binding" one of their arguments
- * negators         not1, not2         adapt functor by negating arguments
+ * negators         not1, not2, not_fn adapt functor by negating arguments
  * member functions ptr_fun            allow functors to be class member
  *                  mem_fun            function adaptors                
  *                  mem_fun_ref

@@ -41,6 +41,12 @@ static void demonstrate_lambdas(InputIterator first, InputIterator last);
  * algorithm.
  */
 int main() {
+  // Use the default less<> functor to order set in ascending order.
+  set<float> aSet{5.5, 1.1, 3.3, 4.4, 2.2};
+
+  demonstrate_functors(aSet.begin(), aSet.end());
+  demonstrate_lambdas(aSet.begin(), aSet.end());
+
   // Use a functor to order set in descending order.
   set<float, std::greater<>> aSet{5.5, 1.1, 3.3, 4.4, 2.2};
 
@@ -106,9 +112,9 @@ demonstrate_lambdas(InputIterator first, InputIterator last) {
         ostream_iterator<float> (cout, " "));
   cout << endl;
 
-  // Divide all floats in the vector by 3 and store them back into the vector.
+  // Divide all floats in vector by 3 and store them back into vector.
   transform(first, last,
-            // This works because aVect retains is values from earlier transform().
+            // aVect retains its values from earlier transform().
             aVect.begin(),
             [](float a) { return a / 3.0; });
 
