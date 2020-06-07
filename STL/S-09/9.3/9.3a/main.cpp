@@ -1,4 +1,5 @@
 #include <vector>
+#include <deque>
 #include <algorithm>
 #include <iterator>
 #include <functional>
@@ -20,7 +21,6 @@ using namespace std;
  * and it will return true or false. This template takes only one
  * argument, so it is unary.
  */
-
 template<typename T>
 struct is_odd : unary_function<T, bool> {
   bool operator() (T number) const {
@@ -37,8 +37,8 @@ static void
 print_results(const sequential_container<T> &container);
 
 /**
- * We use these templates with a STL algorithm named remove_copy_if()
- * and STL functors not1()/not_fn().  These methods take 4 arguments:
+ * We use these templates with STL algorithms remove_copy_if()/copy_if()
+ * and STL functors not1()/not_fn().  The STL algorithms take 4 arguments:
  * start copying from here, stop here, and the true/false function to
  * use to determine whether to copy the argument into the result
  * output iterator.
@@ -54,26 +54,27 @@ int main() {
 
   print_results(vector2);
 
-  vector<int> vector3;
+  deque<int> deque1;
   // Remove even numbers via the not_fn() negator.
   remove_copy_if(vector1.begin(), vector1.end(),
-                 back_inserter(vector3),
+                 back_inserter(deque1),
                  not_fn(is_odd<int>()));
 
-  print_results(vector3);
+  print_results(deque1);
 
   // Clear the vector.
-  vector3.resize(0);
+  deque1.resize(0);
 
-  // Copy odd numbers using a C++ lambda function.
+  // Copy odd numbers using a C++ generic lambda function.
   copy_if(vector1.begin(),
           vector1.end(),
-          back_inserter(vector3),
+          back_inserter(deque1),
+          // This lambda function returns true if number is odd!
           [](auto number)  {
             return number % 2 != 0;
           });
 
-  print_results(vector3);
+  print_results(deque1);
 
   return 0;
 }

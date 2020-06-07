@@ -4,7 +4,6 @@
 #include <vector>
 #include <iterator>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 /**
@@ -22,14 +21,14 @@ struct IntGreaterThanThree : public unary_function<int, bool> {
 
 /** 
  * This example shows functors being used with the not1(), not2(), and
- * not_fn() negators, the find_if()/find_if_not() algorithms, and a
- * C++ lambda function.
+ * not_fn() negators, the find_if()/find_if_not() STL algorithms, and a
+ * C++ generic lambda function.
  */
 int main() {
   vector<int> v{4, 1, 2, 8, 5, 7};
 
-  // Use a custom functor and a negator to get an iterator to the
-  // first element in the vector that's not greater than three.
+  // Use a custom functor and not1() negator to get an iterator to
+  // the first element in the vector that's not greater than three.
   auto itr = find_if (v.begin(),
                       v.end(),
                       not1(IntGreaterThanThree()));
@@ -40,7 +39,15 @@ int main() {
   // element in the vector that's not greater than three.
   itr = find_if (v.begin(),
                  v.end(),
-                 not_fn(bind2nd(greater<int> (), 3)));
+                 not1(bind2nd(greater<int> (), 3)));
+
+  print_results(itr, v.end());
+
+  // Use an STL functor and a negator to get an iterator to the first
+  // element in the vector that's not greater than three.
+  itr = find_if (v.begin(),
+                 v.end(),
+                 not_fn(bind(greater<int> (), placeholders::_1, 3)));
 
   print_results(itr, v.end());
 
