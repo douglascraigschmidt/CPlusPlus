@@ -8,8 +8,8 @@
 using namespace std;
 
 /**
- * A negator adapter can be used to store the opposite result of a
- * functor.
+ * A negator adapter can be used to compute the opposite result of a
+ * functor they encapsulate.
  *
  * Negater     Result
  * not1(Op)    Negates the result of unary 'Op'
@@ -37,7 +37,7 @@ static void
 print_results(const sequential_container<T> &container);
 
 /**
- * We use these templates with STL algorithms remove_copy_if()/copy_if()
+ * We use these template with STL algorithms remove_copy_if()/copy_if()
  * and STL functors not1()/not_fn().  The STL algorithms take 4 arguments:
  * start copying from here, stop here, and the true/false function to
  * use to determine whether to copy the argument into the result

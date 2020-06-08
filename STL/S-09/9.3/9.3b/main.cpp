@@ -47,7 +47,7 @@ int main() {
   // element in the vector that's not greater than three.
   itr = find_if (v.begin(),
                  v.end(),
-                 not_fn(bind(greater<int> (), placeholders::_1, 3)));
+                 not_fn(bind(greater<> (), placeholders::_1, 3)));
 
   print_results(itr, v.end());
 
