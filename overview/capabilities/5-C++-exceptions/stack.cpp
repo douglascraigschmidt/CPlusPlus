@@ -5,13 +5,13 @@ template<typename T>
 stack<T>::stack(size_t size)
   : top_(0),
     size_(size),
-    stack_(new T[size]) {}
+    stack_(make_unique<T[]>(size)) {}
 
 template<typename T>
 stack<T>::stack(const stack<T> &rhs)
   : top_(rhs.top_),
     size_(rhs.size_),
-    stack_(new T[rhs.size_]) {
+    stack_(make_unique<T[]>(rhs.size_)) {
   for (size_t i = 0; i < rhs.size_; ++i)
     stack_[i] = rhs.stack_[i];
 }
