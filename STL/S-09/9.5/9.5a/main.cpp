@@ -22,7 +22,7 @@ bool myFunction (int i) {
 }
 
 int main () {
-  bool (*ptrFunc)(int) = myFunction;
+  bool (*ptrFunc)(int) = &myFunction;
 
   if (ptrFunc(11))
     std::cout << "ptrFunc (11) true" << endl;

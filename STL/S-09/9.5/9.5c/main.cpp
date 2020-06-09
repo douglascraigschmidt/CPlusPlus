@@ -15,8 +15,8 @@ print(InputIterator first, InputIterator last, const string &s);
 
 /**
  * The example demonstrates the use of a number of C++ function
- * adapters, including not1()/bind2nd(), not_fn()/bind(), as well as
- * C++ generic lambda functions and decltype().
+ * adapters, including ptr_fun(), not1()/bind2nd(), not_fn()/bind(), as well
+ * as C++ generic lambda functions and decltype().
  */
 int main() {
   vector<const char *> aVect {"One", "Two", "Three", "Four", "Five"};

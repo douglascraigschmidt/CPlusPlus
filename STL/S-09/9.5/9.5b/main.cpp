@@ -14,16 +14,16 @@ private:
 };
 
 /**
- * This example shows now ptrFunc can be a pointer to a member
+ * This example shows now ptrMemFunc can be a pointer to a member
  * function of class example_class.
  */
 int main () {
   // Declare a member function pointer.
-  bool (example_class::*ptrFunc)(int) const
+  bool (example_class::*ptrMemFunc)(int) const
     = &example_class::firstFunc;
 
   example_class array (10);
 
-  if ((array.*ptrFunc)(11))
-    cout << "the pointer member function is true" << endl;
+  if ((array.*ptrMemFunc)(11))
+    cout << "the pointer member function is true because 11 is great than 10" << endl;
 }       
