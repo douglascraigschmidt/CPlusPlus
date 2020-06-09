@@ -33,6 +33,11 @@ void f(int w, int z) {
   cout << "Non-template" << endl; 
 }
 
+/*
+void f(char w, char z) {
+    cout << "Non-template (pt2)" << endl;
+} */
+
 /**
  * This example demonstrates the use of template functions and
  * non-template functions.

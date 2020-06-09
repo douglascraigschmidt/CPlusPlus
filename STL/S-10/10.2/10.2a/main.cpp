@@ -1,5 +1,5 @@
 /**
- * Non-mutating algorithms don¡¯t change the contents of what is found.
+ * Non-mutating algorithms don't change the contents of what is found.
  * These algorithms typically do lookup and counting operations, such as
  * 
  * . adjacent_find Finds two items adjacent to each other 
@@ -13,8 +13,10 @@
  * . for_each      Applies a function to a range of elements
  * . mismatch      Finds the first position where two ranges differ
  * . search        Searches for a range of elements
- * . search_n      Searches for n consecutive copies of an element within a range
+ * . search_n      Searches for n consecutive copies of an element within a
+ *                 range
  * 
  * Note that unexpected behavior can result if two sequences or
  * strings of unequal size are compared. STL will not warn one or
  * prevent this, so you need to have error checking in custom code.
+ */

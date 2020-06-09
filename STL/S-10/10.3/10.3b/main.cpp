@@ -32,21 +32,35 @@ private:
 int main() {
   deque<int> values {10, 20, -30, 40, -50, 60};
 
+  auto value = 5;
+
   // Use custom functor to find first value > 5.
   auto itr = find_if (values.begin(),
                       values.end(),
-                      is_greater_than<int>(5));
+                      is_greater_than<int>(value));
 
   if (itr != values.end()) 
-    cout << *itr << " is greater than 5" << endl;
+    cout << *itr << " is greater than " << value << endl;
 
-  // Use bind2nd() and greater<> functor to find first value > 20.
+  value = 20;
+
+  // Use bind() and greater<> functor to find first value > 20.
   itr = find_if (values.begin(),
                  values.end(),
-                 bind2nd (greater<int>(), 20));
+                 bind (greater<int>(), placeholders::_1, value));
 
   if (itr != values.end()) 
-    cout << *itr << " is greater than 20" << endl;
+    cout << *itr << " is greater than " << value << endl;
+
+  value = 40;
+
+  // Use C++ lambda function to first value >= 40.
+  itr = find_if (values.begin(),
+                 values.end(),
+                 [value](auto i) { return i >= value; });
+
+  if (itr != values.end()) 
+    cout << *itr << " is greater than " << value << endl;
 
   return 0;
 } 

@@ -5,7 +5,7 @@
  */
 template <typename R, typename T, typename U>
 R max(T a, U b) {
-    return a < b ? b: a;
+    return a < b ? b : a;
 }
 
 /**
@@ -21,7 +21,7 @@ R max(T a, U b) {
  */
 int main () {
   // Must provide return datatype
-  double d = max<double>(5.5, 2);
+  auto d = max<double>(5.5, 2);
 
   // can provide all datatypes (though int is optional).
   int i = max<int, char, char>('a', 'b');

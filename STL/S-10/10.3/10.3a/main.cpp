@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * Non-mutating search algorithms:
+ * Some examples of non-mutating search algorithms:
  * 
  * . find() - looks for a value in a range. 
  * 
@@ -61,7 +61,7 @@ int main() {
                       // passing an int as parameter, which is each
                       // element of the list since that's what we get
                       // when we dereference the iterator.
-                      bind2nd (less<int>(), 0));
+                      bind (less<int>(), placeholders::_1, 0));
 
   if (itr != values.end()) 
     cout << *itr << " is negative" << endl;

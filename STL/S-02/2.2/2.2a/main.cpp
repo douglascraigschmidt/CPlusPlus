@@ -38,13 +38,13 @@ T add(T a, T b) {
  * and template functions.
  */
 int main () {
-  int i = 5, j = 6, k;
-  long l = 10, m = 5, n;
-  double a = 10.5, b = 5.5, d;
+  int i = 5, j = 6;
+  long l = 10, m = 5;
+  double a = 10.5, b = 5.5;
 
-  k = plus(i, j);
-  n = plus(l, m);
-  d = plus(a, b);
+  int k = plus(i, j);
+  long n = plus(l, m);
+  double d = plus(a, b);
 
   std::cout << k << std::endl;
   std::cout << n << std::endl;

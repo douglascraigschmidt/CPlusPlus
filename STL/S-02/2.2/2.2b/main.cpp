@@ -22,7 +22,7 @@ int main () {
   long l = 10, m = 5;
 
   int k = add(i, j);
-  long n = add (l, m);
+  long n = add(l, m);
   double d = add(10.5, 16.7);
 
   // The following is a compile error!

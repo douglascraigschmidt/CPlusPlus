@@ -54,6 +54,9 @@ container<char *>::uppercase() {
   return element;
 }
 
+/**
+ * Define class Foo that defines operator++().
+ */
 class Foo {
 public:
   explicit Foo(int i): i_(i) {}
@@ -73,6 +76,9 @@ ostream &operator<<(ostream &os,  const Foo &foo) {
   return os << int(foo);
 }
 
+/**
+ * Specialize container with a Foo.
+ */
 template<> class container<Foo> {
 public:
   explicit container (Foo arg): element (arg) {}
@@ -90,18 +96,18 @@ private:
  * specialization.
  */
 int main () {
-  container<int> myint (7);
-  container<double> mydouble (10.5) ;
+  container<int> my_int (7);
+  container<double> my_double (10.5) ;
 
   char lowercase[] = "hello world";
-  container<char *> mycharstring (lowercase);
+  container<char *> my_charstring (lowercase);
 
-  cout << myint.increase() << endl;
-  cout << mydouble.increase() << endl;
-  cout << mycharstring.uppercase() << endl;
+  cout << my_int.increase() << endl;
+  cout << my_double.increase() << endl;
+  cout << my_charstring.uppercase() << endl;
 
-  container<Foo> myFoo (Foo(10));
-  cout << myFoo.increase() << endl;
+  container<Foo> my_foo (Foo(10));
+  cout << my_foo.increase() << endl;
 
   return 0;
 }

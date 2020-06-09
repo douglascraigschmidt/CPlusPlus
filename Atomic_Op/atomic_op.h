@@ -6,7 +6,7 @@
 template <typename TYPE>
 class atomic_op {
 public:
-  /// Initialize @c value_ to c.
+  /// Initialize @c impl_ to c.
   explicit atomic_op (TYPE c): impl_(c) {}
 
   /// Manage copying...
@@ -19,19 +19,19 @@ public:
     return *this;
   }
 
-  /// Atomically pre-increment @c value_.
+  /// Atomically pre-increment @c impl_.
   TYPE operator++ () {
     std::lock_guard<std::mutex> lock(mutex_);
     return ++impl_;
   }
 
-  /// Atomically pre-decrement @c value_.
+  /// Atomically pre-decrement @c impl_.
   TYPE operator-- () {
     std::lock_guard<std::mutex> lock(mutex_);
-    return ++impl_;
+    return --impl_;
   }
 
-  /// Explicitly return @c value_.
+  /// Explicitly return @c impl_.
   explicit operator TYPE() const {
     std::lock_guard<std::mutex> lock(mutex_);
     return impl_;
