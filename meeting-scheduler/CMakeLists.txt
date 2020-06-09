@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(meeting_scheduler
-        Meeting.cpp
+        meeting.cpp
         main.cpp)
