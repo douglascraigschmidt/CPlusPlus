@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
-project(atomic_op)
+project(meeting_scheduler)
 
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
-add_executable(
-        main.cpp
-        Meeting.cpp)
+add_executable(meeting_scheduler
+        Meeting.cpp
+        main.cpp)
