@@ -8,12 +8,12 @@
  * The Standard Template Library provides a number of simple, useful
  * and general algorithms to perform the most common operations on
  * groups and sequences of elements. These include traversals,
- * searching, sorting and the insertion and removal of elements in
- * containers.
+ * searching, sorting, as well as the insertion and removal of elements
+ * in containers.
  *
  * These algorithms are implemented in a way that works well with the
- * containers and iterators, but one can also use them alone with
- * custom code with standard arrays and pointers.
+ * containers and iterators, but they can also be used stand-alone with
+ * custom code, as well as with standard C-style arrays and pointers.
  * 
  * No containers are passed to the algorithms, so programmers don't
  * even need a container.  Arguments to the algorithms are only data
@@ -41,7 +41,7 @@
  * 
  * In addition to these main types, there are specific algorithms
  * within each type that accept a test condition, known as a
- * predicate. These are named ending with the _if suffix to remind us
+ * predicate. These are named ending with the _if() suffix to remind us
  * that they require an "if" predicate's result (true or false), as an
  * argument; these can be the result of functor calls.
  *  

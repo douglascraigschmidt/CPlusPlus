@@ -27,6 +27,10 @@ struct abs_value {
   }
 };
 
+/**
+ * Demonstrates the use of STL algorithms count() and count_if()
+ * in conjunction with our abs_value functor.
+ */
 int main() {
   vector<int> v {10, 20, -30, 40, 10, -40, 60, -10};
 

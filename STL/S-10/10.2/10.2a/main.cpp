@@ -10,6 +10,7 @@
  * . find_end      Finds last sequence of elements in a range
  * . find_first_of Finds first sequence of elements in a range
  * . find_if       Finds the first element for which a predicate is true
+ * . find_if_not   Finds the first element for which a predicate is false
  * . for_each      Applies a function to a range of elements
  * . mismatch      Finds the first position where two ranges differ
  * . search        Searches for a range of elements
