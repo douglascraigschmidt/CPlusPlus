@@ -59,15 +59,6 @@ static void
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
 #if 0
-  // Find and print any conflicts using a for loop.
-  for (auto iter = begin; iter != end; ++iter) {
-    if (iter != end - 1 && *iter == *(iter + 1))
-      std::cout << "CONFLICT:" << std::endl 
-                << " " << *iter << std::endl
-                << " " << *(iter + 1) << std::endl 
-                << std::endl;
-  }
-#else
   // Find any conflicts using the STL adjacent_find() algorithm.
   auto iter = std::adjacent_find (begin, end);
   
@@ -76,14 +67,20 @@ check_for_conflicts (InputIterator begin,
               << " " << *iter << std::endl
               << " " << *(iter + 1) << std::endl 
               << std::endl;
-
-  /**
+#else
   // Find and print any conflicts using the STL transform() algorithm.
   std::transform (begin, end - 1,
                   begin + 1,
                   begin,
-                  print_conflicts (std::cout));
-  */
+                  [](const meeting &lhs, const meeting &rhs) {
+                    // If operator == returns true there's a conflict,
+                    // so print it out!
+                    if (lhs == rhs)
+                      std::cout << "CONFLICT:" << std::endl
+                          << " " << lhs << std::endl
+                          << " " << rhs << std::endl << std::endl;
+                    return lhs;
+                  });
 #endif
 }
 
