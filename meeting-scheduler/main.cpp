@@ -58,7 +58,7 @@ template <typename InputIterator>
 static void 
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
-#if 0
+#if 1
   // Find any conflicts using the STL adjacent_find() algorithm.
   auto iter = std::adjacent_find (begin, end);
   
