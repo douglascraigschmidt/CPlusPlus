@@ -4,7 +4,7 @@ using namespace std;
 
 /**
  * This example demonstrates the use of template member functions and
- * member function templates.
+ * member function templates in C++ parameterized types.
  */
 
 /**
@@ -13,9 +13,9 @@ using namespace std;
  * and increase() template member function are called.
  */
 template <typename T>		
-class Container {
+class container {
 public:
-  explicit Container(const T &arg): element (arg) {}
+  explicit container(const T &arg): element (arg) {}
 
   // template member function
   T increase() {return ++element;}
@@ -31,20 +31,20 @@ private:
  * 
  * Member function templates are template functions that are members
  * of any class or class template. Notice that member templates are
- * not the same as template members. For example:
+ * not the same as template members.
  * 
  * A template member is a member declared inside a class template.
  */
 template <typename T> 
-struct Class_A  {
-  explicit Class_A(T *p): p_(p) {
+struct class_A  {
+  explicit class_A(T *p): p_(p) {
     cout << typeid(p).name() << endl;
   }
 
   // a template (data) member
   T *p_; 	
 
-  // another template member (function)
+  // another template member function (can be virtual if necessary)
   void f(T *t) const {
     // print the "name" of the types.
     cout << typeid(t).name() << endl;
@@ -58,7 +58,7 @@ struct Class_A  {
  * Here's an example of a member function template in a non-template
  * class.
  */
-struct Class_B {
+struct class_B {
   // member function template (can't be virtual)
   template <typename T>     
   void mf(T *t) {
@@ -72,12 +72,18 @@ struct Class_B {
  * template class.
  */
 template <typename T>
-struct Class_C {
+struct class_C {
     // member function template (can't be virtual)
     template <typename U>
     void mf(U u, T *t) {
         // print the "name" of the types.
         cout << typeid(u).name() << endl;
+        cout << typeid(t).name() << endl;
+    }
+
+    // template member function (can be virtual if necessary)
+    void f(T *t) const {
+        // print the "name" of the types.
         cout << typeid(t).name() << endl;
     }
 };
@@ -88,27 +94,29 @@ struct Class_C {
  */
 int main () {
   // Show the use of a template member function.
-  Container<int> myint(7);
+  container<int> myint(7);
   cout << myint.increase() << endl;
 
   // Show the use of another template member function.
   long l;
-  Class_A<long> a(&l);
+  class_A<long> a(&l);
   a.f(&l);
 
   // Show the use of a member function template.
   int i;
   double d;
-  Class_B b;
-  b.mf(&i);
-  b.mf(&d);
+  class_B b;
+  b.mf(&i); // The C++ compiler is automatically synthesizing
+  b.mf(&d); // the mf() member function template for int and double.
 
   // Show more uses of template class and a member function template.
-  Class_C<int> c;
-  Class_C<double> cc;
+  class_C<int> c;
+  class_C<double> cc;
 
   c.mf(10, &i);
   cc.mf(20.5, &d);
+  c.f(&i);
+  cc.f(&d);
 
   return 0;
 }

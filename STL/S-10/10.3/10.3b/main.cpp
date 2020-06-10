@@ -7,6 +7,15 @@
 using namespace std;
 
 /**
+ * The following example shows the following STL non-mutating
+ * algorithms that find elements in an iterator range:
+ *
+ * . find          Finds a specified value in a given range 
+ * . find_if       Finds the first element for which a predicate is true
+ * . find_if_not   Finds the first element for which a predicate is false
+ */
+
+/**
  * Define a is_greater_than functor that takes any type of numeric
  * data or even a class if the > operator has been defined for it.
  * This is a "stateful functor" since it stores state that's used in
@@ -26,9 +35,9 @@ private:
 };
 
 /**
- * Demonstrates various functions from the find*() family using the
- * is_greater_than functor and alternative approaches using bind()/greater<>
- * and a C++ generic lambda function.
+ * Demonstrates algorithms from the find*() family using the
+ * is_greater_than functor and alternative approaches using
+ * bind()/greater<> and a C++ generic lambda function.
  */
 int main() {
   deque<int> values {10, 20, -30, 40, -50, 60, 20, -40};

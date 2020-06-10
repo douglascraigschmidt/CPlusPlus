@@ -35,10 +35,10 @@ struct example_class <int, int> {
 }; */
 
 int main() {
-  example_class <int, double> a;     // prints "example_class<T, U>"
-  example_class <double, double> b;  // prints "example_class<T, T>"
-  example_class <double, int> c;     // prints "example_class<T, int>"
-  example_class <int *, double *> d; // prints "example_class<T*, U*>"
+  example_class<int, double> a;     // prints "example_class<T, U>"
+  example_class<double, double> b;  // prints "example_class<T, T>"
+  example_class<double, int> c;     // prints "example_class<T, int>"
+  example_class<int *, double *> d; // prints "example_class<T*, U*>"
 
   // example_class <int, int> e;        // prints??
 

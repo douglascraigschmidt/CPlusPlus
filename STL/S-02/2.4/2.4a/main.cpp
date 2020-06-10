@@ -48,6 +48,7 @@ private:
 char *
 container<char *>::uppercase() {
   for (int i = 0; element[i] != '\0'; ++i)
+    // @@ Update to use the C/C++ macros.
     if (element[i] >= 'a' && element[i] <= 'z')
       element[i] += 'A' - 'a';
 

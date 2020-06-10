@@ -46,14 +46,16 @@ using namespace std;
  */
 
 /**
- * Here is some code using the find_if algorithm with a functor rather
- * than simply using a pointer or iterator.
+ * This example uses the find_if() algorithm on a built-in array and a
+ * functor, rather than simply using a pointer or iterator.
  */
 int main() {
-  list<int> values {10, 20, -30, 40, -50, 60};
+  int a_begin[] = {10, 20, -30, 40, -50, 60};
+  auto a_end = a_begin + sizeof(a_begin)/sizeof(*a_begin);
 
-  auto itr = find_if (values.begin(),
-                      values.end(),
+  // Find the first negative number.
+  auto itr = find_if (a_begin,
+                      a_end,
                       // The binder object "lives" only thruout the
                       // execution of the loop inside find_if(). The
                       // expression predicate(*i) inside find_if()
@@ -63,7 +65,7 @@ int main() {
                       // when we dereference the iterator.
                       bind (less<int>(), placeholders::_1, 0));
 
-  if (itr != values.end()) 
+  if (itr != a_end) 
     cout << *itr << " is negative" << endl;
 
   return 0;

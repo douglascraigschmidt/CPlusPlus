@@ -22,7 +22,8 @@ using namespace std;
  * its "template template" parameter. The resulting container type is
  * used to implement the stack object:
 */
-template <typename T, template <typename ...> class container = deque>
+template <typename T,
+          template <typename ...> class container = deque>
 class stack {
 public:
   void push(const T &t) { s.push_back(t); }

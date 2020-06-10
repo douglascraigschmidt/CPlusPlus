@@ -1,13 +1,16 @@
 #include <iostream>
+#define MOVE std::move
+#define PASS_BY_VALUE 1
 #include "simple_string.h"
 #include "pair.h"
 
 using namespace std;
 
 /**
- * This example shows the use of class templates and also demonstrates
- * the difference between pass-by-value and pass-by-reference
- * semantics for C++ parameters and return values.
+ * This example shows the use of C++ class templates and also
+ * demonstrates the difference between pass-by-value and
+ * pass-by-reference semantics (including "copy" vs "move" semantics
+ * and optimizations) for C++ parameters and return values.
  */
 int main () {
   {

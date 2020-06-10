@@ -30,10 +30,10 @@ using namespace std;
  * integral values, enumerations, or instance pointers with external
  * linkage. They can't be string literals nor global pointers since
  * both have internal linkage. Nor can they be floating point,
- * typename or void type.
+ * typename, or void type.
  *
  * Non-type template parameters are not lvalues, i.e., they are
- * simply "plain old literal data"/
+ * simply "plain old data" (POD).
  */
 
 #include "memblock.h"
