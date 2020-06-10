@@ -2,6 +2,7 @@
 #include <cassert>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 #include "meeting.h"
 
@@ -10,11 +11,13 @@
  */
 meeting::meeting (char **argv)
   : title_ (argv[0]), 
-    day_ (meeting::day_of_week (*argv[1])),
-    start_time_ (atoi (argv[2])),
-    finish_time_ (atoi (argv[3]))
-{
-  // std::cout << title_ << " " << "" << day_ << " " << start_time_ << " " << finish_time_ << std::endl;
+    day_ (meeting::day_of_week (*argv[1])) {
+  std::stringstream a1(argv[2]);
+  std::stringstream a2(argv[3]);
+
+  a1 >> start_time_;
+  a2 >> finish_time_;
+    // std::cout << title_ << " " << "" << day_ << " " << start_time_ << " " << finish_time_ << std::endl;
 }
 
 /**
@@ -22,8 +25,7 @@ meeting::meeting (char **argv)
  */
 enum meeting::day_of_week
 meeting::day_of_week (char c) {
-  switch (c) 
-    {
+  switch (c) {
     case 'M': return meeting::MO;
     case 'T': return meeting::TU;
     case 'W': return meeting::WE;
@@ -34,7 +36,7 @@ meeting::day_of_week (char c) {
     default:
       assert (!"not a week day");
       return meeting::MO;
-    }
+  }
 }
 
 /**
@@ -76,28 +78,31 @@ meeting::operator = (const meeting &m) {
 }
 
 /**
- * Relational operator that detects overlaps in meeting times.
+ * "Equality" operator that detects overlaps in meeting times.
  */
 bool 
 meeting::operator== (const meeting &m) const {
+  // This is an example conflict:
+  // CS242 T 1230 1430
+  // CS281 T 1300 1430
   return day_ == m.day_ 
     && ((start_time_ <= m.start_time_ 
          && m.start_time_ <= finish_time_) 
-        || (m.start_time_ <= start_time_ &&
-            start_time_ <= m.finish_time_));
+        || (m.start_time_ <= start_time_ 
+            && start_time_ <= m.finish_time_));
 }
 
 /**
- * Relational operator.
+ * Operator that checks for less than relation.
  */
-bool 
+bool
 meeting::operator < (const meeting &m) const {
-  return day_ < m.day_
-    || (day_ == m.day_
-        && start_time_ < m.start_time_)
-    || (day_ == m.day_
-        && start_time_ == m.start_time_
-        && finish_time_ < m.finish_time_);
+    return day_ < m.day_
+           || (day_ == m.day_
+               && start_time_ < m.start_time_)
+           || (day_ == m.day_
+               && start_time_ == m.start_time_
+               && finish_time_ < m.finish_time_);
 }
 
 /**
