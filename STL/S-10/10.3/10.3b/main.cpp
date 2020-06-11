@@ -10,9 +10,9 @@ using namespace std;
  * The following example shows the following STL non-mutating
  * algorithms that find elements in an iterator range:
  *
- * . find          Finds a specified value in a given range 
- * . find_if       Finds the first element for which a predicate is true
- * . find_if_not   Finds the first element for which a predicate is false
+ * . find() - finds a specified value in a given range 
+ * . find_if() - finds the first element for which a predicate is true
+ * . find_if_not() - finds the first element for which a predicate is false
  */
 
 /**
