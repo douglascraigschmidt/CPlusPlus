@@ -15,12 +15,6 @@ using namespace std;
  * 
  * • mismatch: search two parallel ranges and returns position of the
  *   first one that is unequal or doesn't satisfy a binary_predicate.
- * 
- * • search: look in first range for an occurrence of the second
- *   range, possibly using a binary_predicate.
- * 
- * • search_n: look in range for an occurrence of n items equal to a
- *   value, possibly using a binary_predicate.
 */
 
 /**

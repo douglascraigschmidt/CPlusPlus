@@ -10,28 +10,27 @@
 using namespace std;
 
 /**
- * The following example shows the following STL non-mutating
- * algorithms that check for the max and min elements in an iterator
- * range:
+ * The following example shows several STL non-mutating algorithms that
+ * check for the max and min elements in an iterator range:
  *
  * •	max: returns larger of two items, possible using a binary predicate.
  * •	max_element: finds largest item in a range, may use a binary_predicate. 
  * •	min: returns larger of two items, possible using a binary_predicate. 
  * •	min_element: finds largest item in a range, may use a binary_predicate.
  * 
- * Like find and find_if, they return an iterator pointing to the
+ * Like find() and find_if(), they return an iterator pointing to the
  * element found. If none is found, the iterator will point to the end
  * of the range.
  * 
  * ForwardIterator
  * max_element(ForwardIterator first,
- *                        ForwardIterator last)
+ *             ForwardIterator last)
  *  
  * ForwardIterator
  *  min_element(ForwardIterator first,
- *                        ForwardIterator last)
+ *              ForwardIterator last)
  * 
- * Notice that max_element and min_element require ForwardIterators,
+ * Notice that max_element() and min_element() require ForwardIterators,
  * not just InputIterators because they have to save the iterator of
  * the largest or smallest element found, and InputIterators don't
  * support saving.
@@ -39,9 +38,9 @@ using namespace std;
  * The max_element() and min_element() methods above use operator< to
  * identify the biggest and smallest items.  You can also pass a
  * predicate functor to max_element() and min_element(). This
- * predicate functor takes two arguments, the current maximum and an
+ * predicate functor takes two arguments, the current max/min and an
  * element, and return true only when the element should replace the
- * current maximum, as shown below:
+ * current max/min, as shown below:
  * 
  * ForwardIterator
  * max_element(ForwardIterator first,
