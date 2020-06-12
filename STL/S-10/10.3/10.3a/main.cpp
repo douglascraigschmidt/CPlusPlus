@@ -47,12 +47,11 @@ using namespace std;
  * functor, rather than simply using a pointer or iterator.
  */
 int main() {
-  int a_begin[] = {10, 20, -30, 40, -50, 60};
-  auto a_end = a_begin + sizeof(a_begin)/sizeof(*a_begin);
+  int a[] = {10, 20, -30, 40, -50, 60};
 
   // Find the first negative number.
-  auto itr = find_if (a_begin,
-                      a_end,
+  auto itr = find_if (begin(a),
+                      end(a),
                       // The binder object "lives" only thruout the
                       // execution of the loop inside find_if(). The
                       // expression predicate(*i) inside find_if()

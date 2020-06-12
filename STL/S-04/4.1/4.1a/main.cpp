@@ -102,7 +102,7 @@ int main () {
   int a2[a1_size];
 
   // Perform the copy.
-  my_copy::copy(a1, a1 + a1_size, a2);
+  my_copy::copy(begin(a1), end(a1), a2);
 
   // Print the results.
   for (auto i : a2)
