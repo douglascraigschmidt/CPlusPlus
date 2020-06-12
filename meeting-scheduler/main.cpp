@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <iterator>
 
-#include "print_conflicts.h"
 #include "argv_iterator.h"
 #include "meeting.h"
 
@@ -35,7 +34,7 @@ main (int argc, char *argv[]) {
   std::sort (schedule.begin (), schedule.end ());
 
   // Detect/print any conflicts.
-  check_for_conflicts (schedule.cbegin (), schedule.cend ());
+  check_for_conflicts (schedule.begin (), schedule.end ());
 
   // Print out schedule, using STL output stream iterator adapter.
   std::copy (schedule.cbegin (),
@@ -53,17 +52,32 @@ template <typename InputIterator>
 static void 
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
+#if 1
+  for (auto iter = begin; iter != end; ) {
+    // Find any conflicts using the STL adjacent_find() algorithm.
+    iter = std::adjacent_find(iter, end);
 
-  for (auto iter = begin; iter != end; iter += 2) {
-      // Find any conflicts using the STL adjacent_find() algorithm.
-      iter = std::adjacent_find(iter, end);
-
-      if (iter != end) {
-          std::cout << "CONFLICT:" << std::endl
-                    << " " << *iter << std::endl
-                    << " " << *(iter + 1) << std::endl
-                    << std::endl;
-      }
+    if (iter != end) {
+      std::cout << "CONFLICT:" << std::endl
+                << " " << iter[0] << std::endl
+                << " " << iter[1] << std::endl
+                << std::endl;
+      ++iter;
+    }
   }
+#else
+  std::transform(begin, end - 1,
+                 begin + 1, 
+                 begin,
+                 [](decltype(*begin) &lhs, decltype(*begin) &rhs) {
+                   // If operator == returns true there's a conflict,
+                   // so print it out!
+                   if (lhs == rhs)
+                     std::cout << "CONFLICT:" << std::endl 
+                               << " " << lhs << std::endl
+                               << " " << rhs << std::endl << std::endl;
+                   return lhs;
+                 }); 
+#endif
 }
 
