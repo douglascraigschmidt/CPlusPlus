@@ -28,8 +28,8 @@ int main()  {
         aDeck.push_back(i + 'A');
 
     cout << "Original sequence: ";
-    for(auto i : aDeck)
-        cout << i << " ";
+    for(auto c : aDeck)
+        cout << c << " ";
     cout << endl;
 
     // Note two different ways to define an iterator!
@@ -40,11 +40,12 @@ int main()  {
     cout << "*it2: " << *it2 << endl;
     cout << endl;
 
+    // Modifies the deque by putting 'X' before the iterator.
     aDeck.insert(it1, 'X');
 
     cout << "Sequence after insert: ";
-    for(auto i : aDeck)
-        cout << i << " ";
+    for(auto c : aDeck)
+        cout << c << " ";
 
     cout << endl;
 

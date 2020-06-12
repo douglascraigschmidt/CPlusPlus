@@ -20,12 +20,12 @@ using namespace std;
  * . Iterating over the elements in forward or reverse order.
  * 
  * Compared to vectors and deques, lists perform generally better in
- * inserting, extracting and moving elements in any position within
+ * inserting, extracting, and moving elements in any position within
  * the container, and therefore also in algorithms that make intensive
  * use of these features.
  * 
  * The main drawback of lists compared to these other sequential
- * containers is that lists don?t provide direct (i.e., random) access
+ * containers is that lists don't provide direct (i.e., random) access
  * to the elements by their position. Thus, to access the sixth
  * element in a list, a program must iterate from a known position
  * (like the beginning or the end) to that position, which takes
@@ -92,7 +92,7 @@ int main() {
     // Get iterator to the "last" element.
     auto p = list2.end();
 
-    // Print the first element (decrementing first).
+    // Print the last element (decrementing first).
     cout << *--p;
 
     // Remove the last element.

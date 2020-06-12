@@ -13,10 +13,12 @@ void print(const deque<T> &d) {
     cout << "The number of items in the deque:" 
          << d.size() << endl;
 
-    for (typename deque<T>::const_iterator iter = d.begin();
-         iter != d.end();
-         ++iter)
+    for (typename deque<T>::const_iterator iter = d.cbegin();
+         iter != d.cend();
+         ++iter) {
+        // *iter = T(); illegal!
         cout << *iter << " ";
+    }
 
     cout << endl << endl;
 }
@@ -32,6 +34,7 @@ int main() {
     aDeck.push_back(3);
     aDeck.push_front(1);
 
+    // Insert before aDeck[1].
     aDeck.insert(aDeck.begin() + 1, 2);
     aDeck[2] = 0;
 

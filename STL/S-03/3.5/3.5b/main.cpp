@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * Characteristics of STD lists include the following:
+ * Characteristics of STL lists include the following:
  * 
  * . Has all the functions that vectors have except capacity(),
  *   reserve(), at(), and the [] operator.
@@ -17,7 +17,8 @@ using namespace std;
  *   (assuming an iterator points to the desired location).
  * 
  * . Iterators to deleted elements are invalid but inserting elements
- *   does not invalidate iterators.
+ *   does not invalidate iterators (unless you remove the element that
+ *   your iterator is pointing to!)
  *
  * Here's another example using a list along with its bi-directional
  * iterator.
@@ -32,10 +33,12 @@ int main() {
   // Insert a new element at the front.
   my_list.push_front(0);              
 
-  // Insert "2" after first element by incrementing the iterator.
+  // Insert "2" before the second element by incrementing the begin iterator.
   my_list.insert(++my_list.begin(), 2);
+  // Insert "42" before final element in the list by decrement the end iterator.
+  my_list.insert(--my_list.end(), 42);
 
-  // Insert two more elements at the end.
+    // Insert two more elements at the end.
   my_list.push_back(5);
   my_list.push_back(6);
 

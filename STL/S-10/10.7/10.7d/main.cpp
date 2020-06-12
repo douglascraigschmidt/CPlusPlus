@@ -7,14 +7,16 @@ using namespace std;
 /**
  * Simple wrapper for lower_range().
  */
-template<class ForwardIt, class T>
-static ForwardIt binary_find(ForwardIt first, ForwardIt last, const T& value) {
-  return std::lower_bound(first, last, value);
+template<class ForwardIt, class T, class Compare=std::less<>>
+ForwardIt binary_find(ForwardIt first, ForwardIt last,
+                      const T& value, Compare comp={}) {
+    first = std::lower_bound(first, last, value, comp);
+    return first != last && !comp(value, *first) ? first : last;
 }
 
 /**
  * This example demonstrates how to use the STL binary_search() and
- * lower_range() algorithms.
+ * lower_bound() algorithms.
  */
 int main() {
   string a[] = {"now", "is", "the", "time", 
@@ -36,6 +38,7 @@ int main() {
   }
 
   vector<string> c(begin(a), end(a));
+
   auto i = 0;
   for (const auto& s : c)
       cout << "[" << i++ << "] = " << s << endl;
@@ -44,7 +47,8 @@ int main() {
     std::cout << "Searching for " << word << endl;
 
     auto it = binary_find(c.cbegin(),
-                          c.cend(), word);
+                          c.cend(),
+                          word);
     if (it != c.cend())
       std::cout << "Found " << word << " at index " 
                 << distance(c.cbegin(), it) << endl;

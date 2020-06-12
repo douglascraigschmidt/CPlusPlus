@@ -3,13 +3,13 @@
 using namespace std;
 
 /**
- * Here are some examples of STL string creation.
+ * Here are some examples of C++ string creation.
  */
 int main() {
   // create a string by using a char string
   const char *ptr = "say goodnight, Gracie";
 
-  // create a string initialized by char* string
+  // create a string initialized by const char* string pointer.
   string str1(ptr);
 
   string str2("say goodnight, Gracie");  // or even using the constructor
@@ -25,7 +25,7 @@ int main() {
 
   // To find where a substring starts, erase it, and insert another,
   // use the following code:
-  if (pos != string::npos ) {   // check that found
+  if (pos != string::npos) {   // check that found
     str2.erase(pos, 6);
     str2.insert(pos, "Irene");
     cout << str2 << endl;

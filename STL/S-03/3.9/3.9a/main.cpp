@@ -50,14 +50,13 @@ ostream& operator <<(std::ostream& os,
 int main() {
   // Create an array of four shape names.
   const char *shapes[] = { "Circle", "Triangle", "Square", "Rectangle"};
-  int shapes_len = sizeof(shapes) / sizeof(*shapes);
 
   // Wrap a vector of strings containing three words.
   sequential_container_wrapper<string> b1(3, "words");
 
   // Wrap a deque containing the shape names.
-  sequential_container_wrapper<const char *, deque> b2(shapes,
-                                                       shapes + shapes_len);
+  sequential_container_wrapper<const char *, deque> b2(begin(shapes),
+                                                       end(shapes));
 
   // Print the results.
   cout << b1 << endl;

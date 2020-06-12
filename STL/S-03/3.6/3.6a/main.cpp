@@ -5,14 +5,14 @@ using namespace std;
 /**
  * The STL string class is not part of the STL.  However, it often
  * acts much like a form of a container of char data and can use the
- * STL iterators, algorithms and functions.
+ * STL iterators, algorithms, and functors.
  */
 int main() {
   string my_letters = "abcdefghijklmnopqrstuvwxyz";
 
-  int i = 0;
+  auto i = 0;
 
-  for(char my_letter : my_letters)
+  for(auto my_letter : my_letters)
     cout << ++i << " " << my_letter << endl;
 
   for (auto i = my_letters.begin();

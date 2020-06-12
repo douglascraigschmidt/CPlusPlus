@@ -3,7 +3,7 @@
 using namespace std;
 
 /**
- * More examples of using string class functions.
+ * More examples of using C++ string class functions.
  */
 int main () {
   string a("abcd efg");

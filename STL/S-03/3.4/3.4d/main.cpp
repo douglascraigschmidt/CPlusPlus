@@ -10,44 +10,44 @@ using namespace std;
  * their elements.
  */
 int main() {
-  deque<char> myFirstDeck, myNextDeck;
+  deque<char> myFirstDeck, mySecondDeck;
 
-  for(size_t i = 0; i <26; i++)
-    myFirstDeck.push_back(i+'A');
+  for(size_t i = 0; i < 26; i++)
+    myFirstDeck.push_back(i +'A');
 
-  for(size_t i = 0; i <10; i++)
-    myNextDeck.push_front(i+'0');
+  for(size_t i = 0; i < 10; i++)
+    mySecondDeck.push_front(i + '0');
 
-  cout << "Size of myFirstDeck and myNextDeck: ";
-  cout << myFirstDeck.size() << " " << myNextDeck.size() << endl;
+  cout << "Size of myFirstDeck and mySecondDeck: ";
+  cout << myFirstDeck.size() << " " << mySecondDeck.size() << endl;
   cout << "myFirstDeck: ";
 
   for(auto i : myFirstDeck)
     cout << i;
-  cout << endl << "myNextDeck: ";
+  cout << endl << "mySecondDeck: ";
 
-  for(auto i : myNextDeck)
+  for(auto i : mySecondDeck)
     cout << i;
   cout << "\n\n";
 
   // swap deque elements using member function.
-  myFirstDeck.swap(myNextDeck);
+  myFirstDeck.swap(mySecondDeck);
 
-  cout << "Size of myFirstDeck and myNextDeck after first swap: ";
-  cout << myFirstDeck.size() << " " << myNextDeck.size() << endl;
+  cout << "Size of myFirstDeck and mySecondDeck after first swap: ";
+  cout << myFirstDeck.size() << " " << mySecondDeck.size() << endl;
 
   cout << "myFirstDeck after first swap: ";
-  for(char i : myFirstDeck)
-    cout << i;
+  for(auto c : myFirstDeck)
+    cout << c;
   cout << endl;
 
-  cout << "myNextDeck after first swap: ";
+  cout << "mySecondDeck after first swap: ";
 
-  for(char i : myNextDeck)
+  for(char i : mySecondDeck)
     cout << i;
   cout << "\n\n";
 
-  swap(myFirstDeck, myNextDeck);
+  swap(myFirstDeck, mySecondDeck);
 
   return 0;
 }
