@@ -57,22 +57,22 @@ private:
   /**
    * The number of argv elements to process.
    */
-  int argc_{};
+  int argc_;
 
   /**
    * The argv elements themselves.
    */
-  char **argv_{};
+  char **argv_;
 
   /**
    * The original starting point for argv.
    */
-  char **base_argv_{};
+  char **base_argv_;
 
   /**
    * The number of argv elements to skip on each call to operator++.
    */
-  int increment_{};
+  int increment_;
 };
 
 #endif /* _ARGV_ITERATOR_H */
