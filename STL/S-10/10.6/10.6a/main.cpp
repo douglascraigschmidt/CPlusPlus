@@ -42,11 +42,10 @@ struct print
  * This example demonstrates how to use the STL for_each() algorithm.
  */
 int main()  {
-  int a_begin[] = {1, 4, 2, 8, 5, 7};
-  auto a_end = a_begin + sizeof(a_begin) / sizeof(*a_begin);
+  int a[] = {1, 4, 2, 8, 5, 7};
 
-  print<int> fun = for_each(a_begin,
-                            a_end,
+  print<int> fun = for_each(begin(a),
+                            end(a),
                             print<int>(cout));
 
   cout << endl << fun.count() << " objects printed." << endl;

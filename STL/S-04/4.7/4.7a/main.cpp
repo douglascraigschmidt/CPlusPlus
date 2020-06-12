@@ -45,14 +45,13 @@ int main() {
 static void demonstrate_pointer_arithmetic() {
   // Create a array of 10 numbers.
   int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-  int a_size = sizeof(a) / sizeof(*a);
 
   // Keep track of the total number of even values.
   auto total_even = 0;
 
   // Iterate through the vector summing the values of even numbers.
-  for (auto ip = a;
-       ip != a + a_size;
+  for (auto ip = begin(a);
+       ip != end(a);
        // Use pointer's += operator to skip over odd numbers.
        ip += 2)
     total_even += *ip;

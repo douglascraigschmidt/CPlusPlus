@@ -25,10 +25,9 @@ int main()  {
   find_mismatches(v1.begin(), v1.end(), v2.begin(), v2.end());
 
   // Compare two different types of "containers" that won't match.
-  int a_begin[] = {10, 40, 60, 80, 100};
-  int *a_end = a_begin + sizeof(a_begin)/sizeof(*a_begin);
+  int a[] = {10, 40, 60, 80, 100};
 
-  find_mismatches(v1.begin(), v1.end(), a_begin, a_end);
+  find_mismatches(v1.begin(), v1.end(), begin(a), end(a));
 
   return 0;
 }

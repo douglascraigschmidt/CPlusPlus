@@ -30,11 +30,10 @@ int main () {
 static void 
 demonstrate_bind1st() {
   int numbers[] = {10, 20, 40, 30, 50, 20, 10};
-  int *numbers_end = numbers + sizeof(numbers) / sizeof(*numbers);
 
   // Use bind1st()
-  auto n = count_if (numbers,
-                     numbers_end,
+  auto n = count_if (begin(numbers),
+                     end(numbers),
                      bind1st(equal_to<int>(), 10));
 
   cout << "There are " 
@@ -66,11 +65,10 @@ demonstrate_bind1st() {
 static void 
 demonstrate_bind2nd() {
   int numbers[] = {10, 20, 40, 30, 50, 20, 10};
-  int *numbers_end = numbers + sizeof(numbers) / sizeof(*numbers);
 
   // Use bind2nd()
-  auto n = count_if (numbers,
-                     numbers_end,
+  auto n = count_if (begin(numbers),
+                     end(numbers),
                      bind2nd(equal_to<int>(), 20));
 
   cout << "There are " 
@@ -79,8 +77,8 @@ demonstrate_bind2nd() {
        << endl;
 
   // Use bind()
-  n = count_if (numbers,
-                numbers_end,
+  n = count_if (begin(numbers),
+                end(numbers),
                 bind(equal_to<int>(), placeholders::_1, 20));
 
   cout << "There are "
@@ -89,8 +87,8 @@ demonstrate_bind2nd() {
        << endl;
 
   // Use generic lambda.
-  n = count_if (numbers,
-                numbers_end,
+  n = count_if (begin(numbers),
+                end(numbers),
                 [](auto i) { return i == 20; });
 
   cout << "There are " 

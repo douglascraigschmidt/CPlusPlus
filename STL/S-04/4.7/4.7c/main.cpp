@@ -28,11 +28,10 @@ int main () {
 void
 demonstrate_pointer_arithmetic() {
     const char *a[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
-    const int a_length = sizeof(a) / sizeof(*a);
 
     // Print the results.
-    copy (a,
-          a + a_length,
+    copy (begin(a),
+          end(a),
           ostream_iterator<string> (cout, " "));
     cout << endl;
 

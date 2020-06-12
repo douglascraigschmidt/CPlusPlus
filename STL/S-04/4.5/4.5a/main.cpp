@@ -56,7 +56,7 @@ static void replace_builtin_array() {
     cout << endl;
 
     // replacing 10 with 42
-    replace(a, a + (sizeof(a)/sizeof(*a)), 10, 42);
+    replace(begin(a), end(a), 10, 42);
 
     // printing a elements
     cout << "after replacing, a: ";

@@ -11,7 +11,7 @@ using namespace std;
  */
 int  main() {
   int ar[] = {12, 45, 234, 64, 12, 35, 63, 23, 12, 55};
-  vector<int> vec1(ar, ar + (sizeof(ar)/sizeof(*ar)));
+  vector<int> vec1(begin(ar), end(ar));
   vector<int> vec2 {12, 45, 234, 64, 12, 35, 63, 23, 12, 55};
 
   for (auto i : vec2)
