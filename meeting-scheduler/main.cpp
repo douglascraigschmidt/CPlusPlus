@@ -53,8 +53,7 @@ template <typename InputIterator>
 static void 
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
-
-  for (auto iter = begin; iter != end; iter += 2) {
+  for (auto iter = begin; iter != end; ) {
       // Find any conflicts using the STL adjacent_find() algorithm.
       iter = std::adjacent_find(iter, end);
 
@@ -63,6 +62,7 @@ check_for_conflicts (InputIterator begin,
                     << " " << *iter << std::endl
                     << " " << *(iter + 1) << std::endl
                     << std::endl;
+          iter++;
       }
   }
 }
