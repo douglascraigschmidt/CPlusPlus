@@ -17,7 +17,7 @@ struct print_conflicts {
    * This method detects/prints "conflicts" between two meeting
    * times/dates, i.e., it looks for overlaps in the start/end times.
    */
-  meeting operator () (const Meeting &lhs, const Meeting &rhs) {
+  const meeting &operator () (const meeting &lhs, const meeting &rhs) {
     // If operator == returns true there's a conflict, so print it
     // out!
     if (lhs == rhs)
