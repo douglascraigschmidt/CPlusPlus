@@ -51,7 +51,7 @@ int main() {
   // Create an array of four shape names.
   const char *shapes[] = { "Circle", "Triangle", "Square", "Rectangle"};
 
-  // Wrap a vector of strings containing three words.
+  // Wrap a vector of strings to contain three "words".
   sequential_container_wrapper<string> b1(3, "words");
 
   // Wrap a deque containing the shape names.

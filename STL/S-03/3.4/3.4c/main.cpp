@@ -10,17 +10,17 @@ using namespace std;
  */
 template <typename T>
 void print(const deque<T> &d) {
-    cout << "The number of items in the deque:" 
-         << d.size() << endl;
+  cout << "The number of items in the deque:" 
+       << d.size() << endl;
 
-    for (typename deque<T>::const_iterator iter = d.cbegin();
-         iter != d.cend();
-         ++iter) {
-        // *iter = T(); illegal!
-        cout << *iter << " ";
-    }
+  for (typename deque<T>::const_iterator iter = d.cbegin();
+       iter != d.cend();
+       ++iter) {
+    // *iter = T(); illegal!
+    cout << *iter << " ";
+  }
 
-    cout << endl << endl;
+  cout << endl << endl;
 }
 
 /**

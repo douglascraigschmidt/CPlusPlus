@@ -79,7 +79,7 @@ int main( ) {
     }
 
     for (auto f : myDeck)
-        cout <<  f << ' ' ;
+        cout << f << ' ' ;
 
     cout << endl;
     return 0;

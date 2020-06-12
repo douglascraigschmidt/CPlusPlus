@@ -15,10 +15,10 @@ int main() {
   for(auto my_letter : my_letters)
     cout << ++i << " " << my_letter << endl;
 
-  for (auto i = my_letters.begin();
-       i != my_letters.end();
+  for (auto i = my_letters.cbegin();
+       i != my_letters.cend();
        ++i)
-      cout << *i << " " << endl;
+    cout << *i << " " << endl;
 
   return 0;
 }

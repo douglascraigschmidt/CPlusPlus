@@ -21,39 +21,39 @@ using namespace std;
  * Here is another deque example that uses deque’s random access
  * iterators.
  */
-int main()  {
-    deque<char> aDeck;
+int main() {
+  deque<char> aDeck;
 
-    for(size_t i = 0; i <5; i++)
-        aDeck.push_back(i + 'A');
+  for(size_t i = 0; i < 5; i++)
+    aDeck.push_back(i + 'A');
 
-    cout << "Original sequence: ";
-    for(auto c : aDeck)
-        cout << c << " ";
-    cout << endl;
+  cout << "Original sequence: ";
+  for(auto c : aDeck)
+    cout << c << " ";
+  cout << endl;
 
-    // Note two different ways to define an iterator!
-    deque<char>::iterator it1 = aDeck.begin() + 2; // Note random access
-    auto it2 = aDeck.begin() + 3; // iterators here
+  // Here are two different ways to define an iterator!
+  deque<char>::iterator it1 = aDeck.begin() + 2; // random access
+  auto it2 = aDeck.begin() + 3;                  // iterators here!
 
-    cout << "*it1: " << *it1 << ", ";
-    cout << "*it2: " << *it2 << endl;
-    cout << endl;
+  cout << "*it1: " << *it1 << ", ";
+  cout << "*it2: " << *it2 << endl;
+  cout << endl;
 
-    // Modifies the deque by putting 'X' before the iterator.
-    aDeck.insert(it1, 'X');
+  // Modifies the deque by putting 'X' before the iterator.
+  aDeck.insert(it1, 'X');
 
-    cout << "Sequence after insert: ";
-    for(auto c : aDeck)
-        cout << c << " ";
+  cout << "Sequence after insert: ";
+  for(auto c : aDeck)
+    cout << c << " ";
 
-    cout << endl;
+  cout << endl;
 
-    // These iterator dereferences may cause the program to crash
-    // since STL does not implement "robust iterators" for deques.
-    cout << "*it1: " << *it1 << ", ";
-    cout << "*it2: " << *it2 << endl;
+  // These iterator dereferences may cause the program to crash since
+  // STL does not implement "robust iterators" for deques.
+  cout << "*it1: " << *it1 << ", ";
+  cout << "*it2: " << *it2 << endl;
 
-    return 0;
+  return 0;
 }
 

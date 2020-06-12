@@ -33,9 +33,9 @@ int main() {
   // Insert a new element at the front.
   my_list.push_front(0);              
 
-  // Insert "2" before the second element by incrementing the begin iterator.
+  // Insert "2" before 2nd element by incrementing the begin iterator.
   my_list.insert(++my_list.begin(), 2);
-  // Insert "42" before final element in the list by decrement the end iterator.
+  // Insert "42" before final element by decrement the end iterator.
   my_list.insert(--my_list.end(), 42);
 
     // Insert two more elements at the end.
