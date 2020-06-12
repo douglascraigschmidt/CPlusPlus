@@ -14,7 +14,11 @@ public:
   /**
    * Default constructor.
    */
-  argv_iterator () = default;
+  argv_iterator ()
+    : argc_ (0),
+      argv_ (0),
+      base_argv_ (0),
+      increment_ (0) {}
 
   /**
    * This constructor stores the argc and argv parameters, together
@@ -76,3 +80,4 @@ private:
 };
 
 #endif /* _ARGV_ITERATOR_H */
+
