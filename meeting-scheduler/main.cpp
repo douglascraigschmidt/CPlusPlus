@@ -54,16 +54,16 @@ static void
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
 
-  for (auto iter = begin; iter != end; ) {
+  for (auto iter = begin; iter != end; iter += 2) {
       // Find any conflicts using the STL adjacent_find() algorithm.
       iter = std::adjacent_find(iter, end);
 
-      if (iter != end)
+      if (iter != end) {
           std::cout << "CONFLICT:" << std::endl
                     << " " << *iter << std::endl
                     << " " << *(iter + 1) << std::endl
                     << std::endl;
+      }
   }
-
 }
 
