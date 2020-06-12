@@ -1,10 +1,7 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
 #include <iterator>
-#include <functional>
-#include <set>
 
 #include "print_conflicts.h"
 #include "argv_iterator.h"
@@ -14,9 +11,7 @@
  * Forward declaration.
  */
 template <typename InputIterator>
-static void 
-check_for_conflicts (InputIterator begin,
-                     InputIterator end);
+static void check_for_conflicts (InputIterator begin, InputIterator end);
 
 /**
  * This program reads a list of meeting times/dates provided as
@@ -40,11 +35,11 @@ main (int argc, char *argv[]) {
   std::sort (schedule.begin (), schedule.end ());
 
   // Detect/print any conflicts.
-  check_for_conflicts (schedule.begin (), schedule.end ());
+  check_for_conflicts (schedule.cbegin (), schedule.cend ());
 
   // Print out schedule, using STL output stream iterator adapter.
-  std::copy (schedule.begin (),
-             schedule.end (), 
+  std::copy (schedule.cbegin (),
+             schedule.cend (),
              std::ostream_iterator<meeting> (std::cout, "\n"));
 
   return 0;
@@ -58,29 +53,17 @@ template <typename InputIterator>
 static void 
 check_for_conflicts (InputIterator begin,
                      InputIterator end) {
-#if 1
-  // Find any conflicts using the STL adjacent_find() algorithm.
-  auto iter = std::adjacent_find (begin, end);
-  
-  if (iter != end)
-    std::cout << "CONFLICT:" << std::endl 
-              << " " << *iter << std::endl
-              << " " << *(iter + 1) << std::endl 
-              << std::endl;
-#else
-  // Find and print any conflicts using the STL transform() algorithm.
-  std::transform (begin, end - 1,
-                  begin + 1,
-                  begin,
-                  [](const meeting &lhs, const meeting &rhs) {
-                    // If operator == returns true there's a conflict,
-                    // so print it out!
-                    if (lhs == rhs)
-                      std::cout << "CONFLICT:" << std::endl
-                          << " " << lhs << std::endl
-                          << " " << rhs << std::endl << std::endl;
-                    return lhs;
-                  });
-#endif
+
+  for (auto iter = begin; iter != end; ) {
+      // Find any conflicts using the STL adjacent_find() algorithm.
+      iter = std::adjacent_find(iter, end);
+
+      if (iter != end)
+          std::cout << "CONFLICT:" << std::endl
+                    << " " << *iter << std::endl
+                    << " " << *(iter + 1) << std::endl
+                    << std::endl;
+  }
+
 }
 
