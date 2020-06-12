@@ -69,7 +69,7 @@ void print_data_type (const T& a)  {
 template <typename T>
 struct example_class
 {
-  example_class () {}
+  example_class () = default;
   T result (T t) { return t; }
   void add (const T &t) {}
 };
@@ -78,7 +78,7 @@ struct example_class
 template void print_data_type<int>(const int &);
 template void print_data_type<double>(const double &);
 
-// explicitly instantiate a template class¡¯ constructor for int data
+// explicitly instantiate a template class's constructor for int data
 template example_class<int>::example_class();
 
 // explicitly instantiate an entire template class and all its functions

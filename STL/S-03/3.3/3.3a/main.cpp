@@ -99,7 +99,7 @@ int main() {
     v.push_back(i);
 
   // Another way to print elements separated by a space
-  for (int i : v)
+  for (auto i : v)
     cout << i << ' ';
 
   cout << endl;

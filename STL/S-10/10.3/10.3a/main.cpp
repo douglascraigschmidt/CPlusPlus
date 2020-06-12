@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * Some examples of non-mutating search algorithms:
+ * Some examples of non-mutating find algorithms:
  * 
  * . find() - looks for a value in a range. 
  * 
@@ -19,11 +19,8 @@ using namespace std;
  * . find_end() - looks backward for items in first range that are not
  *   also in the second range or uses a binary_predicate to find first
  *   non-matching item.
- * 
- * . adjacent_find() - looks for first pair in range that are equal,
- *   or match under a binary_predicate.
  *
- * Some example implementations of STL search algorithms:
+ * Some example implementations of STL find algorithms:
  *
  * template <typename InputIterator, typename T>
  * InputIterator find(InputIterator first, InputIterator last, 

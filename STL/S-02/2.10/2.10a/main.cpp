@@ -10,7 +10,7 @@ using namespace std;
  */
 template<typename T>
 T adder(T v) {
-  std::cout << __PRETTY_FUNCTION__ << "\n";
+  std::cout << "(" << __PRETTY_FUNCTION__ << ")\n";
 
   return v;
 }
@@ -25,13 +25,16 @@ T adder(T first, Args... args) {
   return first + adder(args...);
 }
 
+/**
+ * Demonstrate the use of variadic template functions!
+ */
 int main() {
-  long sum = adder(1, 2, 3, 8, 7);
+  auto sum = adder(1, 4, 2, 3, 8, 7);
 
   cout << "sum = " << sum << endl;
 
   std::string s1 = "C++", s2 = " ", s3 = "is", s4 = " ", s5 = "cool!";
-  std::string string_sum = adder(s1, s2, s3, s4, s5);
+  auto string_sum = adder(s1, s2, s3, s4, s5);
   
   cout << "string sum = " << string_sum << endl;
 

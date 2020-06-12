@@ -42,18 +42,15 @@ find_mismatches(InputIterator1 first1, InputIterator1 last1,
       && equal(first1, last1, first2))
     cout << "ranges are equal" << endl;
   else {
-    // using default comparison:
+    // using default comparison via operator==.
     auto results = mismatch(first1, last1, first2);
 
     std::cout << "First mismatching elements: " << *results.first;
     std::cout << " and " << *results.second << '\n';
 
-    ++results.first;
-    ++results.second;
-
-    // using predicate comparison:
-    results = mismatch(results.first, last1,
-                       results.second,
+    // using predicate comparison done via a generic lambda function.
+    results = mismatch(++results.first, last1,
+                       ++results.second,
                        [](auto i, auto j) {
                          return i == j;
                        });

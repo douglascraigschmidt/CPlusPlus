@@ -25,7 +25,7 @@ T min(const T &i, const T &j) {
  * Here are some problems with macros:
  *
  * . The C++ compiler does not verify that the macro parameters are of
- *   compatible types because macros don¡¯t do type checking.
+ *   compatible types because macros don't do type checking.
  *
  * . In the macro version, the i and j parameters are evaluated twice, e.g.,
  * 
@@ -36,8 +36,8 @@ T min(const T &i, const T &j) {
  * . Macros are expanded by the preprocessor, so, compiler error
  *   messages will refer to the expanded macro, rather than the macro
  *   definition itself. Also, the macro will show up in expanded form
- *   during debugging so programmers can¡¯t see its code during
- *   debugging, e.g., debuggers can¡¯t set breakpoints in macros.
+ *   during debugging so programmers can't see its code during
+ *   debugging, e.g., debuggers can't set breakpoints in macros.
  *
  * The function below demonstrates the problems with macros.
  */

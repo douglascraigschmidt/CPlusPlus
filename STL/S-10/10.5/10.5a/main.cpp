@@ -13,14 +13,12 @@ using namespace std;
  * The following example shows several STL non-mutating algorithms that
  * check for the max and min elements in an iterator range:
  *
- * •	max: returns larger of two items, possible using a binary predicate.
- * •	max_element: finds largest item in a range, may use a binary_predicate. 
- * •	min: returns larger of two items, possible using a binary_predicate. 
- * •	min_element: finds largest item in a range, may use a binary_predicate.
+ * • max_element() - finds largest item in a range, may use a binary_predicate.
+ * • min_element() - finds smallest item in a range, may use a binary_predicate.
  * 
  * Like find() and find_if(), they return an iterator pointing to the
- * element found. If none is found, the iterator will point to the end
- * of the range.
+ * max or min element found, which should always be found unless the
+ * range is empty!
  * 
  * ForwardIterator
  * max_element(ForwardIterator first,
@@ -91,7 +89,7 @@ int main() {
   // Here's how to find the smallest odd number in a collection
   // via a C++ generic lambda function.
   result = min_element(stats.begin(), stats.end(),
-                       [](int x, int current_min) {
+                       [](auto x, auto current_min) {
                          return (x % 2) == 1 && x < current_min;
                        });
   cout << "Min odd = " << *result << endl;
