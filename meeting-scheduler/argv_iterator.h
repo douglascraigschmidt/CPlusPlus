@@ -16,8 +16,8 @@ public:
    */
   argv_iterator ()
     : argc_ (0),
-      argv_ (0),
-      base_argv_ (0),
+      argv_ (nullptr),
+      base_argv_ (nullptr),
       increment_ (0) {}
 
   /**

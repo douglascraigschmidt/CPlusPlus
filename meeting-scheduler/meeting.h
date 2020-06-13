@@ -19,27 +19,9 @@ struct meeting {
   static day_of_week day_of_week (char c);
 
   /**
-   * Constructor initializes the data members.
-   */
-  meeting (const std::string &title,
-           enum day_of_week day,
-           size_t start_time,
-           size_t finish_time);
-
-  /**
-   * Copy constructor.
-   */
-  meeting (const meeting &m);
-
-  /**
    * Constructor that converts an argv into a meeting object.
    */
   explicit meeting (char **argv);
-
-  /**
-   * Copy assignment operator.
-   */
-  meeting &operator= (const meeting &m);
 
   /**
    * Relational operators.
@@ -60,12 +42,12 @@ struct meeting {
   /**
    * meeting start time in HHMM format.
    */
-  size_t start_time_;
+  size_t start_time_{};
 
   /** 
    * meeting finish time in HHMM format
    */
-  size_t finish_time_;
+  size_t finish_time_{};
 };
 
 /**

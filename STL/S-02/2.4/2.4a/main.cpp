@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctype.h>
+
 using namespace std;
 
 /**
@@ -48,9 +50,8 @@ private:
 char *
 container<char *>::uppercase() {
   for (int i = 0; element[i] != '\0'; ++i)
-    // @@ Update to use the C/C++ macros.
-    if (element[i] >= 'a' && element[i] <= 'z')
-      element[i] += 'A' - 'a';
+    if (islower(element[i]))
+      element[i] = toupper(element[i]);
 
   return element;
 }

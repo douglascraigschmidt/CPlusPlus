@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <utility>
 
 #include "meeting.h"
 
@@ -17,7 +18,6 @@ meeting::meeting (char **argv)
 
   a1 >> start_time_;
   a2 >> finish_time_;
-    // std::cout << title_ << " " << "" << day_ << " " << start_time_ << " " << finish_time_ << std::endl;
 }
 
 /**
@@ -40,44 +40,6 @@ meeting::day_of_week (char c) {
 }
 
 /**
- * Constructor that initializes the data members.
- */
-meeting::meeting (const std::string &title,
-                  enum day_of_week day,
-                  size_t start,
-                  size_t finish)
-  : title_ (title), 
-    day_ (day),
-    start_time_ (start),
-    finish_time_ (finish) {
-}
-
-/**
- * Copy constructor.
- */
-meeting::meeting (const meeting &m)
- : title_ (m.title_), 
-   day_ (m.day_),
-   start_time_ (m.start_time_),
-   finish_time_ (m.finish_time_) {
-}
-
-/**
- * Copy assignment operator.
- */
-meeting &
-meeting::operator = (const meeting &m) {
-  // Check for self-assignment.
-  if (this != &m) {
-    title_ = m.title_;
-    day_ = m.day_;
-    start_time_ = m.start_time_;
-    finish_time_ = m.finish_time_;
-  }
-  return *this;
-}
-
-/**
  * "Equality" operator that detects overlaps in meeting times.
  */
 bool 
@@ -93,10 +55,10 @@ meeting::operator== (const meeting &m) const {
 }
 
 /**
- * Operator that checks for less than relation.
+ * Operator that checks for less than relation (used by sort()).
  */
 bool
-meeting::operator < (const meeting &m) const {
+meeting::operator< (const meeting &m) const {
     return day_ < m.day_
            || (day_ == m.day_
                && start_time_ < m.start_time_)

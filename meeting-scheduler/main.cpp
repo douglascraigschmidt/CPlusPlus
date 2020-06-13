@@ -16,7 +16,7 @@ static void check_for_conflicts (InputIterator begin, InputIterator end);
  * This program reads a list of meeting times/dates provided as
  * argc/argv command-line parameters to the program, detects/prints
  * any "conflicts" (i.e., overlaps in time/date), and writes out the
- * schedule to the output.
+ * sorted schedule to the output.
  */
 int 
 main (int argc, char *argv[]) {
