@@ -17,7 +17,7 @@ using namespace std;
  * plus() functor with the transform algorithm to add the elements.
  */
 int main() {
-  vector<int> v1(10), v2(10); 
+  vector<int> v1(10), v2(10);
 
   fill(v1.begin(), v1.end(), 1);
   partial_sum(v1.begin(), v1.end(), v1.begin());
@@ -40,7 +40,7 @@ int main() {
             v2.begin(),
             plus<>());
   copy(v2.begin(),v2.end(), ostream_iterator<int>(cout, " ")); 
-  cout <<endl; 
+  cout << endl;
   return 0;
 } 
 

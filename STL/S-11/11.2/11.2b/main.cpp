@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-msc51-cpp"
 #include <iostream>
 #include <functional>
 #include <algorithm>
@@ -10,10 +12,10 @@ using namespace std;
 
 /**
  * Here is an example using the five parameter version of transform(),
- * along with copy() and generate(). 
+ * along with copy() and generate_n().
 */
 int main() {
-  srand(time(0));
+  srand(time(nullptr));
 
   vector<int> v;
 
@@ -38,17 +40,21 @@ int main() {
   transform(v.begin(), v.end(),
             v2.begin(),
             v.begin(),
-            modulus<int>() ); 
+            modulus<>() );
 
   // Could also use this four-param version of transform():
-  // transform(v.begin(), v.end(), v.begin(), bind2nd(modulus<int>(), 20));   
+  transform(v.begin(), v.end(),
+            v.begin(),
+            [](auto i) { return i % 20; });
 
   copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
   cout << endl;
 
-  sort(v.begin(), v.end(), greater<int>() );
+  sort(v.begin(), v.end(), greater<>() );
   copy(v.begin(), v.end(), ostream_iterator<int>( cout," "));
   cout << endl;
 
   return 0;
 } 
+
+#pragma clang diagnostic pop
