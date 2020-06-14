@@ -1,7 +1,7 @@
 /**
  * The term "mutating algorithms" may give the impression that these
- * types of algorithms modify the elements in a container.  Some
- * mutating algorithms do this, of course, but others simply
+ * types of algorithms always modify the elements in a container.
+ * Some mutating algorithms do this, of course, but others simply
  * reorganize the elements based on some rule.
  * 
  * For example, all STL algorithms work with iterators.  Since
