@@ -4,6 +4,9 @@
 #include <iterator>
 using namespace std;
 
+/**
+ * This example shows how to apply the STL reverse() algorithm.
+ */
 int main () {
   vector<int> myVect{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
@@ -13,6 +16,17 @@ int main () {
 
   copy (myVect.begin (),
         myVect.end (),
+        ostream_iterator<int> (cout, " "));
+  cout << endl;
+
+  string my_palindrome ("a man a plan a canal panama")
+
+  reverse(palindrome.begin(),
+          palindrome.end());       
+  cout << "my_palindrome contains:";
+
+  copy (my_palindrome.begin (),
+        my_palindrome.end (),
         ostream_iterator<int> (cout, " "));
   cout << endl;
 

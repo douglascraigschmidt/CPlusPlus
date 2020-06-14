@@ -4,8 +4,11 @@
 #include <iterator>
 using namespace std;
 
-struct twenty : unary_function<int, int>
-{
+/**
+ * This (overly specific ;-)) functor is used below to showcase
+ * remove_copy_if().
+ */
+struct twenty : unary_function<int, int> {
 	bool operator () (int x) const { return x == 20; }
 };
 
@@ -32,13 +35,25 @@ int main () {
   copy (myVect.begin(), myVect.end(), ostream_iterator<int> (cout, " "));
   cout << endl;  
 
+  myVect.reset();
+
   // Remove everything that's not a 10!
   auto nend = remove_copy_if (begin(a),
                               end(a),
-                              begin(a),
+                              back_inserter(myVect),
                               not_fn(bind(equal_to<>(), placeholders::_1, 10)));
 
-  cout << "After removing every thing that's no a 10 a[] contains:";
+  cout << "After removing every thing that's not a 10 myVect contains:";
+  copy (myVect.begin(), myVect.end(), ostream_iterator<int> (cout, " "));
+  cout << endl;  
+
+  // Copy all the 10's
+  auto nend = copy_if (begin(a),
+                       end(a),
+                       begin(a)
+                       [](auto i) { return i == 10; });
+
+  cout << "After copying every thing that's a 10 a[] contains:";
   copy (begin(a), nend, ostream_iterator<int> (cout, " "));
   cout << endl;  
   return 0;

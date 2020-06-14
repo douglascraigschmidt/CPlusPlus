@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * Some examples of non-mutating find algorithms:
+ * Some examples of STL mutating algorithms:
  * 
  * • swap() - swaps values of two given variables. 
  * • iter_swap() - swaps two items in a container indicated by

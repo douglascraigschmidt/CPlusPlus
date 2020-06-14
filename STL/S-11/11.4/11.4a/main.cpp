@@ -5,8 +5,7 @@
 using namespace std;
 
 /**
- * There are a number of STL algorithms that remove elements from a
- * range.
+ * There are several STL algorithms that remove elements from a range.
  * 
  * • remove() - deletes items in a range that equal a given value. 
  * • remove_if() - deletes items in a range if a predicate is true. 
@@ -27,7 +26,7 @@ int main () {
   copy (begin(a), end(a), ostream_iterator<int> (cout, " "));
   cout << endl;
 
-  int *nend = remove (begin(a), begin(a), 20);
+  auto nend = remove (begin(a), begin(a), 20);
 
   cout << "range contains:";
   copy (begin(a), nend, ostream_iterator<int> (cout, " "));
