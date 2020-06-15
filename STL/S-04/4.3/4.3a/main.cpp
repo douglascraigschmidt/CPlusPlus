@@ -4,10 +4,10 @@
 using namespace std;
 
 /**
- * This is the simplest type of iterator, because it can only read
- * forward in a sequence or collection of elements. It reads the
+ * An input iterator is the simplest type of iterator, because it can only
+ * read forward in a sequence or collection of elements. It reads the
  * elements only once and can return the elements when it finds
- * them. One can dereference an Input Iterator to obtain the value it
+ * them. One can dereference an input iterator to obtain the value it
  * points to, but one can't assign a new value to the element using
  * the iterator's functions.  Input iterators can only do these
  * operations:
@@ -18,7 +18,7 @@ using namespace std;
  * . dereference operator         *j; j->m; // Can't write, but can read
  * . pre/post increment operator  ++j; j++; *j++;
  *
- * Input Iterators are used by non-modifying algorithms. For example,
+ * Input iterators are used by non-mutating algorithms. For example,
  * the STL find(), find_if(), and count() algorithms require no more
  * than input iterators as their first two arguments. One can pass
  * them more powerful iterators or pointers, but only the simplest

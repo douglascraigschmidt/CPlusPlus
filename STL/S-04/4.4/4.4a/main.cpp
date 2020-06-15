@@ -17,8 +17,7 @@ using namespace std;
  * . pre/post increment operator ++j; j++;
  *
  * Many STL algorithms (e.g., copy() and transform()) return an output
- * iterator as their result, which enables chaining of these
- * operations.
+ * iterator as their result, which enables chaining of these operations.
  *
  * The example below uses an input iterator to read ints from standard
  * input and store them into a vector using an output iterator
@@ -35,10 +34,10 @@ int main () {
         back_inserter(v));
 
   // Copy contents of vector v to cout.
-  copy (v.begin (),
-        v.end (),
+  copy (v.cbegin (),
+        v.cend (),
         ostream_iterator<int> (cout, "\n"));
-
+/*
     // The same behavior using various loops.
     for (auto i = v.begin ();
          i != v.end ();
@@ -47,4 +46,5 @@ int main () {
 
     for (auto i : v)
       cout << i << endl;
+      */
 }

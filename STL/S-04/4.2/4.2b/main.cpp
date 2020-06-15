@@ -49,9 +49,9 @@ int main() {
         cout << d << ' ';
     cout << endl;
 
-    list<double>::const_iterator dListConstIter = dList.begin();
+    list<double>::const_iterator dListConstIter = dList.cbegin();
     // could use
-    // auto dListConstIter = dList.begin();
+    // auto dListConstIter = dList.cbegin();
 
     list<double>::value_type d = *dListConstIter;
     // could use

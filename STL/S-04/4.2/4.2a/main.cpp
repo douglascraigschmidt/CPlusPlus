@@ -6,8 +6,8 @@ using namespace std;
 
 /**
  * The C++ standard library provides iterators for the standard
- * containers (e.g., list, vector, and deque), and a few other
- * non-container classes, such as string. 
+ * containers in STL (e.g., list, vector, and deque), and a few other
+ * non-container classes, such as string.
  * 
  * The definition of iterators makes them much more than simple C/C++
  * pointers although they perform that type of behavior. They also
@@ -69,7 +69,7 @@ int main () {
        // represents a logical element that's one *past* the last
        // element in a container, not the physical memory location
        // that's just beyond the last element.
-       it != v.end(); 
+       it != v.end();
        ++it) {
       cout << *it << ' ';
       // you can change the element(s) you're iterating over
@@ -97,9 +97,9 @@ int main () {
   std::vector<std::string> sv{"hello", "world"};
 
   // Print the contents of the vector using an iterator.
-  for (std::vector<std::string>::const_iterator itr = sv.begin();
-       itr != sv.end();
-       ++itr) 
+  for (std::vector<std::string>::const_iterator itr = sv.cbegin();
+       itr != sv.cend();
+       ++itr)
     std::cout << "(" << itr->size() << ") " << *itr << ' ';
 
   std::cout << endl;
@@ -118,8 +118,8 @@ int main () {
  * const object. Here is an example that works with const objects:
  */
 static void print_const(const vector<int> &v) {
-  for (vector<int>::const_iterator it = v.begin();
-       it != v.end();
+  for (vector<int>::const_iterator it = v.cbegin();
+       it != v.cend();
        ++it) {
     cout << *it << ' ';
     // this is illegal with a const iterator:

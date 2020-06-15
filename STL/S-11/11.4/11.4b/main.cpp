@@ -27,7 +27,7 @@ struct is_even {
 int main () {
   int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  auto pend = remove_if (pbegin, pend, is_odd);
+  auto pend = remove_if (begin(a), end(a), is_odd);
 
   cout << "with all odd values removed the range contains:";
   copy (begin(a), pend, ostream_iterator<int> (cout, " "));

@@ -17,23 +17,37 @@ using namespace std;
  *   that middle comes first. 
  * • rotate_copy() - creates a rotated copy. 
  *
- * This example uses the rotate() algorithm on a vector.
+ * This example uses the STL rotate() and rotate_copy() algorithms
+ * on some vectors.
  */
 int main () {
-  vector<int> myVect{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  vector<int> v1{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  cout << "myVect originally contains:\n";
-  copy (myVect.begin (),
-        myVect.end (),
+  cout << "v1 originally contains:\n";
+  copy (v1.begin (),
+        v1.end (),
         ostream_iterator<int> (cout, " "));
 
-  rotate(myVect.begin(),
-         myVect.begin() + 5,
-         myVect.end());
+  rotate(v1.begin(),
+         v1.begin() + 4,
+         v1.end());
 
-  cout << "\nmyVect rotated contains:\n";
-  copy (myVect.begin (),
-        myVect.end (),
+  cout << "\nv1 rotated contains:\n";
+  copy (v1.begin (),
+        v1.end (),
+        ostream_iterator<int> (cout, " "));
+  cout << endl;
+
+  vector<int> v2;
+
+  rotate_copy(v1.begin(),
+              v1.begin() + 5,
+              v1.end(),
+              back_inserter(v2));
+
+  cout << "\nv2 rotated contains:\n";
+  copy (v2.begin (),
+        v2.end (),
         ostream_iterator<int> (cout, " "));
   cout << endl;
 

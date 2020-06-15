@@ -35,7 +35,7 @@ int main () {
   copy (myVect.begin(), myVect.end(), ostream_iterator<int> (cout, " "));
   cout << endl;  
 
-  myVect.reset();
+  myVect.resize(0);
 
   // Remove everything that's not a 10!
   auto nend = remove_copy_if (begin(a),
@@ -48,13 +48,13 @@ int main () {
   cout << endl;  
 
   // Copy all the 10's
-  auto nend = copy_if (begin(a),
-                       end(a),
-                       begin(a)
-                       [](auto i) { return i == 10; });
+  auto nnend = copy_if (begin(a),
+                        end(a),
+                        begin(a),
+                        [](auto i) { return i == 10; });
 
   cout << "After copying every thing that's a 10 a[] contains:";
-  copy (begin(a), nend, ostream_iterator<int> (cout, " "));
+  copy (begin(a), nnend, ostream_iterator<int> (cout, " "));
   cout << endl;  
   return 0;
 }

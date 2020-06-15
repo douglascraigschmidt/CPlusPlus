@@ -18,7 +18,6 @@ using namespace std;
  * end, which keep their old values and are still accessible, as shown
  * in the following example.
  */
- 
 int main () {
   int a[] = {10, 20, 30, 30, 20, 10, 10, 20};
 
@@ -26,7 +25,7 @@ int main () {
   copy (begin(a), end(a), ostream_iterator<int> (cout, " "));
   cout << endl;
 
-  auto nend = remove (begin(a), begin(a), 20);
+  auto nend = remove (begin(a), end(a), 20);
 
   cout << "range contains:";
   copy (begin(a), nend, ostream_iterator<int> (cout, " "));

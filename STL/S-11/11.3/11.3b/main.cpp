@@ -5,7 +5,8 @@
 using namespace std;
 
 /**
- * This example shows how to apply the STL reverse() algorithm.
+ * This example shows how to apply the STL reverse() and reverse_copy()
+ * algorithms.
  */
 int main () {
   vector<int> myVect{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -19,15 +20,12 @@ int main () {
         ostream_iterator<int> (cout, " "));
   cout << endl;
 
-  string my_palindrome ("a man a plan a canal panama")
+  string my_palindrome ("amanaplanacanalpanama");
 
-  reverse(palindrome.begin(),
-          palindrome.end());       
-  cout << "my_palindrome contains:";
+  reverse_copy(my_palindrome.begin(),
+               my_palindrome.end(),
+               ostream_iterator<char>(cout));
 
-  copy (my_palindrome.begin (),
-        my_palindrome.end (),
-        ostream_iterator<int> (cout, " "));
   cout << endl;
 
   return 0;
