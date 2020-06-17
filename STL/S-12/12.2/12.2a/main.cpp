@@ -1,49 +1,30 @@
-#include <algorithm>
-#include <vector>
 #include <iostream>
-#include <iterator>          
+#include <ctime>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <queue>
+
+#include "heap_sort.h"
+#include "time_sort.h"
+#include "generate_data.h"
+
 using namespace std;
 
 /**
- * Union of two sorted ranges
- * 
- * Constructs a sorted range beginning in the location pointed by
- * result with the set union of the two sorted ranges [first1,last1)
- * and *  [first2,last2) as content.
- * 
- * The union of two sets is formed by the elements that are present in
- * either one of the sets, or in both.
- * 
- * The comparison to check for equivalence of values, uses either
- * operator< for the first version, or comp for the second, in order
- * to test this; The value of an element, a, is equivalent to another
- * one, b, when (!a<b && !b<a) or (!comp(a,b) && !comp(b,a)).
- * 
- * For the function to yield the expected result, the elements in the
- * ranges shall be already ordered according to the same strict weak
- * ordering criterion (operator< or comp).
- * 
- * This example demonstrates how to compute set union.
+ * Compare the performance of heap_sort() and sort().
  */
+int main() {
+  const int biggest = 100000;
+  const int size = 100000;
 
-int main () {
-  int first[] = {5, 10, 15, 20, 25};
-  int second[] = {50, 40, 30, 20, 10};
-  vector<int> v;
+  srand(time(nullptr));
 
-  sort (begin(first), end(first));     
-  sort (begin(second), end(second));   
+  vector<int> data = generate_data<int>(size, biggest);
 
-  auto it = set_union (begin(first), end(first),
-                       begin(second), end(second), 
-                       back_inserter(v));
- 
-  cout << "union has " << distance(it - v.begin())
-       << " elements:\n";
-  copy(v.begin(),
-       v.end(),
-       ostream_iterator<int>(cout, " "));
-  cout << endl;
+  time_sort<int>("heap_sort(vector)", data, heap_sort);
+  time_sort<int>("sort(vector)", data, sort);
 
   return 0;
 }

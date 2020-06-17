@@ -5,8 +5,8 @@
  * This sorting method works on random-access iterators.
  */
 template<typename RandomAccessIterator, typename Compare>
-void insertion_sort(RandomAccessIterator begin,
-                    RandomAccessIterator end,
+void insertion_sort(RandomAccessIterator first,
+                    RandomAccessIterator last,
                     Compare comp);
 
 #include "insertion_sort.cpp"

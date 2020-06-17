@@ -10,14 +10,13 @@ using namespace std;
  * and remove_if().
  */
 int main() {
-  int sum=0;
   vector<int> v{1, 4, 2, 8, 5, 7};
 
   copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
 
-  sum = count_if (v.begin(), 
-                  v.end(),
-                  bind(greater<>(), placeholders::_1, ,5));
+  auto sum = count_if (v.begin(),
+                       v.end(),
+                       bind(greater<>(), placeholders::_1, 5));
 
   cout << endl << "There are " << sum << " number(s) greater than 5" << endl;
 
@@ -29,7 +28,7 @@ int main() {
   // remove_if() doesn't actually remove elements, but simply moves
   // unwanted elements to the end and returns an iterator pointing to
   // the first of these unwanted elements. It works this way because
-  // it¡¯s a generic routine and it doesn't "know" whether the size of
+  // it's a generic routine and it doesn't "know" whether the size of
   // the underlying data structure can be changed. However, v.erase()
   // does know, so it can remove the items from the vector.
   v.erase(nend, v.end());
@@ -38,6 +37,7 @@ int main() {
   copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
   cout << endl;
 
+  // Sort the final results.
   sort(v.begin(), v.end());
   cout << "Elements sorted:" << endl;
   copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));

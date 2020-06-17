@@ -48,7 +48,7 @@ int main() {
   std::replace_copy_if (v.begin(), v.end(),
                         v2.begin(), 
                         [](auto i) {
-                          return (abs(i) % 2) == 1;
+                          return (i % 2) == 1;
                         }, 0);
 
   cout << "after replacing odd numbers with 0, v2: ";

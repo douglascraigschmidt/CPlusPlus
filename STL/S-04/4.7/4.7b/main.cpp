@@ -28,7 +28,7 @@ demonstrate_pointer_arithmetic() {
     int a[] = {1, 2, 3, 4};
 
     // now create 2 pointers that are random access pointers.
-    auto i = a;
+    auto i = begin(a);
     auto j = i + 2;
     cout << *j << " ";
 
@@ -56,19 +56,20 @@ demonstrate_pointer_arithmetic() {
  */
 void
 demonstrate_random_access_iterator() {
-    vector<int> v (1, 1);	//created a vector with one element: 1
-    v.push_back (2);
-    v.push_back (3);
-    v.push_back (4); 			// vector v: 1 2 3 4
+    vector<int> v {1, 2, 3, 4};
 
     // now create 2 iterators that are random access iterators
-    auto i = v.begin();
+    auto i = begin(v);
     auto j = i + 2; cout << *j << " ";
 
     // Perform some "pointer arithmetic".
-    i += 3; cout << *i << " ";
-    j = i - 1; cout << *j << " ";
+    i += 3;
+    cout << *i << " ";
+
+    j = i - 1;
+    cout << *j << " ";
     j -= 2;
+
     cout << *j << " ";
     cout << v[1] << endl;
 

@@ -1,11 +1,7 @@
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <vector>
 #include <list>
-#include <algorithm>
-#include <chrono>
-#include <cassert>
 
 #include "bubble_sort.h"
 #include "insertion_sort.h"

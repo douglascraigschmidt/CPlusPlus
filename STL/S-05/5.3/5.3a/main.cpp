@@ -29,29 +29,32 @@ using namespace std;
  */
 int main() {
   // Arrange the set in descending order.
-  set<int, greater<>> setof_nums({2, 1, 3, 0, 7});
-  auto index = setof_nums.find (9);
+  set<int, greater<>> set_of_ints({2, 1, 3, 0, 7});
 
-  if (index == setof_nums.end())
+  cout << set_of_ints.size() << " elements in the set" << endl;
+
+  auto iter = set_of_ints.find (9);
+
+  if (iter == set_of_ints.end())
     cout << "9 not found\n";
   else
     cout << "9 found\n";
 
-  setof_nums.insert(9);
+  set_of_ints.insert(9);
 
-  cout << setof_nums.size() << " elements in the set" << endl;
+  cout << set_of_ints.size() << " elements in the set" << endl;
 
   // Use generic find() algorithm.
-  index = find(setof_nums.begin(), setof_nums.end(), 9);
+  iter = find(set_of_ints.begin(), set_of_ints.end(), 9);
 
-  if (index == setof_nums.end())
+  if (iter == set_of_ints.end())
     cout << "9 not found in the set\n"  << endl;
   else
     cout << "9 found it! \n" << endl;
 
   // Print contents of the set in descending order.
-  copy (setof_nums.begin (),
-        setof_nums.end (),
+  copy (set_of_ints.begin (),
+        set_of_ints.end (),
         ostream_iterator<int> (cout, " "));
 
   cout << endl;

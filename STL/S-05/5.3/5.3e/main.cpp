@@ -5,11 +5,11 @@
 using namespace std;
 
 /** 
- * The member functions begin() and end() produce iterators for both
+ * The factory methods begin() and end() produce iterators for both
  * sets and multisets. The iterators produced by these functions are
  * constant so that keys cannot be changed when traversing the set
  * since this could perturb the ordering of the keys!!  There are also
- * reverse iterators: member functions rbegin() and rend() produce
+ * reverse iterators: factory method rbegin() and rend() produce
  * iterators that yield the elements in reverse order.
  *
  * To remove a value from a set, use erase(). The arguments can be

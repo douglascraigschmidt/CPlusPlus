@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <cassert>
+
 using namespace std;
 
 /**
@@ -24,6 +26,8 @@ int main() {
   set<int> fourthSet;
   // Swap the contents of the first and forth sets.
   fourthSet.swap (firstSet);
+
+  assert(firstSet.empty());
 
   copy (thirdSet.begin (),
         thirdSet.end (),

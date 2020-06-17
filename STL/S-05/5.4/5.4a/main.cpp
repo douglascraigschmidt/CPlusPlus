@@ -18,8 +18,8 @@ using namespace std;
  * . Two or more elements may be identical. 
  *
  * Set and multiset are particularly well suited to the set-related
- * algorithms: set_union, set_intersection, set_difference, and
- * set_symmetric_difference because:
+ * algorithms: set_union(), set_intersection(), set_difference(), and
+ * set_symmetric_difference() because:
  * 
  * . Set algorithms require their arguments to be sorted ranges and
  *   the elements in set and multiset are sorted in ascending order.
@@ -75,8 +75,8 @@ int main() {
                  inserter(c, c.end()));
   cout << "Set c (difference of set a and set b): ";
 
-  copy(c.begin(), 
-       c.end(),
+  copy(c.cbegin(),
+       c.cend(),
        ostream_iterator<int>(cout, " "));
   cout << endl;
 

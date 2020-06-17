@@ -3,16 +3,16 @@
  */
 template<typename RandomAccessIterator,
          typename Compare>
-void insertion_sort(RandomAccessIterator begin,
-                    RandomAccessIterator end,
+void insertion_sort(RandomAccessIterator first,
+                    RandomAccessIterator last,
                     Compare comp) {
-  for (auto sorted = end - 1;
-       sorted != begin; 
+  for (auto sorted = last - 1;
+       sorted != first; 
        --sorted) {
     auto next = sorted - 1;
     int value = *next;
     for (auto itr = sorted;
-         itr != end; 
+         itr != last; 
          ++itr, ++next) {
       if (comp(value, *itr))
         break;

@@ -9,7 +9,7 @@ static void demonstrate_pointer_arithmetic();
 static void demonstrate_random_access_iterators();
 
 /**
- * Random Access Iterators allow the operations of pointer arithmetic:
+ * Random-access iterators allow the operations of pointer arithmetic:
  * addition of arbitrary offsets, subscripting, and subtraction of one
  * iterator from another to find a distance.  These are the most
  * powerful iterators and are like regular pointers but they are also
@@ -70,8 +70,8 @@ static void demonstrate_random_access_iterators() {
   auto total_even = 0;
 
   // Iterate through the vector summing the values of even numbers.
-  for (auto iter = v.begin();
-       iter != v.end();
+  for (auto iter = begin(v);
+       iter != end(v);
        // Use iter's += operator to skip over odd numbers.
        iter += 2) 
     total_even += *iter;
