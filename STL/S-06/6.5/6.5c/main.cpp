@@ -21,13 +21,14 @@ int main() {
 
   cout << endl;
 
-  auto total = 0;
   deque<int> d{3, 4, 7, 8};
 
   // Stream the whole deque and a sum to cout
   copy(d.begin(),
        d.end() - 1,
        ostream_iterator<int>(cout, " + "));
+
+  auto total = 0;
 
   cout << *(d.end() - 1)
        << " = " 

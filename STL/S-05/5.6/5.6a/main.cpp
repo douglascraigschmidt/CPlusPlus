@@ -1,7 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <deque>
-#include <list>
 #include <map>
 
 using namespace std;
@@ -22,13 +20,6 @@ using namespace std;
  *           typename Allocator = allocator <pair<const Key, Value>>
  * class multimap;
  */
-
-#include <string>
-#include <map>
-#include <iostream>
-#include <iterator>
-#include <algorithm>
-#include <functional>
 
 using namespace std;
 
@@ -83,17 +74,15 @@ int main(int argc, char *argv[]) {
   names.insert(names.end(), value_type("Mike", "Jones"));
   names.insert(names.end(), value_type("Kim", "Jones"));
 
-  vector<value_type> mackay_names{ value_type("Sophie", "Mackay"),
-                                   value_type("Steve", "Mackay"),
-                                   value_type("Kim", "Mackay") };
-
-  names.insert(mackay_names.begin(), mackay_names.end());
+  names.insert({ value_type("Sophie", "Mackay"),
+                   value_type("Steve", "Mackay"),
+                   value_type("Kim", "Mackay") });
 
   // print out the names
   cout << "All the names:" << endl << names << endl;
 
   // Find the people named Kim
-  pair<names_type::iterator,names_type::iterator> p =
+  pair<names_type::iterator, names_type::iterator> p =
     names.equal_range ("Kim");
 
   // print them out 

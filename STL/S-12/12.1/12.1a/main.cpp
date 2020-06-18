@@ -7,10 +7,11 @@ using namespace std;
 /**
  * STL defines a number of set algorithms:
  *
- * . set_union() - 
- * . set_intersection() - 
- * . set_difference() - 
- * . set_symmetric_difference() - 
+ * . set_union() - Computes the union of two sets
+ * . set_intersection() - Computes the intersection of two sets
+ * . set_difference() - Computes the difference of two sets
+ * . set_symmetric_difference() - Computes the symmetric difference of
+ *   two sets.
  *
  * These algorithms expect the ranges they work on are sorted.
  *
@@ -24,8 +25,8 @@ using namespace std;
  * this is a directional operation - for a symmetrical equivalent, see
  * set_symmetric_difference.
  *
- * The comparison to check for equivalence of values, uses either
- * operator< for the first version, or comp for the second, in order
+ * The comparison to check for equivalence of values uses either
+ * operator< for the first version or comp for the second, in order
  * to test this; The value of an element, a, is equivalent to another
  * one, b, when (!a<b && !b<a) or (!comp(a,b) && !comp(b,a)).
  * 
@@ -41,7 +42,7 @@ static void set_difference_on_arrays();
 static void set_difference_on_sets();
 
 /**
- * This example shows how to compute set_difference() on builtin
+ * This example shows how to compute set_difference() on built-in
  * arrays and on STL set containers.
  */
 int main()  {
@@ -65,9 +66,11 @@ set_difference_on_arrays() {
   cout << "\na2 = ";
   copy(begin(a2), end(a2), ostream_iterator<int>(cout," "));
 
+  // The difference of two sets is formed by the elements that are
+  // present in the first set, but not in the second one.
   auto itr = set_difference(begin(a1), end(a1),
                             begin(a2), end(a2), 
-                            answer);
+                            begin(answer));
 
   cout << "\nThe set difference has " << distance(begin(answer), itr)
        << " elements with results = ";
@@ -91,7 +94,7 @@ set_difference_on_sets() {
 
   auto itr = set_difference(begin(s1), end(s1),
                             begin(s2), end(s2),
-                            inserter(answer, answer.begin()));
+                            inserter(answer, answer.end()));
 
     cout << "\nThe set difference has " << distance(begin(answer), end(answer))
          << " elements with results = ";

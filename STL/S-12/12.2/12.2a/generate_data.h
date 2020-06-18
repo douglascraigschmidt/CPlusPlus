@@ -2,6 +2,7 @@
 #define _GENERATE_DATA_H
 
 #include <vector>
+#include <algorithm>
 
 template <typename T,
           template <typename ...> typename Container = std::vector>

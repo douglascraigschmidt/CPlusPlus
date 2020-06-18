@@ -5,40 +5,35 @@
 using namespace std;
 
 /**
- * Reverse iterators walk backwards through collections. There are two
- * types: reverse_iterator, which only goes backward through the data,
- * and reverse_bidirectional_iterator, which can go backward and
- * forward.
+ * Reverse iterators walk "backwards" through ranges in a container. There
+ * are two types: reverse_iterator, which only goes backward through the data,
+ * and reverse_bidirectional_iterator, which can go backward and forward.
  *
  * These iterators can be created using a default constructor or by a
- * single argument constructor which initializes the new
- * reverse_iterator with a random_access_iterator.  Here are some of
- * their operators:
+ * single argument constructor that initializes the new reverse_
+ * iterator with a random_access_iterator.  Here are some of their
+ * operators:
  *
- * * operator 	        returns a reference to the current item i.e. value pointed to.
+ * . operator*() - Returns a reference to the current item i.e., value
+ *   pointed to. 
  *
- * ++ operator	        advances the iterator to the previous item
- *                      (--current) and returns a reference that item. 
+ * . ++operator() - Advances the iterator to the previous item
+ *   (--current) and returns a reference that item. 
  * 
- * ++ operator (int) 	advances the iterator to the integer previous item
- *                      (--current) and returns a copy of the previous item.
+ * . ++operator(int) - Advances the iterator to the integer previous item
+ *   (--current) and returns a copy of the previous item.
  *
- * -- operator 	        advances the iterator to the next item
- *                      (++current) and returns a reference to that item. 
+ * . --operator() - Advances the iterator to the next item
+ *   (++current) and returns a reference to that item. 
  * 
- * -- operator (int)	advances the iterator to the integer next item
- *                      (++current) and returns a copy to the previous item. 
+ * . --operator(int) - Advances the iterator to the integer next item
+ *   (++current) and returns a copy to the previous item. 
  * 
- * == operator    	    This returns true only if the iterators x and
- *                      y point to the same item. 
+ * . ==operator() - This returns true only if the iterators x and
+ *   y point to the same item. 
  */
 int main() {
-  deque<int> aDeck;
-
-  for (int i = 0;
-       i < 10;
-       i++)
-    aDeck.push_back(i);
+  deque<int> aDeck {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
   cout << "Contents printed backward:\n";
 

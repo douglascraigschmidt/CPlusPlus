@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * The numeric algorithms are math functions found in <numeric> .
+ * The numeric algorithms are math functions found in <numeric>.
  * 
  * . accumulate() - Calculates the sum of all the elements in a
  *   specified range. It doesn't change the input data and can also

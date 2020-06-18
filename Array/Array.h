@@ -1,7 +1,7 @@
 /* -*- C++ -*- */
 
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef _ARRAY_H
+#define _ARRAY_H
 
 // This header defines "size_t"
 #include <stdlib.h>
@@ -61,19 +61,19 @@ public:
 #endif /* RVALUE_REFERENCES */
 
   // Destructor is a no-op in this implementation
-  ~Array (void);
+  ~Array ();
 
   // Get an iterator that points to the beginning of the Array.
-  iterator begin (void);
+  iterator begin ();
 
   // Get a const interator that points to the beginning of the Array.
-  const_iterator  begin (void) const;
+  const_iterator begin () const;
 
   // Get an iterator that points to the end
-  iterator end (void);
+  iterator end ();
 
   // Get a const iterator that points to the end of the list.
-  const_iterator end (void) const;
+  const_iterator end () const;
 
   // = Set/get methods.
 
@@ -91,7 +91,7 @@ public:
   void get (T &item, size_t index) const;
 
   // Returns the <cur_size_> of the array.
-  size_t size (void) const;
+  size_t size () const;
 
   // Returns a reference to the <index> element in the <Array> without
   // checking for range errors.
@@ -154,7 +154,8 @@ private:
  * you cannot change the underlying array!
  */
 template <typename T>
-class Array_Iterator 
+class Array_Iterator
+  : public std::iterator<std::bidirectional_iterator_tag, Array<T>>
 {
   friend class Array<T>;
 private:
@@ -164,19 +165,19 @@ private:
 public:
   /// Dereference operator returns a reference to the item contained
   /// at the current position
-  T& operator* (void);
+  T& operator* ();
 
   /// Returns a const reference to the item contained at the current position
-  const T& operator* (void) const;
+  const T& operator* () const;
 
   /// Preincrement operator
-  Array_Iterator<T> &operator++ (void);
+  Array_Iterator<T> &operator++ ();
 
   /// Postincrement operator
   Array_Iterator<T> operator++ (int);
 
   /// Predecrement operator
-  Array_Iterator<T> &operator-- (void);
+  Array_Iterator<T> &operator-- ();
 
   /// Posdecrement operator
   Array_Iterator<T> operator-- (int);
@@ -212,6 +213,8 @@ private:
  */
 template <typename T>
 class Const_Array_Iterator
+  : public std::iterator<std::bidirectional_iterator_tag,
+                         Array<T>>
 {
   friend class Array<T>;
 private:
@@ -220,16 +223,16 @@ private:
 
 public:
   /// Returns a const reference to the item contained at the current position.
-  const T& operator* (void) const;
+  const T& operator* () const;
 
   /// Preincrement operator
-  const Const_Array_Iterator<T> &operator++ (void) const;
+  const Const_Array_Iterator<T> &operator++ () const;
 
   /// Postincrement operator
   Const_Array_Iterator<T> operator++ (int) const;
 
   /// Predecrement operator
-  const Const_Array_Iterator &operator-- (void) const; 
+  const Const_Array_Iterator &operator-- () const;
 
   /// Postdecrement operator
   Const_Array_Iterator<T> operator-- (int) const;
@@ -239,13 +242,6 @@ public:
 
   /// Nonequality operator
   bool operator!= (const Const_Array_Iterator<T> &lhs) const;
-
-  // = Necessary traits
-  typedef std::bidirectional_iterator_tag iterator_category;
-  typedef T value_type;
-  typedef T *pointer;
-  typedef T &reference;
-  typedef int difference_type;
 
 private:
   /// the array we are dealing with
@@ -262,4 +258,4 @@ private:
 
 #include "Array.cpp"
 
-#endif /* ARRAY_H */
+#endif /* _ARRAY_H */

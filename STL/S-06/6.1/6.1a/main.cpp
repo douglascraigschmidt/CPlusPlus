@@ -29,8 +29,8 @@
  * 
  * back_insert_iterator   push_back(value)         vector, deque, list, string
  * 
- * insert_iterator   	  insert(value, position)  vectors, deques, lists, 
- *                                                 maps, and sets
+ * insert_iterator   	  insert(value, position)  vector, deque, list,
+ *                                                 map, and set
  * 
  * STL algorithms that copy elements, such as copy(), unique_copy(),
  * copy_backwards(), remove_copy(), & replace_copy(), are passed an

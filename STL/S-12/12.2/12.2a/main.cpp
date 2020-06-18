@@ -17,7 +17,7 @@ using namespace std;
  */
 int main() {
   const int biggest = 100000;
-  const int size = 100000;
+  const int size = 200000;
 
   srand(time(nullptr));
 

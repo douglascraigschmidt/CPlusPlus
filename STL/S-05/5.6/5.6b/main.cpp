@@ -1,19 +1,7 @@
 #include <iostream>
-#include <vector>
-#include <deque>
-#include <list>
 #include <map>
 
 #include "simple_string.h"
-
-using namespace std;
-
-#include <string>
-#include <map>
-#include <iostream>
-#include <iterator>
-#include <algorithm>
-#include <functional>
 
 using namespace std;
 
@@ -45,12 +33,12 @@ ostream& operator<<(ostream& out, const names_type &l) {
 int main(int argc, char* argv[]) {
   names_type names;  // create a multimap of names
 
-  cout << "starting insert()" << endl;
+  cout << "starting insert(&&)" << endl;
   // Put the names in the multimap
   names.insert(value_type("Kim", "Smith"));
   names.insert(value_type("Jane", "Smith"));
   names.insert(value_type("Kay", "Smith"));
-  cout << "ending insert()" << endl;
+  cout << "ending insert(&&)" << endl;
 
   cout << "starting emplace()" << endl;
   names.emplace("Kurt", "Jones");

@@ -10,7 +10,7 @@ using namespace std;
  * sorted ranges [first1,last1) and * [first2,last2) as content.
  * 
  * The union of two sets is formed by the elements that are present in
- * either one of the sets, or in both.
+ * either one of the sets or in both.
  * 
  * The comparison to check for equivalence of values, uses either
  * operator< for the first version, or comp for the second, in order
@@ -24,21 +24,23 @@ using namespace std;
  * This example demonstrates how to apply the set_union() algorithm.
  */
 int main () {
-  int first[] = {5, 10, 15, 20, 25};
-  int second[] = {50, 40, 30, 20, 10};
-  vector<int> v;
+  int a1[] = { 5, 10, 15, 20, 25};
+  int a2[] = {50, 40, 30, 20, 10};
+  vector<int> answer;
 
-  sort (begin(first), end(first));     
-  sort (begin(second), end(second));   
+  sort (begin(a1), end(a1));
+  sort (begin(a2), end(a2));
 
-  set_union (begin(first), end(first),
-             begin(second), end(second),
-             back_inserter(v));
+  // The union of two sets is formed by the elements that are present in
+  // either one of the sets, or in both.
+  set_union (begin(a1), end(a1),
+             begin(a2), end(a2),
+             back_inserter(answer));
  
-  cout << "union has " << v.size() << " elements:\n";
+  cout << "union has " << answer.size() << " elements:\n";
 
-  copy(v.begin(),
-       v.end(),
+  copy(answer.begin(),
+       answer.end(),
        ostream_iterator<int>(cout, " "));
   cout << endl;
 

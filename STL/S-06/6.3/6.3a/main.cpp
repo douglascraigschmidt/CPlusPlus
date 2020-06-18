@@ -17,11 +17,11 @@ using namespace std;
  * }
  *
  * This function is useful since it uses the C++ compiler's type
- *10uction mechanism.
+ * deduction mechanism.
  */
 int main() {
-  vector <int> aVect;
-  back_insert_iterator<vector <int>> n (aVect);
+  vector<int> aVect;
+  back_insert_iterator<vector<int>> n (aVect);
 
   for (int i; cin >> i; *n++ = i)
     continue;

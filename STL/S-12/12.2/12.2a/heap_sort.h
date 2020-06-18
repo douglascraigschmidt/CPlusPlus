@@ -1,6 +1,8 @@
 #ifndef _HEAP_SORT_H
 #define _HEAP_SORT_H
 
+#include <algorithm>
+
 /**
  * This sorting method works on random-access iterators.
  */

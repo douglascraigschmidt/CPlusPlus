@@ -13,27 +13,35 @@ using namespace std;
  *
  * Here's the typical implementation for class stack in STL:
  *
- * template <typename T, typename Container = deque<T> >
+ * template <typename T, typename Container = deque<T>>
  * class stack {
  * public:
  *   explicit stack(const Container& c): container_(c) {}
  *   ...
  *   bool empty() const { return container_.empty(); }
  *   size_type size() const { return container_.size(); }
- *   value_type& top() { return container.back(); }
- *   const value_type& top() const { return container.back(); }
- *   void push(const value_type& t)  { container.push_back(t); };
- *   void pop() { container.pop_back(); }
+ *   value_type& top() { return container_.back(); }
+ *   const value_type& top() const { return container_.back(); }
+ *   void push(const value_type& t)  { container_.push_back(t); };
+ *   void pop() { container_.pop_back(); }
  *
- * private :
- *   Container container_ ;
+ * private:
+ *   Container container_;
  *   //...
  * };
- *
+ */
+
+/**
+ * Forward decl.
+ */
+void print_top(const stack<char> &s);
+
+/**
  * Here is a simple example using the STL stack class.
  */
 int main() {
-  stack<char> aStack;
+  stack<char> aStack; // Could also use ({'A', 'B', 'C', 'D'});
+  cout << "Pushing 'A', 'B', 'C', and 'D'" << endl;
 
   aStack.push('A');
   aStack.push('B');
@@ -43,10 +51,18 @@ int main() {
   while(!aStack.empty()) {
     cout << "Popping: ";
 
+    if (aStack.top() == 'C')
+      aStack.top() = 'Z';
+
+    print_top(aStack);
+
     // pop() and top() are decoupled!
-    cout << aStack.top() << endl;
     aStack.pop();
   }
 
   return 0;
+}
+
+void print_top(const stack<char> &s) {
+    cout << s.top() << endl;
 }

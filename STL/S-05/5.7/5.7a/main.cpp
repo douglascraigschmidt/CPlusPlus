@@ -1,9 +1,6 @@
 #include <iostream>
-#include <initializer_list>
 #include <unordered_map>
-#include <map>
 #include <vector>
-#include <string>
 #include <algorithm>
 
 /**
@@ -24,7 +21,8 @@
  * 
  * Characteristics of unordered_map
  * . Inserting a new element into an unordered_map does not invalidate
- *   iterators that point to existing elements. 
+ *   iterators that point to existing elements.
+ *
  * . Erasing an element from an unordered_map also does not invalidate
  *   any iterators, except those iterators that actually point to the
  *   element that is being erased. 
@@ -58,10 +56,10 @@ int main () {
   for (auto const &i : word_map)
     std::cout << i.second << " " << i.first << std::endl; 
 
-  std::vector<std::pair <std::string, int>> v;
+  std::vector<std::pair <std::string, int>> v (word_map.begin(),
+                                               word_map.end());
 
-  for (auto const &i : word_map)
-    v.emplace_back(i);
+  // for (auto const &i : word_map) v.emplace_back(i);
 
   // std::copy (word_map.begin (), word_map.end (), std::back_inserter (v));
 

@@ -33,10 +33,10 @@ int main () {
   Vector v;
 
   // Default constructor to get ending iterator; get values from cin
-  // until EOF
+  // until EOF.
   cout << "Enter a sequence of integers (eof to quit): ";
-  copy (is_iter (cin),
-        is_iter (),
+  copy (is_iter(cin),
+        is_iter(),
         back_inserter (v));
 
   // Stream the whole vector and the sum to cout.
@@ -44,9 +44,9 @@ int main () {
         v.end () - 1,
         os_iter (std::cout, " + "));
 
-    Vector::value_type sum = 0;
+  Vector::value_type sum = 0;
 
-    if (!v.empty())
+  if (!v.empty())
     cout << v.back () 
          << " = "  
          << accumulate (v.begin (), v.end (), sum)

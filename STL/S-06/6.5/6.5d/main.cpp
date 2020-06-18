@@ -20,7 +20,7 @@ using namespace std;
  * only for one-pass-algorithms.
 */
 int main () {
-  const char *fname = tmpnam (0);    // temp filename
+  const char *fname = tmpnam (nullptr);    // temp filename
   if (!fname)
     return 1;
   ofstream out (fname, ios::out | ios::in | ios::trunc);
@@ -34,20 +34,21 @@ int main () {
   // construct an istreambuf_iterator pointing to the ofstream object
   // underlying streambuffer
 #if 0
-  istreambuf_iterator<char> iter (out.rdbuf ());
+  istreambuf_iterator<char> first (out.rdbuf ());
 
   // construct an end of stream iterator
-  const istreambuf_iterator<char> end;
+  const istreambuf_iterator<char> last;
   cout << endl;
-  // output the content of the file
-  while (iter != end)
-    cout << *iter++;
-#endif
 
+  // Output the content of the file
+  while (first != last)
+    cout << *first++;
+#else
   // Alternative more concise approach is:
   copy (istreambuf_iterator<char> (out.rdbuf ()),
-  		istreambuf_iterator<char> (),
-  	    ostream_iterator<char> (cout));
+        istreambuf_iterator<char> (),
+        ostream_iterator<char> (cout));
+#endif
 
   cout << endl;
 

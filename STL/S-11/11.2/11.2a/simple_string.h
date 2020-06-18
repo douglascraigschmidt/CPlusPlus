@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "google-explicit-constructor"
+#pragma ide diagnostic ignored "cert-dcl21-cpp"
 #ifndef _SIMPLE_STRING_H
 #define _SIMPLE_STRING_H
 
@@ -20,6 +23,7 @@ public:
   typedef char value_type;
   typedef simple_string_iterator iterator;
   typedef simple_string_const_iterator const_iterator;
+  // ...
 
   simple_string();
 
@@ -93,24 +97,24 @@ public:
   const char& operator* () const;
 
   /**
-   * Preincrement operator
+   * Pre-increment operator
    */
   simple_string_iterator &operator++ ();
 
   /**
-   * Postincrement operator
+   * Post-increment operator
    */
-  const simple_string_iterator operator++ (int);
+  simple_string_iterator operator++ (int);
 
   /**
-   * Predecrement operator
+   * Pre-decrement operator
    */
   simple_string_iterator &operator-- ();
 
   /**
-   * Posdecrement operator
+   * Post-decrement operator
    */
-  const simple_string_iterator operator-- (int);
+  simple_string_iterator operator-- (int);
 
   /**
    * Equality operator
@@ -118,7 +122,7 @@ public:
   bool operator== (const simple_string_iterator &rhs) const;
 
   /**
-   * Nonequality operator
+   * Non-equality operator
    */
   bool operator!= (const simple_string_iterator &lhs) const;
 
@@ -151,29 +155,29 @@ class simple_string_const_iterator :
 public:
   /**
    * Returns a const reference to the item contained at the current
-   * position.
+   * position (note there's no non-const operator*()!!)
    */
   const char& operator* () const;
 
   /**
-   * Preincrement operator
+   * Pre-increment operator
    */
-  const simple_string_const_iterator & operator++ () const;
+  simple_string_const_iterator & operator++ ();
 
   /**
-   * Postincrement operator
+   * Post-increment operator
    */
-  const simple_string_const_iterator operator++ (int) const;
+  simple_string_const_iterator operator++ (int);
 
   /**
-   * Predecrement operator
+   * Pre-decrement operator
    */
-  const simple_string_const_iterator &operator-- () const;
+  simple_string_const_iterator &operator-- ();
 
   /**
-   * Postdecrement operator
+   * Post-decrement operator
    */
-  const simple_string_const_iterator operator-- (int) const;
+  simple_string_const_iterator operator-- (int);
 
   /**
    * Equality operator
@@ -181,7 +185,7 @@ public:
   bool operator== (const simple_string_const_iterator &rhs) const;
 
   /**
-   * Nonequality operator
+   * Non-equality operator
    */
   bool operator!= (const simple_string_const_iterator &lhs) const;
 
@@ -203,3 +207,5 @@ private:
 };
 
 #endif /* _SIMPLE_STRING_H */
+
+#pragma clang diagnostic pop

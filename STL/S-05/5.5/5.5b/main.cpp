@@ -1,6 +1,5 @@
 #include <utility>
 #include <iostream>
-#include <string>
 #include <map>
 #include <algorithm>
 #include <memory>
@@ -8,7 +7,7 @@
 using namespace std;
 
 struct print { // Iterator value is a key-value pair.
-  void operator () (const map<string, string>::value_type &p) { 
+  void operator() (const map<string, string>::value_type &p) {
     cout << p.first << "=" << p.second << endl; 
   }
 };

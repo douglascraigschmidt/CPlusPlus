@@ -1,9 +1,6 @@
 #include <iostream>
-#include <initializer_list>
-#include <unordered_map>
 #include <map>
 #include <vector>
-#include <string>
 #include <algorithm>
 
 /**
@@ -51,8 +48,8 @@ int main () {
 #if 0  
   // Use an explicit iterator to count the number of times each word
   // appears in the word_list.
-  for (WORD_MAP::iterator word_iter = word_list.begin ();
-       word_iter != word_list.end ();
+  for (WORD_MAP::iterator word_iter = word_list.cbegin ();
+       word_iter != word_list.cend ();
        ++word_iter)
     ++word_map[*word_iter];
 
@@ -69,13 +66,16 @@ int main () {
     std::cout << i.second << " " << i.first << std::endl; 
 
   // Create a functor.
-  struct total_it {
+  class total_it {
+  public:
     explicit total_it (int i): i_ (i) {}
 
     void operator()(const WORD_MAP::value_type &p) {
       i_ += p.second;
     }
 
+    int count() const { return i_; }
+  private:
     int i_; 
   };
 
@@ -86,7 +86,7 @@ int main () {
                           word_map.end(),
                           // Use a functor.
                           total_it (total));
-  total = it.i_;
+  total = it.count();
 
   std::cout << "total number of words = " << total << std::endl;
 
@@ -96,7 +96,7 @@ int main () {
   for_each (word_map.begin(),
             word_map.end(),
             // Use a lambda function.
-            [&total] (const WORD_MAP::value_type &p) { 
+            [&total] (const WORD_MAP::value_type &p) {
               total += p.second;
             });
 

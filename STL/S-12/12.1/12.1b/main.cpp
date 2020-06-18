@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * The STL set_union() algorithm constructs a sorted range beginning
+ * The STL set_intersection() algorithm constructs a sorted range beginning
  * in the location pointed by result with the set intersection of the
  * two sorted ranges [first1,last1) and [first2,last2) as content.
  *  
@@ -32,6 +32,8 @@ int main () {
   sort (begin(a1), end(a1));
   sort (begin(a2), end(a2));
 
+  // The intersection of two sets is formed only by the elements that
+  // are present in both sets at the same time.
   auto itr = set_intersection (begin(a1), end(a1),
                                begin(a2), end(a2),
                                begin(results));

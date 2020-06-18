@@ -15,33 +15,24 @@ using namespace std;
  * front_insert_iterator<Container> front_inserter(Container& x) {
  *   return front_insert_iterator<Container>(x);
  * }
- *
- * template <typename Container, typename Iterator>
- * insert_iterator<Container> inserter(Container& x, Iterator i) {
- *   return insert_iterator<Container>(x, Container::iterator(i));
- * }
  * 
- * This function adapter leverages C++¡¯s implicit type inference
+ * This function adapter leverages C++'s implicit type inference
  * feature for functions.
  */
 int main() {
-  list<int> aList1, aList2;
-  list<int>::iterator itr;
-  int i;
-
-  for(i = 0; i < 5; i++)
-    aList1.push_back(i);
+  list<int> aList1 {0, 1, 2, 3, 4}, aList2;
 
   cout << "Original contents of aList:\n";
   copy (aList1.begin (),
         aList1.end (),
         ostream_iterator<int> (cout, "\n"));  
 
-  front_insert_iterator<list<int>> frnt_i_itr(aList1);
+  front_insert_iterator<list<int>> itr(aList1);
+  // auto itr = aList1.begin();
   // create a front_insert_iterator to aList
 
-  *frnt_i_itr++ = 100;   // insert rather than overwrite at front
-  *frnt_i_itr++ = 200;
+  *itr++ = 100;   // insert rather than overwrite at front
+  *itr++ = 200;
 
   cout << "aList after insertion:\n";
   copy (aList1.begin (),
@@ -59,7 +50,12 @@ int main() {
   cout << "Contents of aList2 after insertion: \n";
   copy (aList2.begin (),
         aList2.end (),
-        ostream_iterator<int> (cout, "\n"));  
+        ostream_iterator<int> (cout, "\n"));
+
+  if (!equal(aList1.rbegin(), aList1.rend(), aList2.begin()))
+      cout << "end of the world" << endl;
+  else
+      cout << "output is as expected" << endl;
 
   return 0;
 }
