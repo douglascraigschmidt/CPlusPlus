@@ -1,7 +1,8 @@
 /**
  * Container adaptors are classes that are based on other classes to
  * implement a new functionality, often a more limited one. For
- * example, stack restricts vector and queue restricts deque.
+ * example, stack and queue can restrict sequential containers, such
+ * as vector, deque, and list.
  * 
  * Member functions can be added or hidden or can be combined to
  * achieve new functionality.  In particular, container adapters

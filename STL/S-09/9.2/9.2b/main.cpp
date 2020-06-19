@@ -8,8 +8,8 @@
 using namespace std;
 
 /**
- * This example applies bind2nd() and a C++ lambda function with
- * various STL algorithms.
+ * This example applies bind2nd(), bind(), and a C++ lambda function
+ * with various STL algorithms.
  */
 int main () {
   vector<double> myVector{10.1, 20.2, 30.3, 40.4, 50.5};
@@ -31,7 +31,7 @@ int main () {
   // Count how many values are greater than value.
   auto n = count_if(myVector.begin(),
                     myVector.end(),
-                    bind2nd(greater<float>(), value));
+                    bind(greater<>(), placeholders::_1, value));
 
   cout << "number of elements greater than "
        << value

@@ -162,46 +162,46 @@ simple_string::cend () const {
 char &
 simple_string_iterator::operator* () {
   cout << "simple_string_iterator::operator*()" << endl;
-  return this->simple_string_[this->pos_];
+  return simple_string_[pos_];
 }
 
 const char &
 simple_string_iterator::operator* () const {
   cout << "simple_string_iterator::operator*()" << endl;
-  return this->simple_string_[this->pos_];
+  return simple_string_[pos_];
 }
 
 simple_string_iterator &
 simple_string_iterator::operator++ () {
   cout << "simple_string_iterator::operator++" << endl;
-  ++this->pos_;
+  ++pos_;
   return *this;
 }
 
 simple_string_iterator
 simple_string_iterator::operator++ (int) {
   cout << "simple_string_iterator::operator++(int)" << endl;
-  return {this->simple_string_, pos_++};
+  return {simple_string_, pos_++};
 }
 
 simple_string_iterator &
 simple_string_iterator::operator-- () {
   cout << "simple_string_iterator::operator--()" << endl;
-  --this->pos_;
+  --pos_;
   return *this;
 }
 
 simple_string_iterator
 simple_string_iterator::operator-- (int)  {
   cout << "simple_string_iterator::operator--(int)" << endl;
-  return {this->simple_string_, pos_--};
+  return {simple_string_, pos_--};
 }
 
 bool
 simple_string_iterator::operator== (const simple_string_iterator &rhs) const {
   cout << "simple_string_iterator::operator==" << endl;
-  return &this->simple_string_ == &rhs.simple_string_
-    && this->pos_ == rhs.pos_;
+  return &simple_string_ == &rhs.simple_string_
+    && pos_ == rhs.pos_;
 }
 
 bool
@@ -213,13 +213,13 @@ simple_string_iterator::operator!= (const simple_string_iterator &rhs) const {
 const char &
 simple_string_const_iterator::operator* () const {
   cout << "simple_string_const_iterator::operator*()" << endl;
-  return this->simple_string_[this->pos_];
+  return simple_string_[pos_];
 }
 
 simple_string_const_iterator &
 simple_string_const_iterator::operator++ () {
   cout << "simple_string_const_iterator::operator++()" << endl;
-  ++this->pos_;
+  ++pos_;
   return *this;
 }
 
@@ -234,7 +234,7 @@ simple_string_const_iterator::operator++ (int) {
 simple_string_const_iterator &
 simple_string_const_iterator::operator-- () {
   cout << "simple_string_const_iterator::operator--" << endl;
-  --this->pos_;
+  --pos_;
   return *this;
 }
 
@@ -249,7 +249,7 @@ simple_string_const_iterator::operator-- (int) {
 bool
 simple_string_const_iterator::operator== (const simple_string_const_iterator &rhs) const {
   cout << "simple_string_const_iterator::operator==()" << endl;
-  return &this->simple_string_ == &rhs.simple_string_ && this->pos_ == rhs.pos_;
+  return &simple_string_ == &rhs.simple_string_ && pos_ == rhs.pos_;
 }
 
 bool
