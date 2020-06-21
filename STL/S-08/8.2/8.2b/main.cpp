@@ -103,7 +103,7 @@ int main() {
   for(int i = 1; i <= 20; i++)
      aVect.push_back(i);
 
-  cout << "Sequence:";
+  cout << "Sequence: ";
   for(auto i : aVect)
     cout << i << " ";
   cout << endl;

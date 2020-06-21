@@ -2,8 +2,8 @@
 
 using namespace std;
 
-float plus (float a, float b) { return a + b; }
-float minus (float a, float b) { return a - b; }
+float Plus (float a, float b) { return a + b; }
+float Minus (float a, float b) { return a - b; }
 
 /**
  * A function pointer can be provided as a function's calling
@@ -45,9 +45,9 @@ typedef float(*pt2Func)(float, float);
 static pt2Func 
 get_ptf (char opCode) {
   if (opCode == '+')
-    return &plus;
+    return &Plus;
   else if (opCode == '-')
-    return &minus;
+    return &Minus;
   else
     return nullptr;
 }

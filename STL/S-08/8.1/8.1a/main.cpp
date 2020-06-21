@@ -34,8 +34,8 @@ using namespace std;
  * designed to perform the four basic arithmetic operations as
  * function calls.
  */
-float plus (float a, float b) { return a+b; }
-float minus (float a, float b) { return a-b; }
+float Plus (float a, float b) { return a+b; }
+float Minus (float a, float b) { return a-b; }
 float multiply(float a, float b) { return a*b; }
 float divide (float a, float b) { return a/b; }
 
@@ -46,10 +46,10 @@ float switchOpCode(float a, float b, char opCode)  {
     float result;
     switch(opCode)   {
     case '+' :
-      result = plus (a, b); 
+      result = Plus (a, b);
       break;
     case '-' :
-      result = minus (a, b); 
+      result = Minus (a, b);
       break;
     case '*' :
       result = multiply (a, b); 
@@ -67,7 +67,7 @@ float switchOpCode(float a, float b, char opCode)  {
  * returns a float. The function pointer "specifies" which arithmetic
  * operation is executed.
  */
-float switchFunctPtr(float a, float b, float (*pt2Func)(float, float))  {
+float switchFuncPtr(float a, float b, float (*pt2Func)(float, float))  {
   return pt2Func(a, b); // call using function pointer
 
 }
@@ -83,9 +83,9 @@ int main() {
        << endl;
 
   cout << "Switch: 2.0 - 5.0 = "
-       << switchFunctPtr (2.0,
+       << switchFuncPtr (2.0,
                           5.0,
                           // pointer to function 'minus'.
-                          &minus.
+                          &Minus)
        << endl;
 }

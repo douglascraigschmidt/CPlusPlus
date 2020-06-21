@@ -50,19 +50,27 @@ int main() {
   int a[] = {10, 20, -30, 40, -50, 60};
 
   // Find the first negative number.
-  auto itr = find_if (begin(a),
-                      end(a),
-                      // The binder object "lives" only thruout the
-                      // execution of the loop inside find_if(). The
-                      // expression predicate(*i) inside find_if()
-                      // simply calls the member function operator(),
-                      // passing an int as parameter, which is each
-                      // element of the list since that's what we get
-                      // when we dereference the iterator.
-                      bind (less<int>(), placeholders::_1, 0));
+  auto itr1 = find_if (begin(a),
+                       end(a),
+                       // The binder object "lives" only thruout the
+                       // execution of the loop inside find_if(). The
+                       // expression predicate(*i) inside find_if()
+                       // simply calls the member function operator(),
+                       // passing an int as parameter, which is each
+                       // element of the list since that's what we get
+                       // when we dereference the iterator.
+                       bind (less<int>(), placeholders::_1, 0));
 
-  if (itr != a_end) 
-    cout << *itr << " is negative" << endl;
+  if (itr1 != end(a))
+    cout << *itr1 << " is first negative" << endl;
+
+  // Find the last negative number.
+  auto itr2 = find_if (rbegin(a),
+                       rend(a),
+                       bind (less<int>(), placeholders::_1, 0));
+
+  if (itr2 != rend(a))
+    cout << *itr2 << " is last negative" << endl;
 
   return 0;
 } 
