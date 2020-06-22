@@ -50,8 +50,8 @@ int main() {
   // Use a functor to order set in descending order.
   set<float, std::greater<>> dSet{5.5, 1.1, 3.3, 4.4, 2.2};
 
-  demonstrate_functors(aSet.begin(), dSet.end());
-  demonstrate_lambdas(aSet.begin(), dSet.end());
+  demonstrate_functors(dSet.begin(), dSet.end());
+  demonstrate_lambdas(dSet.begin(), dSet.end());
 
   return 0;
 }
