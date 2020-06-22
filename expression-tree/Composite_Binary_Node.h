@@ -18,14 +18,14 @@ public:
                          Component_Node *right);
 
   /// Dtor
-  virtual ~Composite_Binary_Node (void);
+  ~Composite_Binary_Node () override;
 
   /// Return the left child.
-  virtual Component_Node *left (void) const;
+  [[nodiscard]] Component_Node *left () const override;
 
 private:
   /// left child
-  std::auto_ptr<Component_Node> left_;
+  std::unique_ptr<Component_Node> left_;
 };
 
 #endif /* _COMPOSITE_BINARY_NODE_H_ */

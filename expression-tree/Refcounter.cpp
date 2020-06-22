@@ -65,7 +65,7 @@ Refcounter<T>::get_ptr (void)
 
 /// get the underlying pointer
 template <typename T>
-const T *
+Component_Node *const
 Refcounter<T>::get_ptr (void) const
 {
   return ptr_->t_;

@@ -32,7 +32,7 @@ class Expression_Tree_Iterator_Factory
 {
 public:
   /// Constructor.
-  Expression_Tree_Iterator_Factory (void);
+  Expression_Tree_Iterator_Factory ();
 
   /// Dynamically allocate a new @a Expression_Tree_Iterator_Impl
   /// object based on the designated @a traversal_order and @a end_iter.
@@ -43,31 +43,31 @@ public:
 private:
   /// Dynamically allocate a new @a Expression_Tree_Level_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  Expression_Tree_Iterator_Impl *make_in_order_tree_iterator (Expression_Tree &tree,
+  static Expression_Tree_Iterator_Impl *make_in_order_tree_iterator (Expression_Tree &tree,
                                                               bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Pre_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  Expression_Tree_Iterator_Impl *make_pre_order_tree_iterator (Expression_Tree &tree,
+  static Expression_Tree_Iterator_Impl *make_pre_order_tree_iterator (Expression_Tree &tree,
                                                                bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Post_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  Expression_Tree_Iterator_Impl *make_post_order_tree_iterator (Expression_Tree &tree,
+  static Expression_Tree_Iterator_Impl *make_post_order_tree_iterator (Expression_Tree &tree,
                                                                 bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Level_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  Expression_Tree_Iterator_Impl *make_level_order_tree_iterator (Expression_Tree &tree,
+  static Expression_Tree_Iterator_Impl *make_level_order_tree_iterator (Expression_Tree &tree,
                                                                  bool end_iter);
 
-  typedef Expression_Tree_Iterator_Impl *(Expression_Tree_Iterator_Factory::*TRAVERSAL_PTMF) (Expression_Tree &tree, bool end_iter);
+  typedef Expression_Tree_Iterator_Impl *(*TRAVERSAL_PTMF) (Expression_Tree &tree, bool end_iter);
   typedef std::map <std::string, TRAVERSAL_PTMF> TRAVERSAL_MAP;
 
   TRAVERSAL_MAP traversal_map_;
 };
 
-Expression_Tree_Iterator_Factory::Expression_Tree_Iterator_Factory (void)
+Expression_Tree_Iterator_Factory::Expression_Tree_Iterator_Factory ()
 {
   traversal_map_["in-order"] = &Expression_Tree_Iterator_Factory::make_in_order_tree_iterator;
   traversal_map_["pre-order"] = &Expression_Tree_Iterator_Factory::make_pre_order_tree_iterator;
@@ -108,7 +108,7 @@ Expression_Tree_Iterator_Factory::make_tree_iterator (Expression_Tree &tree,
                                                       const std::string &traversal_order,
                                                       bool end_iter)
 {  
-  TRAVERSAL_MAP::iterator iter = traversal_map_.find (traversal_order);
+  auto iter = traversal_map_.find (traversal_order);
   if (iter == traversal_map_.end ())
     {
       // We don't understand the type. Convert the type to a string
@@ -119,7 +119,7 @@ Expression_Tree_Iterator_Factory::make_tree_iterator (Expression_Tree &tree,
   else
     {
       Expression_Tree_Iterator_Factory::TRAVERSAL_PTMF ptmf = iter->second;
-      return (this->*ptmf) (tree, end_iter);
+      return (*ptmf) (tree, end_iter);
     }
 }
 
@@ -128,8 +128,8 @@ static Expression_Tree_Iterator_Factory tree_iterator_factory;
 
 // Default ctor
 
-Expression_Tree::Expression_Tree (void)
-  : root_ (0)
+Expression_Tree::Expression_Tree ()
+  : root_ (nullptr)
 {    
 }
 
@@ -149,13 +149,15 @@ Expression_Tree::Expression_Tree (const Expression_Tree &t)
 
 // Assignment operator
 
-void
+Expression_Tree &
 Expression_Tree::operator= (const Expression_Tree &t)
 {
   // Refcounter class takes care of the internal decrements and
   // increments.
   if (this != &t)
-    root_ = t.root_;    
+    root_ = t.root_;
+
+  return *this;
 }
 
 // Dtor
@@ -176,8 +178,7 @@ Expression_Tree::is_null (void) const
 // return root pointer
 
 Component_Node *
-Expression_Tree::get_root (void) 
-{
+Expression_Tree::get_root () const {
   return root_.get_ptr ();
 }
 

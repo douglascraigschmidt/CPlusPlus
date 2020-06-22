@@ -17,12 +17,11 @@ Composite_Negate_Node::Composite_Negate_Node (Component_Node *right)
 }
 
 // Dtor
-Composite_Negate_Node::~Composite_Negate_Node (void)
-{
-}
+Composite_Negate_Node::~Composite_Negate_Node ()
+= default;
 
 int
-Composite_Negate_Node::item (void) const
+Composite_Negate_Node::item () const
 {
   return '-';
 }

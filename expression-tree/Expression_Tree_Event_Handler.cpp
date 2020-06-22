@@ -54,7 +54,7 @@ Expression_Tree_Event_Handler::handle_input (void)
 bool
 Expression_Tree_Event_Handler::get_input (std::string &input)
 {
-  return std::getline (std::cin, input) != 0;
+  return !std::getline (std::cin, input);
 }
 
 bool

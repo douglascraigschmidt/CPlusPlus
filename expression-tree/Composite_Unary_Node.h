@@ -13,17 +13,17 @@ class Composite_Unary_Node : public Component_Node
 {
 public:
   /// Ctor
-  Composite_Unary_Node (Component_Node *right);
+  explicit Composite_Unary_Node (Component_Node *right);
 
   /// Return the right child.
-  virtual Component_Node *right (void) const;
+  [[nodiscard]] Component_Node *right () const override;
 
   /// Dtor
-  virtual ~Composite_Unary_Node (void);
+  ~Composite_Unary_Node () override;
 
 private:
   /// Right child
-  std::auto_ptr<Component_Node> right_;
+  std::unique_ptr<Component_Node> right_;
 };
 
 #endif /* _COMPOSITE_UNARY_NODE_H_ */

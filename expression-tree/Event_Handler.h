@@ -15,14 +15,14 @@ class Event_Handler
 {
 public:
   /// Delete this object.
-  virtual void delete_this (void);
+  virtual void delete_this ();
 
   /// Called back by the @a Reactor when input events occur.
-  virtual void handle_input (void) = 0;
+  virtual void handle_input () = 0;
 
 protected:
   /// Destructor is private to ensure dynamic allocation.
-  virtual ~Event_Handler (void) = 0;
+  virtual ~Event_Handler () = 0;
 };
 
 #endif /* _EVENT_HANDLER_H_ */

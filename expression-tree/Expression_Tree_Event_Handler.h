@@ -77,14 +77,14 @@ class Verbose_Expression_Tree_Event_Handler
 {
 public:
   /// Constructor.
-  Verbose_Expression_Tree_Event_Handler (void);
+  Verbose_Expression_Tree_Event_Handler ();
 
   /// Dtor.
-  virtual ~Verbose_Expression_Tree_Event_Handler (void);
+  virtual ~Verbose_Expression_Tree_Event_Handler ();
 
 protected:
   /// This hook method verbosely prompts the user for input.
-  virtual void prompt_user (void);
+  virtual void prompt_user ();
 
   /// This hook method makes the appropriate command based on the user
   /// input.

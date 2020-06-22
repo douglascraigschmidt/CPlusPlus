@@ -72,14 +72,15 @@ In_Order_Expression_Tree_Iterator_Impl::operator++ (void)
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
 
-  if (!stack_.is_empty ())
+  if (!stack_.empty ())
     {
       // if we have nodes greater than ourselves
       if (!stack_.top ().right ().is_null ())
         {
-          // push the right child node onto the stack
+            // push the right child node onto the stack
           // and pop the old parent (it's been visited now)
-          stack_.push (stack_.pop ().right ());
+          stack_.push (stack_.top().right ());
+          stack_.pop();
 
           // keep pushing until we get to the left most child
           while (!stack_.top ().left ().is_null ())
@@ -117,7 +118,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterat
           && stack_.size () == in_order_rhs->stack_.size ())
         {
           // Check for both being is_empty (special condition).
-          if (stack_.is_empty () && in_order_rhs->stack_.is_empty ())
+          if (stack_.empty () && in_order_rhs->stack_.empty ())
             return true;
 
           // check the front's node pointer. If the node pointers are
@@ -198,12 +199,13 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator++ (void)
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
 
-  if (!stack_.is_empty ())
+  if (!stack_.empty ())
     {
       // we need to pop the node off the stack before pushing the
       // children, or else we'll revisit this node later
 
-      Expression_Tree current = stack_.pop ();
+      Expression_Tree current = stack_.top ();
+      stack_.pop();
 
       // note the order here: right first, then left. Since this is
       // LIFO, this results in the left child being the first
@@ -243,7 +245,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Itera
           && stack_.size () == pre_order_rhs->stack_.size ())
         {
           // check for both being is_empty (special condition)
-          if (stack_.is_empty () && pre_order_rhs->stack_.is_empty ())
+          if (stack_.empty () && pre_order_rhs->stack_.empty ())
             return true;
 
           // check the front's node pointer. If the node pointers
@@ -347,16 +349,17 @@ Post_Order_Expression_Tree_Iterator_Impl::operator++ (void)
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
 
-  if (!stack_.is_empty ())
+  if (!stack_.empty ())
     {
       // we need to pop the node off the stack before pushing the
       // children, or else we'll revisit this node later
 
-      Expression_Tree current = stack_.pop ();
+      Expression_Tree current = stack_.top ();
+      stack_.pop();
 
       // This is where stuff gets a little confusing.
 
-      if (!stack_.is_empty () 
+      if (!stack_.empty ()
           && stack_.top ().left ().get_root () != current.get_root ()
           && stack_.top ().right ().get_root () != current.get_root () )
         {
@@ -411,7 +414,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iter
           && stack_.size () == post_order_rhs->stack_.size ())
         {
           // check for both being is_empty (special condition)
-          if (stack_.is_empty () && post_order_rhs->stack_.is_empty ())
+          if (stack_.empty () && post_order_rhs->stack_.empty ())
             return true;
 
           // check the front's node pointer. If the node pointers are
@@ -453,12 +456,12 @@ Post_Order_Expression_Tree_Iterator_Impl::clone (void)
 Level_Order_Expression_Tree_Iterator_Impl::Level_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
                                                                                       bool end_iter)
   : Expression_Tree_Iterator_Impl (tree), 
-    queue_ (LQUEUE_SIZE)
+    queue_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
   if (!end_iter && !this->tree_.is_null ())
-    queue_.enqueue (const_cast <Expression_Tree &> (tree));
+    queue_.push (const_cast <Expression_Tree &> (tree));
 }
 
 /// destructor - nothing to do
@@ -488,18 +491,19 @@ Level_Order_Expression_Tree_Iterator_Impl::operator* (void) const
 void
 Level_Order_Expression_Tree_Iterator_Impl::operator++ (void) 
 {
-  if (!queue_.is_empty ())
+  if (!queue_.empty ())
     {
       // If the queue is not empty, dequeue an element
-      Expression_Tree root = queue_.dequeue ();
+      Expression_Tree root = queue_.front ();
+      queue_.pop();
 
       if (!root.is_null ())
         {
           // If the element wasn't null, enqueue its children
           if (!root.left ().is_null ())
-            queue_.enqueue (root.left ());
+            queue_.push (root.left ());
           if (!root.right ().is_null ())
-            queue_.enqueue (root.right ());
+            queue_.push (root.right ());
         }
     }
 }
@@ -531,7 +535,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Ite
           && queue_.size () == level_order_rhs->queue_.size ())
         {
           // check for both being is_empty (special condition)
-          if (queue_.is_empty () && level_order_rhs->queue_.is_empty ())
+          if (queue_.empty () && level_order_rhs->queue_.empty ())
             return true;
 
           // check the front's node pointer. If the node pointers

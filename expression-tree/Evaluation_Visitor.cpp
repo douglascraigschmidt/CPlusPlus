@@ -24,16 +24,24 @@ Evaluation_Visitor::visit (const Leaf_Node &node)
 void 
 Evaluation_Visitor::visit (const Composite_Negate_Node &node)
 {
-  if (stack_.size () >= 1)
-    stack_.push (-stack_.pop ());
+  if (!stack_.empty()) {
+      auto arg = stack_.top();
+      stack_.pop();
+      stack_.push(-arg);
+  }
 }
 
 /// evaluation of an addition (Composite_Add_Node)
 void 
 Evaluation_Visitor::visit (const Composite_Add_Node &node)
 {
-  if (stack_.size () >= 2)
-    stack_.push (stack_.pop () + stack_.pop ());
+  if (stack_.size () >= 2) {
+      auto rhs = stack_.top();
+      stack_.pop();
+      auto lhs = stack_.top();
+      stack_.pop();
+      stack_.push(lhs + rhs);
+  }
   // std::cout << "add current top: " << stack_.top () << std::endl;
 }
 
@@ -43,8 +51,11 @@ Evaluation_Visitor::visit (const Composite_Subtract_Node &node)
 {
   if (stack_.size () >= 2)
     {
-      int rhs = stack_.pop ();
-      stack_.push (stack_.pop () - rhs);
+      auto rhs = stack_.top ();
+      stack_.pop ();
+      auto lhs = stack_.top ();
+      stack_.pop ();
+      stack_.push (lhs - rhs);
     }
 }
 
@@ -54,8 +65,11 @@ Evaluation_Visitor::visit (const Composite_Divide_Node &node)
 {
   if (stack_.size () >= 2 && stack_.top ())
     {
-      int rhs = stack_.pop ();
-      stack_.push (stack_.pop () / rhs );
+      auto rhs = stack_.top ();
+      stack_.pop ();
+      auto lhs = stack_.top ();
+      stack_.pop ();
+      stack_.push (lhs / rhs );
     }
   else
     {
@@ -69,15 +83,20 @@ Evaluation_Visitor::visit (const Composite_Divide_Node &node)
 void 
 Evaluation_Visitor::visit (const Composite_Multiply_Node &node)
 {
-  if (stack_.size () >= 2)
-    stack_.push (stack_.pop () * stack_.pop ());
+  if (stack_.size () >= 2) {
+      auto rhs = stack_.top ();
+      stack_.pop ();
+      auto lhs = stack_.top ();
+      stack_.pop ();
+      stack_.push(lhs * rhs);
+  }
 }
 
 /// print a total for the evaluation
 int 
-Evaluation_Visitor::total (void)
+Evaluation_Visitor::total ()
 {
-  if (!stack_.is_empty ())
+  if (!stack_.empty ())
     return stack_.top ();
   else
     return 0;
@@ -85,9 +104,10 @@ Evaluation_Visitor::total (void)
 
 /// reset the evaluation
 void 
-Evaluation_Visitor::reset (void)
+Evaluation_Visitor::reset ()
 {
-  stack_.erase ();
+  // Reset the stack to 0.
+  stack_ = std::stack<int>();
 }
 
 #endif /* _EVALUATION_VISITOR_CPP_ */

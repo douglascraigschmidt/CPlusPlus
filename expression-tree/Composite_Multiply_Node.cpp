@@ -17,12 +17,11 @@ Composite_Multiply_Node::Composite_Multiply_Node (Component_Node * left,
 }
 
 // Dtor
-Composite_Multiply_Node::~Composite_Multiply_Node (void)
-{
-}
+Composite_Multiply_Node::~Composite_Multiply_Node ()
+= default;
 
 int
-Composite_Multiply_Node::item (void) const
+Composite_Multiply_Node::item () const
 {
   return '*';
 }

@@ -2,8 +2,8 @@
 #ifndef _EVALUATION_VISITOR_H_
 #define _EVALUATION_VISITOR_H_
 
+#include <stack>
 #include "Visitor.h"
-#include "LStack.h"
 
 /// forward declarations of nodes
 /// solves circular include problem
@@ -26,32 +26,32 @@ class Evaluation_Visitor : public Visitor
 {
 public:
   /// Visit a @a Leaf_Node.
-  virtual void visit (const Leaf_Node &node);
+  void visit (const Leaf_Node &node) override;
 
   /// Visit a @a Composite_Negate_Node.
-  virtual void visit (const Composite_Negate_Node &node);
+  void visit (const Composite_Negate_Node &node) override;
 
   /// Visit a @a Composite_Add_Node.
-  virtual void visit (const Composite_Add_Node &node);
+  void visit (const Composite_Add_Node &node) override;
 
   /// Visit a @a Composite_Subtract_Node.
-  virtual void visit (const Composite_Subtract_Node &node);
+  void visit (const Composite_Subtract_Node &node) override;
 
   /// Visit a @a Composite_Divide_Node.
-  virtual void visit (const Composite_Divide_Node &node);
+  void visit (const Composite_Divide_Node &node) override;
 
   /// Visit a @a Composite_Multiply_Node.
-  virtual void visit (const Composite_Multiply_Node &node);
+  void visit (const Composite_Multiply_Node &node) override;
 
   /// Print the total of the evaluation.
-  int total (void);
+  int total ();
 
   /// Resets the evaluation to it can be reused.
-  void reset (void);
+  void reset ();
 
 private:
   /// Stack used for temporarily storing evaluations.
-  LStack<int> stack_;
+  std::stack<int> stack_;
 };  
 
 #endif /* _VISITOR_H_ */

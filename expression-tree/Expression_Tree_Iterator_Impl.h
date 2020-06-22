@@ -2,11 +2,10 @@
 #ifndef _TREE_ITERATOR_IMPL_H_
 #define _TREE_ITERATOR_IMPL_H_
 
-#include <stdlib.h>
+#include <stack>
+#include <queue>
+#include <cstdlib>
 #include <stdexcept>
-
-#include "LStack.h"
-#include "LQueue.h"
 
 // Solve circular include problem
 
@@ -122,7 +121,7 @@ public:
 
 private:
   /// Our current position in the iteration.
-  LStack <Expression_Tree> stack_;
+  std::stack <Expression_Tree> stack_;
 };
 
 /**
@@ -176,7 +175,7 @@ public:
 
 private:
   /// Our current position in the iteration.
-  LStack <Expression_Tree> stack_;
+  std::stack <Expression_Tree> stack_;
 };
 
 /**
@@ -230,7 +229,7 @@ public:
 
 private:
   /// Our current position in the iteration.
-  LStack <Expression_Tree> stack_;
+  std::stack <Expression_Tree> stack_;
 };
 
 /**
@@ -284,8 +283,7 @@ public:
 
 private:
   /// Our current position in the iteration.
-  // @@ Consider zapping this.
-  LQueue <Expression_Tree> queue_;
+  std::queue <Expression_Tree> queue_;
 };
 
 #endif /* _TREE_ITERATOR_IMPL_H_ */

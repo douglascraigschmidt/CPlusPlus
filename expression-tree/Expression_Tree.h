@@ -32,7 +32,7 @@ public:
   class Invalid_Iterator : public std::domain_error
   {
   public:
-    Invalid_Iterator(const std::string &message) : std::domain_error(message) {}
+    explicit Invalid_Iterator(const std::string &message) : std::domain_error(message) {}
   }; 
 
   // Define a "trait"
@@ -41,36 +41,36 @@ public:
   typedef Expression_Tree_Const_Iterator const_iterator;
 
   /// Default ctor
-  Expression_Tree (void);
+  Expression_Tree ();
 
   /// Ctor that takes a @a Node * that contains all the nodes in the
   /// expression tree.
-  Expression_Tree (Component_Node *root, bool increase_count = false);
+  explicit Expression_Tree (Component_Node *root, bool increase_count = false);
 
   // Copy ctor
   Expression_Tree (const Expression_Tree &t);
 
   /// Gain access to the underlying root pointer functions are useful
   /// to the iterators.
-  Component_Node *get_root (void);
+  [[nodiscard]] Component_Node * get_root () const;
 
   /// Assignment operator.
-  void operator= (const Expression_Tree &t);
+  Expression_Tree &operator= (const Expression_Tree &t);
 
   /// Dtor
-  ~Expression_Tree (void);
+  ~Expression_Tree ();
 
   /// Check if tree is null tree.
-  bool is_null (void) const;
+  [[nodiscard]] bool is_null () const;
 
   /// Return the item in the tree.
-  int item (void) const;
+  [[nodiscard]] int item () const;
 
   /// Return the left child.
-  Expression_Tree left (void);
+  Expression_Tree left ();
 
   /// Return the right child.
-  Expression_Tree right (void);
+  Expression_Tree right ();
 
   /// Get an iterator pointing to the "beginning" of the expression
   /// tree relative to the requested @a traversal_order.
@@ -82,11 +82,11 @@ public:
 
   /// Get a const iterator pointing to the "beginning" of the
   /// expression tree relative to the requested @a traversal_order.
-  const_iterator begin (const std::string &traversal_order) const;
+  [[nodiscard]] const_iterator begin (const std::string &traversal_order) const;
 
   /// Get a const iterator pointing to the "end" of the expression
   /// tree relative to the requested @a traversal_order.
-  const_iterator end (const std::string &traversal_order) const;
+  [[nodiscard]] const_iterator end (const std::string &traversal_order) const;
 
   /// Accept a visitor to perform some action on the Expression_Tree.
   void accept (Visitor &visitor) const;

@@ -66,8 +66,8 @@ namespace parsing {
   int
   getopt(int argc, char *argv[], char *optstring)
   {
-    register char c;
-    register char *place;
+    char c;
+    char *place;
 
     optarg = 0;
 

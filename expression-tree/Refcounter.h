@@ -2,6 +2,8 @@
 #ifndef _REFCOUNTER_H_
 #define _REFCOUNTER_H_
 
+#include "Component_Node.h"
+
 /**
  * @class Refcounter
  * @brief This template class provides transparent reference counting
@@ -49,7 +51,7 @@ public:
   T *get_ptr (void);
 
   /// get the underlying pointer
-  const T *get_ptr (void) const;
+  Component_Node *const get_ptr (void) const;
 
 private:
   /// implementation of the increment operation

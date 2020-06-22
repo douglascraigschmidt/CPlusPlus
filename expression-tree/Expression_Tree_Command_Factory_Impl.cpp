@@ -1,20 +1,17 @@
 #ifndef _COMMAND_FACTORY_IMPL_CPP
-#define _COMMANd_FACTORY_IMPL_CPP
+#define _COMMAND_FACTORY_IMPL_CPP
 
-#include <sstream>
 #include <stdexcept>
 
 #include "Expression_Tree_Command_Factory_Impl.h"
-#include "Expression_Tree_Command.h"
-#include "Expression_Tree_Command_Impl.h"
 
 // Expression_Tree_Command_Factory_Impl Constructor.
-Expression_Tree_Command_Factory_Impl::Expression_Tree_Command_Factory_Impl (void)
+Expression_Tree_Command_Factory_Impl::Expression_Tree_Command_Factory_Impl ()
 {
 }
 
 // Expression_Tree_Command_Factory_Impl Destructor.
-Expression_Tree_Command_Factory_Impl::~Expression_Tree_Command_Factory_Impl (void)
+Expression_Tree_Command_Factory_Impl::~Expression_Tree_Command_Factory_Impl ()
 {
 }
 

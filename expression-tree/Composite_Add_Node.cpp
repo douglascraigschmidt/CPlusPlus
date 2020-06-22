@@ -18,7 +18,7 @@ Composite_Add_Node::Composite_Add_Node (Component_Node *left,
 }
 
 int
-Composite_Add_Node::item (void) const
+Composite_Add_Node::item () const
 {
   return '+';
 }

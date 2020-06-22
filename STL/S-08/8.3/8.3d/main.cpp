@@ -10,22 +10,22 @@ using namespace std;
  * relational functors have the standard six math functions =, != , >,
  * >=, * <, and <=.
  * 
- * Predicate	         Type	 Result
- * equal_to<type>()	     Binary	 Equality of parameters (param1 == param2)
+ * Predicate             Type    Result
+ * equal_to<type>()      Binary  Equality of parameters (param1 == param2)
  * 
- * not_equal_to<type>()	 Binary	 Inequality of parameters (param1 !=
+ * not_equal_to<type>()  Binary  Inequality of parameters (param1 !=
  *                               param2) 
  * 
  * less<type>()          Binary  Parameter 1 less than parameter 2
  *                               (param1 < param2) 
  * 
- * greater<type>()	     Binary	 Parameter 1 greater than parameter 2
+ * greater<type>()       Binary  Parameter 1 greater than parameter 2
  *                               (param1 > param2) 
  *  
- * less_equal<type>()	 Binary	 Parameter 1 less than or equal to
+ * less_equal<type>()    Binary  Parameter 1 less than or equal to
  *                               parameter 2 (param1 <= param2) 
  * 
- * greater_equal<type>() Binary	 Parameter 1 greater than or equal to
+ * greater_equal<type>() Binary  Parameter 1 greater than or equal to
  *                               parameter 2 (param1 >= param2) 
  *  
  * The STL templates also enable the creation of custom binary or

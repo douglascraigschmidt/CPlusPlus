@@ -13,14 +13,13 @@ Composite_Binary_Node::Composite_Binary_Node (Component_Node *left,
 }
 
 // Dtor
-Composite_Binary_Node::~Composite_Binary_Node (void)
-{
-}
+Composite_Binary_Node::~Composite_Binary_Node ()
+= default;
 
 
 // Return the left child pointer
 Component_Node *
-Composite_Binary_Node::left (void) const
+Composite_Binary_Node::left () const
 {
   return left_.get ();
 }

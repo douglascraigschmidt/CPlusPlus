@@ -16,16 +16,16 @@ class Composite_Negate_Node : public Composite_Unary_Node
 {
 public:
   /// Ctor
-  Composite_Negate_Node (Component_Node *right);
+  explicit Composite_Negate_Node (Component_Node *right);
 
   /// Dtor
-  virtual ~Composite_Negate_Node (void);
+  ~Composite_Negate_Node () override;
 
   /// Return the printable character stored in the node.
-  virtual int item (void) const;
+  [[nodiscard]] int item () const override;
 
   /// Define the @a accept() operation used for the Visitor pattern.
-  virtual void accept (Visitor &visitor) const;
+  void accept (Visitor &visitor) const override;
 };
 
 #endif /* _COMPOSITE_NEGATE_NODE_H_ */

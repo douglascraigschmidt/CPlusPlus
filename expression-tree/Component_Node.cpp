@@ -10,11 +10,10 @@
 
 // Dtor
 Component_Node::~Component_Node (void)
-{
-}
+= default;
 
 int
-Component_Node::item (void) const
+Component_Node::item () const
 {
   throw Invalid_Function_Call ("Component_Node::item() called improperly");
   return 0;
@@ -22,16 +21,16 @@ Component_Node::item (void) const
 
 // default left is to return a null pointer
 Component_Node *
-Component_Node::left (void) const
+Component_Node::left () const
 {
-  return 0;
+  return nullptr;
 }
 
 // default right is to return a null pointer
 Component_Node *
-Component_Node::right (void) const
+Component_Node::right () const
 {
-  return 0;
+  return nullptr;
 }
 
 // accept a visitor

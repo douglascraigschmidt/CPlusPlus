@@ -15,12 +15,11 @@ Composite_Subtract_Node::Composite_Subtract_Node (Component_Node *left,
 }
 
 // Dtor
-Composite_Subtract_Node::~Composite_Subtract_Node (void)
-{
-}
+Composite_Subtract_Node::~Composite_Subtract_Node ()
+= default;
 
 int
-Composite_Subtract_Node::item (void) const
+Composite_Subtract_Node::item () const
 {
   return '-';
 }

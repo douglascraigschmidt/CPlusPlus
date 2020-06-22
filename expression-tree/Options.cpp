@@ -6,8 +6,6 @@
 
 #include "getopt.h"
 #include "Options.h"
-#include "LQueue.h"
-#include "LStack.h"
 #include "Typedefs.h"
 
 // Initialize the singleton.
@@ -34,11 +32,6 @@ Options::Options (void)
 // Dtor
 Options::~Options (void)
 {
-  // call free_list_release to clean up our preallocated LQueue_Nodes
-  LQueue_Node<Component_Node *>::free_list_release ();
-  LQueue_Node<int>::free_list_release ();
-  LStack_Node<Component_Node *>::free_list_release ();  
-  LStack_Node<int>::free_list_release ();  
 }
 
 // Return exe name.

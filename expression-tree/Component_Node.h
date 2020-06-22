@@ -31,21 +31,21 @@ public:
   class Invalid_Function_Call : public std::domain_error
   {
   public:
-    Invalid_Function_Call (const std::string &message): std::domain_error(message) {}
+    explicit Invalid_Function_Call (const std::string &message): std::domain_error(message) {}
   }; 
 
   /// Dtor
-  virtual ~Component_Node (void) = 0;
+  virtual ~Component_Node () = 0;
 
   /// Return the item stored in the node (throws std::domain_error if
   /// called directly).
-  virtual int item (void) const;
+  [[nodiscard]] virtual int item () const;
 
   /// Return the left child (returns 0 if called directly).
-  virtual Component_Node *left (void) const;
+  [[nodiscard]] virtual Component_Node *left () const;
 
   /// Return the right child (returns 0 if called directly).
-  virtual Component_Node *right (void) const;
+  [[nodiscard]] virtual Component_Node *right () const;
 
   /// Accept a visitor to perform some action on the node's item
   /// completely arbitrary visitor template (throws std::domain_error

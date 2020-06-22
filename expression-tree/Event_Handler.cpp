@@ -3,12 +3,11 @@
 
 #include "Event_Handler.h"
 
-Event_Handler::~Event_Handler (void)
-{
-}
+Event_Handler::~Event_Handler ()
+= default;
 
 void
-Event_Handler::delete_this (void)
+Event_Handler::delete_this ()
 {
   delete this;
 }

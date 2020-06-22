@@ -21,10 +21,10 @@ public:
                       Component_Node *right);
 
   /// Return the printable character stored in the node.
-  virtual int item (void) const;
+  [[nodiscard]] int item () const override;
 
   /// Define the @a accept() operation used for the Visitor pattern.
-  virtual void accept (Visitor &visitor) const;
+  void accept (Visitor &visitor) const override;
 };
 
 #endif /* _ADD_NODE_H_ */
