@@ -19,11 +19,11 @@ private:
  */
 int main () {
   // Declare a member function pointer.
-  bool (example_class::*ptrMemFunc)(int) const
+  bool (example_class::*ptrToMemFunc)(int) const
     = &example_class::firstFunc;
 
   example_class array (10);
 
-  if ((array.*ptrMemFunc)(11))
+  if ((array.*ptrToMemFunc)(11))
     cout << "the pointer member function is true because 11 is great than 10" << endl;
 }       

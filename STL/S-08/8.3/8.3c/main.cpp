@@ -19,7 +19,7 @@ using namespace std;
  * 
  * plus<type>()             Binary      Adds supplied parameters (param1 + param2)
  * 
- * minus<type>()            Binary      Subtracts supplied parameters (param1 ¡V param2)
+ * minus<type>()            Binary      Subtracts supplied parameters (param1 - param2)
  * 
  * multiplies<type>()       Binary      Multiplies supplied parameters (param1 * param2)
  * 
@@ -48,10 +48,10 @@ int main() {
   demonstrate_lambdas(aSet.begin(), aSet.end());
 
   // Use a functor to order set in descending order.
-  set<float, std::greater<>> aSet{5.5, 1.1, 3.3, 4.4, 2.2};
+  set<float, std::greater<>> dSet{5.5, 1.1, 3.3, 4.4, 2.2};
 
-  demonstrate_functors(aSet.begin(), aSet.end());
-  demonstrate_lambdas(aSet.begin(), aSet.end());
+  demonstrate_functors(aSet.begin(), dSet.end());
+  demonstrate_lambdas(aSet.begin(), dSet.end());
 
   return 0;
 }
@@ -82,7 +82,7 @@ demonstrate_functors(InputIterator first, InputIterator last) {
   transform(first, last,
             // This works because aVect retains is values from earlier transform().
             aVect.begin(),
-            bind2nd(divides<float>(), 3.0));
+            bind(divides<float>(), placeholders::_1, 3.0));
 
   copy (aVect.begin (),
         aVect.end (),
@@ -105,7 +105,7 @@ demonstrate_lambdas(InputIterator first, InputIterator last) {
   transform(first, last,
             first,
             back_inserter(aVect),
-            [](float a, float b) { return a * b; });
+            [](auto a, auto b) { return a * b; });
 
   copy (aVect.begin (),
         aVect.end (),
@@ -116,7 +116,7 @@ demonstrate_lambdas(InputIterator first, InputIterator last) {
   transform(first, last,
             // aVect retains its values from earlier transform().
             aVect.begin(),
-            [](float a) { return a / 3.0; });
+            [](auto a) { return a / 3.0; });
 
   copy (aVect.begin (),
         aVect.end (),

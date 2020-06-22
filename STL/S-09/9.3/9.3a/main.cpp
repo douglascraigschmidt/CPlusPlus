@@ -1,8 +1,6 @@
+#include <functional>
 #include <vector>
 #include <deque>
-#include <algorithm>
-#include <iterator>
-#include <functional>
 #include <iostream>
 
 using namespace std;
@@ -14,7 +12,7 @@ using namespace std;
  * Negater     Result
  * not1(Op)    Negates the result of unary 'Op'
  * not2(Op)    Negates result of binary 'Op'
- * not_fn(Op)  Negates result of 'Op'
+ * not_fn(Op)  Negates result of either a unary or binary 'Op'
  * 
  * To see how these negators work, we'll create our own template for
  * simple boolean functor that will check if a value is an odd number
@@ -62,7 +60,7 @@ int main() {
 
   print_results(deque1);
 
-  // Clear the vector.
+  // Clear the deque.
   deque1.resize(0);
 
   // Copy odd numbers using a C++ generic lambda function.

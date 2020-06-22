@@ -3,7 +3,7 @@ project(9_4a)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 add_executable(9_4a
         main.cpp)

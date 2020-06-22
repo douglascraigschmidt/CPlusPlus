@@ -54,7 +54,7 @@ static void demonstrate_on_array();
 
 /** 
  * Here is an example to remove spaces in a string that uses the
- * equal_to<> and bind2nd<> functors. It says perform remove_if when
+ * equal_to<> and bind<> functors. It says perform remove_if() when
  * the equal to function finds a blank char in the string.
  */
 int main() {
@@ -68,9 +68,9 @@ static void
 demonstrate_on_string() {
   string s = "spaces in text";
   cout << s << endl;
-  auto new_end = remove_if(s.begin(),
-                           s.end(), 
-                           bind2nd(equal_to<char>(), ' '));
+  auto new_end = remove_if(begin(s),
+                           end(s),
+                           bind(equal_to<>(), placeholders::_1, ' '));
 
   cout << s << endl; // Note the "xt" characters aren't removed at the end!
 
@@ -87,7 +87,7 @@ demonstrate_on_array() {
 
   auto new_end = remove_if(begin(s),
                            end(s),
-                           bind2nd(equal_to<char>(), ' '));
+                           bind(equal_to<>(), placeholders::_1, ' '));
 
   /*
    auto new_end = remove_if(begin(s),

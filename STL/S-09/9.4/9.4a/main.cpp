@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * A member function adapter can be used to allow class member
+ * A member function adapter can be used to allow C++ class member
  * functions as arguments to the STL predefined algorithms. There are
  * 3 of them (the first two are deprecated in later C++ standards):
  * 
@@ -60,7 +60,7 @@ int main() {
   WrapInt wi (10);
   wi.isEven();
 
-  for (int i = 0; i < 10; i++)
+  for (auto i = 0; i < 10; i++)
     aVect[i] = WrapInt(i + 1);
 
   cout << "Sequence contains: ";
@@ -80,6 +80,8 @@ int main() {
            mem_fun_ref(&WrapInt::showval));
   cout << endl;
 
+  aVect.erase(end_p, aVect.end());
+
   for (int i = 0; i < 10; i++)
     aVect[i] = WrapInt(i + 1);
 
@@ -96,6 +98,8 @@ int main() {
 
   cout << endl;
 
+  aVect.erase(end_p, aVect.end());
+
   for (int i = 0; i < 10; i++)
     aVect[i] = WrapInt(i + 1);
 
@@ -108,6 +112,9 @@ int main() {
            end_p,
            // Use a lambda function.
            [](WrapInt &wi) { wi.showval(); });
- 
+
+  aVect.erase(end_p, aVect.end());
+
+
   return 0;
 }

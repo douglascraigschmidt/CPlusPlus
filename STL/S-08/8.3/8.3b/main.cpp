@@ -55,7 +55,7 @@ using namespace std;
  * the STL provides templates in the <utility> header file so they can
  * use the !=, the >=, and <= operators.
  * 
- * #4. Functors classified based whether they can carry a ��state��:
+ * #4. Functors classified based whether they can carry a "state":
  * 
  * Having a state means having member variables that can take on
  * values. For example a class named Rectangle can have a fillColor

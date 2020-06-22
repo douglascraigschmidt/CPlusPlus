@@ -35,11 +35,13 @@ int main() {
 
   print_results(itr, v.end());
 
+  /*
   // Use an STL functor and a negator to get an iterator to the first
   // element in the vector that's not greater than three.
   itr = find_if (v.begin(),
                  v.end(),
                  not1(bind2nd(greater<int> (), 3)));
+                 */
 
   print_results(itr, v.end());
 
@@ -62,7 +64,7 @@ int main() {
   // Sort the vector using "not" less (i.e., greater).
   sort(v.begin(),
        v.end(),
-       not2(less<int>()));
+       not2(less<int>())); // can also use not_fn().
 
   print_results(v.begin(), v.end());
 

@@ -11,7 +11,7 @@ using namespace std;
  */
 static void demonstrate_bind1st();
 static void demonstrate_bind2nd();
-static void contrast_bind1st_and_bind2nd();
+static void contrast_bind1st_bind2nd_and_bind();
 
 /**
  * This example introduces the bind1st(), bind2nd(), and bind()
@@ -42,9 +42,9 @@ demonstrate_bind1st() {
        << endl;
 
   // Use bind()
-  n = count_if (numbers,
-                numbers_end,
-                bind(equal_to<int>(), placeholders::_1, 10));
+  n = count_if (begin(numbers),
+                end(numbers),
+                bind(equal_to<>(), placeholders::_1, 10));
 
   cout << "There are " 
        << n
@@ -52,8 +52,8 @@ demonstrate_bind1st() {
        << endl;
 
   // Use generic lambda function
-  n = count_if (numbers,
-                numbers_end,
+  n = count_if (begin(numbers),
+                end(numbers),
                 [](auto i) { return i == 10; });
 
   cout << "There are " 

@@ -13,19 +13,19 @@ using namespace std;
  * function. Define ptrFunc as a pointer to a non class member
  * function taking a single integer argument and returning a bool:
  * 
- * bool (*ptrFunc)( int );      
+ * bool (*ptrFunc)(int);
  *  
  * The value of ptrFunc becomes an actual function address to the CPU:
  */
-bool myFunction (int i) {
+bool isGreatThanTen (int i) {
   return i > 10;
 }
 
 int main () {
-  bool (*ptrFunc)(int) = &myFunction;
+  bool (*ptrToFunc)(int) = &isGreatThanTen;
 
-  if (ptrFunc(11))
-    std::cout << "ptrFunc (11) true" << endl;
+  if (ptrToFunc(11))
+    std::cout << "ptrToFunc (11) true" << endl;
 
   return 0 ;
 }

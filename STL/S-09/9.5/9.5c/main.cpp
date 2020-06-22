@@ -23,6 +23,7 @@ int main() {
 
   print(aVect.begin(), aVect.end(), "Sequence contains: ");
 
+#if 0
   // Using not1(), bind2nd(), and ptr_fun() adapters.
   auto itr = find_if(aVect.begin(),
                      aVect.end(),
@@ -30,10 +31,12 @@ int main() {
 
   print(itr, aVect.end(), "Found it: ");
 
+#else
   // Using not_fn() and bind()
-  itr = find_if(aVect.begin(),
-                aVect.end(),
-                not_fn(bind(strcmp, placeholders::_1, "Two")));
+  auto itr = find_if(aVect.begin(),
+                     aVect.end(),
+                     not_fn(bind(strcmp, placeholders::_1, "Two")));
+#endif
 
   print(itr, aVect.end(), "Found it: ");
 
