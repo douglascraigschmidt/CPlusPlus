@@ -63,10 +63,12 @@ public:
 
 /**
  * Demonstrates the use of STL algorithms that check for max and min
- * elements in an iterator range.
+ * elements in an iterator range for an STL array class.
  */
 int main() {
-  vector<int> stats {10, 25, 9, -30, 41, 11, -40, 67, -10};
+  array<int, 9> stats {10, 25, 9,
+                        -30, 41, 11,
+                        -40, 67, -10};
 
   cout << "Looking for max number" << endl;
 
@@ -74,7 +76,8 @@ int main() {
   auto result = max_element(stats.begin(), stats.end());
  
   if (result != stats.end())
-    cout << "Max found = " <<  *result << endl;
+    cout << "Max found = " <<  *result
+         << " in array of size " << stats.size() << endl;
 
   // Find the min element in the range.
   result = min_element(stats.begin(), stats.end());
