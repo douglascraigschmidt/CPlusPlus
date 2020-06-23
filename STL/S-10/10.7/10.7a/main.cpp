@@ -10,10 +10,13 @@ using namespace std;
  * STL algorithms include a number of functions that search for
  * elements in an iterator range, including the following:
  * 
- * . search: look in first range for an occurrence of the second
+ * . search() - look in first range for an occurrence of the second
  *   range, possibly using a binary_predicate.
  * 
- * . search_n: look in range for an occurrence of n items equal to a
+ * . find_end() - Searches for the last occurrence of the sequence
+ *   [s_first, s_last) in the range [first, last).
+
+ * . search_n() - look in range for an occurrence of n items equal to a
  *   value, possibly using a binary_predicate.
  * 
  * . adjacent_find() - looks for first pair in range that are equal,
@@ -35,9 +38,14 @@ template<typename InputIterator1, typename InputIterator2>
 static void
 search_for_subsequence(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2);
+template<typename InputIterator1, typename InputIterator2>
+static void
+find_end_for_subsequence(InputIterator1 first1, InputIterator1 last1,
+                         InputIterator2 first2, InputIterator2 last2);
 
 /**
- * This example demonstrates how to use the STL search() algorithm.
+ * This example demonstrates how to use the STL search() and find_end() algorithms,
+ * which are surprisingly similar!
  */
 int main() {
   vector<string> l1 {"now", "is", "the", "time", 
@@ -51,10 +59,12 @@ int main() {
                    "I'm", "on", "my", "way"};
 
   string l3[] = {"all", "good", "people"};
+  string l4[] = {"to"};
 
   // Search for subsequences using search().
   search_for_subsequence(l1.begin(), l1.end(), begin(l3), end(l3));
   search_for_subsequence(l2.begin(), l2.end(), begin(l3), end(l3));
+  find_end_for_subsequence(l1.begin(), l1.end(), begin(l4), end(l4));
 
   return 0;
 }
@@ -78,3 +88,27 @@ search_for_subsequence(InputIterator1 first1, InputIterator1 last1,
   } 
 }
 
+/**
+ * Use search() to search for a subsequence in a sequence.
+ */
+template<typename InputIterator1, typename InputIterator2>
+static void
+find_end_for_subsequence(InputIterator1 first1, InputIterator1 last1,
+                         InputIterator2 first2, InputIterator2 last2) {
+    std::cout << __FUNCTION__ << "()\n";
+
+    auto itr = find_end(first1,
+                        last1,
+                        first2,
+                        last2);
+
+    if (itr != last1) {
+        cout << "last occurrence is at index "
+             << distance(first1, itr)
+             << " with contents ";
+        copy(itr,
+             itr + distance(first2, last2),
+             ostream_iterator<decltype(*last2)>(cout, " "));
+        cout << endl;
+    }
+}

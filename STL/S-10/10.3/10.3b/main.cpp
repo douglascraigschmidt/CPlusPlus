@@ -110,15 +110,19 @@ find_with_array() {
                       is_greater_than<int>(value));
 
   if (itr1 != v1.get() + size)
-    cout << *itr1 << " is the first value greater than " << value << endl;
+    cout << *itr1 << " is the first value greater than "
+         << value << endl;
 
   // Use C++ lambda function to first value that's *not* >= 40.
   itr1 = find_if_not(v2.get(),
                      v2.get() + size,
-                     [value](auto i) { return i >= value; });
+                     [value](auto i) {
+                       return i >= value;
+                     });
 
   if (itr1 != v2.get() + size)
-    cout << *itr1 << " is not greater than or equal to " << value << endl;
+    cout << *itr1 << " is not greater than or equal to "
+         << value << endl;
 
   value = 40;
 
@@ -128,7 +132,8 @@ find_with_array() {
                       bind (greater<>(), placeholders::_1, value));
 
   if (itr2 != s.rend())
-    cout << *itr2 << " is the last value greater than " << value << endl;
+    cout << *itr2 << " is the last value greater than "
+         << value << endl;
 }
 
 #pragma clang diagnostic pop

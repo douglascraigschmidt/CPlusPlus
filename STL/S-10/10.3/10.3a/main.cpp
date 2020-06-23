@@ -3,6 +3,7 @@
 #pragma ide diagnostic ignored "modernize-use-transparent-functors"
 #include <algorithm>
 #include <iostream>
+#include <functional>
 #include <list>
 using namespace std;
 
@@ -16,10 +17,6 @@ using namespace std;
  * . find_first_of() - looks for items in first range that is also in
  *   the second range or uses a binary_predicate to find first matching
  *   item.
- * 
- * . find_end() - looks backward for items in first range that are not
- *   also in the second range or uses a binary_predicate to find first
- *   non-matching item.
  *
  * Some example implementations of STL find algorithms:
  *
@@ -50,7 +47,7 @@ using namespace std;
 int main() {
   int a[] = {10, 20, -30, 40, -50, 60};
 
-  // Find the first negative number.
+    // Find the first negative number.
   auto itr1 = find_if (begin(a),
                        end(a),
                        // The binder object "lives" only thruout the
@@ -75,6 +72,5 @@ int main() {
 
   return 0;
 } 
- 
 
 #pragma clang diagnostic pop

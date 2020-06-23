@@ -54,14 +54,17 @@ int main() {
   auto total = 0;
   for_each(begin(a),
            end(a),
-           [&total](auto j) { cout << j << ' '; total++;});
+           [&total](auto j) {
+             cout << j << ' ';
+             total++;
+           });
 
   cout << endl << total << " objects printed." << endl;
 
   print<int> p(cout);
 
   for (auto i : a)
-      p(i);
+    p(i);
 
   cout << endl << fun.count() << " objects printed." << endl;
 

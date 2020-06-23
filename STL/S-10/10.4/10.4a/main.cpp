@@ -13,8 +13,8 @@ using namespace std;
  * The following example shows the following STL non-mutating
  * algorithms that count elements in an iterator range:
  *
- * • count: scan range and count occurrence of a value. 
- * • count_if: scan range and count times a predicate is true.
+ * • count() - scan range and count occurrence of a value. 
+ * • count_if() - scan range and count times a predicate is true.
  */
 
 /**
