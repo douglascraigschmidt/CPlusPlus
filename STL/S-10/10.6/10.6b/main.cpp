@@ -52,11 +52,14 @@ find_mismatches(InputIterator1 first1, InputIterator1 last1,
         // using default comparison via operator==.
         auto results = mismatch(t1, last1, t2);
 
-        std::cout << "mismatching elements: " << *results.first;
-        std::cout << " and " << *results.second << '\n';
+        if (results.first != last1) {
+          std::cout << "mismatching elements: " << *results.first;
+          std::cout << " and " << *results.second << '\n';
 
-        t1 = ++results.first;
-        t2 = ++results.second;
+          t1 = ++results.first;
+          t2 = ++results.second;
+        } else
+          t1 = last1;
       }
     }
   }
