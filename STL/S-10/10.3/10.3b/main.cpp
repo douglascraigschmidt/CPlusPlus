@@ -1,4 +1,5 @@
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-avoid-bind"
 #pragma ide diagnostic ignored "modernize-use-transparent-functors"
 #include <algorithm>
 #include <iostream>
@@ -34,7 +35,7 @@ public:
   }
 
 private:
-  const T value;
+  const T &value;
 };
 
 /**
@@ -119,6 +120,8 @@ find_with_array() {
   if (itr1 != v2.get() + size)
     cout << *itr1 << " is not greater than or equal to " << value << endl;
 
+  value = 40;
+
   // Use bind() and greater<> functor to find last value > 20.
   auto itr2 = find_if(s.rbegin(),
                       s.rend(),
@@ -126,8 +129,6 @@ find_with_array() {
 
   if (itr2 != s.rend())
     cout << *itr2 << " is the last value greater than " << value << endl;
-
-  value = 40;
 }
 
 #pragma clang diagnostic pop

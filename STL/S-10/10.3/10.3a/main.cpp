@@ -1,4 +1,5 @@
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-avoid-bind"
 #pragma ide diagnostic ignored "modernize-use-transparent-functors"
 #include <algorithm>
 #include <iostream>
@@ -6,14 +7,14 @@
 using namespace std;
 
 /**
- * Some examples of non-mutating find algorithms:
+ * Some examples of non-mutating find*() family of algorithms:
  * 
  * . find() - looks for a value in a range. 
  * 
  * . find_if() - looks for items in a range that satisfy a predicate. 
  * 
  * . find_first_of() - looks for items in first range that is also in
- *   the second range or uses a binary_predicate to find first matchig
+ *   the second range or uses a binary_predicate to find first matching
  *   item.
  * 
  * . find_end() - looks backward for items in first range that are not
@@ -59,7 +60,7 @@ int main() {
                        // passing an int as parameter, which is each
                        // element of the list since that's what we get
                        // when we dereference the iterator.
-                       bind (less<int>(), placeholders::_1, 0));
+                       bind (less<>(), placeholders::_1, 0));
 
   if (itr1 != end(a))
     cout << *itr1 << " is first negative" << endl;
@@ -67,7 +68,7 @@ int main() {
   // Find the last negative number.
   auto itr2 = find_if (rbegin(a),
                        rend(a),
-                       bind (less<int>(), placeholders::_1, 0));
+                       bind (less<>(), placeholders::_1, 0));
 
   if (itr2 != rend(a))
     cout << *itr2 << " is last negative" << endl;

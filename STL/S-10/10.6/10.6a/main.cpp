@@ -22,8 +22,8 @@ using namespace std;
  * and prints the value to the given ostream.
  */
 template<typename T> 
-struct print
-  : public unary_function<T, void> {
+class print : public unary_function<T, void> {
+public:
   explicit print(ostream &out) : os_(out), i_ (0) {}
 
   void operator() (const T &x) {
@@ -34,6 +34,7 @@ struct print
     return i_; 
   }
 
+private:
   ostream& os_;
   int i_;
 };
@@ -41,12 +42,26 @@ struct print
 /**
  * This example demonstrates how to use the STL for_each() algorithm.
  */
-int main()  {
+int main() {
   int a[] = {1, 4, 2, 8, 5, 7};
 
   print<int> fun = for_each(begin(a),
                             end(a),
                             print<int>(cout));
+
+  cout << endl << fun.count() << " objects printed." << endl;
+
+  auto total = 0;
+  for_each(begin(a),
+           end(a),
+           [&total](auto j) { cout << j << ' '; total++;});
+
+  cout << endl << total << " objects printed." << endl;
+
+  print<int> p(cout);
+
+  for (auto i : a)
+      p(i);
 
   cout << endl << fun.count() << " objects printed." << endl;
 

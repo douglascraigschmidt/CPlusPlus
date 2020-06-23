@@ -2,10 +2,9 @@
 #pragma ide diagnostic ignored "modernize-avoid-bind"
 #include <iostream>
 #include <vector>
-#include <cmath>
 #include <algorithm>
 #include <functional>
-#include <numeric>
+#include <array>
 
 using namespace std;
 

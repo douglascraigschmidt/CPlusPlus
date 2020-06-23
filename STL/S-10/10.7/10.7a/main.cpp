@@ -53,8 +53,8 @@ int main() {
   string l3[] = {"all", "good", "people"};
 
   // Search for subsequences using search().
-  search_for_subsequence(l1.begin(), l1.end(), l3, l3 + 3);
-  search_for_subsequence(l2.begin(), l2.end(), l3, l3 + 3);
+  search_for_subsequence(l1.begin(), l1.end(), begin(l3), end(l3));
+  search_for_subsequence(l2.begin(), l2.end(), begin(l3), end(l3));
 
   return 0;
 }

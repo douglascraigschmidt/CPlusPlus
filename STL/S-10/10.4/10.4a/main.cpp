@@ -53,7 +53,7 @@ int main() {
   // Count # of times abs(10) occurs in range using a lambda function.
   num = count_if(v.begin(),
                  v.end(),
-                 [&](auto i) { return abs(i) == *itr; });
+                 [itr](auto i) { return abs(i) == *itr; });
 
   cout << "Found " << num << " occurrences of abs(" << *itr << ")" << endl;
 

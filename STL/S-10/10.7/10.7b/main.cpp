@@ -28,8 +28,6 @@ int main() {
                    "each", "day", "so", "satisfied", 
                    "I'm", "on", "my", "way"};
 
-  string l3[] = {"all", "good", "people"};
-
   // Search for 2 consecutive values using search_n().
   search_n_for_value(l1.begin(), l1.end(), 2, "t",
                      [](const string &s, const string &v) {
@@ -55,7 +53,7 @@ search_n_for_value(ForwardIterator first, ForwardIterator last,
                    BinaryPredicate pred) {
   std::cout << __FUNCTION__ << "()\n";
 
-  for (ForwardIterator tmp = first;
+  for (auto tmp = first;
        tmp != last; ) {
     auto itr = search_n(tmp, last, size, value, pred);
 

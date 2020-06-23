@@ -28,17 +28,15 @@ int main() {
                    "each", "day", "so", "satisfied", 
                    "I'm", "on", "my", "way"};
 
-  string l3[] = {"all", "good", "people"};
-
   // Search for 2 consecutive values using adjacent_find().
-    adjacent_find_for_pred(l1,
-                           [](const string &s, const string &v) {
-                               return s[0] == v[0];
-                           });
-    adjacent_find_for_pred(l2,
-                           [](const string &s, const string &v) {
-                               return s[0] == v[0];
-                           });
+  adjacent_find_for_pred(l1,
+                         [](const string &s, const string &v) {
+                             return s[0] == v[0];
+                         });
+  adjacent_find_for_pred(l2,
+                         [](const string &s, const string &v) {
+                             return s[0] == v[0];
+                         });
   return 0;
 }
 
