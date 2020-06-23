@@ -25,16 +25,16 @@ class Expression_Tree_Command_Factory
 {
 public:
   /// Default ctor that stores the designated @ tree_context.
-  Expression_Tree_Command_Factory (Expression_Tree_Context &tree_context);
+  explicit Expression_Tree_Command_Factory (Expression_Tree_Context &tree_context);
 
   /// Copy ctor - needed for reference counting.
   Expression_Tree_Command_Factory (const Expression_Tree_Command_Factory &f);
 
   /// Assignment operator - needed for reference counting.
-  void operator= (const Expression_Tree_Command_Factory &f);
+  Expression_Tree_Command_Factory &operator= (const Expression_Tree_Command_Factory &f);
 
   /// Dtor.
-  ~Expression_Tree_Command_Factory (void);
+  ~Expression_Tree_Command_Factory ();
 
   /// Make the requested command.  This method is the primary method
   /// used by clients.  

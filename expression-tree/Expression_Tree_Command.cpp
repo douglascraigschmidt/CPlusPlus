@@ -11,9 +11,7 @@ Expression_Tree_Command::Expression_Tree_Command (Expression_Tree_Command_Impl *
 }
 
 Expression_Tree_Command::Expression_Tree_Command (const Expression_Tree_Command &rhs)
-  : command_impl_ (rhs.command_impl_)
-{
-}
+= default;
 
 Expression_Tree_Command & 
 Expression_Tree_Command::operator= (const Expression_Tree_Command &rhs)
@@ -25,18 +23,17 @@ Expression_Tree_Command::operator= (const Expression_Tree_Command &rhs)
   return *this;
 }
 
-Expression_Tree_Command::~Expression_Tree_Command (void)
-{
-}
+Expression_Tree_Command::~Expression_Tree_Command ()
+= default;
 
 bool
-Expression_Tree_Command::execute (void)
+Expression_Tree_Command::execute ()
 {
   return command_impl_->execute ();
 }
 
 void
-Expression_Tree_Command::print_valid_commands (void)
+Expression_Tree_Command::print_valid_commands ()
 {
   command_impl_->print_valid_commands ();
 }

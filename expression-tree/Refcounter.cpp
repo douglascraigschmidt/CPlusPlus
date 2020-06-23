@@ -6,7 +6,7 @@
 
 /// default Ctor
 template <typename T>
-Refcounter<T>::Refcounter (void)
+Refcounter<T>::Refcounter ()
   : ptr_ (0)
 {
 }
@@ -30,7 +30,7 @@ Refcounter<T>::Refcounter (const Refcounter &rhs)
 
   /// Dtor will delete pointer if refcount becomes 0
 template <typename T>
-Refcounter<T>::~Refcounter (void)
+Refcounter<T>::~Refcounter ()
 {
   decrement ();
 }
@@ -38,35 +38,39 @@ Refcounter<T>::~Refcounter (void)
 /// assignment operator for times when you don't want the reference
 /// increased for incoming ptr.
 template <typename T>
-void 
+Refcounter<T> &
 Refcounter<T>::operator= (T *ptr)
 {
   decrement ();
   ptr_ = new Shim (ptr);
+  return *this;
 }
 
   /// assignment operator
 template <typename T>
-void
+Refcounter<T> &
 Refcounter<T>::operator= (const Refcounter& rhs)
 {
-  decrement ();
-  ptr_ = rhs.ptr_;
-  increment ();
+  if (this != &rhs) {
+      decrement();
+      ptr_ = rhs.ptr_;
+      increment();
+  }
+  return *this;
 }
 
 /// get the underlying pointer
 template <typename T>
 T * 
-Refcounter<T>::get_ptr (void)
+Refcounter<T>::get_ptr ()
 {
   return ptr_->t_;
 }
 
 /// get the underlying pointer
 template <typename T>
-Component_Node *const
-Refcounter<T>::get_ptr (void) const
+Component_Node *
+Refcounter<T>::get_ptr () const
 {
   return ptr_->t_;
 }
@@ -75,7 +79,7 @@ Refcounter<T>::get_ptr (void) const
 /// dereference operator
 template <typename T>
 T & 
-Refcounter<T>::operator* (void)
+Refcounter<T>::operator* ()
 {
   return *ptr_->t_;
 }
@@ -84,7 +88,7 @@ Refcounter<T>::operator* (void)
 template <typename T>
 const 
 T &
-Refcounter<T>::operator* (void) const
+Refcounter<T>::operator* () const
 {
   return *ptr_->t_;
 }
@@ -92,7 +96,7 @@ Refcounter<T>::operator* (void) const
 /// mimic pointer dereferencing
 template <typename T>
 T *
-Refcounter<T>::operator-> (void)
+Refcounter<T>::operator-> ()
 {
   return ptr_->t_;
 }
@@ -100,7 +104,7 @@ Refcounter<T>::operator-> (void)
 /// mimic pointer dereferencing
 template <typename T>
 const T *
-Refcounter<T>::operator-> (void) const
+Refcounter<T>::operator-> () const
 {
   return ptr_->t_;
 }
@@ -108,7 +112,7 @@ Refcounter<T>::operator-> (void) const
 /// implementation of the increment operation
 template <typename T>
 void 
-Refcounter<T>::increment (void)
+Refcounter<T>::increment ()
 {
   if (ptr_)
     ++ptr_->refcount_;
@@ -117,7 +121,7 @@ Refcounter<T>::increment (void)
   /// implementation of the decrement operation
 template <typename T>
 void 
-Refcounter<T>::decrement (void)
+Refcounter<T>::decrement ()
 {
   if (ptr_)
     {
@@ -137,7 +141,7 @@ Refcounter<T>::Shim::Shim (T *t)
 }
 
 template <typename T>
-Refcounter<T>::Shim::~Shim (void) 
+Refcounter<T>::Shim::~Shim ()
 { 
   delete t_; 
 }

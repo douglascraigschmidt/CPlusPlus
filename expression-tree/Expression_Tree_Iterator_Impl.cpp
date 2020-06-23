@@ -18,9 +18,8 @@ Expression_Tree_Iterator_Impl::Expression_Tree_Iterator_Impl (const Expression_T
 
 // Destructor
 
-Expression_Tree_Iterator_Impl::~Expression_Tree_Iterator_Impl (void)
-{
-}
+Expression_Tree_Iterator_Impl::~Expression_Tree_Iterator_Impl ()
+= default;
 
 /// Construct an In_Order_Expression_Tree_Iterator_Impl. If end_iter is set to true,
 /// the iterator points to the end of the tree
@@ -44,14 +43,13 @@ In_Order_Expression_Tree_Iterator_Impl::In_Order_Expression_Tree_Iterator_Impl (
 
 /// destructor - nothing to do
 
-In_Order_Expression_Tree_Iterator_Impl::~In_Order_Expression_Tree_Iterator_Impl (void)
-{
-}
+In_Order_Expression_Tree_Iterator_Impl::~In_Order_Expression_Tree_Iterator_Impl ()
+= default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-In_Order_Expression_Tree_Iterator_Impl::operator* (void)
+In_Order_Expression_Tree_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -59,7 +57,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator* (void)
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-In_Order_Expression_Tree_Iterator_Impl::operator* (void) const
+In_Order_Expression_Tree_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -67,7 +65,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator* (void) const
 /// moves the iterator to the next node (pre-increment)
  
 void
-In_Order_Expression_Tree_Iterator_Impl::operator++ (void)
+In_Order_Expression_Tree_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -96,7 +94,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator++ (void)
 bool 
 In_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
 {
-  const In_Order_Expression_Tree_Iterator_Impl * in_order_rhs = dynamic_cast
+  const auto *in_order_rhs = dynamic_cast
     <const In_Order_Expression_Tree_Iterator_Impl *> (&rhs);
 
   // if the rhs was not a level_order iterator then we've already
@@ -111,8 +109,8 @@ In_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterat
       // to assume the queue at least has a front node (coupled with
       // the is_empty () function later).
 
-      Expression_Tree &t1 = const_cast <Expression_Tree &> (tree_);
-      Expression_Tree &t2 = const_cast <Expression_Tree &> (in_order_rhs->tree_);
+      auto &t1 = const_cast <Expression_Tree &> (tree_);
+      auto &t2 = const_cast <Expression_Tree &> (in_order_rhs->tree_);
 
       if (t1.get_root () == t2.get_root () 
           && stack_.size () == in_order_rhs->stack_.size ())
@@ -149,7 +147,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iterat
 /// @see Expression_Tree_Iterator
  
 Expression_Tree_Iterator_Impl * 
-In_Order_Expression_Tree_Iterator_Impl::clone (void)
+In_Order_Expression_Tree_Iterator_Impl::clone ()
 {
   return new In_Order_Expression_Tree_Iterator_Impl (*this);
 }
@@ -170,15 +168,13 @@ Pre_Order_Expression_Tree_Iterator_Impl::Pre_Order_Expression_Tree_Iterator_Impl
 
 /// destructor - nothing to do
 
-Pre_Order_Expression_Tree_Iterator_Impl::~Pre_Order_Expression_Tree_Iterator_Impl (void)
-{
-
-}
+Pre_Order_Expression_Tree_Iterator_Impl::~Pre_Order_Expression_Tree_Iterator_Impl ()
+= default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Pre_Order_Expression_Tree_Iterator_Impl::operator* (void)
+Pre_Order_Expression_Tree_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -186,7 +182,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator* (void)
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Pre_Order_Expression_Tree_Iterator_Impl::operator* (void) const
+Pre_Order_Expression_Tree_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -194,7 +190,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator* (void) const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Pre_Order_Expression_Tree_Iterator_Impl::operator++ (void)
+Pre_Order_Expression_Tree_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -223,7 +219,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator++ (void)
 bool 
 Pre_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
 {
-  const Pre_Order_Expression_Tree_Iterator_Impl *pre_order_rhs = dynamic_cast
+  const auto *pre_order_rhs = dynamic_cast
     <const Pre_Order_Expression_Tree_Iterator_Impl *> (&rhs);
 
   // if the rhs was not a level_order iterator
@@ -238,8 +234,8 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Itera
       // to assume the queue at least has a front node (coupled with
       // the is_empty () function later).
 
-      Expression_Tree &t1 = const_cast <Expression_Tree &> (tree_);
-      Expression_Tree &t2 = const_cast <Expression_Tree &> (pre_order_rhs->tree_);
+      auto &t1 = const_cast <Expression_Tree &> (tree_);
+      auto &t2 = const_cast <Expression_Tree &> (pre_order_rhs->tree_);
 
       if (t1.get_root () == t2.get_root () 
           && stack_.size () == pre_order_rhs->stack_.size ())
@@ -277,7 +273,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Itera
 /// @see Expression_Tree_Iterator
  
 Expression_Tree_Iterator_Impl * 
-Pre_Order_Expression_Tree_Iterator_Impl::clone (void)
+Pre_Order_Expression_Tree_Iterator_Impl::clone ()
 {
   return new Pre_Order_Expression_Tree_Iterator_Impl (*this);
 }
@@ -321,14 +317,13 @@ Post_Order_Expression_Tree_Iterator_Impl::Post_Order_Expression_Tree_Iterator_Im
 
 /// destructor - nothing to do
 
-Post_Order_Expression_Tree_Iterator_Impl::~Post_Order_Expression_Tree_Iterator_Impl (void)
-{
-}
+Post_Order_Expression_Tree_Iterator_Impl::~Post_Order_Expression_Tree_Iterator_Impl ()
+= default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Post_Order_Expression_Tree_Iterator_Impl::operator* (void)
+Post_Order_Expression_Tree_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -336,7 +331,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator* (void)
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Post_Order_Expression_Tree_Iterator_Impl::operator* (void) const
+Post_Order_Expression_Tree_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -344,7 +339,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator* (void) const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Post_Order_Expression_Tree_Iterator_Impl::operator++ (void)
+Post_Order_Expression_Tree_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -392,7 +387,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator++ (void)
 bool 
 Post_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
 {
-  const Post_Order_Expression_Tree_Iterator_Impl * post_order_rhs = dynamic_cast
+  const auto * post_order_rhs = dynamic_cast
     <const Post_Order_Expression_Tree_Iterator_Impl *> (&rhs);
 
   // if the rhs was not a level_order iterator
@@ -407,8 +402,8 @@ Post_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iter
       // to assume the queue at least has a front node (coupled with
       // the is_empty () function later).
 
-      Expression_Tree &t1 = const_cast <Expression_Tree &> (tree_);
-      Expression_Tree &t2 = const_cast <Expression_Tree &> (post_order_rhs->tree_);
+      auto &t1 = const_cast <Expression_Tree &> (tree_);
+      auto &t2 = const_cast <Expression_Tree &> (post_order_rhs->tree_);
 
       if (t1.get_root () == t2.get_root () 
           && stack_.size () == post_order_rhs->stack_.size ())
@@ -445,7 +440,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iter
 /// @see Expression_Tree_Iterator
  
 Expression_Tree_Iterator_Impl * 
-Post_Order_Expression_Tree_Iterator_Impl::clone (void)
+Post_Order_Expression_Tree_Iterator_Impl::clone ()
 {
   return new Post_Order_Expression_Tree_Iterator_Impl (*this);
 }
@@ -466,14 +461,13 @@ Level_Order_Expression_Tree_Iterator_Impl::Level_Order_Expression_Tree_Iterator_
 
 /// destructor - nothing to do
 
-Level_Order_Expression_Tree_Iterator_Impl::~Level_Order_Expression_Tree_Iterator_Impl (void)
-{
-}
+Level_Order_Expression_Tree_Iterator_Impl::~Level_Order_Expression_Tree_Iterator_Impl ()
+= default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Level_Order_Expression_Tree_Iterator_Impl::operator* (void)
+Level_Order_Expression_Tree_Iterator_Impl::operator* ()
 {
   return queue_.front ();
 }
@@ -481,7 +475,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator* (void)
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Level_Order_Expression_Tree_Iterator_Impl::operator* (void) const
+Level_Order_Expression_Tree_Iterator_Impl::operator* () const
 {
   return queue_.front ();
 }
@@ -489,7 +483,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator* (void) const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Level_Order_Expression_Tree_Iterator_Impl::operator++ (void) 
+Level_Order_Expression_Tree_Iterator_Impl::operator++ ()
 {
   if (!queue_.empty ())
     {
@@ -513,7 +507,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator++ (void)
 bool 
 Level_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
 {
-  const Level_Order_Expression_Tree_Iterator_Impl * level_order_rhs = dynamic_cast
+  const auto * level_order_rhs = dynamic_cast
     <const Level_Order_Expression_Tree_Iterator_Impl *> (&rhs);
 
   // if the rhs was not a level_order iterator then we've already
@@ -528,8 +522,8 @@ Level_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Ite
       // to assume the queue at least has a front node (coupled with
       // the is_empty () function later).
 
-      Expression_Tree &t1 = const_cast <Expression_Tree &> (tree_);
-      Expression_Tree &t2 = const_cast <Expression_Tree &> (level_order_rhs->tree_);
+      auto &t1 = const_cast <Expression_Tree &> (tree_);
+      auto &t2 = const_cast <Expression_Tree &> (level_order_rhs->tree_);
 
       if (t1.get_root () == t2.get_root () 
           && queue_.size () == level_order_rhs->queue_.size ())
@@ -566,7 +560,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Ite
 /// @see Expression_Tree_Iterator
  
 Expression_Tree_Iterator_Impl * 
-Level_Order_Expression_Tree_Iterator_Impl::clone (void)
+Level_Order_Expression_Tree_Iterator_Impl::clone ()
 {
   return new Level_Order_Expression_Tree_Iterator_Impl (*this);
 }

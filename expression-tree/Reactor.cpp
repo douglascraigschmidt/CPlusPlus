@@ -10,7 +10,7 @@
 Reactor *
 Reactor::instance_ = 0;
 
-Reactor::Reactor (void)
+Reactor::Reactor ()
   : run_event_loop_ (true)
 {
 }
@@ -32,7 +32,7 @@ struct Remove_Handler_Adapter
   }
 };
 
-Reactor::~Reactor (void)
+Reactor::~Reactor ()
 {
   std::for_each (dispatch_table_.begin (),
                  dispatch_table_.end (),
@@ -40,7 +40,7 @@ Reactor::~Reactor (void)
 }
 
 Reactor *
-Reactor::instance (void)
+Reactor::instance ()
 {
   if (Reactor::instance_ == 0)
     Reactor::instance_ = new Reactor;
@@ -64,7 +64,7 @@ Reactor::remove_input_handler (Event_Handler *eh)
 }
 
 void 
-Reactor::run_event_loop (void)
+Reactor::run_event_loop ()
 {
   while (run_event_loop_)
     std::for_each (dispatch_table_.begin (),
@@ -73,7 +73,7 @@ Reactor::run_event_loop (void)
 }
 
 void
-Reactor::end_event_loop (void)
+Reactor::end_event_loop ()
 {
   run_event_loop_ = false;
 }

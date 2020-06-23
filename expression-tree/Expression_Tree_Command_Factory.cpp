@@ -19,19 +19,20 @@ Expression_Tree_Command_Factory::Expression_Tree_Command_Factory (const Expressi
 }
 
 /// Assignment operator - needed for reference counting.
-void
+Expression_Tree_Command_Factory &
 Expression_Tree_Command_Factory::operator= (const Expression_Tree_Command_Factory &f)
 {
   // check for self assignment first
   if (this != &f)
     /// we just make use of the Refcounter functionality here
     factory_impl_ = f.factory_impl_;
+
+  return *this;
 }
 
 // Destructor.
-Expression_Tree_Command_Factory::~Expression_Tree_Command_Factory (void)
-{
-}
+Expression_Tree_Command_Factory::~Expression_Tree_Command_Factory ()
+= default;
 
 // Method to create the binary tree to traverse.
 Expression_Tree_Command

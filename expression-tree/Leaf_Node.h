@@ -18,22 +18,22 @@ class Leaf_Node : public Component_Node
 {
 public:
   /// Ctor.
-  Leaf_Node (int item);
+  explicit Leaf_Node (int item);
 
   /// Ctor.
-  Leaf_Node (const std::string &item);
+  explicit Leaf_Node (const std::string &item);
 
   /// Ctor.
-  Leaf_Node (const char *item);
+  explicit Leaf_Node (const char *item);
 
   /// Dtor.
-  virtual ~Leaf_Node (void);
+  ~Leaf_Node () override;
 
   /// Return the item stored in the node.
-  virtual int item (void) const;
+  [[nodiscard]] int item () const override;
 
   /// Define the @a accept() operation used for the Visitor pattern.
-  virtual void accept (Visitor &visitor) const; 
+  void accept (Visitor &visitor) const override;
 
 private:
   /// Integer value associated with the operand.

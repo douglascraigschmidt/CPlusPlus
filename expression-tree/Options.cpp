@@ -2,7 +2,7 @@
 #define _OPTIONS_CPP_
 
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 
 #include "getopt.h"
 #include "Options.h"
@@ -10,46 +10,45 @@
 
 // Initialize the singleton.
 Options *
-Options::instance_ = 0;
+Options::instance_ = nullptr;
 
 Options*
 Options::instance ()
 {
   // Create the options implementation if it hasn't already been done
 
-  if (instance_ == 0)
+  if (instance_ == nullptr)
     instance_ = new Options;
 
   return instance_;
 }
 
 // Ctor
-Options::Options (void)
+Options::Options ()
   : verbose_ (false)
 {
 }
 
 // Dtor
-Options::~Options (void)
-{
-}
+Options::~Options ()
+= default;
 
 // Return exe name.
 std::string
-Options::exe (void) const
+Options::exe () const
 {
   return exe_;
 }
 
 // Return path name.
 std::string
-Options::path (void) const
+Options::path () const
 {
   return path_;
 }
 
 bool
-Options::verbose (void) const
+Options::verbose () const
 {
   return verbose_;
 }
@@ -86,7 +85,7 @@ Options::parse_args (int argc, char *argv[])
 
 // Parse the command line arguments.
 void
-Options::print_usage (void)
+Options::print_usage ()
 {
   std::cout << "\nHelp Invoked on " << path_ + exe_ << "\n\n";
   std::cout << "Usage: " << exe_ << " [-h|-v]\n\n" << 

@@ -3,7 +3,7 @@ project(CPP-OOP)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CPP-OOP
         main.cpp)

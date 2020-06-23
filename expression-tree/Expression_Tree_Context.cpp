@@ -73,7 +73,7 @@ Expression_Tree_Context::set (const std::string &key_value_pair)
 }
 
 Expression_Tree_State *
-Expression_Tree_Context::state (void) const
+Expression_Tree_Context::state () const
 {
   return state_.get ();
 }
@@ -85,7 +85,7 @@ Expression_Tree_Context::state (Expression_Tree_State *state)
 }
 
 Expression_Tree &
-Expression_Tree_Context::tree (void)
+Expression_Tree_Context::tree ()
 {
   return tree_;
 }

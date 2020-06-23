@@ -143,9 +143,7 @@ Expression_Tree::Expression_Tree (Component_Node *root, bool increase_count)
 // Copy ctor
 
 Expression_Tree::Expression_Tree (const Expression_Tree &t)
-  : root_ (t.root_)
-{
-}
+= default;
 
 // Assignment operator
 
@@ -162,17 +160,14 @@ Expression_Tree::operator= (const Expression_Tree &t)
 
 // Dtor
 
-Expression_Tree::~Expression_Tree (void)
-{
-  // taken care of by Refcounter class
-}
+Expression_Tree::~Expression_Tree () = default;
 
 // Check if the tree is empty.
 
 bool
-Expression_Tree::is_null (void) const
+Expression_Tree::is_null () const
 {
-  return root_.get_ptr () == 0;
+  return root_.get_ptr () == nullptr;
 }
 
 // return root pointer
@@ -185,7 +180,7 @@ Expression_Tree::get_root () const {
 // Return the stored item.
 
 int 
-Expression_Tree::item (void) const
+Expression_Tree::item () const
 {
   return root_->item ();
 }
@@ -193,7 +188,7 @@ Expression_Tree::item (void) const
 // Return the left branch.
 
 Expression_Tree
-Expression_Tree::left (void)
+Expression_Tree::left ()
 {
   return Expression_Tree (root_->left (), true);
 }
@@ -201,7 +196,7 @@ Expression_Tree::left (void)
 // Return the right branch.
 
 Expression_Tree
-Expression_Tree::right (void)
+Expression_Tree::right ()
 {
   return Expression_Tree (root_->right (), true);
 }
@@ -240,7 +235,7 @@ Expression_Tree::end (const std::string &traversal_order)
 Expression_Tree_Const_Iterator
 Expression_Tree::begin (const std::string &traversal_order) const
 {
-  Expression_Tree *non_const_this = const_cast <Expression_Tree *> (this);
+  auto *non_const_this = const_cast <Expression_Tree *> (this);
   return Expression_Tree::const_iterator (tree_iterator_factory.make_tree_iterator (*non_const_this, 
                                                                                     traversal_order,
                                                                                     false));
@@ -251,14 +246,13 @@ Expression_Tree::begin (const std::string &traversal_order) const
 Expression_Tree_Const_Iterator
 Expression_Tree::end (const std::string &traversal_order) const
 {
-  Expression_Tree *non_const_this = const_cast <Expression_Tree *> (this);
+  auto *non_const_this = const_cast <Expression_Tree *> (this);
   return Expression_Tree::const_iterator (tree_iterator_factory.make_tree_iterator (*non_const_this,
                                                                                     traversal_order,
                                                                                     true));
 }
 
 /// Accept a visitor to perform some action on the Expression_Tree.
-
 void
 Expression_Tree::accept (Visitor &visitor) const
 {

@@ -34,21 +34,21 @@ class Expression_Tree_Iterator_Impl
 
 public:
   /// Construct an Expression_Tree_Iterator_Impl to iterate over a tree.  
-  Expression_Tree_Iterator_Impl (const Expression_Tree &tree);
+  explicit Expression_Tree_Iterator_Impl (const Expression_Tree &tree);
 
   /// Dtor.
-  virtual ~Expression_Tree_Iterator_Impl (void);
+  virtual ~Expression_Tree_Iterator_Impl ();
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
-  virtual Expression_Tree operator* (void) = 0;
+  virtual Expression_Tree operator* () = 0;
 
   /// Returns a const reference to the item contained at the current
   /// position.
-  virtual const Expression_Tree operator* (void) const = 0;
+  virtual const Expression_Tree operator* () const = 0;
 
   /// Increment operator (used for both pre- and post-increment).
-  virtual void operator++ (void) = 0;
+  virtual void operator++ () = 0;
 
   /// Equality operator.
   virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const = 0;
@@ -57,7 +57,7 @@ public:
   virtual bool operator!= (const Expression_Tree_Iterator_Impl &rhs) const = 0;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone(void) = 0;
+  virtual Expression_Tree_Iterator_Impl *clone() = 0;
 
   /// = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -86,31 +86,31 @@ public:
   /// Construct an In_Order_Expression_Tree_Iterator_Impl. If end_iter
   /// is set to true, the iterator points to the end of the
   /// tree. Otherwise, the iterator starts with a free tree.
-  In_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
+  explicit In_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
                                bool end_iter = false);
 
   /// Dtor.
-  virtual ~In_Order_Expression_Tree_Iterator_Impl (void);
+  ~In_Order_Expression_Tree_Iterator_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
-  virtual Expression_Tree operator* (void);
+  Expression_Tree operator* () override;
 
   /// Returns a const reference to the item contained at the current
   /// position.
-  virtual const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const override;
 
   /// Increment operator (used for both pre- and post-increment).
-  virtual void operator++ (void);
+  void operator++ () override;
 
   /// Equality operator.
-  virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const;
+  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
   /// Nonequality operator.
-  virtual bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const;
+  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone (void);
+  Expression_Tree_Iterator_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -140,31 +140,31 @@ public:
   /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter
   /// is set to true, the iterator points to the end of the
   /// tree. Otherwise, the iterator starts with a free tree.
-  Pre_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree, 
+  explicit Pre_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
                                 bool end_iter = false);
 
   /// Dtor.
-  virtual ~Pre_Order_Expression_Tree_Iterator_Impl ();
+  ~Pre_Order_Expression_Tree_Iterator_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
-  virtual Expression_Tree operator* (void);
+  Expression_Tree operator* () override;
 
   /// Returns a const reference to the item contained at the current
   /// position.
-  virtual const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const override;
 
   /// Increment operator (used for both pre- and post-increment).
-  virtual void operator++ (void);
+  void operator++ () override;
 
   /// Equality operator.
-  virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const;
+  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
   /// Nonequality operator.
-  virtual bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const;
+  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone (void);
+  Expression_Tree_Iterator_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -194,31 +194,31 @@ public:
   /// Construct an Post_Order_Expression_Tree_Iterator_Impl. If end_iter is set
   /// to true, the iterator points to the end of the tree. Otherwise,
   /// the iterator starts with a free tree.
-  Post_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree, 
+  explicit Post_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
                                  bool end_iter = false);
 
   /// Dtor.
-  virtual ~Post_Order_Expression_Tree_Iterator_Impl (void);
+  ~Post_Order_Expression_Tree_Iterator_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
-  virtual Expression_Tree operator* (void);
+  Expression_Tree operator* () override;
 
   /// Returns a const reference to the item contained at the current
   /// position.
-  virtual const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const override;
 
   /// Increment operator (used for both pre- and post-increment).
-  virtual void operator++ (void);
+  void operator++ () override;
 
   /// Equality operator.
-  virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const;
+  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
   /// Nonequality operator.
-  virtual bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const;
+  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone (void);
+  Expression_Tree_Iterator_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -248,31 +248,31 @@ public:
   /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
   /// true, the iterator points to the end of the tree. Otherwise, the
   /// iterator starts with a free tree.
-  Level_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
+  explicit Level_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
                                              bool end_iter = false);
 
   /// Dtor.
-  virtual ~Level_Order_Expression_Tree_Iterator_Impl ();
+  ~Level_Order_Expression_Tree_Iterator_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
-  virtual Expression_Tree operator* (void);
+  Expression_Tree operator* () override;
 
   /// Returns a const reference to the item contained at the current
   /// position.
-  virtual const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const override;
 
   /// Increment operator (used for both pre- and post-increment).
-  virtual void operator++ (void);
+  void operator++ () override;
 
   /// Equality operator.
-  virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const;
+  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
   /// Nonequality operator.
-  virtual bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const;
+  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone (void);
+  Expression_Tree_Iterator_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;

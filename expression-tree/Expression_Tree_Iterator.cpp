@@ -28,7 +28,7 @@ Expression_Tree_Iterator::Expression_Tree_Iterator (Expression_Tree_Iterator_Imp
 /// the current position.
 
 Expression_Tree 
-Expression_Tree_Iterator::operator* (void)
+Expression_Tree_Iterator::operator* ()
 {
   // return impl_->operator* ();
   return *(*impl_);
@@ -37,7 +37,7 @@ Expression_Tree_Iterator::operator* (void)
 /// Returns a const reference to the item contained at the current position
 
 const Expression_Tree 
-Expression_Tree_Iterator::operator* (void) const
+Expression_Tree_Iterator::operator* () const
 {
   // return impl_->operator* ();
   return *(*impl_);
@@ -46,7 +46,7 @@ Expression_Tree_Iterator::operator* (void) const
 /// Pre-increment operator
 
 Expression_Tree_Iterator &
-Expression_Tree_Iterator::operator++ (void)
+Expression_Tree_Iterator::operator++ ()
 {
   // return impl_->operator++ ();
   ++(*impl_);
@@ -84,9 +84,7 @@ Expression_Tree_Iterator::operator!= (const Expression_Tree_Iterator &rhs)
 /// Copy ctor - needed for reference counting.
 
 Expression_Tree_Const_Iterator::Expression_Tree_Const_Iterator (const Expression_Tree_Const_Iterator &ts)
-  : impl_ (ts.impl_)
-{
-}
+= default;
   
 /// Copy ctor for impl *.
 
@@ -98,7 +96,7 @@ Expression_Tree_Const_Iterator::Expression_Tree_Const_Iterator (Expression_Tree_
 /// Returns a const reference to the item contained at the current position
 
 const Expression_Tree 
-Expression_Tree_Const_Iterator::operator* (void) const
+Expression_Tree_Const_Iterator::operator* () const
 {
   return *(*impl_);
 }
@@ -106,7 +104,7 @@ Expression_Tree_Const_Iterator::operator* (void) const
 /// Preincrement operator
 
 Expression_Tree_Const_Iterator &
-Expression_Tree_Const_Iterator::operator++ (void)
+Expression_Tree_Const_Iterator::operator++ ()
 {
   ++(*impl_);
   return *this;

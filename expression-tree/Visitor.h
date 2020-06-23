@@ -39,7 +39,7 @@ public:
   virtual void visit (const Composite_Multiply_Node &node) = 0;
 
   /// No-op destructor to hold things together.
-  virtual ~Visitor (void) = 0;
+  virtual ~Visitor () = 0;
 };
 
 #endif /* _VISITOR_H_ */

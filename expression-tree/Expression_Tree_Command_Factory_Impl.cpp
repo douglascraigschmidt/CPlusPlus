@@ -7,13 +7,11 @@
 
 // Expression_Tree_Command_Factory_Impl Constructor.
 Expression_Tree_Command_Factory_Impl::Expression_Tree_Command_Factory_Impl ()
-{
-}
+= default;
 
 // Expression_Tree_Command_Factory_Impl Destructor.
 Expression_Tree_Command_Factory_Impl::~Expression_Tree_Command_Factory_Impl ()
-{
-}
+= default;
 
 Expression_Tree_Command
 Concrete_Expression_Tree_Command_Factory_Impl::make_format_command (const std::string &param)
@@ -78,8 +76,7 @@ Concrete_Expression_Tree_Command_Factory_Impl::Concrete_Expression_Tree_Command_
 
 // Destructor
 Concrete_Expression_Tree_Command_Factory_Impl::~Concrete_Expression_Tree_Command_Factory_Impl (void)
-{
-}
+= default;
 
 Expression_Tree_Command
 Concrete_Expression_Tree_Command_Factory_Impl::make_command (const std::string &input)

@@ -20,22 +20,22 @@ class Interpreter_Context
 {
 public:
   /// Constructor.
-  Interpreter_Context (void);
+  Interpreter_Context ();
 
   /// Destructor.
-  ~Interpreter_Context (void);
+  ~Interpreter_Context ();
 
   /// Return the value of a variable.
-  int get (std::string variable);
+  int get (const std::string& variable);
 
   /// Set the value of a variable.
-  void set (std::string variable, int value);
+  void set (const std::string& variable, int value);
 
   /// Print all variables and their values.
-  void print (void);
+  void print ();
 
   /// Clear all variables and their values.
-  void reset (void);
+  void reset ();
 
 private:
   /// Hash table containing variable names and values.
@@ -55,10 +55,10 @@ class Interpreter
 {
 public:
   /// Constructor.
-  Interpreter (void);
+  Interpreter ();
 
   /// destructor
-  virtual ~Interpreter (void);
+  virtual ~Interpreter ();
 
   /// Converts a string and context into a parse tree, and builds an
   /// expression tree out of the parse tree.
@@ -77,26 +77,26 @@ public:
 
 private:
   /// Inserts a terminal into the parse tree.
-  void terminal_insert (Symbol *op,
+  static void terminal_insert (Symbol *op,
                        std::list<Symbol *>& list);
 
   /// Inserts a variable (leaf node / number) into the parse tree.
   void variable_insert (Interpreter_Context &context,
                         const std::string &input,
                         std::string::size_type &i,
-                      int & accumulated_precedence,
-                      std::list<Symbol *>& list,
-                       Symbol *& lastValidInput);
+                        int & accumulated_precedence,
+                        std::list<Symbol *>& list,
+                        Symbol *& lastValidInput);
 
   /// Inserts a leaf node / number into the parse tree.
   void number_insert (const std::string &input, 
                       std::string::size_type &i,
                       int & accumulated_precedence,
                       std::list<Symbol *>& list,
-                       Symbol *& lastValidInput);
+                      Symbol *& lastValidInput);
 
   /// Inserts a multiplication or division into the parse tree.
-  void precedence_insert (Symbol *op, std::list<Symbol *>& list);
+  static void precedence_insert (Symbol *op, std::list<Symbol *>& list);
 
   void main_loop (Interpreter_Context & context,
                        const std::string &input,

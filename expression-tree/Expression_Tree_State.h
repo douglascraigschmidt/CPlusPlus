@@ -25,7 +25,7 @@ public:
   class Invalid_State : public std::domain_error
   {
   public:
-    Invalid_State(const std::string &message) : std::domain_error(message) {}
+    explicit Invalid_State(const std::string &message) : std::domain_error(message) {}
   }; 
 
   /// Set the desired format to the designated @a new_format, updating
@@ -75,8 +75,8 @@ public:
   /// new_format, e.g., @a Pre_Order_Uninitialized_State, @a
   /// Post_Order_Uninitialized_State, @a In_Order_Uninitialized_State,
   /// or @a Level_Order_Uninitialized_State.
-  virtual void format (Expression_Tree_Context &context, 
-                       const std::string &new_format);
+  void format (Expression_Tree_Context &context,
+                       const std::string &new_format) override;
 
 private:
   /**
@@ -92,7 +92,7 @@ private:
   {
   public:
     /// Constructor.
-    Uninitialized_State_Factory (void);
+    Uninitialized_State_Factory ();
 
     /// Dynamically allocate a new @a Expression_Tree_State
     /// object based on the designated @a traversal_order and @a end_iter.
@@ -101,21 +101,21 @@ private:
   private:
     /// Dynamically allocate a new @a Level_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static Expression_Tree_State *make_in_order_uninitialized_state (void);
+    static Expression_Tree_State *make_in_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Pre_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static Expression_Tree_State *make_pre_order_uninitialized_state (void);
+    static Expression_Tree_State *make_pre_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Post_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static Expression_Tree_State *make_post_order_uninitialized_state (void);
+    static Expression_Tree_State *make_post_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Level_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static Expression_Tree_State *make_level_order_uninitialized_state (void);
+    static Expression_Tree_State *make_level_order_uninitialized_state ();
 
-    typedef Expression_Tree_State *(*UNINITIALIZED_STATE_PTF) (void);
+    typedef Expression_Tree_State *(*UNINITIALIZED_STATE_PTF) ();
     typedef std::map <std::string, UNINITIALIZED_STATE_PTF> UNINITIALIZED_STATE_MAP;
 
     static UNINITIALIZED_STATE_MAP uninitialized_state_map_;

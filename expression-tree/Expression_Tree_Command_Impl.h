@@ -24,17 +24,17 @@ class Expression_Tree_Command_Impl
 public:
 
   /// Constructor that provides the appropriate @a Expression_Tree_Context.
-  Expression_Tree_Command_Impl (Expression_Tree_Context &);
+  explicit Expression_Tree_Command_Impl (Expression_Tree_Context &);
 
   /// Destructor.
-  virtual ~Expression_Tree_Command_Impl (void) = 0;
+  virtual ~Expression_Tree_Command_Impl () = 0;
 
   /// Pure virtual method for executing a command that must be defined
   /// by subclasses.
-  virtual bool execute (void) = 0;
+  virtual bool execute () = 0;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void) = 0;
+  virtual void print_valid_commands () = 0;
 
 protected:
   /// Reference to the @a Expression_Tree_Context that's the target of
@@ -53,13 +53,13 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested format.
   Format_Command (Expression_Tree_Context &, 
-                  const std::string &new_format);
+                  std::string new_format);
 
   /// Set the desired format.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 
 private:
   /// Requested format.
@@ -76,13 +76,13 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested expression.
   Expr_Command (Expression_Tree_Context &, 
-                const std::string &new_expr);
+                std::string new_expr);
 
   /// Create the desired expression tree.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 
 private:
   /// Requested expression.
@@ -100,13 +100,13 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested format.
   Print_Command (Expression_Tree_Context &, 
-                 const std::string &print_format);
+                 std::string print_format);
 
   /// Print the expression tree.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 
 private:
   /// Format to print out the tree.
@@ -124,11 +124,11 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested format.
   Eval_Command (Expression_Tree_Context &, 
-                const std::string &eval_format);
+                std::string eval_format);
 
   /// Evaluate the expression tree.
-  virtual bool execute (void);
-  virtual void print_valid_commands (void);
+  bool execute () override;
+  void print_valid_commands () override;
 
 private:
   /// Format to use for the evaluation.
@@ -146,11 +146,11 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested format.
   Set_Command (Expression_Tree_Context &context, 
-                const std::string &key_value_pair);
+                std::string key_value_pair);
 
   /// Evaluate the expression tree.
-  virtual bool execute (void);
-  virtual void print_valid_commands (void);
+  bool execute () override;
+  void print_valid_commands () override;
 
 private:
   /// Format to use for the evaluation.
@@ -166,13 +166,13 @@ class Quit_Command : public Expression_Tree_Command_Impl
 public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context.
-  Quit_Command (Expression_Tree_Context &);
+  explicit Quit_Command (Expression_Tree_Context &);
 
   /// Quit the event loop.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 };
 
 /**
@@ -185,13 +185,13 @@ public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and sequence of commands.
   Macro_Command (Expression_Tree_Context &,
-                 const std::vector <Expression_Tree_Command> &macro_commands);
+                 std::vector <Expression_Tree_Command> macro_commands);
 
   /// Quit the event loop.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 
 private:
   /// Vector of commands that are executed as a macro.
@@ -210,13 +210,13 @@ class Null_Command : public Expression_Tree_Command_Impl
 public:
   /// Constructor that provides the appropriate @a
   /// Expression_Tree_Context and the requested format.
-  Null_Command (Expression_Tree_Context &context);
+  explicit Null_Command (Expression_Tree_Context &context);
 
   /// Set the desired format.
-  virtual bool execute (void);
+  bool execute () override;
 
   /// Print the valid commands available to users.
-  virtual void print_valid_commands (void);
+  void print_valid_commands () override;
 };
 
 #endif /* _EXPRESSION_TREE_COMMAND_IMPL_H_ */

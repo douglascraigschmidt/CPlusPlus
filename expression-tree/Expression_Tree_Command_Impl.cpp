@@ -4,6 +4,7 @@
 #include <functional>
 #include <algorithm>
 #include <iostream>
+#include <utility>
 #include "Expression_Tree_Context.h"
 #include "Expression_Tree_Command_Factory_Impl.h"
 #include "Expression_Tree_Command_Impl.h"
@@ -13,19 +14,18 @@ Expression_Tree_Command_Impl::Expression_Tree_Command_Impl (Expression_Tree_Cont
 {
 }
 
-Expression_Tree_Command_Impl::~Expression_Tree_Command_Impl (void)
-{ 
-}
+Expression_Tree_Command_Impl::~Expression_Tree_Command_Impl ()
+= default;
 
-Format_Command::Format_Command (Expression_Tree_Context &context, const std::string &new_format)
+Format_Command::Format_Command (Expression_Tree_Context &context, std::string new_format)
   : Expression_Tree_Command_Impl (context),
-    format_ (new_format)
+    format_ (std::move(new_format))
 {
 
 }
 
 bool
-Format_Command::execute (void)
+Format_Command::execute ()
 { 
   tree_context_.format (format_);
   return true;
@@ -33,7 +33,7 @@ Format_Command::execute (void)
 
 
 void
-Format_Command::print_valid_commands (void)
+Format_Command::print_valid_commands ()
 { 
   std::cout << "\n";
   std::cout << "1. expr [expression]\n";
@@ -47,21 +47,21 @@ Format_Command::print_valid_commands (void)
 
 
 Expr_Command::Expr_Command (Expression_Tree_Context &context,
-                            const std::string &new_expr)
+                            std::string new_expr)
   : Expression_Tree_Command_Impl (context),
-    expr_ (new_expr)
+    expr_ (std::move(new_expr))
 {
 }
 
 bool
-Expr_Command::execute (void)
+Expr_Command::execute ()
 { 
   tree_context_.make_tree (expr_);
   return true;
 }
 
 void
-Expr_Command::print_valid_commands (void)
+Expr_Command::print_valid_commands ()
 { 
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
@@ -73,21 +73,21 @@ Expr_Command::print_valid_commands (void)
 }
 
 Print_Command::Print_Command (Expression_Tree_Context &context,
-                              const std::string &print_format)
+                              std::string print_format)
   : Expression_Tree_Command_Impl (context),
-    format_ (print_format)
+    format_ (std::move(print_format))
 {
 }
 
 bool
-Print_Command::execute (void)
+Print_Command::execute ()
 { 
   tree_context_.print (format_);
   return true;
 }
 
 void
-Print_Command::print_valid_commands (void)
+Print_Command::print_valid_commands ()
 { 
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
@@ -99,21 +99,21 @@ Print_Command::print_valid_commands (void)
 }
 
 Eval_Command::Eval_Command (Expression_Tree_Context &context,
-                            const std::string &eval_format)
+                            std::string eval_format)
   : Expression_Tree_Command_Impl (context),
-    format_ (eval_format)
+    format_ (std::move(eval_format))
 {
 }
 
 bool
-Eval_Command::execute (void)
+Eval_Command::execute ()
 { 
   tree_context_.evaluate (format_);
   return true;
 }
 
 void
-Eval_Command::print_valid_commands (void)
+Eval_Command::print_valid_commands ()
 { 
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
@@ -125,21 +125,21 @@ Eval_Command::print_valid_commands (void)
 }
 
 Set_Command::Set_Command (Expression_Tree_Context &context,
-                            const std::string &key_value_pair)
+                            std::string key_value_pair)
   : Expression_Tree_Command_Impl (context),
-    key_value_pair_ (key_value_pair)
+    key_value_pair_ (std::move(key_value_pair))
 {
 }
 
 bool
-Set_Command::execute (void)
+Set_Command::execute ()
 { 
   tree_context_.set (key_value_pair_);
   return true;
 }
 
 void
-Set_Command::print_valid_commands (void)
+Set_Command::print_valid_commands ()
 { 
   std::cout << "\n";
 
@@ -175,25 +175,25 @@ Quit_Command::Quit_Command (Expression_Tree_Context &context)
 }
 
 bool
-Quit_Command::execute (void)
+Quit_Command::execute ()
 { 
   return false; 
 }
 
 void
-Quit_Command::print_valid_commands (void)
+Quit_Command::print_valid_commands ()
 { 
 }
 
 Macro_Command::Macro_Command (Expression_Tree_Context &context,
-                              const std::vector <Expression_Tree_Command> &macro_commands)
+                              std::vector <Expression_Tree_Command> macro_commands)
   : Expression_Tree_Command_Impl (context),
-    macro_commands_ (macro_commands)
+    macro_commands_ (std::move(macro_commands))
 {
 }
 
 bool
-Macro_Command::execute (void)
+Macro_Command::execute ()
 { 
   std::for_each (macro_commands_.begin (),
                  macro_commands_.end (),
@@ -220,7 +220,7 @@ Macro_Command::execute (void)
 }
 
 void
-Macro_Command::print_valid_commands (void)
+Macro_Command::print_valid_commands ()
 { 
 }
 
@@ -230,13 +230,13 @@ Null_Command::Null_Command (Expression_Tree_Context &context)
 }
 
 bool 
-Null_Command::execute (void) 
+Null_Command::execute ()
 { 
   return true; 
 }
 
 void 
-Null_Command::print_valid_commands (void)
+Null_Command::print_valid_commands ()
 {
   std::cout << "\n1a. format [in-order]\n";
   std::cout << "1b. set [variable=value]\n";

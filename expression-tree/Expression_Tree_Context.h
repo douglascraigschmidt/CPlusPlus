@@ -21,7 +21,7 @@ class Expression_Tree_Context
 {
 public:
   /// Constructor.
-  Expression_Tree_Context (void);
+  Expression_Tree_Context ();
 
   /// Set the desired format to the designated @a new_format.
   void format (const std::string &new_format);
@@ -42,20 +42,20 @@ public:
   void set (const std::string &key_value_pair);
 
   /// Return a pointer to the current @a Expression_Tree_State.
-  Expression_Tree_State *state (void) const;
+  [[nodiscard]] Expression_Tree_State *state () const;
 
   /// Set the current @a Expression_Tree_State to the designated @a
   /// new_state pointer.
   void state (Expression_Tree_State *new_state);
 
   /// Return a reference to the current @a Expression_Tree.
-  Expression_Tree &tree (void);
+  Expression_Tree &tree ();
 
   /// Set the current @a Expression_Tree to the @a new_tree.
   void tree (const Expression_Tree &new_tree);
 
   /// Returns whether or not a successful format call has been called
-  bool formatted() { return formatted_; }
+  bool formatted() const { return formatted_; }
 
   /// Persistent interpreter context for variables. Our interpreter
   /// will change values inside of this, so I just stuck the variable

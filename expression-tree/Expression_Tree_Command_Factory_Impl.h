@@ -29,7 +29,7 @@ class Expression_Tree_Command_Factory_Impl
 
 public:
   /// Dtor - make it virtual since we subclass from this interface.
-  virtual ~Expression_Tree_Command_Factory_Impl (void) = 0;
+  virtual ~Expression_Tree_Command_Factory_Impl () = 0;
 
   /// Make the requested command.  This method is the primary method
   /// used by clients.  
@@ -65,7 +65,7 @@ public:
 
 protected:
   /// Ctor - only visible to derived classes.
-  Expression_Tree_Command_Factory_Impl (void);
+  Expression_Tree_Command_Factory_Impl ();
 };
 
 /**
@@ -77,42 +77,42 @@ class Concrete_Expression_Tree_Command_Factory_Impl
 {
 public:
   /// Default constructor
-  Concrete_Expression_Tree_Command_Factory_Impl (Expression_Tree_Context &);
+  explicit Concrete_Expression_Tree_Command_Factory_Impl (Expression_Tree_Context &);
 
   /// Dtor
-  virtual ~Concrete_Expression_Tree_Command_Factory_Impl (void);
+  ~Concrete_Expression_Tree_Command_Factory_Impl () override;
 
   /// Make the requested command.  This method is the primary method
   /// used by clients.  
-  virtual Expression_Tree_Command make_command (const std::string &s);
+  Expression_Tree_Command make_command (const std::string &s) override;
 
   /// Make the requested format command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_format_command (const std::string &);
+  Expression_Tree_Command make_format_command (const std::string &) override;
 
   /// Make the requested expression command.  This method is used in
   /// the implementation of the various commands.
-  virtual Expression_Tree_Command make_expr_command (const std::string &);
+  Expression_Tree_Command make_expr_command (const std::string &) override;
 
   /// Make the requested print command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_print_command (const std::string &);
+  Expression_Tree_Command make_print_command (const std::string &) override;
 
   /// Make the requested eval command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_eval_command (const std::string &);
+  Expression_Tree_Command make_eval_command (const std::string &) override;
 
   /// Make the requested eval command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_set_command (const std::string &);
+  Expression_Tree_Command make_set_command (const std::string &) override;
 
   /// Make the requested quit command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_quit_command (const std::string &);
+  Expression_Tree_Command make_quit_command (const std::string &) override;
 
   /// Make the requested macro command.  This method is used in the
   /// implementation of the various commands.
-  virtual Expression_Tree_Command make_macro_command (const std::string &);
+  Expression_Tree_Command make_macro_command (const std::string &) override;
 
 private:
   /// Useful typedefs to simplify use of the STL @std::map.

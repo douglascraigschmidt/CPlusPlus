@@ -12,14 +12,14 @@ class stack {
 public:
   class underflow : public exception {
   public:
-      const char *what() const noexcept override {
+      [[nodiscard]] const char *what() const noexcept override {
         return "underflow exception happened";
       }
   };
 
   class overflow : public exception {
   public:
-      const char *what() const noexcept override {
+      [[nodiscard]] const char *what() const noexcept override {
         return "overflow exception happened";
       }
   };
@@ -36,9 +36,9 @@ public:
 
   virtual void pop() = 0;
 
-  virtual bool empty() const = 0;
+  [[nodiscard]] virtual bool empty() const = 0;
 
-  virtual bool full() const = 0;
+  [[nodiscard]] virtual bool full() const = 0;
 };
 
 #endif /* _STACK_H */

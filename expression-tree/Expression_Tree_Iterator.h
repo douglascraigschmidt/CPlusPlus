@@ -32,19 +32,17 @@ public:
   Expression_Tree_Iterator (const Expression_Tree_Iterator &ts);
   
   /// Copy ctor for impl *.
-  Expression_Tree_Iterator (Expression_Tree_Iterator_Impl *impl);
+  explicit Expression_Tree_Iterator (Expression_Tree_Iterator_Impl *impl);
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position
-  // @@ Expression_Tree operator* (void);
-  Expression_Tree operator* (void);
+  Expression_Tree operator* ();
 
   /// Returns a const reference to the item contained at the current position
-  // @@ Expression_Tree operator* (void);
-  const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const;
 
   /// Preincrement operator
-  Expression_Tree_Iterator &operator++ (void);
+  Expression_Tree_Iterator &operator++ ();
 
   /// Postincrement operator. 
   Expression_Tree_Iterator operator++ (int);
@@ -87,13 +85,13 @@ public:
   Expression_Tree_Const_Iterator (const Expression_Tree_Const_Iterator &ts);
   
   /// Copy ctor for impl *.
-  Expression_Tree_Const_Iterator (Expression_Tree_Iterator_Impl *impl);
+  explicit Expression_Tree_Const_Iterator (Expression_Tree_Iterator_Impl *impl);
   
   /// Returns a const reference to the item contained at the current position
-  const Expression_Tree operator* (void) const;
+  const Expression_Tree operator* () const;
 
   /// Preincrement operator
-  Expression_Tree_Const_Iterator &operator++ (void);
+  Expression_Tree_Const_Iterator &operator++ ();
 
   /// Postincrement operator. 
   Expression_Tree_Const_Iterator operator++ (int);

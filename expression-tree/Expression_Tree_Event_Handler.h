@@ -21,10 +21,10 @@ class Expression_Tree_Event_Handler : public Event_Handler
 {
 public:
   /// Constructor.
-  Expression_Tree_Event_Handler (void);
+  Expression_Tree_Event_Handler ();
 
   /// Dtor.
-  virtual ~Expression_Tree_Event_Handler (void) = 0;
+  ~Expression_Tree_Event_Handler () override = 0;
 
   /// Factory that creates the appropriate subclass of @a
   /// Expression_Tree_Event_Handler, i.e., @a
@@ -36,12 +36,12 @@ public:
   /// available.  It is a template method that performs the sequence
   /// of steps associated with processing expression tree application
   /// commands.
-  virtual void handle_input (void);
+  void handle_input () override;
 
 protected:
   /// This hook method is a placeholder for prompting the user for
   /// input.
-  virtual void prompt_user (void) = 0;
+  virtual void prompt_user () = 0;
 
   /// This hook method gets user input.
   virtual bool get_input (std::string &user_input);
@@ -80,15 +80,15 @@ public:
   Verbose_Expression_Tree_Event_Handler ();
 
   /// Dtor.
-  virtual ~Verbose_Expression_Tree_Event_Handler ();
+  ~Verbose_Expression_Tree_Event_Handler () override;
 
 protected:
   /// This hook method verbosely prompts the user for input.
-  virtual void prompt_user ();
+  void prompt_user () override;
 
   /// This hook method makes the appropriate command based on the user
   /// input.
-  virtual Expression_Tree_Command make_command (const std::string &user_input);
+  Expression_Tree_Command make_command (const std::string &user_input) override;
 
 private:
   /// Keeps track of whether we've prompted the user already.
@@ -109,18 +109,18 @@ class Macro_Command_Expression_Tree_Event_Handler
 {
 public:
   /// Constructor.
-  Macro_Command_Expression_Tree_Event_Handler (void);
+  Macro_Command_Expression_Tree_Event_Handler ();
 
   /// Dtor.
-  virtual ~Macro_Command_Expression_Tree_Event_Handler (void);
+  ~Macro_Command_Expression_Tree_Event_Handler () override;
 
 protected:
   /// This hook method less verbosely prompts the user for input.
-  virtual void prompt_user (void);
+  void prompt_user () override;
 
   /// This hook method makes the appropriate set of macro commands
   /// based on the user input.
-  virtual Expression_Tree_Command make_command (const std::string &user_input);
+  Expression_Tree_Command make_command (const std::string &user_input) override;
 };
 
 #endif /* _EXPRESSION_TREE_EVENT_HANDLER_H_ */

@@ -3,7 +3,7 @@
 #define _LEAF_NODE_CPP_
 
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "Component_Node.h"
 #include "Visitor.h"
@@ -31,13 +31,12 @@ Leaf_Node::Leaf_Node (const char *item)
 }
 
 // Dtor
-Leaf_Node::~Leaf_Node (void)
-{
-}
+Leaf_Node::~Leaf_Node ()
+= default;
 
 // return the item
 int
-Leaf_Node::item (void) const
+Leaf_Node::item () const
 {
   return item_;
 }

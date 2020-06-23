@@ -19,21 +19,21 @@ class Options
 {
 public:
   /// Method to return the one and only instance.
-  static Options *instance (void);
+  static Options *instance ();
 
   /// Destructor
-  ~Options (void);
+  ~Options ();
 
   /// This returns the queue type specified on the command line.
 
   /// This returns the exe name, passed in through the command line.
-  std::string exe (void) const;
+  [[nodiscard]] std::string exe () const;
 
   /// This returns the path, passed in through the command line.
-  std::string path (void) const;
+  [[nodiscard]] std::string path () const;
 
   /// Run the program in verbose mode.
-  bool verbose (void) const;
+  [[nodiscard]] bool verbose () const;
 
   /// Parse command-line arguments and set the appropriate values as
   /// follows:
@@ -43,11 +43,11 @@ public:
   bool parse_args (int argc, char *argv[]);
 
   /// Print out usage and default values.
-  void print_usage (void);
+  void print_usage ();
 
 private:
   /// Make the constructor private for a singleton.
-  Options (void);
+  Options ();
 
   /// Values for parameters passed in on the command line.
   std::string exe_;

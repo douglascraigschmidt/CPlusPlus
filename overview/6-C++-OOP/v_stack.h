@@ -10,19 +10,19 @@ class v_stack : public stack<T> {
 public:
   explicit v_stack(size_t size);
 
-  virtual void push(const T &item);
+  void push(const T &item) override;
 
-  virtual void push(T &&rval);
+  void push(T &&rval) override;
 
-  virtual const T &top() const;
+  const T &top() const override;
 
-  virtual T &top();
+  T &top() override;
 
-  virtual void pop();
+  void pop() override;
 
-  virtual bool empty() const;
+  [[nodiscard]] bool empty() const override;
 
-  virtual bool full() const;
+  [[nodiscard]] bool full() const override;
 
 private:
   size_t size_;

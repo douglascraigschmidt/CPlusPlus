@@ -19,16 +19,16 @@ class Reactor
 {
 public:
   /// Singleton access point.
-  static Reactor *instance (void);
+  static Reactor *instance ();
 
   /// Dtor.
-  ~Reactor (void);
+  ~Reactor ();
 
   /// Run the reactor's event loop.
-  void run_event_loop (void);
+  void run_event_loop ();
 
   /// End the reactor's event loop.
-  void end_event_loop (void);
+  void end_event_loop ();
 
   /// Register @a event_handler for input events.
   void register_input_handler (Event_Handler *event_handler);
@@ -38,7 +38,7 @@ public:
         
 private:
   /// Constructor is private to ensure use as a singleton.
-  Reactor (void);
+  Reactor ();
 
   /// Pointer to the singleton instance of the @a Reactor.
   static Reactor *instance_;

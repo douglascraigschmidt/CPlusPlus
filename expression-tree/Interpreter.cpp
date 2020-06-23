@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <memory>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "Component_Node.h"
 #include "Leaf_Node.h"
@@ -25,11 +25,11 @@ public:
   Symbol (Symbol *left, Symbol *right, int precedence_ = 0);
 
   /// destructor
-  virtual ~Symbol (void);
+  virtual ~Symbol ();
 
   /// abstract method for returning precedence level (higher
   /// value means higher precedence
-  virtual int precedence (void)
+  virtual int precedence ()
     {
       return precedence_;
     }
@@ -38,7 +38,7 @@ public:
 
   /// abstract method for building an Expression Expression_Tree Node
 
-  virtual Component_Node *build (void) = 0;
+  virtual Component_Node *build () = 0;
 
   /// left and right pointers
 
@@ -59,7 +59,7 @@ public:
   Operator (Symbol *left, Symbol *right, int precedence_ = 1);
 
   /// destructor
-  ~Operator (void);
+  ~Operator () override;
 };
 
 /**
@@ -71,10 +71,10 @@ class Unary_Operator : public Symbol
 {
 public:
   /// constructor
-  Unary_Operator (Symbol *right, int precedence_ = 1);
+  explicit Unary_Operator (Symbol *right, int precedence_ = 1);
 
   /// destructor
-  ~Unary_Operator (void);
+  ~Unary_Operator () override;
 };
 
 /**
@@ -86,18 +86,18 @@ class Number : public Symbol
 {
 public:
   /// constructors
-  Number (std::string input);
+  explicit Number (const std::string& input);
   Number (int input);
 
   /// destructor
-  virtual ~Number (void);
+  ~Number () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 private:
   /// contains the value of the leaf node
   int item_;
@@ -112,17 +112,17 @@ class Subtract : public Operator
 {
 public:
   /// constructor
-  Subtract (void);
+  Subtract ();
 
   /// destructor
-  virtual ~Subtract (void);
+  ~Subtract () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 };
 
 /**
@@ -134,17 +134,17 @@ class Add : public Operator
 {
 public:
   /// constructor
-  Add (void);
+  Add ();
 
   /// destructor
-  virtual ~Add (void);
+  ~Add () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 };
 
 /**
@@ -156,17 +156,17 @@ class Negate : public Unary_Operator
 {
 public:
   /// constructor
-  Negate (void);
+  Negate ();
 
   /// destructor
-  virtual ~Negate (void);
+  ~Negate () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 };
 
 /**
@@ -178,17 +178,17 @@ class Multiply : public Operator
 {
 public:
   /// constructor
-  Multiply (void);
+  Multiply ();
 
   /// destructor
-  virtual ~Multiply (void);
+  ~Multiply () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 };
 
 /**
@@ -200,56 +200,52 @@ class Divide : public Operator
 {
 public:
   /// constructor
-  Divide (void);
+  Divide ();
 
   /// destructor
-  virtual ~Divide (void);
+  ~Divide () override;
 
   /// returns the precedence level
   //virtual int precedence (void);
-  virtual int add_precedence (int accumulated_precedence);
+  int add_precedence (int accumulated_precedence) override;
 
   /// builds an equivalent Expression_Tree node
-  virtual Component_Node *build (void);
+  Component_Node *build () override;
 };
 
 // constructor
-Interpreter_Context::Interpreter_Context (void)
-{
-}
+Interpreter_Context::Interpreter_Context ()
+= default;
 
 // destructor
-Interpreter_Context::~Interpreter_Context (void)
-{
-}
+Interpreter_Context::~Interpreter_Context ()
+= default;
 
 // return the value of a variable
 int
-Interpreter_Context::get (std::string variable)
+Interpreter_Context::get (const std::string& variable)
 {
   return map_[variable];
 }
 
 // set the value of a variable
 void
-Interpreter_Context::set (std::string variable, int value)
+Interpreter_Context::set (const std::string& variable, int value)
 {
   map_[variable] = value;
 }
 
 // print all variables and their values
 void
-Interpreter_Context::print (void)
+Interpreter_Context::print ()
 {
-  for (std::map<std::string, int>::iterator i = map_.begin ();
-       i != map_.end (); 
-       ++i)
-    std::cout << i->first << "=" << i->second << "\n";
+  for (auto & i : map_)
+    std::cout << i.first << "=" << i.second << "\n";
 }
 
 // clear all variables and their values
 void
-Interpreter_Context::reset (void)
+Interpreter_Context::reset ()
 {
   map_.clear ();
 }
@@ -261,7 +257,7 @@ Symbol::Symbol (Symbol *left, Symbol *right, int precedence)
 }
 
 // destructor
-Symbol::~Symbol (void)
+Symbol::~Symbol ()
 {
   delete left_;
   delete right_;
@@ -274,39 +270,36 @@ Operator::Operator (Symbol *left, Symbol *right, int precedence)
 }
 
 // destructor
-Operator::~Operator (void)
-{
-}
+Operator::~Operator ()
+= default;
 
 // constructor
 Unary_Operator::Unary_Operator (Symbol *right, int precedence)
-  : Symbol (0, right, precedence)
+  : Symbol (nullptr, right, precedence)
 {
 }
 
 // destructor
-Unary_Operator::~Unary_Operator (void)
-{
-}
+Unary_Operator::~Unary_Operator ()
+= default;
 
 // constructor
-Number::Number (std::string input)
-  : Symbol (0, 0, 4)
+Number::Number (const std::string& input)
+  : Symbol (nullptr, nullptr, 4)
 {
   item_ = ::atoi (input.c_str ());
 }
 
 // constructor
 Number::Number (int input)
-  : Symbol (0, 0, 4), 
+  : Symbol (nullptr, nullptr, 4),
     item_ (input)
 {
 }
 
 // destructor
-Number::~Number (void)
-{
-}
+Number::~Number ()
+= default;
 
 // returns the precedence level
 int 
@@ -317,21 +310,20 @@ Number::add_precedence (int precedence)
 
 // builds an equivalent Expression_Tree node
 Component_Node *
-Number::build (void)
+Number::build ()
 {
   return new Leaf_Node (item_);
 }
 
 // constructor
-Negate::Negate (void)
-  : Unary_Operator (0, 3)
+Negate::Negate ()
+  : Unary_Operator (nullptr, 3)
 {
 }
 
 // destructor
-Negate::~Negate (void)
-{
-}
+Negate::~Negate ()
+= default;
 
 // returns the precedence level
 int 
@@ -348,15 +340,14 @@ Negate::build ()
 }
 
 // constructor
-Add::Add (void)
-  : Operator (0, 0, 1)
+Add::Add ()
+  : Operator (nullptr, nullptr, 1)
 {
 }
 
 // destructor
-Add::~Add (void)
-{
-}
+Add::~Add ()
+= default;
 
 // returns the precedence level
 int 
@@ -367,21 +358,20 @@ Add::add_precedence (int precedence)
 
 // builds an equivalent Expression_Tree node
 Component_Node *
-Add::build (void)
+Add::build ()
 {
   return new Composite_Add_Node (left_->build (), right_->build ());
 }
 
 // constructor
-Subtract::Subtract (void)
-  : Operator (0, 0, 1)
+Subtract::Subtract ()
+  : Operator (nullptr, nullptr, 1)
 {
 }
 
 // destructor
-Subtract::~Subtract (void)
-{
-}
+Subtract::~Subtract ()
+= default;
 
 // returns the precedence level
 int 
@@ -392,21 +382,20 @@ Subtract::add_precedence (int precedence)
 
 // builds an equivalent Expression_Tree node
 Component_Node *
-Subtract::build (void)
+Subtract::build ()
 {
   return new Composite_Subtract_Node (left_->build (), right_->build ());
 }
 
 // constructor
-Multiply::Multiply (void)
-  : Operator (0, 0, 2)
+Multiply::Multiply ()
+  : Operator (nullptr, nullptr, 2)
 {
 }
 
 // destructor
-Multiply::~Multiply (void)
-{
-}
+Multiply::~Multiply ()
+= default;
 
 // returns the precedence level
 int 
@@ -417,21 +406,20 @@ Multiply::add_precedence (int precedence)
 
 // builds an equivalent Expression_Tree node
 Component_Node *
-Multiply::build (void)
+Multiply::build ()
 {
   return new Composite_Multiply_Node (left_->build (), right_->build ());
 }
 
 // constructor
-Divide::Divide (void)
-  : Operator (0, 0, 2)
+Divide::Divide ()
+  : Operator (nullptr, nullptr, 2)
 {
 }
 
 // destructor
-Divide::~Divide (void)
-{
-}
+Divide::~Divide ()
+= default;
 
 // returns the precedence level
 int 
@@ -442,20 +430,18 @@ Divide::add_precedence (int precedence)
 
 // builds an equivalent Expression_Tree node
 Component_Node *
-Divide::build (void)
+Divide::build ()
 {
   return new Composite_Divide_Node (left_->build (), right_->build ());
 }
 
 // constructor
-Interpreter::Interpreter (void)
-{
-}
+Interpreter::Interpreter ()
+= default;
 
 // destructor
-Interpreter::~Interpreter (void)
-{
-}
+Interpreter::~Interpreter ()
+= default;
 
 // method for checking if a character is a valid operator
 bool
@@ -488,7 +474,7 @@ Interpreter::is_alphanumeric (char input)
 // inserts a terminal into the parse tree
 void
 Interpreter::terminal_insert (Symbol *terminal,
-                       std::list<Symbol *>& list)
+                              std::list<Symbol *>& list)
 {
   if (!list.empty ())
     {
@@ -518,8 +504,8 @@ Interpreter::variable_insert (Interpreter_Context &context,
                               const std::string &input,
                               std::string::size_type &i,
                               int & accumulated_precedence,
-                       std::list<Symbol *>& list,
-                       Symbol *& lastValidInput)
+                              std::list<Symbol *>& list,
+                              Symbol *& lastValidInput)
 {
   // merge all consecutive number chars into a single
   // Number symbol, eg '123' = int (123). Scope of j needs
@@ -536,7 +522,7 @@ Interpreter::variable_insert (Interpreter_Context &context,
 
   // make a Number out of the integer
 
-  Number *number = new Number (value);
+  auto *number = new Number (value);
   number->add_precedence (accumulated_precedence);
 
   lastValidInput = number;
@@ -554,8 +540,8 @@ void
 Interpreter::number_insert (const std::string &input,
                             std::string::size_type &i,
                             int & accumulated_precedence,
-                       std::list<Symbol *>& list,
-                       Symbol *& lastValidInput)
+                            std::list<Symbol *>& list,
+                            Symbol *& lastValidInput)
 {
   // merge all consecutive number chars into a single Number symbol,
   // eg '123' = int (123). Scope of j needs to be outside of the for
@@ -566,7 +552,7 @@ Interpreter::number_insert (const std::string &input,
   for (; i + j <= input.length () && is_number (input[i + j]); ++j)
     continue;
 
-  Number *number = new Number (input.substr (i,j));
+  auto *number = new Number (input.substr (i,j));
   number->add_precedence (accumulated_precedence);
 
   lastValidInput = number;
@@ -582,7 +568,7 @@ Interpreter::number_insert (const std::string &input,
 // inserts a multiplication or division into the parse tree
 void 
 Interpreter::precedence_insert (Symbol *op,
-                       std::list<Symbol *>& list)
+                                std::list<Symbol *>& list)
 {
   if (!list.empty ())
     {
@@ -681,7 +667,7 @@ Interpreter::main_loop (Interpreter_Context & context,
           Add *op = new Add ();
           op->add_precedence (accumulated_precedence);
 
-          lastValidInput = 0;
+          lastValidInput = nullptr;
 
           // insert the op according to left-to-right relationships
           precedence_insert (op, list);
@@ -690,9 +676,9 @@ Interpreter::main_loop (Interpreter_Context & context,
         {
           handled = true;
 
-          Symbol * op = 0;
+          Symbol * op = nullptr;
           // subtraction operation
-          Number *number = 0;
+          Number *number = nullptr;
 
           if (!lastValidInput)
             {
@@ -707,7 +693,7 @@ Interpreter::main_loop (Interpreter_Context & context,
               op->add_precedence (accumulated_precedence);
             }
           
-          lastValidInput = 0;
+          lastValidInput = nullptr;
 
           // insert the op according to left-to-right relationships
           precedence_insert (op, list);
@@ -717,10 +703,10 @@ Interpreter::main_loop (Interpreter_Context & context,
         {
           handled = true;
           // multiplication operation
-          Multiply *op = new Multiply ();
+          auto *op = new Multiply ();
           op->add_precedence (accumulated_precedence);
  
-          lastValidInput = 0;
+          lastValidInput = nullptr;
 
           // insert the op according to precedence relationships
           precedence_insert (op, list);
@@ -730,10 +716,10 @@ Interpreter::main_loop (Interpreter_Context & context,
         {
           handled = true;
           // division operation
-          Divide *op = new Divide ();
+          auto *op = new Divide ();
           op->add_precedence (accumulated_precedence);
  
-          lastValidInput = 0;
+          lastValidInput = nullptr;
 
           // insert the op according to precedence relationships
           precedence_insert (op, list);
@@ -787,11 +773,11 @@ Interpreter::handle_parenthesis (Interpreter_Context & context,
         }
     }
 
-  if (master_list.size () > 0 && list.size () > 0)
+  if (!master_list.empty() && !list.empty())
     {
       Symbol * lastSymbol = master_list.back ();
-      Operator * op = dynamic_cast <Operator *> (lastSymbol);
-      Unary_Operator * unary = dynamic_cast <Unary_Operator *>
+      auto * op = dynamic_cast <Operator *> (lastSymbol);
+      auto * unary = dynamic_cast <Unary_Operator *>
                                  (lastSymbol);
 
 
@@ -811,7 +797,7 @@ Interpreter::handle_parenthesis (Interpreter_Context & context,
         // error
         }
     }
-  else if (list.size () > 0)
+  else if (!list.empty())
     master_list = list;
 
   list.clear ();
@@ -825,7 +811,7 @@ Interpreter::interpret (Interpreter_Context &context,
 {
   std::list<Symbol *> list;
   //list.clear ();
-  Symbol * lastValidInput = 0;
+  Symbol * lastValidInput = nullptr;
   bool handled = false;
   int accumulated_precedence = 0;
 

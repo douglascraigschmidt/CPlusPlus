@@ -18,7 +18,7 @@ class Expression_Tree_Command
 {
 public:
   /// Constructor that assumes ownership of an @a Expression_Tree_Command_Impl *.
-  Expression_Tree_Command (Expression_Tree_Command_Impl * = 0);
+  explicit Expression_Tree_Command (Expression_Tree_Command_Impl * = 0);
 
   /// Copy ctor.
   Expression_Tree_Command (const Expression_Tree_Command &);
@@ -27,13 +27,13 @@ public:
   Expression_Tree_Command &operator= (const Expression_Tree_Command &);
 
   /// Dtor.
-  ~Expression_Tree_Command (void);
+  ~Expression_Tree_Command ();
 
   /// Runs the command.
-  bool execute (void);
+  bool execute ();
 
   /// Print the valid commands available to users.
-  void print_valid_commands (void);
+  void print_valid_commands ();
 
 private:
   /// Pointer to actual implementation, i.e., the "bridge", which is

@@ -2,12 +2,8 @@
 #include <iostream>
 #include <algorithm>
 
-#include <sstream>
-
 #include "Expression_Tree_Context.h"
 #include "Expression_Tree_Iterator.h"
-#include "Component_Node.h"
-#include "Interpreter.h"
 #include "Print_Visitor.h"
 #include "Evaluation_Visitor.h"
 #include "Expression_Tree.h"
@@ -24,7 +20,7 @@ class Accept_Visitor_Adapter
 {
 public:
   /// Constructor.
-  Accept_Visitor_Adapter (VISITOR &visitor): visitor_ (visitor)
+  explicit Accept_Visitor_Adapter (VISITOR &visitor): visitor_ (visitor)
   {
   }
 
@@ -59,7 +55,7 @@ Expression_Tree_State::print_tree (const Expression_Tree &tree,
 #if 0
   std::for_each (tree.begin (traversal_order),
                  tree.end (traversal_order),
-                 [&print_visitor] (const Expression_Tree &tree)
+                 [&print_visitor] (auto tree)
                  {
                    tree.accept (print_visitor);
                  });
@@ -172,8 +168,7 @@ Uninitialized_State::Uninitialized_State_Factory::make_post_order_uninitialized_
 Expression_Tree_State *
 Uninitialized_State::Uninitialized_State_Factory::make_uninitialized_state (const std::string &format)
 {
-  UNINITIALIZED_STATE_MAP::iterator iter 
-    = uninitialized_state_map_.find (format);
+  auto iter = uninitialized_state_map_.find (format);
 
   if (iter == uninitialized_state_map_.end ())
     {

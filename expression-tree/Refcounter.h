@@ -17,58 +17,58 @@ class Refcounter
 {
 public:
   /// default Ctor
-  Refcounter (void);
+  Refcounter ();
 
   /// Ctor with refcounting functionality
-  Refcounter (T *ptr, bool increase_count = false);
+  explicit Refcounter (T *ptr, bool increase_count = false);
 
   /// copy Ctor
   Refcounter (const Refcounter& rhs);
 
   /// Dtor will delete pointer if refcount becomes 0
-  virtual ~Refcounter (void);
+  virtual ~Refcounter ();
 
   /// assignment operator for times when you don't want
   /// the reference increased for incoming ptr
-  void operator= (T *ptr);
+  Refcounter &operator= (T *ptr);
 
   /// assignment operator
-  void operator= (const Refcounter &rhs);
+  Refcounter &operator= (const Refcounter &rhs);
 
   /// dereference operator
-  T &operator* (void);
+  T &operator* ();
 
   /// dereference operator
-  const T &operator* (void) const;
+  const T &operator* () const;
 
   /// mimic pointer dereferencing
-  T *operator-> (void);
+  T *operator-> ();
 
   /// mimic pointer dereferencing
-  const T *operator-> (void) const;
+  const T *operator-> () const;
 
   /// get the underlying pointer
-  T *get_ptr (void);
+  T *get_ptr ();
 
   /// get the underlying pointer
-  Component_Node *const get_ptr (void) const;
+  [[nodiscard]] Component_Node *get_ptr () const;
 
 private:
   /// implementation of the increment operation
-  void increment (void);
+  void increment ();
 
   /// implementation of the decrement operation
-  void decrement (void);
+  void decrement ();
 
   /// A shim class that keeps track of the reference count and a
   /// pointer to the type @a T that's reference counted.
   struct Shim
   {
     /// Constructor.
-    Shim (T *t);
+    explicit Shim (T *t);
     
     /// Destructor.
-    ~Shim (void);
+    ~Shim ();
 
     /// Pointer to the object that's being reference counted.
     T *t_;
