@@ -20,6 +20,7 @@ class simple_string_const_iterator;
  */
 class simple_string {
 public:
+  // Traits defined to mimic the STL container model.
   typedef char value_type;
   typedef simple_string_iterator iterator;
   typedef simple_string_const_iterator const_iterator;
@@ -55,10 +56,11 @@ public:
   iterator begin ();
 
   // Get a const interator that points to the beginning of the Array.
-  const_iterator cbegin () const;
+  const_iterator begin () const;
+
 
   // Get a const interator that points to the beginning of the Array.
-  const_iterator begin () const;
+  const_iterator cbegin () const;
 
   // Get an iterator that points to the end
   iterator end ();
@@ -97,22 +99,22 @@ public:
   const char& operator* () const;
 
   /**
-   * Pre-increment operator
+   * Pre-increment operator (++iter)
    */
   simple_string_iterator &operator++ ();
 
   /**
-   * Post-increment operator
+   * Post-increment operator (iter++)
    */
   simple_string_iterator operator++ (int);
 
   /**
-   * Pre-decrement operator
+   * Pre-decrement operator (--iter)
    */
   simple_string_iterator &operator-- ();
 
   /**
-   * Post-decrement operator
+   * Post-decrement operator (iter--)
    */
   simple_string_iterator operator-- (int);
 

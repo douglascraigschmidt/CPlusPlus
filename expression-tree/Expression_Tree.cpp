@@ -10,8 +10,8 @@
 #include <stdexcept>
 
 #include "Component_Node.h"
-#include "Expression_Tree_Iterator.h"
-#include "Expression_Tree_Iterator_Impl.h"
+#include "ET_Iterator.h"
+#include "ET_Iterator_Impl.h"
 #include "Expression_Tree.h"
 
 /**

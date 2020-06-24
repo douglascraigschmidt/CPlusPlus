@@ -12,10 +12,11 @@
  */
 meeting::meeting (char **argv)
   : title_ (argv[0]), 
-    day_ (meeting::day_of_week (*argv[1])) {
+    day_ (meeting::weekday (*argv[1])) {
   std::stringstream a1(argv[2]);
   std::stringstream a2(argv[3]);
 
+  // Convert char * values into size_t.
   a1 >> start_time_;
   a2 >> finish_time_;
 }
@@ -23,7 +24,7 @@ meeting::meeting (char **argv)
 /**
  * Factory method.
  */
-enum meeting::day_of_week
+meeting::weekday
 meeting::day_of_week (char c) {
   switch (c) {
     case 'M': return meeting::MO;
@@ -40,7 +41,8 @@ meeting::day_of_week (char c) {
 }
 
 /**
- * "Equality" operator that detects overlaps in meeting times.
+ * "Equality" operator that detects overlaps in meeting times
+ * (used by check_for_conflicts()).
  */
 bool 
 meeting::operator== (const meeting &m) const {
@@ -55,7 +57,7 @@ meeting::operator== (const meeting &m) const {
 }
 
 /**
- * Operator that checks for less than relation (used by sort()).
+ * Operator that determines the "less than" relation (used by sort()).
  */
 bool
 meeting::operator< (const meeting &m) const {

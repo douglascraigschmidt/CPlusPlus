@@ -20,7 +20,7 @@ static void check_for_conflicts (InputIterator begin, InputIterator end);
  */
 int 
 main (int argc, char *argv[]) {
-  // Create a vector of meeting objects.
+  // Create an initially empty vector of meeting objects.
   std::vector<meeting> schedule;
 
   // Use the argv_iterator to convert the argc/argv command-line

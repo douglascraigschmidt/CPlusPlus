@@ -126,13 +126,15 @@ simple_string::strnew(const char *s) {
 typename simple_string::iterator
 simple_string::begin () {
   cout << "simple_string::begin()" << endl;
+  // One way to create an iterator.
   return {*this, 0};
 }
 
 simple_string::const_iterator
 simple_string::begin () const {
-  cout << "simple_string::begin()" << endl;
-  return {*this, 0};
+  cout << "const simple_string::begin()" << endl;
+  // Another way to create an iterator.
+  return simple_string_const_iterator(*this, 0);
 }
 
 typename simple_string::const_iterator
@@ -149,7 +151,7 @@ simple_string::end () {
 
 simple_string::const_iterator
 simple_string::end () const {
-  cout << "simple_string::end()" << endl;
+  cout << "const simple_string::end()" << endl;
   return {*this, len_};
 }
 
@@ -181,6 +183,7 @@ simple_string_iterator::operator++ () {
 simple_string_iterator
 simple_string_iterator::operator++ (int) {
   cout << "simple_string_iterator::operator++(int)" << endl;
+  // One way of creating a copy of an iterator.
   return {simple_string_, pos_++};
 }
 
@@ -194,6 +197,7 @@ simple_string_iterator::operator-- () {
 simple_string_iterator
 simple_string_iterator::operator-- (int)  {
   cout << "simple_string_iterator::operator--(int)" << endl;
+  // One way of creating a copy of an iterator.
   return {simple_string_, pos_--};
 }
 
@@ -226,6 +230,7 @@ simple_string_const_iterator::operator++ () {
 simple_string_const_iterator
 simple_string_const_iterator::operator++ (int) {
   cout << "simple_string_const_iterator::operator++(int)" << endl;
+  // Another way of creating a copy of the iterator.
   simple_string_const_iterator old (*this);
   ++(*this);
   return old;
@@ -241,9 +246,8 @@ simple_string_const_iterator::operator-- () {
 simple_string_const_iterator
 simple_string_const_iterator::operator-- (int) {
   cout << "simple_string_const_iterator::operator--(int)" << endl;
-  simple_string_const_iterator old (*this);
-  --(*this);
-  return old;
+  // Yet another way of creating a copy of the iterator.
+  return simple_string_const_iterator (simple_string_, pos_--);
 }
 
 bool

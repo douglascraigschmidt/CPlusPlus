@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
+#include <array>
 #include <iterator>
 using namespace std;
 
@@ -9,14 +9,17 @@ using namespace std;
  * algorithms.
  */
 int main () {
-  vector<int> myVect{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  array<int, 10> my_array{1, 2, 3,
+                          4, 5, 6,
+                          7, 8, 9,
+                          10};
 
-  reverse(myVect.begin(),
-          myVect.end());       
-  cout << "myVect contains:";
+  reverse(my_array.begin(),
+          my_array.end());
+  cout << "my_array contains: ";
 
-  copy (myVect.begin (),
-        myVect.end (),
+  copy (my_array.begin (),
+        my_array.end (),
         ostream_iterator<int> (cout, " "));
   cout << endl;
 

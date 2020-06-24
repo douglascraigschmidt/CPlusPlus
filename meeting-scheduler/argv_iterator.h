@@ -8,8 +8,7 @@
  * template parameter T that can be used as a forward iterator.
  */
 template <typename T>
-class argv_iterator 
-  : public std::iterator <std::forward_iterator_tag, T> {
+class argv_iterator : public std::iterator <std::forward_iterator_tag, T> {
 public:
   /**
    * Default constructor.
@@ -22,8 +21,8 @@ public:
 
   /**
    * This constructor stores the argc and argv parameters, together
-   * with the number of argv parameters to conver into an instance of
-   * type parameter T.
+   * with the number of argv parameters to convert into an instance
+   * of type parameter T.
    */
   argv_iterator (int argc, char **argv, int increment)
     : argc_ (argc),

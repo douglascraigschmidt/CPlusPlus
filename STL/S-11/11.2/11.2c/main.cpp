@@ -14,7 +14,7 @@ using namespace std;
 /**
  * This example uses several STL algorithm functions to work with the
  * elements of two vectors, each holding 10 integers. It also uses the
- * plus() functor with the transform algorithm to add the elements.
+ * plus() functor with the transform() algorithm to add the elements.
  */
 int main() {
   vector<int> v1(10), v2(10);
@@ -39,6 +39,7 @@ int main() {
             v2.begin(),
             v2.begin(),
             plus<>());
+
   copy(v2.begin(),v2.end(), ostream_iterator<int>(cout, " ")); 
   cout << endl;
   return 0;

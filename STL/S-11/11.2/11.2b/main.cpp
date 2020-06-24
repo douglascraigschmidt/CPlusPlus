@@ -41,11 +41,12 @@ int main() {
             v2.begin(),
             v.begin(),
             modulus<>() );
-
+/*
   // Could also use this four-param version of transform():
   transform(v.begin(), v.end(),
             v.begin(),
             [](auto i) { return i % 20; });
+            */
 
   copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
   cout << endl;

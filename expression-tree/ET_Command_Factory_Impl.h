@@ -1,0 +1,131 @@
+/* -*- C++ -*- */
+#ifndef _EXPRESSION_TREE_COMMAND_FACTORY_IMPL_H_
+#define _EXPRESSION_TREE_COMMAND_FACTORY_IMPL_H_
+
+#include <string>
+#include <map>
+#include "ET_User_Command.h"
+#include "ET_Context.h"
+#include "Refcounter.h"
+
+// Forward declarations.
+class Traversal_Strategy_Impl;
+class Expression_Tree_Iterator_Impl;
+class User_Command_Impl;
+
+/**
+ * @class User_Command_Factory_Impl
+ * @brief Implementation of the Abstract Factory pattern that to
+ *        create various types of @a Expression_Tree_Commands.  
+ * 
+ *        Plays the role of the "implementor" base class in the
+ *        Bridge pattern that is used as the basis for the subclasses
+ *        that actually create the commands.
+ */
+class User_Command_Factory_Impl
+{
+  /// Needed for reference counting.
+  friend class Expression_Tree_Command_Factory;
+
+public:
+  /// Dtor - make it virtual since we subclass from this interface.
+  virtual ~User_Command_Factory_Impl () = 0;
+
+  /// Make the requested command.  This method is the primary method
+  /// used by clients.  
+  virtual User_Command make_command (const std::string &s) = 0;
+
+  /// Make the requested format command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_format_command (const std::string &) = 0;
+
+  /// Make the requested expression command.  This method is used in
+  /// the implementation of the various commands.
+  virtual User_Command make_expr_command (const std::string &) = 0;
+
+  /// Make the requested print command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_print_command (const std::string &) = 0;
+
+  /// Make the requested eval command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_eval_command (const std::string &) = 0;
+
+  /// Make the requested format command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_set_command (const std::string &) = 0;
+
+  /// Make the requested quit command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_quit_command (const std::string &) = 0;
+
+  /// Make the requested macro command.  This method is used in the
+  /// implementation of the various commands.
+  virtual User_Command make_macro_command (const std::string &) = 0;
+
+protected:
+  /// Ctor - only visible to derived classes.
+  User_Command_Factory_Impl ();
+};
+
+/**
+ * @class Concrete_Expression_Tree_Command_Factory_Impl
+ * @brief This is a concrete factory to create expression tree commands. 
+ */
+class Concrete_Expression_Tree_Command_Factory_Impl 
+  : public User_Command_Factory_Impl
+{
+public:
+  /// Default constructor
+  explicit Concrete_Expression_Tree_Command_Factory_Impl (Tree_Context &);
+
+  /// Dtor
+  ~Concrete_Expression_Tree_Command_Factory_Impl () override;
+
+  /// Make the requested command.  This method is the primary method
+  /// used by clients.  
+  User_Command make_command (const std::string &s) override;
+
+  /// Make the requested format command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_format_command (const std::string &) override;
+
+  /// Make the requested expression command.  This method is used in
+  /// the implementation of the various commands.
+  User_Command make_expr_command (const std::string &) override;
+
+  /// Make the requested print command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_print_command (const std::string &) override;
+
+  /// Make the requested eval command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_eval_command (const std::string &) override;
+
+  /// Make the requested eval command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_set_command (const std::string &) override;
+
+  /// Make the requested quit command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_quit_command (const std::string &) override;
+
+  /// Make the requested macro command.  This method is used in the
+  /// implementation of the various commands.
+  User_Command make_macro_command (const std::string &) override;
+
+private:
+  /// Useful typedefs to simplify use of the STL @std::map.
+  typedef User_Command (Concrete_Expression_Tree_Command_Factory_Impl::*FACTORY_PTMF)
+    (const std::string &);
+  typedef std::map<std::string, FACTORY_PTMF> COMMAND_MAP;
+
+  /// Map used to validate user command input and dispatch
+  /// corresponding factory method.
+  COMMAND_MAP command_map_;
+
+  /// Holds the expression tree that is the target of the commands.
+  Tree_Context &tree_context_;
+};
+
+#endif /* _EXPRESSION_TREE_COMMAND_FACTORY_IMPL_H_ */

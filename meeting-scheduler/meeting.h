@@ -11,12 +11,12 @@ struct meeting {
   /**
    * Enum literals for days of the week.
    */
-  enum day_of_week {MO, TU, WE, TH, FR, SA, SU};
+  enum weekday {MO, TU, WE, TH, FR, SA, SU};
 
   /**
-   * Factory method that converts a character to the day_of_week enum.
+   * Factory method that converts a character to the weekday enum.
    */
-  static day_of_week day_of_week (char c);
+  static weekday day_of_week (char c);
 
   /**
    * Constructor that converts an argv into a meeting object.
@@ -37,7 +37,7 @@ struct meeting {
   /**
    * Week day of meeting.
    */
-  enum day_of_week day_;
+  weekday day_;
 
   /**
    * meeting start time in HHMM format.
