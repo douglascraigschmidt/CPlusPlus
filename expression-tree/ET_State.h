@@ -1,5 +1,5 @@
-#ifndef _TREE_STATE_H_
-#define _TREE_STATE_H_
+#ifndef _ET_STATE_H_
+#define _ET_STATE_H_
 
 #include <string>
 #include <iostream>

@@ -1,5 +1,5 @@
-#ifndef _EXPRESSION_TREE_COMMAND_IMPL_H_
-#define _EXPRESSION_TREE_COMMAND_IMPL_H_
+#ifndef _ET_COMMAND_IMPL_H_
+#define _ET_COMMAND_IMPL_H_
 
 #include <string>
 #include <vector>
@@ -219,4 +219,4 @@ public:
   void print_valid_commands () override;
 };
 
-#endif /* _EXPRESSION_TREE_COMMAND_IMPL_H_ */
+#endif /* _ET_COMMAND_IMPL_H_ */

@@ -1,5 +1,5 @@
-#ifndef _EXPRESSION_TREE_EVENT_HANDLER_H_
-#define _EXPRESSION_TREE_EVENT_HANDLER_H_
+#ifndef _ET_EVENT_HANDLER_H_
+#define _ET_EVENT_HANDLER_H_
 
 #include "Event_Handler.h"
 #include "ET_Context.h"
@@ -123,4 +123,4 @@ protected:
   User_Command make_command (const std::string &user_input) override;
 };
 
-#endif /* _EXPRESSION_TREE_EVENT_HANDLER_H_ */
+#endif /* _ET_EVENT_HANDLER_H_ */

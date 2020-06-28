@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _EXPRESSION_TREE_COMMAND_FACTORY_H_
-#define _EXPRESSION_TREE_COMMAND_FACTORY_H_
+#ifndef _ET_COMMAND_FACTORY_H_
+#define _ET_COMMAND_FACTORY_H_
 
 #include <string>
 #include "ET_User_Command.h"
@@ -74,4 +74,4 @@ private:
   Refcounter <User_Command_Factory_Impl> factory_impl_;
 };
 
-#endif /* _EXPRESSION_TREE_COMMAND_FACTORY_H_ */
+#endif /* _ET_COMMAND_FACTORY_H_ */

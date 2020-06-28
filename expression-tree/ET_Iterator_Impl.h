@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _TREE_ITERATOR_IMPL_H_
-#define _TREE_ITERATOR_IMPL_H_
+#ifndef _ET_ITERATOR_IMPL_H_
+#define _ET_ITERATOR_IMPL_H_
 
 #include <stack>
 #include <queue>
@@ -286,4 +286,4 @@ private:
   std::queue <Expression_Tree> queue_;
 };
 
-#endif /* _TREE_ITERATOR_IMPL_H_ */
+#endif /* _ET_ITERATOR_IMPL_H_ */

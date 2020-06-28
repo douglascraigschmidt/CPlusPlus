@@ -1,5 +1,5 @@
-#ifndef _EXPRESSION_TREE_COMMAND_FACTORY_CPP
-#define _EXPRESSION_TREE_COMMAND_FACTORY_CPP
+#ifndef _ET_COMMAND_FACTORY_CPP
+#define _ET_COMMAND_FACTORY_CPP
 
 #include "ET_Command_Factory.h"
 #include "ET_Command_Factory_Impl.h"
@@ -7,7 +7,7 @@
 // Default constructor.
 User_Command_Factory::User_Command_Factory (Tree_Context &tree_context)
   // so far there is only one tree implementation, so we just create it here.
-  : factory_impl_ (new Concrete_Expression_Tree_Command_Factory_Impl (tree_context))
+  : factory_impl_ (new User_Command_Factory_Impl (tree_context))
 {
 }
 
@@ -83,4 +83,4 @@ User_Command_Factory::make_macro_command (const std::string &s)
   return factory_impl_->make_macro_command (s);
 }
 
-#endif /* _EXPRESSION_TREE_COMMAND_FACTORY_H */
+#endif /* _ET_COMMAND_FACTORY_H */

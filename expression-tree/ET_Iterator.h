@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _TREE_ITERATOR_H_
-#define _TREE_ITERATOR_H_
+#ifndef _ET_ITERATOR_H_
+#define _ET_ITERATOR_H_
 
 #include <string>
 
@@ -115,4 +115,4 @@ private:
   Refcounter <Expression_Tree_Iterator_Impl> impl_;
 };
 
-#endif /* _TREE_ITERATOR_H_ */
+#endif /* _ET_ITERATOR_H_ */

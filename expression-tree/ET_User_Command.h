@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _EXPRESSION_TREE_COMMAND_H_
-#define _EXPRESSION_TREE_COMMAND_H_
+#ifndef _ET_COMMAND_H_
+#define _ET_COMMAND_H_
 
 #include "Refcounter.h"
 #include "ET_User_Command_Impl.h"
@@ -41,4 +41,4 @@ private:
   Refcounter <User_Command_Impl> command_impl_;
 };
 
-#endif /* _EXPRESSION_TREE_COMMAND_H_ */
+#endif /* _ET_COMMAND_H_ */

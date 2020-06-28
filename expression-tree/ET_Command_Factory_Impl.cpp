@@ -1,56 +1,48 @@
-#ifndef _COMMAND_FACTORY_IMPL_CPP
-#define _COMMAND_FACTORY_IMPL_CPP
+#ifndef ET_COMMAND_FACTORY_IMPL_CPP
+#define ET_COMMAND_FACTORY_IMPL_CPP
 
 #include <stdexcept>
 
 #include "ET_Command_Factory_Impl.h"
 
-// User_Command_Factory_Impl Constructor.
-User_Command_Factory_Impl::User_Command_Factory_Impl ()
-= default;
-
-// User_Command_Factory_Impl Destructor.
-User_Command_Factory_Impl::~User_Command_Factory_Impl ()
-= default;
-
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_format_command (const std::string &param)
+User_Command_Factory_Impl::make_format_command (const std::string &param)
 {
   return User_Command (new Format_Command (tree_context_, param));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_expr_command (const std::string &param)
+User_Command_Factory_Impl::make_expr_command (const std::string &param)
 {
   return User_Command (new Expr_Command (tree_context_, param));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_print_command (const std::string &param)
+User_Command_Factory_Impl::make_print_command (const std::string &param)
 {
   return User_Command (new Print_Command (tree_context_, param));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_eval_command (const std::string &param)
+User_Command_Factory_Impl::make_eval_command (const std::string &param)
 {
   return User_Command (new Eval_Command (tree_context_, param));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_set_command (const std::string &param)
+User_Command_Factory_Impl::make_set_command (const std::string &param)
 {
   return User_Command (new Set_Command (tree_context_, param));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_quit_command (const std::string &)
+User_Command_Factory_Impl::make_quit_command (const std::string &)
 {
   return User_Command (new Quit_Command (tree_context_));
 }
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_macro_command (const std::string &expr_string)
+User_Command_Factory_Impl::make_macro_command (const std::string &expr_string)
 {
   std::vector <User_Command> macro_commands;
 
@@ -62,7 +54,7 @@ Concrete_Expression_Tree_Command_Factory_Impl::make_macro_command (const std::st
 }
 
 // Constructor.
-Concrete_Expression_Tree_Command_Factory_Impl::Concrete_Expression_Tree_Command_Factory_Impl (Tree_Context &tree_context)
+User_Command_Factory_Impl::User_Command_Factory_Impl (Tree_Context &tree_context)
   : command_map_ (),
     tree_context_ (tree_context)
 {
@@ -75,11 +67,11 @@ Concrete_Expression_Tree_Command_Factory_Impl::Concrete_Expression_Tree_Command_
 }
 
 // Destructor
-Concrete_Expression_Tree_Command_Factory_Impl::~Concrete_Expression_Tree_Command_Factory_Impl (void)
+User_Command_Factory_Impl::~User_Command_Factory_Impl (void)
 = default;
 
 User_Command
-Concrete_Expression_Tree_Command_Factory_Impl::make_command (const std::string &input)
+User_Command_Factory_Impl::make_command (const std::string &input)
 {
   // separate the command from the parameters
   std::string::size_type space_pos = input.find (' ');
@@ -89,7 +81,7 @@ Concrete_Expression_Tree_Command_Factory_Impl::make_command (const std::string &
   // COMMAND_MAP::iterator iter = command_map_.find (command_keyword);
   auto iter = command_map_.find (command_keyword);
   if (iter == command_map_.end ())
-    return Concrete_Expression_Tree_Command_Factory_Impl::make_quit_command (parameters);
+    return User_Command_Factory_Impl::make_quit_command (parameters);
   else
     {
       auto ptmf = iter->second;
@@ -97,4 +89,4 @@ Concrete_Expression_Tree_Command_Factory_Impl::make_command (const std::string &
     }
 }
 
-#endif /* _COMMAND_FACTORY_IMPL_CPP */
+#endif /* ET_COMMAND_FACTORY_IMPL_CPP */
