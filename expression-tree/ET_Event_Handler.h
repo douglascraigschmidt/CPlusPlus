@@ -24,7 +24,7 @@ public:
   Expression_Tree_Event_Handler ();
 
   /// Dtor.
-  ~Expression_Tree_Event_Handler () override = 0;
+  ~Expression_Tree_Event_Handler () override;
 
   /// Factory that creates the appropriate subclass of @a
   /// Expression_Tree_Event_Handler, i.e., @a
