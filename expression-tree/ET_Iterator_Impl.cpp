@@ -31,9 +31,9 @@ In_Order_Expression_Tree_Iterator_Impl::In_Order_Expression_Tree_Iterator_Impl (
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !this->tree_.is_null ())
+  if (!end_iter && !tree_.is_null ())
     {
-      stack_.push (const_cast <Expression_Tree &> (tree));
+      stack_.push (tree);
 
       // start at the smallest element (left-most)
       while (!stack_.top ().left ().is_null ())
@@ -75,10 +75,11 @@ In_Order_Expression_Tree_Iterator_Impl::operator++ ()
       // if we have nodes greater than ourselves
       if (!stack_.top ().right ().is_null ())
         {
-            // push the right child node onto the stack
-          // and pop the old parent (it's been visited now)
-          stack_.push (stack_.top().right ());
+          auto right_child = stack_.top().right ();
+          // Push the right child node onto the stack and pop the old
+          // parent (it's been visited now).
           stack_.pop();
+          stack_.push (right_child);
 
           // keep pushing until we get to the left most child
           while (!stack_.top ().left ().is_null ())
@@ -162,7 +163,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::Pre_Order_Expression_Tree_Iterator_Impl
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !this->tree_.is_null ())
+  if (!end_iter && !tree_.is_null ())
     stack_.push (const_cast <Expression_Tree &> (tree));
 }
 
@@ -288,7 +289,7 @@ Post_Order_Expression_Tree_Iterator_Impl::Post_Order_Expression_Tree_Iterator_Im
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !this->tree_.is_null ())
+  if (!end_iter && !tree_.is_null ())
     {
       Expression_Tree current = const_cast <Expression_Tree &> (tree);
       stack_.push (current);
@@ -455,7 +456,7 @@ Level_Order_Expression_Tree_Iterator_Impl::Level_Order_Expression_Tree_Iterator_
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !this->tree_.is_null ())
+  if (!end_iter && !tree_.is_null ())
     queue_.push (const_cast <Expression_Tree &> (tree));
 }
 
