@@ -15,34 +15,20 @@ Reactor::Reactor ()
 {
 }
 
-/**
- * @class Remove_Handler_Adapter
- * @brief This functor implements the Adapter pattern so an @a
- *        Reactor's @a remove_input_handler() method can be called
- *        with the appropriate @a Event_Handler in the context of the
- *        @a std:for_each() algorithm.
- */
-struct Remove_Handler_Adapter
-{
-  /// Remote @a event_handler from the singleton @a Reactor.
-  bool operator () (Event_Handler *event_handler)
-  {
-    Reactor::instance ()->remove_input_handler (event_handler);
-    return true;
-  }
-};
-
 Reactor::~Reactor ()
 {
   std::for_each (dispatch_table_.begin (),
                  dispatch_table_.end (),
-                 Remove_Handler_Adapter ());
+                 [](Event_Handler *event_handler) {
+                   // Remove each event_handler.
+                   Reactor::instance ()->remove_input_handler (event_handler);
+                 });
 }
 
 Reactor *
 Reactor::instance ()
 {
-  if (Reactor::instance_ == 0)
+  if (Reactor::instance_ == nullptr)
     Reactor::instance_ = new Reactor;
 
   return Reactor::instance_;
@@ -57,9 +43,10 @@ Reactor::register_input_handler (Event_Handler *eh)
 void
 Reactor::remove_input_handler (Event_Handler *eh)
 {
-  std::remove (dispatch_table_.begin (),
-	       dispatch_table_.end (),
-	       eh);
+  auto itr = std::remove (dispatch_table_.begin (),
+	                      dispatch_table_.end (),
+	                      eh);
+  dispatch_table_.erase(itr, dispatch_table_.end());
   eh->delete_this ();
 }
 
@@ -69,7 +56,7 @@ Reactor::run_event_loop ()
   while (run_event_loop_)
     std::for_each (dispatch_table_.begin (),
                    dispatch_table_.end (),
-                   std::mem_fun (&Event_Handler::handle_input));
+                   std::mem_fn (&Event_Handler::handle_input));
 }
 
 void
