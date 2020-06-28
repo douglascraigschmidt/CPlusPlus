@@ -6,11 +6,4 @@
 Event_Handler::~Event_Handler ()
 = default;
 
-void
-Event_Handler::delete_this ()
-{
-  // @@
-  // delete this;
-}
-
 #endif /* _EVENT_HANDLER_CP */
