@@ -20,8 +20,7 @@ public:
   /// Called back by the @a Reactor when input events occur.
   virtual void handle_input () = 0;
 
-protected:
-  /// Destructor is private to ensure dynamic allocation.
+  /// Virtual destructor.
   virtual ~Event_Handler () = 0;
 };
 

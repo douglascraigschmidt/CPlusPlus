@@ -2,6 +2,7 @@
 #define _REACTOR_H
 
 #include <vector>
+#include <memory>
 
 // Forward declarations.
 class Event_Handler;
@@ -34,7 +35,7 @@ public:
   void register_input_handler (Event_Handler *event_handler);
 
   /// Remove @a event_handler for input events.
-  void remove_input_handler (Event_Handler *event_handler);
+  void remove_input_handler (std::unique_ptr<Event_Handler> event_handler);
         
 private:
   /// Constructor is private to ensure use as a singleton.
@@ -43,8 +44,9 @@ private:
   /// Pointer to the singleton instance of the @a Reactor.
   static Reactor *instance_;
 
-  /// Vector of pointers to @a Event_Handler objects used to dispatch callbacks.
-  std::vector <Event_Handler *> dispatch_table_;
+  /// Vector of unique_ptrs to @a Event_Handler objects used to
+  /// dispatch callbacks.
+  std::vector <std::unique_ptr<Event_Handler>> dispatch_table_;
 
   /// Keeps track of whether we're running the event loop or not.
   bool run_event_loop_;

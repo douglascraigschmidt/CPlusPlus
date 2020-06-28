@@ -9,6 +9,7 @@ Event_Handler::~Event_Handler ()
 void
 Event_Handler::delete_this ()
 {
+  // @@
   // delete this;
 }
 

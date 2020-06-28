@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <functional>
+#include <iostream>
 
 #include "Reactor.h"
 #include "Event_Handler.h"
@@ -16,14 +17,7 @@ Reactor::Reactor ()
 }
 
 Reactor::~Reactor ()
-{
-  std::for_each (dispatch_table_.begin (),
-                 dispatch_table_.end (),
-                 [](Event_Handler *event_handler) {
-                   // Remove each event_handler.
-                   Reactor::instance ()->remove_input_handler (event_handler);
-                 });
-}
+= default;
 
 Reactor *
 Reactor::instance ()
@@ -37,26 +31,31 @@ Reactor::instance ()
 void
 Reactor::register_input_handler (Event_Handler *eh)
 {
-  dispatch_table_.push_back (eh);
+  dispatch_table_.push_back (std::unique_ptr<Event_Handler> (eh));
 }
 
 void
-Reactor::remove_input_handler (Event_Handler *eh)
+Reactor::remove_input_handler (std::unique_ptr<Event_Handler> eh)
 {
   auto itr = std::remove (dispatch_table_.begin (),
-	                      dispatch_table_.end (),
-	                      eh);
+                          dispatch_table_.end (),
+                          eh);
+
   dispatch_table_.erase(itr, dispatch_table_.end());
-  eh->delete_this ();
 }
 
 void 
 Reactor::run_event_loop ()
 {
-  while (run_event_loop_)
-    std::for_each (dispatch_table_.begin (),
-                   dispatch_table_.end (),
-                   std::mem_fn (&Event_Handler::handle_input));
+  for (;;) {
+    if (run_event_loop_) {
+      std::for_each (dispatch_table_.begin (),
+                     dispatch_table_.end (),
+                     std::mem_fn (&Event_Handler::handle_input));
+    } else {
+      break;
+    }
+  }
 }
 
 void

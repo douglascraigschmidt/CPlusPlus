@@ -24,20 +24,21 @@ Expression_Tree_Event_Handler::handle_input ()
 
   std::string input;
   
-  if (!get_input(input))
+  if (!get_input(input)) {
     Reactor::instance ()->end_event_loop ();
-    
+  }
+
   User_Command command = make_command (input);
   
   try
     {
-      if (!execute_command(command))
+      if (!execute_command(command)) {
         Reactor::instance ()->end_event_loop ();
-      else
-        {
-          last_valid_command_ = command;
-          command.print_valid_commands ();
-        }
+      }
+      else {
+        last_valid_command_ = command;
+        command.print_valid_commands ();
+      }
     }
   catch (Expression_Tree::Invalid_Iterator &e)
     {
@@ -55,7 +56,7 @@ bool
 Expression_Tree_Event_Handler::get_input (std::string &input)
 {
   std::getline (std::cin, input);
-  return std::cin.eof();
+  return !std::cin.eof();
 }
 
 bool

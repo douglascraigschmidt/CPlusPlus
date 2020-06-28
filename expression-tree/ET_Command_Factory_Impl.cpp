@@ -82,11 +82,10 @@ User_Command_Factory_Impl::make_command (const std::string &input)
   auto iter = command_map_.find (command_keyword);
   if (iter == command_map_.end ())
     return User_Command_Factory_Impl::make_quit_command (parameters);
-  else
-    {
-      auto ptmf = iter->second;
-      return (this->*ptmf) (parameters);
-    }
+  else {
+    auto ptmf = iter->second;
+    return (this->*ptmf) (parameters);
+  }
 }
 
 #endif /* ET_COMMAND_FACTORY_IMPL_CPP */
