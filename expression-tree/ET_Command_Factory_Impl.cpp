@@ -67,7 +67,7 @@ User_Command_Factory_Impl::User_Command_Factory_Impl (Tree_Context &tree_context
 }
 
 // Destructor
-User_Command_Factory_Impl::~User_Command_Factory_Impl (void)
+User_Command_Factory_Impl::~User_Command_Factory_Impl ()
 = default;
 
 User_Command
