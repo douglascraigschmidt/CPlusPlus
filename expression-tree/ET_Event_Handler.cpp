@@ -26,6 +26,7 @@ Expression_Tree_Event_Handler::handle_input ()
   
   if (!get_input(input)) {
     Reactor::instance ()->end_event_loop ();
+    return;
   }
 
   User_Command command = make_command (input);
