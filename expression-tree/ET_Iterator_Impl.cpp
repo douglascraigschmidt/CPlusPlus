@@ -90,6 +90,22 @@ In_Order_Expression_Tree_Iterator_Impl::operator++ ()
     }
 }
 
+/// Delegation operator.
+ 
+Expression_Tree *
+In_Order_Expression_Tree_Iterator_Impl::operator->()
+{
+  return &stack_.top ();
+}
+
+/// Delegation operator.
+ 
+const Expression_Tree *
+In_Order_Expression_Tree_Iterator_Impl::operator-> () const
+{
+  return &stack_.top ();
+}
+
 /// checks two iterators for equality
  
 bool 
@@ -213,6 +229,22 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator++ ()
       if (!current.left ().is_null ())
         stack_.push (current.left ());
     }
+}
+
+/// Delegation operator.
+ 
+Expression_Tree *
+Pre_Order_Expression_Tree_Iterator_Impl::operator->()
+{
+  return &stack_.top ();
+}
+
+/// Delegation operator.
+ 
+const Expression_Tree *
+Pre_Order_Expression_Tree_Iterator_Impl::operator-> () const
+{
+  return &stack_.top ();
 }
 
 /// checks two iterators for equality
@@ -383,6 +415,22 @@ Post_Order_Expression_Tree_Iterator_Impl::operator++ ()
     }
 }
 
+/// Delegation operator.
+ 
+Expression_Tree *
+Post_Order_Expression_Tree_Iterator_Impl::operator->()
+{
+  return &stack_.top ();
+}
+
+/// Delegation operator.
+ 
+const Expression_Tree *
+Post_Order_Expression_Tree_Iterator_Impl::operator-> () const
+{
+  return &stack_.top ();
+}
+
 /// checks two iterators for equality
  
 bool 
@@ -501,6 +549,22 @@ Level_Order_Expression_Tree_Iterator_Impl::operator++ ()
             queue_.push (root.right ());
         }
     }
+}
+
+/// Delegation operator.
+ 
+Expression_Tree *
+Level_Order_Expression_Tree_Iterator_Impl::operator->()
+{
+  return &queue_.front ();
+}
+
+/// Delegation operator.
+ 
+const Expression_Tree *
+Level_Order_Expression_Tree_Iterator_Impl::operator-> () const
+{
+  return &queue_.front ();
 }
 
 /// checks two iterators for equality

@@ -47,6 +47,14 @@ public:
   /// position.
   virtual const Expression_Tree operator* () const = 0;
 
+  /// Delegation operator returns a pointer to the item contained
+  /// at the current position.
+  virtual Expression_Tree *operator->() = 0;
+
+  /// Delegation operator returns a const pointer to the item
+  /// contained at the current position.
+  virtual const Expression_Tree *operator-> () const = 0;
+
   /// Increment operator (used for both pre- and post-increment).
   virtual void operator++ () = 0;
 
@@ -103,6 +111,14 @@ public:
   /// Increment operator (used for both pre- and post-increment).
   void operator++ () override;
 
+  /// Delegation operator returns a pointer to the item contained
+  /// at the current position.
+  Expression_Tree *operator->() override;
+
+  /// Delegation operator returns a const pointer to the item
+  /// contained at the current position.
+  const Expression_Tree *operator-> () const override;
+
   /// Equality operator.
   bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
@@ -156,6 +172,14 @@ public:
 
   /// Increment operator (used for both pre- and post-increment).
   void operator++ () override;
+
+  /// Delegation operator returns a pointer to the item contained
+  /// at the current position.
+  Expression_Tree *operator->() override;
+
+  /// Delegation operator returns a const pointer to the item
+  /// contained at the current position.
+  const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
   bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
@@ -211,6 +235,14 @@ public:
   /// Increment operator (used for both pre- and post-increment).
   void operator++ () override;
 
+  /// Delegation operator returns a pointer to the item contained
+  /// at the current position.
+  Expression_Tree *operator->() override;
+
+  /// Delegation operator returns a const pointer to the item
+  /// contained at the current position.
+  const Expression_Tree *operator-> () const override;
+
   /// Equality operator.
   bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
 
@@ -264,6 +296,14 @@ public:
 
   /// Increment operator (used for both pre- and post-increment).
   void operator++ () override;
+
+  /// Delegation operator returns a pointer to the item contained
+  /// at the current position.
+  Expression_Tree *operator->() override;
+
+  /// Delegation operator returns a const pointer to the item
+  /// contained at the current position.
+  const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
   bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;

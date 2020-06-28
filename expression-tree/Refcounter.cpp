@@ -75,7 +75,6 @@ Refcounter<T>::get_ptr () const
   return ptr_->t_;
 }
 
-
 /// dereference operator
 template <typename T>
 T & 

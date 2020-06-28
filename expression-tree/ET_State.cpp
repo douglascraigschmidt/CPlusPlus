@@ -8,32 +8,6 @@
 #include "Evaluation_Visitor.h"
 #include "Expression_Tree.h"
 
-/**
- * @class Accept_Visitor_Adapter
- * @brief This functor implements the Adapter pattern so the @a
- *        Component_Node's @a accept() method can be called with the
- *        appropriate visitor in the context of the @a std:for_each()
- *        algorithm.
- */
-template <typename VISITOR>
-class Accept_Visitor_Adapter
-{
-public:
-  /// Constructor.
-  explicit Accept_Visitor_Adapter (VISITOR &visitor): visitor_ (visitor)
-  {
-  }
-
-  /// Accept the @a visitor_ to visit the @a node.
-  void operator () (const Expression_Tree &t)
-  {
-    t.accept (visitor_);
-  }
-
-private:
-  VISITOR &visitor_;
-};
-
 /// this method traverses the tree in with a given traversal strategy
 void 
 Expression_Tree_State::print_tree (const Expression_Tree &tree,
@@ -50,7 +24,7 @@ Expression_Tree_State::print_tree (const Expression_Tree &tree,
   for (auto iter = tree.begin (traversal_order);
        iter != tree.end (traversal_order);
        ++iter)
-    (*iter).accept (print_visitor);
+    iter->accept (print_visitor);
 
 #if 0
   std::for_each (tree.begin (traversal_order),
@@ -59,8 +33,6 @@ Expression_Tree_State::print_tree (const Expression_Tree &tree,
                  {
                    tree.accept (print_visitor);
                  });
-
-                 // Accept_Visitor_Adapter<Print_Visitor> (print_visitor));
 #endif
 
   os << std::endl;
@@ -78,7 +50,9 @@ Expression_Tree_State::evaluate_tree (const Expression_Tree &tree,
   
   std::for_each (tree.begin (traversal_order),
                   tree.end (traversal_order),
-                  Accept_Visitor_Adapter<Evaluation_Visitor> (evaluation_visitor));
+                  [&evaluation_visitor](const Expression_Tree &t) {
+                      t.accept(evaluation_visitor);
+                  });
 
 #if 0
   // std::for_each() is a short-hand for writing the following loop:
@@ -179,9 +153,7 @@ Uninitialized_State::Uninitialized_State_Factory::make_uninitialized_state (cons
     }
   else
     {
-      Uninitialized_State::Uninitialized_State_Factory::UNINITIALIZED_STATE_PTF ptf
-        = iter->second;
-      return (*ptf) ();
+      return (*iter->second) ();
     }
 }           
 

@@ -47,6 +47,12 @@ public:
   /// Postincrement operator. 
   Expression_Tree_Iterator operator++ (int);
 
+  /// Delegation operator
+  Expression_Tree *operator-> ();
+
+  /// Delegation operator
+  const Expression_Tree *operator-> () const;
+
   /// Equality operator
   bool operator== (const Expression_Tree_Iterator &rhs);
 
@@ -95,6 +101,9 @@ public:
 
   /// Postincrement operator. 
   Expression_Tree_Const_Iterator operator++ (int);
+
+  /// Delegation operator
+  const Expression_Tree *operator-> () const;
 
   /// Equality operator
   bool operator== (const Expression_Tree_Const_Iterator &rhs);

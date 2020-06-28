@@ -53,6 +53,22 @@ Expression_Tree_Iterator::operator++ ()
   return *this;
 }
 
+/// Delegation operator
+
+Expression_Tree *
+Expression_Tree_Iterator::operator-> ()
+{
+  return impl_->operator->();
+}
+
+/// Delegation operator
+
+const Expression_Tree *
+Expression_Tree_Iterator::operator-> () const
+{
+  return impl_->operator->();
+}
+
 /// Post-increment operator
 
 Expression_Tree_Iterator 
@@ -118,6 +134,14 @@ Expression_Tree_Const_Iterator::operator++ (int)
   Expression_Tree_Const_Iterator temp (impl_.get_ptr ()->clone ());
   ++(*impl_);
   return *this;
+}
+
+/// Delegation operator
+
+const Expression_Tree *
+Expression_Tree_Const_Iterator::operator-> () const
+{
+  return impl_->operator->();
 }
 
 /// Equality operator

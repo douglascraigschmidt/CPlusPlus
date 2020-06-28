@@ -78,14 +78,11 @@ User_Command_Factory_Impl::make_command (const std::string &input)
   std::string parameters = input.substr (space_pos + 1);
   std::string command_keyword = input.substr (0, space_pos);
 
-  // COMMAND_MAP::iterator iter = command_map_.find (command_keyword);
   auto iter = command_map_.find (command_keyword);
   if (iter == command_map_.end ())
     return User_Command_Factory_Impl::make_quit_command (parameters);
-  else {
-    auto ptmf = iter->second;
-    return (this->*ptmf) (parameters);
-  }
+  else 
+    return (this->*iter->second) (parameters);
 }
 
 #endif /* ET_COMMAND_FACTORY_IMPL_CPP */
