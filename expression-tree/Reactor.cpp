@@ -29,9 +29,9 @@ Reactor::instance ()
 }
 
 void
-Reactor::register_input_handler (Event_Handler *eh)
+Reactor::register_input_handler (std::unique_ptr<Event_Handler> eh)
 {
-  dispatch_table_.push_back (std::unique_ptr<Event_Handler> (eh));
+  dispatch_table_.emplace_back (eh.release());
 }
 
 void
@@ -47,15 +47,10 @@ Reactor::remove_input_handler (std::unique_ptr<Event_Handler> eh)
 void 
 Reactor::run_event_loop ()
 {
-  for (;;) {
-    if (run_event_loop_) {
-      std::for_each (dispatch_table_.begin (),
-                     dispatch_table_.end (),
-                     std::mem_fn (&Event_Handler::handle_input));
-    } else {
-      break;
-    }
-  }
+  while (run_event_loop_)
+    std::for_each (dispatch_table_.begin (),
+                   dispatch_table_.end (),
+                   std::mem_fn (&Event_Handler::handle_input));
 }
 
 void

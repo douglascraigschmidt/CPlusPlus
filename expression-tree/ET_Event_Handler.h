@@ -30,7 +30,7 @@ public:
   /// Expression_Tree_Event_Handler, i.e., @a
   /// Verbose_Expression_Tree_Event_Handler or @a
   /// Macro_Command_Expression_Tree_Event_Handler.
-  static Expression_Tree_Event_Handler *make_handler (bool verbose);
+  static std::unique_ptr<Event_Handler> make_handler (bool verbose);
 
   /// This method is called back by the reactor when input is
   /// available.  It is a template method that performs the sequence

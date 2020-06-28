@@ -21,13 +21,11 @@ main (int argc, char *argv[])
   std::unique_ptr<Reactor> reactor (Reactor::instance ());
 
   // Dynamically allocate the appropriate event handler based on the
-  // command-line options.
-  Expression_Tree_Event_Handler *tree_event_handler
+  // command-line options and register this event handler with the
+  // reactor, which is responsible for triggering the deletion of
+  // the event handler.
+  reactor->register_input_handler
     (Expression_Tree_Event_Handler::make_handler (options->verbose ()));
-
-  // Register the event handler with the reactor.  The reactor is
-  // responsible for triggering the deletion of the event handler
-  reactor->register_input_handler (tree_event_handler);
 
   // Run the reactor's event loop, which drives all the processing via
   // callbacks to registered event handlers.

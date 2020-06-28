@@ -32,7 +32,7 @@ public:
   void end_event_loop ();
 
   /// Register @a event_handler for input events.
-  void register_input_handler (Event_Handler *event_handler);
+  void register_input_handler (std::unique_ptr<Event_Handler> event_handler);
 
   /// Remove @a event_handler for input events.
   void remove_input_handler (std::unique_ptr<Event_Handler> event_handler);

@@ -8,13 +8,13 @@
 #include "ET_User_Command_Impl.h"
 #include "ET_State.h"
 
-Expression_Tree_Event_Handler *
+std::unique_ptr<Event_Handler>
 Expression_Tree_Event_Handler::make_handler (bool verbose)
 {
   if (verbose)
-    return new Verbose_Expression_Tree_Event_Handler;
+    return std::make_unique<Verbose_Expression_Tree_Event_Handler>();
   else
-    return new Macro_Command_Expression_Tree_Event_Handler;
+    return std::make_unique<Macro_Command_Expression_Tree_Event_Handler>();
 }
 
 void 
