@@ -42,42 +42,6 @@ User_Command_Factory::make_command (const std::string &s)
 }
 
 User_Command
-User_Command_Factory::make_format_command (const std::string &s)
-{
-  return factory_impl_->make_format_command (s);
-}
-
-User_Command
-User_Command_Factory::make_expr_command (const std::string &s)
-{
-  return factory_impl_->make_expr_command (s);
-}
-
-User_Command
-User_Command_Factory::make_print_command (const std::string &s)
-{
-  return factory_impl_->make_print_command (s);
-}
-
-User_Command
-User_Command_Factory::make_eval_command (const std::string &s)
-{
-  return factory_impl_->make_eval_command (s);
-}
-
-User_Command
-User_Command_Factory::make_set_command (const std::string &s)
-{
-  return factory_impl_->make_set_command (s);
-}
-
-User_Command
-User_Command_Factory::make_quit_command (const std::string &s)
-{
-  return factory_impl_->make_quit_command (s);
-}
-
-User_Command
 User_Command_Factory::make_macro_command (const std::string &s)
 {
   return factory_impl_->make_macro_command (s);

@@ -26,7 +26,7 @@ public:
   Refcounter (const Refcounter& rhs);
 
   /// Dtor will delete pointer if refcount becomes 0
-  virtual ~Refcounter ();
+  ~Refcounter ();
 
   /// assignment operator for times when you don't want
   /// the reference increased for incoming ptr

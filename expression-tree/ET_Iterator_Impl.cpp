@@ -32,10 +32,8 @@ ET_Iter_Impl::is_equal_stack(T *lhs, const ET_Iter_Impl &rhs) {
       // easy check for determining most inequalities and it allows us
       // to assume the queue at least has a front node (coupled with
       // the is_empty () function later).
-      auto &t1 = lhs->tree_;
-      auto &t2 = rhs_downcast->tree_;
-      auto &s1 = lhs->stack_;
-      auto &s2 = rhs_downcast->stack_;
+      auto &t1 = lhs->tree_, &t2 = rhs_downcast->tree_;
+      auto &s1 = lhs->stack_, &s2 = rhs_downcast->stack_;
 
       if (t1.get_root () == t2.get_root () 
           && s1.size () == s2.size ()) {
@@ -502,10 +500,8 @@ Level_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
     // assume the queue at least has a front node (coupled with the
     // is_empty () function later).
 
-    auto &t1 = tree_;
-    auto &t2 = level_order_rhs->tree_;
-    auto &q1 = queue_;
-    auto &q2 = level_order_rhs->queue_;
+    auto &t1 = tree_, &t2 = level_order_rhs->tree_;
+    auto &q1 = queue_, &q2 = level_order_rhs->queue_;
     if (t1.get_root () == t2.get_root () 
         && q1.size () == q2.size ()) {
       // check for both being is_empty (special condition)

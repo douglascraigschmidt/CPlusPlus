@@ -52,7 +52,7 @@ public:
 
   /// Gain access to the underlying root pointer functions are useful
   /// to the iterators.
-  [[nodiscard]] Component_Node * get_root () const;
+  [[nodiscard]] Component_Node *get_root () const;
 
   /// Assignment operator.
   Expression_Tree &operator= (const Expression_Tree &t);
@@ -67,18 +67,18 @@ public:
   [[nodiscard]] int item () const;
 
   /// Return the left child.
-  Expression_Tree left ();
+  [[nodiscard]] Expression_Tree left ();
 
   /// Return the right child.
-  Expression_Tree right ();
+  [[nodiscard]] Expression_Tree right ();
 
   /// Get an iterator pointing to the "beginning" of the expression
   /// tree relative to the requested @a traversal_order.
-  iterator begin (const std::string &traversal_order);
+  [[nodiscard]] iterator begin (const std::string &traversal_order);
 
   /// Get an iterator pointing to the "end" of the expression tree
   /// relative to the requested @a traversal_order.
-  iterator end (const std::string &traversal_order);
+  [[nodiscard]] iterator end (const std::string &traversal_order);
 
   /// Get a const iterator pointing to the "beginning" of the
   /// expression tree relative to the requested @a traversal_order.

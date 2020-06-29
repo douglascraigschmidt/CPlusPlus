@@ -40,30 +40,6 @@ public:
   /// used by clients.  
   User_Command make_command (const std::string &command);
 
-  /// Make the requested format command.  This method is used in the
-  /// implementation of the various commands.
-  User_Command make_format_command (const std::string &);
-
-  /// Make the requested expression command.  This method is used in
-  /// the implementation of the various commands.
-  User_Command make_expr_command (const std::string &);
-
-  /// Make the requested print command.  This method is used in the
-  /// implementation of the various commands.
-  User_Command make_print_command (const std::string &);
-
-  /// Make the requested set command.  This method is used in the
-  /// implementation of the various commands.
-  User_Command make_set_command (const std::string &);
-
-  /// Make the requested eval command.  This method is used in the
-  /// implementation of the various commands.
-  User_Command make_eval_command (const std::string &);
-
-  /// Make the requested quit command.  This method is used in the
-  /// implementation of the various commands.
-  User_Command make_quit_command (const std::string &);
-
   /// Make the requested macro command.  This method is used in the
   /// implementation of the various commands.
   User_Command make_macro_command (const std::string &);
