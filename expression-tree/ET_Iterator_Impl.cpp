@@ -8,25 +8,62 @@
 
 const size_t LQUEUE_SIZE = 40;
 
-// Constructor for Expression_Tree_Iterator_Impl that takes a tree
+// Constructor for ET_Iter_Impl that takes a tree
 // to iterate over
 
-Expression_Tree_Iterator_Impl::Expression_Tree_Iterator_Impl (const Expression_Tree &tree)
+ET_Iter_Impl::ET_Iter_Impl (const Expression_Tree &tree)
   : tree_ (tree)
 {
 }
 
 // Destructor
 
-Expression_Tree_Iterator_Impl::~Expression_Tree_Iterator_Impl ()
+ET_Iter_Impl::~ET_Iter_Impl ()
 = default;
 
-/// Construct an In_Order_Expression_Tree_Iterator_Impl. If end_iter is set to true,
+template<typename T> bool
+ET_Iter_Impl::is_equal_stack(T *lhs, const ET_Iter_Impl &rhs) {
+  // if the rhs was not an iterator for type T then we've already
+  // discovered the relation is false.
+  if (auto rhs_downcast = dynamic_cast <decltype(lhs)> (&rhs)) {
+      // Check if the container we are iterating over has the same
+      // root node and that the size of the queues are equal. The
+      // latter doesn't truly determine equality. However, this is an
+      // easy check for determining most inequalities and it allows us
+      // to assume the queue at least has a front node (coupled with
+      // the is_empty () function later).
+      auto &t1 = lhs->tree_;
+      auto &t2 = rhs_downcast->tree_;
+      auto &s1 = lhs->stack_;
+      auto &s2 = rhs_downcast->stack_;
+
+      if (t1.get_root () == t2.get_root () 
+          && s1.size () == s2.size ()) {
+          // Check for both being is_empty (special condition).
+          if (s1.empty () && s2.empty ())
+            return true;
+
+          // check the front's node pointer. If the node pointers are
+          // equal, then both iterators are pointing to the same
+          // position in the tree.
+          if (s1.top ().get_root () == s2.top ().get_root ())
+            return true;
+        }
+    }
+
+  // either we were trying to compare a non-level order iterator or we
+  // were comparing two level order iterators that were obviously at
+  // different points in the tree (their queue sizes were different)
+
+  return false;
+}
+
+/// Construct an In_Order_ET_Iter_Impl. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-In_Order_Expression_Tree_Iterator_Impl::In_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                                                                bool end_iter)
-  : Expression_Tree_Iterator_Impl (tree),
+In_Order_ET_Iter_Impl::In_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                              bool end_iter)
+  : ET_Iter_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -43,13 +80,13 @@ In_Order_Expression_Tree_Iterator_Impl::In_Order_Expression_Tree_Iterator_Impl (
 
 /// destructor - nothing to do
 
-In_Order_Expression_Tree_Iterator_Impl::~In_Order_Expression_Tree_Iterator_Impl ()
+In_Order_ET_Iter_Impl::~In_Order_ET_Iter_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-In_Order_Expression_Tree_Iterator_Impl::operator* ()
+In_Order_ET_Iter_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -57,7 +94,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-In_Order_Expression_Tree_Iterator_Impl::operator* () const
+In_Order_ET_Iter_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -65,7 +102,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-In_Order_Expression_Tree_Iterator_Impl::operator++ ()
+In_Order_ET_Iter_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -93,7 +130,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-In_Order_Expression_Tree_Iterator_Impl::operator->()
+In_Order_ET_Iter_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -101,7 +138,7 @@ In_Order_Expression_Tree_Iterator_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-In_Order_Expression_Tree_Iterator_Impl::operator-> () const
+In_Order_ET_Iter_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -109,89 +146,50 @@ In_Order_Expression_Tree_Iterator_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-In_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
-{
-  const auto *in_order_rhs = dynamic_cast
-    <const In_Order_Expression_Tree_Iterator_Impl *> (&rhs);
-
-  // if the rhs was not a level_order iterator then we've already
-  // discovered the relation is false.
-
-  if (in_order_rhs)
-    {
-      // Check if the container we are iterating over has the same
-      // root node and that the size of the queues are equal. The
-      // latter doesn't truly determine equality. However, this is an
-      // easy check for determining most inequalities and it allows us
-      // to assume the queue at least has a front node (coupled with
-      // the is_empty () function later).
-
-      auto &t1 = const_cast <Expression_Tree &> (tree_);
-      auto &t2 = const_cast <Expression_Tree &> (in_order_rhs->tree_);
-
-      if (t1.get_root () == t2.get_root () 
-          && stack_.size () == in_order_rhs->stack_.size ())
-        {
-          // Check for both being is_empty (special condition).
-          if (stack_.empty () && in_order_rhs->stack_.empty ())
-            return true;
-
-          // check the front's node pointer. If the node pointers are
-          // equal, then both iterators are pointing to the same
-          // position in the tree.
-
-          if (stack_.top ().get_root () == in_order_rhs->stack_.top ().get_root ())
-            return true;
-        }
-    }
-
-  // either we were trying to compare a non-level order iterator or we
-  // were comparing two level order iterators that were obviously at
-  // different points in the tree (their queue sizes were different)
-
-  return false;
+In_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
+  return ET_Iter_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
  
 bool 
-In_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iterator_Impl &rhs) const
+In_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 {
-  return ! (*this == rhs);
+  return !(*this == rhs);
 }
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-Expression_Tree_Iterator_Impl * 
-In_Order_Expression_Tree_Iterator_Impl::clone ()
+ET_Iter_Impl *
+In_Order_ET_Iter_Impl::clone ()
 {
-  return new In_Order_Expression_Tree_Iterator_Impl (*this);
+  return new In_Order_ET_Iter_Impl (*this);
 }
 
 /// Construct an Pre_Order_Expression_Tree_Iterator. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-Pre_Order_Expression_Tree_Iterator_Impl::Pre_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                                            bool end_iter)
-  : Expression_Tree_Iterator_Impl (tree), 
+Pre_Order_ET_Iter_Impl::Pre_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                                bool end_iter)
+  : ET_Iter_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
   if (!end_iter && !tree_.is_null ())
-    stack_.push (const_cast <Expression_Tree &> (tree));
+    stack_.push (tree);
 }
 
 /// destructor - nothing to do
 
-Pre_Order_Expression_Tree_Iterator_Impl::~Pre_Order_Expression_Tree_Iterator_Impl ()
+Pre_Order_ET_Iter_Impl::~Pre_Order_ET_Iter_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Pre_Order_Expression_Tree_Iterator_Impl::operator* ()
+Pre_Order_ET_Iter_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -199,7 +197,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Pre_Order_Expression_Tree_Iterator_Impl::operator* () const
+Pre_Order_ET_Iter_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -207,7 +205,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Pre_Order_Expression_Tree_Iterator_Impl::operator++ ()
+Pre_Order_ET_Iter_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -234,7 +232,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Pre_Order_Expression_Tree_Iterator_Impl::operator->()
+Pre_Order_ET_Iter_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -242,7 +240,7 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Pre_Order_Expression_Tree_Iterator_Impl::operator-> () const
+Pre_Order_ET_Iter_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -250,73 +248,35 @@ Pre_Order_Expression_Tree_Iterator_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Pre_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
+Pre_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const
 {
-  const auto *pre_order_rhs = dynamic_cast
-    <const Pre_Order_Expression_Tree_Iterator_Impl *> (&rhs);
-
-  // if the rhs was not a level_order iterator
-  // then we've already discovered the relation is false
-
-  if (pre_order_rhs)
-    {
-      // check if the container we are iterating over has the same
-      // root node and that the size of the queues are equal. The
-      // latter doesn't truly determine equality. However, this is an
-      // easy check for determining most inequalities and it allows us
-      // to assume the queue at least has a front node (coupled with
-      // the is_empty () function later).
-
-      auto &t1 = const_cast <Expression_Tree &> (tree_);
-      auto &t2 = const_cast <Expression_Tree &> (pre_order_rhs->tree_);
-
-      if (t1.get_root () == t2.get_root () 
-          && stack_.size () == pre_order_rhs->stack_.size ())
-        {
-          // check for both being is_empty (special condition)
-          if (stack_.empty () && pre_order_rhs->stack_.empty ())
-            return true;
-
-          // check the front's node pointer. If the node pointers
-          // are equal, then both iterators are pointing to the same
-          // position in the tree.
-
-          if (stack_.top ().get_root () == pre_order_rhs->stack_.top ().get_root ())
-            return true;
-        }
-    }
-
-  // either we were trying to compare a non-level order iterator or
-  // we were comparing two level order iterators that were obviously
-  // at different points in the tree (their queue sizes were different)
-
-  return false;
+  return ET_Iter_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
  
 bool 
-Pre_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iterator_Impl &rhs) const
+Pre_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 {
-  return ! (*this == rhs);
+  return !(*this == rhs);
 }
 
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-Expression_Tree_Iterator_Impl * 
-Pre_Order_Expression_Tree_Iterator_Impl::clone ()
+ET_Iter_Impl *
+Pre_Order_ET_Iter_Impl::clone ()
 {
-  return new Pre_Order_Expression_Tree_Iterator_Impl (*this);
+  return new Pre_Order_ET_Iter_Impl (*this);
 }
 
 /// Construct an Post_Order_Expression_Tree_Iterator. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-Post_Order_Expression_Tree_Iterator_Impl::Post_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                                              bool end_iter)
-  : Expression_Tree_Iterator_Impl (tree), 
+Post_Order_ET_Iter_Impl::Post_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                                  bool end_iter)
+  : ET_Iter_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -350,13 +310,13 @@ Post_Order_Expression_Tree_Iterator_Impl::Post_Order_Expression_Tree_Iterator_Im
 
 /// destructor - nothing to do
 
-Post_Order_Expression_Tree_Iterator_Impl::~Post_Order_Expression_Tree_Iterator_Impl ()
+Post_Order_ET_Iter_Impl::~Post_Order_ET_Iter_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Post_Order_Expression_Tree_Iterator_Impl::operator* ()
+Post_Order_ET_Iter_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -364,7 +324,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Post_Order_Expression_Tree_Iterator_Impl::operator* () const
+Post_Order_ET_Iter_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -372,7 +332,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Post_Order_Expression_Tree_Iterator_Impl::operator++ ()
+Post_Order_ET_Iter_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -418,7 +378,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Post_Order_Expression_Tree_Iterator_Impl::operator->()
+Post_Order_ET_Iter_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -426,7 +386,7 @@ Post_Order_Expression_Tree_Iterator_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Post_Order_Expression_Tree_Iterator_Impl::operator-> () const
+Post_Order_ET_Iter_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -434,53 +394,14 @@ Post_Order_Expression_Tree_Iterator_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Post_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
+Post_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const
 {
-  const auto * post_order_rhs = dynamic_cast
-    <const Post_Order_Expression_Tree_Iterator_Impl *> (&rhs);
-
-  // if the rhs was not a level_order iterator
-  // then we've already discovered the relation is false
-
-  if (post_order_rhs)
-    {
-      // check if the container we are iterating over has the same
-      // root node and that the size of the queues are equal. The
-      // latter doesn't truly determine equality. However, this is an
-      // easy check for determining most inequalities and it allows us
-      // to assume the queue at least has a front node (coupled with
-      // the is_empty () function later).
-
-      auto &t1 = const_cast <Expression_Tree &> (tree_);
-      auto &t2 = const_cast <Expression_Tree &> (post_order_rhs->tree_);
-
-      if (t1.get_root () == t2.get_root () 
-          && stack_.size () == post_order_rhs->stack_.size ())
-        {
-          // check for both being is_empty (special condition)
-          if (stack_.empty () && post_order_rhs->stack_.empty ())
-            return true;
-
-          // check the front's node pointer. If the node pointers are
-          // equal, then both iterators are pointing to the same
-          // position in the tree.
-
-          if (stack_.top ().get_root () == post_order_rhs->stack_.top ().get_root ())
-            return true;
-        }
-    }
-
-  // either we were trying to compare a non-level order iterator or
-  // we were comparing two level order iterators that were obviously
-  // at different points in the tree (their queue sizes were different)
-
-  return false;
-}
+  return ET_Iter_Impl::is_equal_stack(this, rhs);}
 
 /// checks two iterators for inequality
  
 bool 
-Post_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iterator_Impl &rhs) const
+Post_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 {
   return ! (*this == rhs);
 }
@@ -488,35 +409,35 @@ Post_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iter
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-Expression_Tree_Iterator_Impl * 
-Post_Order_Expression_Tree_Iterator_Impl::clone ()
+ET_Iter_Impl *
+Post_Order_ET_Iter_Impl::clone ()
 {
-  return new Post_Order_Expression_Tree_Iterator_Impl (*this);
+  return new Post_Order_ET_Iter_Impl (*this);
 }
 
 /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
 /// true, the iterator points to the end of the tree
 
-Level_Order_Expression_Tree_Iterator_Impl::Level_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                                                                      bool end_iter)
-  : Expression_Tree_Iterator_Impl (tree), 
+Level_Order_ET_Iter_Impl::Level_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                                    bool end_iter)
+  : ET_Iter_Impl (tree),
     queue_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
   if (!end_iter && !tree_.is_null ())
-    queue_.push (const_cast <Expression_Tree &> (tree));
+    queue_.push (tree);
 }
 
 /// destructor - nothing to do
 
-Level_Order_Expression_Tree_Iterator_Impl::~Level_Order_Expression_Tree_Iterator_Impl ()
+Level_Order_ET_Iter_Impl::~Level_Order_ET_Iter_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Level_Order_Expression_Tree_Iterator_Impl::operator* ()
+Level_Order_ET_Iter_Impl::operator* ()
 {
   return queue_.front ();
 }
@@ -524,7 +445,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Level_Order_Expression_Tree_Iterator_Impl::operator* () const
+Level_Order_ET_Iter_Impl::operator* () const
 {
   return queue_.front ();
 }
@@ -532,7 +453,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Level_Order_Expression_Tree_Iterator_Impl::operator++ ()
+Level_Order_ET_Iter_Impl::operator++ ()
 {
   if (!queue_.empty ())
     {
@@ -554,7 +475,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Level_Order_Expression_Tree_Iterator_Impl::operator->()
+Level_Order_ET_Iter_Impl::operator->()
 {
   return &queue_.front ();
 }
@@ -562,7 +483,7 @@ Level_Order_Expression_Tree_Iterator_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Level_Order_Expression_Tree_Iterator_Impl::operator-> () const
+Level_Order_ET_Iter_Impl::operator-> () const
 {
   return &queue_.front ();
 }
@@ -570,53 +491,45 @@ Level_Order_Expression_Tree_Iterator_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Level_Order_Expression_Tree_Iterator_Impl::operator== (const Expression_Tree_Iterator_Impl &rhs) const
-{
-  const auto * level_order_rhs = dynamic_cast
-    <const Level_Order_Expression_Tree_Iterator_Impl *> (&rhs);
-
+Level_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
   // if the rhs was not a level_order iterator then we've already
   // discovered the relation is false.
+  if (auto level_order_rhs = dynamic_cast<decltype(this)> (&rhs)) {
+    // check if the container we are iterating over has the same root
+    // node and that the size of the queues are equal. The latter
+    // doesn't truly determine equality. However, this is an easy
+    // check for determining most inequalities and it allows us to
+    // assume the queue at least has a front node (coupled with the
+    // is_empty () function later).
 
-  if (level_order_rhs)
-    {
-      // check if the container we are iterating over has the same
-      // root node and that the size of the queues are equal. The
-      // latter doesn't truly determine equality. However, this is an
-      // easy check for determining most inequalities and it allows us
-      // to assume the queue at least has a front node (coupled with
-      // the is_empty () function later).
+    auto &t1 = tree_;
+    auto &t2 = level_order_rhs->tree_;
+    auto &q1 = queue_;
+    auto &q2 = level_order_rhs->queue_;
+    if (t1.get_root () == t2.get_root () 
+        && q1.size () == q2.size ()) {
+      // check for both being is_empty (special condition)
+      if (q1.empty () && q2.empty ())
+        return true;
 
-      auto &t1 = const_cast <Expression_Tree &> (tree_);
-      auto &t2 = const_cast <Expression_Tree &> (level_order_rhs->tree_);
-
-      if (t1.get_root () == t2.get_root () 
-          && queue_.size () == level_order_rhs->queue_.size ())
-        {
-          // check for both being is_empty (special condition)
-          if (queue_.empty () && level_order_rhs->queue_.empty ())
-            return true;
-
-          // check the front's node pointer. If the node pointers
-          // are equal, then both iterators are pointing to the same
-          // position in the tree.
-
-          if (queue_.front ().get_root () == level_order_rhs->queue_.front ().get_root ())
-            return true;
-        }
+      // check the front's node pointer. If the node pointers
+      // are equal, then both iterators are pointing to the same
+      // position in the tree.
+      if (q1.front ().get_root () == q2.front ().get_root ())
+        return true;
     }
+  }
 
   // either we were trying to compare a non-level order iterator or we
   // were comparing two level order iterators that were obviously at
   // different points in the tree (their queue sizes were different)
-
   return false;
 }
 
 /// checks two iterators for inequality
  
 bool 
-Level_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Iterator_Impl &rhs) const
+Level_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 {
   return !(*this == rhs);
 }
@@ -624,10 +537,10 @@ Level_Order_Expression_Tree_Iterator_Impl::operator!= (const Expression_Tree_Ite
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-Expression_Tree_Iterator_Impl * 
-Level_Order_Expression_Tree_Iterator_Impl::clone ()
+ET_Iter_Impl *
+Level_Order_ET_Iter_Impl::clone ()
 {
-  return new Level_Order_Expression_Tree_Iterator_Impl (*this);
+  return new Level_Order_ET_Iter_Impl (*this);
 }
 
 #endif /* _TREE_ITERATOR_IMPL_CPP */

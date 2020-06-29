@@ -10,7 +10,7 @@
 
 // Forward declarations.
 class Traversal_Strategy_Impl;
-class Expression_Tree_Iterator_Impl;
+class ET_Iter_Impl;
 class User_Command_Impl;
 
 /**

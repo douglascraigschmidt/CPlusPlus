@@ -46,7 +46,7 @@ Expression_Tree_Event_Handler::handle_input ()
       std::cout << "\nERROR: Bad traversal type (" << e.what() << ")\n";
       last_valid_command_.print_valid_commands ();
     }
-  catch (Expression_Tree_State::Invalid_State &e)
+  catch (ET_State::Invalid_State &e)
     {
       std::cout << "\nERROR: Can't call that command yet.\n";
       last_valid_command_.print_valid_commands ();

@@ -41,12 +41,12 @@ public:
   /// Sets the variable to its corresponding value.
   void set (const std::string &key_value_pair);
 
-  /// Return a pointer to the current @a Expression_Tree_State.
-  [[nodiscard]] Expression_Tree_State *state () const;
+  /// Return a pointer to the current @a ET_State.
+  [[nodiscard]] ET_State *state () const;
 
-  /// Set the current @a Expression_Tree_State to the designated @a
+  /// Set the current @a ET_State to the designated @a
   /// new_state pointer.
-  void state (Expression_Tree_State *new_state);
+  void state (ET_State *new_state);
 
   /// Return a reference to the current @a Expression_Tree.
   Expression_Tree &tree ();
@@ -65,7 +65,7 @@ public:
 private:
   /// Keep track of the current state that we're in.  We use an @a
   /// std::auto_ptr to simplify memory management and avoid memory leaks.
-  std::unique_ptr <Expression_Tree_State> state_;
+  std::unique_ptr <ET_State> state_;
   
   /// Current expression tree.
   Expression_Tree tree_;

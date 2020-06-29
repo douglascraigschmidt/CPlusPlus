@@ -16,7 +16,7 @@ class Expression_Tree_Iterator;
 class Expression_Tree;
 
 /**
- * @class Expression_Tree_Iterator_Impl
+ * @class ET_Iter_Impl
  * @brief Implementation of the Iterator pattern that is used to define 
  *        the various iterations algorithms that can be performed to
  *        traverse the expression tree.
@@ -28,16 +28,14 @@ class Expression_Tree;
  * @see   Expression_Tree_Level_Order_Iterator_Impl, Expression_Tree_In_Order_Iterator_Impl, 
  *        Expression_Tree_Pre_Order_Iterator_Impl, Expression_Tree_Post_Order_Iterator_Impl, 
  */
-class Expression_Tree_Iterator_Impl
+class ET_Iter_Impl
 {
-  friend class Expression_Tree_Iterator;
-
 public:
-  /// Construct an Expression_Tree_Iterator_Impl to iterate over a tree.  
-  explicit Expression_Tree_Iterator_Impl (const Expression_Tree &tree);
+  /// Construct an ET_Iter_Impl to iterate over a tree.
+  explicit ET_Iter_Impl (const Expression_Tree &tree);
 
   /// Dtor.
-  virtual ~Expression_Tree_Iterator_Impl ();
+  virtual ~ET_Iter_Impl ();
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
@@ -59,13 +57,13 @@ public:
   virtual void operator++ () = 0;
 
   /// Equality operator.
-  virtual bool operator== (const Expression_Tree_Iterator_Impl &rhs) const = 0;
+  virtual bool operator== (const ET_Iter_Impl &rhs) const = 0;
 
   /// Nonequality operator.
-  virtual bool operator!= (const Expression_Tree_Iterator_Impl &rhs) const = 0;
+  virtual bool operator!= (const ET_Iter_Impl &rhs) const = 0;
 
   /// Method for cloning an impl. Necessary for post increments.
-  virtual Expression_Tree_Iterator_Impl *clone() = 0;
+  virtual ET_Iter_Impl *clone() = 0;
 
   /// = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -77,28 +75,31 @@ public:
 protected:
   /// The tree we are iterating over.
   const Expression_Tree &tree_;
+
+  template<typename T> static bool is_equal_stack(T *lhs,
+                                                  const ET_Iter_Impl &rhs);
 };
 
 /**
- * @class In_Order_Expression_Tree_Iterator_Impl
+ * @class In_Order_ET_Iter_Impl
  * @brief Iterates through an @a Expression_Tree in in-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
  *        pattern that defines the in-order iteration algorithm.
  */
-class In_Order_Expression_Tree_Iterator_Impl : public Expression_Tree_Iterator_Impl
+class In_Order_ET_Iter_Impl : public ET_Iter_Impl
 {
   friend class Expression_Tree_Iterator;
-  friend class Refcounter<Expression_Tree_Iterator_Impl>;
+  friend class Refcounter<ET_Iter_Impl>;
 public:
-  /// Construct an In_Order_Expression_Tree_Iterator_Impl. If end_iter
+  /// Construct an In_Order_ET_Iter_Impl. If end_iter
   /// is set to true, the iterator points to the end of the
   /// tree. Otherwise, the iterator starts with a free tree.
-  explicit In_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                               bool end_iter = false);
+  explicit In_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                  bool end_iter = false);
 
   /// Dtor.
-  ~In_Order_Expression_Tree_Iterator_Impl () override;
+  ~In_Order_ET_Iter_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
@@ -120,13 +121,13 @@ public:
   const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
-  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
+  bool operator== (const ET_Iter_Impl &rhs) const override;
 
   /// Nonequality operator.
-  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
+  bool operator!= (const ET_Iter_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  Expression_Tree_Iterator_Impl *clone () override;
+  ET_Iter_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -138,29 +139,31 @@ public:
 private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
+
+  friend class ET_Iter_Impl;
 };
 
 /**
- * @class Pre_Order_Expression_Tree_Iterator_Impl
+ * @class Pre_Order_ET_Iter_Impl
  * @brief Iterates through an @a Expression_Tree in level-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
  *        pattern that defines the level-order iteration algorithm.
  */
-class Pre_Order_Expression_Tree_Iterator_Impl : public Expression_Tree_Iterator_Impl
+class Pre_Order_ET_Iter_Impl : public ET_Iter_Impl
 {
   friend class Expression_Tree_Iterator;
-  friend class Refcounter<Expression_Tree_Iterator_Impl>;
+  friend class Refcounter<ET_Iter_Impl>;
 
 public:
   /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter
   /// is set to true, the iterator points to the end of the
   /// tree. Otherwise, the iterator starts with a free tree.
-  explicit Pre_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                bool end_iter = false);
+  explicit Pre_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                   bool end_iter = false);
 
   /// Dtor.
-  ~Pre_Order_Expression_Tree_Iterator_Impl () override;
+  ~Pre_Order_ET_Iter_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
@@ -182,13 +185,13 @@ public:
   const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
-  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
+  bool operator== (const ET_Iter_Impl &rhs) const override;
 
   /// Nonequality operator.
-  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
+  bool operator!= (const ET_Iter_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  Expression_Tree_Iterator_Impl *clone () override;
+  ET_Iter_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -200,29 +203,31 @@ public:
 private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
+
+  friend class ET_Iter_Impl;
 };
 
 /**
- * @class Post_Order_Expression_Tree_Iterator_Impl
+ * @class Post_Order_ET_Iter_Impl
  * @brief Iterates through an @a Expression_Tree in post-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
  *        pattern that defines the post-order iteration algorithm.
  */
-class Post_Order_Expression_Tree_Iterator_Impl : public Expression_Tree_Iterator_Impl
+class Post_Order_ET_Iter_Impl : public ET_Iter_Impl
 {
   friend class Expression_Tree_Iterator;
-  friend class Refcounter<Expression_Tree_Iterator_Impl>;
+  friend class Refcounter<ET_Iter_Impl>;
 public:
 
-  /// Construct an Post_Order_Expression_Tree_Iterator_Impl. If end_iter is set
+  /// Construct an Post_Order_ET_Iter_Impl. If end_iter is set
   /// to true, the iterator points to the end of the tree. Otherwise,
   /// the iterator starts with a free tree.
-  explicit Post_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                 bool end_iter = false);
+  explicit Post_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                    bool end_iter = false);
 
   /// Dtor.
-  ~Post_Order_Expression_Tree_Iterator_Impl () override;
+  ~Post_Order_ET_Iter_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
@@ -244,13 +249,13 @@ public:
   const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
-  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
+  bool operator== (const ET_Iter_Impl &rhs) const override;
 
   /// Nonequality operator.
-  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
+  bool operator!= (const ET_Iter_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  Expression_Tree_Iterator_Impl *clone () override;
+  ET_Iter_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -262,29 +267,31 @@ public:
 private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
+
+  friend class ET_Iter_Impl;
 };
 
 /**
- * @class Level_Order_Expression_Tree_Iterator_Impl
+ * @class Level_Order_ET_Iter_Impl
  * @brief Iterates through an @a Expression_Tree in level-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
  *        pattern that defines the post-order iteration algorithm.
  */
-class Level_Order_Expression_Tree_Iterator_Impl : public Expression_Tree_Iterator_Impl
+class Level_Order_ET_Iter_Impl : public ET_Iter_Impl
 {
   friend class Expression_Tree_Iterator;
-  friend class Refcounter<Expression_Tree_Iterator_Impl>;
+  friend class Refcounter<ET_Iter_Impl>;
 public:
 
   /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
   /// true, the iterator points to the end of the tree. Otherwise, the
   /// iterator starts with a free tree.
-  explicit Level_Order_Expression_Tree_Iterator_Impl (const Expression_Tree &tree,
-                                             bool end_iter = false);
+  explicit Level_Order_ET_Iter_Impl (const Expression_Tree &tree,
+                                     bool end_iter = false);
 
   /// Dtor.
-  ~Level_Order_Expression_Tree_Iterator_Impl () override;
+  ~Level_Order_ET_Iter_Impl () override;
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position.
@@ -306,13 +313,13 @@ public:
   const Expression_Tree *operator-> () const override;
 
   /// Equality operator.
-  bool operator== (const Expression_Tree_Iterator_Impl &rhs) const override;
+  bool operator== (const ET_Iter_Impl &rhs) const override;
 
   /// Nonequality operator.
-  bool operator!= (const Expression_Tree_Iterator_Impl &lhs) const override;
+  bool operator!= (const ET_Iter_Impl &lhs) const override;
 
   /// Method for cloning an impl. Necessary for post increments.
-  Expression_Tree_Iterator_Impl *clone () override;
+  ET_Iter_Impl *clone () override;
 
   // = Necessary traits
   typedef std::forward_iterator_tag iterator_category;
@@ -324,6 +331,8 @@ public:
 private:
   /// Our current position in the iteration.
   std::queue <Expression_Tree> queue_;
+
+  friend class ET_Iter_Impl;
 };
 
 #endif /* _ET_ITERATOR_IMPL_H_ */

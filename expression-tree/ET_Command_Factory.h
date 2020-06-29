@@ -8,7 +8,7 @@
 #include "Refcounter.h"
 
 // Forward declarations.
-class Expression_Tree_Iterator_Impl;
+class ET_Iter_Impl;
 class Tree_Context;
 
 /**

@@ -72,14 +72,14 @@ Tree_Context::set (const std::string &key_value_pair)
   else throw std::domain_error("Must have = sign present");
 }
 
-Expression_Tree_State *
+ET_State *
 Tree_Context::state () const
 {
   return state_.get ();
 }
 
 void
-Tree_Context::state (Expression_Tree_State *state)
+Tree_Context::state (ET_State *state)
 {
   state_.reset (state);
 }
