@@ -25,7 +25,7 @@ main (int argc, char *argv[])
   // reactor, which is responsible for triggering the deletion of
   // the event handler.
   reactor->register_input_handler
-    (Expression_Tree_Event_Handler::make_handler (options->verbose ()));
+    (ET_Event_Handler::make_handler (options->verbose ()));
 
   // Run the reactor's event loop, which drives all the processing via
   // callbacks to registered event handlers.

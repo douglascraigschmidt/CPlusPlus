@@ -6,7 +6,7 @@
 #include "ET_Command_Factory.h"
 
 /**
- * @class Expression_Tree_Event_Handler
+ * @class ET_Event_Handler
  * @brief Provides an abstract interface for handling input events
  *        and commands associated with the expression tree application. 
  *
@@ -14,22 +14,22 @@
  *        pattern and defines methods for use in the Template Method
  *        pattern that is used to process user input commands. 
  *
- * @see   Verbose_Expression_Tree_Event_Handler and
- *        Macro_Command_Expression_Tree_Event_Handler.
+ * @see   Verbose_Mode_ET_Event_Handler and
+ *        Succinct_Mode_ET_Event_Handler.
  */
-class Expression_Tree_Event_Handler : public Event_Handler
+class ET_Event_Handler : public Event_Handler
 {
 public:
   /// Constructor.
-  Expression_Tree_Event_Handler ();
+  ET_Event_Handler ();
 
   /// Dtor.
-  ~Expression_Tree_Event_Handler () override;
+  ~ET_Event_Handler () override;
 
   /// Factory that creates the appropriate subclass of @a
-  /// Expression_Tree_Event_Handler, i.e., @a
-  /// Verbose_Expression_Tree_Event_Handler or @a
-  /// Macro_Command_Expression_Tree_Event_Handler.
+  /// ET_Event_Handler, i.e., @a
+  /// Verbose_Mode_ET_Event_Handler or @a
+  /// Succinct_Mode_ET_Event_Handler.
   static std::unique_ptr<Event_Handler> make_handler (bool verbose);
 
   /// This method is called back by the reactor when input is
@@ -64,7 +64,7 @@ protected:
 };
 
 /**
- * @class Verbose_Expression_Tree_Event_Handler
+ * @class Verbose_Mode_ET_Event_Handler
  * @brief Provides a concrete interface for verbosely handling input
  *        events associated with the expression tree application. 
  *
@@ -72,15 +72,15 @@ protected:
  *        pattern and overrides several hook methods for use in the
  *        Template Method pattern. 
  */
-class Verbose_Expression_Tree_Event_Handler 
-  : public Expression_Tree_Event_Handler
+class Verbose_Mode_ET_Event_Handler
+  : public ET_Event_Handler
 {
 public:
   /// Constructor.
-  Verbose_Expression_Tree_Event_Handler ();
+  Verbose_Mode_ET_Event_Handler ();
 
   /// Dtor.
-  ~Verbose_Expression_Tree_Event_Handler () override;
+  ~Verbose_Mode_ET_Event_Handler () override;
 
 protected:
   /// This hook method verbosely prompts the user for input.
@@ -96,7 +96,7 @@ private:
 };
 
 /**
- * @class Macro_Command_Expression_Tree_Event_Handler
+ * @class Succinct_Mode_ET_Event_Handler
  * @brief Provides a concrete interface for less verbosely handling input
  *        events associated with the expression tree application. 
  *
@@ -104,15 +104,15 @@ private:
  *        pattern and overrides several hook methods for use in the
  *        Template Method pattern. 
  */
-class Macro_Command_Expression_Tree_Event_Handler 
-  : public Expression_Tree_Event_Handler
+class Succinct_Mode_ET_Event_Handler
+  : public ET_Event_Handler
 {
 public:
   /// Constructor.
-  Macro_Command_Expression_Tree_Event_Handler ();
+  Succinct_Mode_ET_Event_Handler ();
 
   /// Dtor.
-  ~Macro_Command_Expression_Tree_Event_Handler () override;
+  ~Succinct_Mode_ET_Event_Handler () override;
 
 protected:
   /// This hook method less verbosely prompts the user for input.

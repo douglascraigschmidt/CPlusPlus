@@ -15,7 +15,7 @@
 #include "Expression_Tree.h"
 
 /**
- * @class Expression_Tree_Iterator_Factory
+ * @class ET_Iterator_Factory
  * @brief Implementation of a factory pattern that dynamically allocates
  *        the appropriate @a ET_Iter_Impl object.
  * 
@@ -28,17 +28,17 @@
  *        Expression_Tree_Pre_Order_Iterator_Impl, and
  *        Expression_Tree_Post_Order_Iterator_Impl.
  */
-class Expression_Tree_Iterator_Factory
+class ET_Iterator_Factory
 {
 public:
   /// Constructor.
-  Expression_Tree_Iterator_Factory ();
+  ET_Iterator_Factory ();
 
   /// Dynamically allocate a new @a ET_Iter_Impl
   /// object based on the designated @a traversal_order and @a end_iter.
-  ET_Iter_Impl *make_tree_iterator (Expression_Tree &tree,
-                                    const std::string &traversal_order,
-                                    bool end_iter);
+  ET_Iter_Impl *make_iterator (Expression_Tree &tree,
+                               const std::string &traversal_order,
+                               bool end_iter);
 
 private:
   /// Dynamically allocate a new @a Expression_Tree_Level_Order_Iterator_Impl
@@ -67,64 +67,59 @@ private:
   TRAVERSAL_MAP traversal_map_;
 };
 
-Expression_Tree_Iterator_Factory::Expression_Tree_Iterator_Factory ()
+ET_Iterator_Factory::ET_Iterator_Factory ()
 {
-  traversal_map_["in-order"] = &Expression_Tree_Iterator_Factory::make_in_order_tree_iterator;
-  traversal_map_["pre-order"] = &Expression_Tree_Iterator_Factory::make_pre_order_tree_iterator;
-  traversal_map_["post-order"] = &Expression_Tree_Iterator_Factory::make_post_order_tree_iterator;
-  traversal_map_["level-order"] = &Expression_Tree_Iterator_Factory::make_level_order_tree_iterator;
+  traversal_map_["in-order"] = &ET_Iterator_Factory::make_in_order_tree_iterator;
+  traversal_map_["pre-order"] = &ET_Iterator_Factory::make_pre_order_tree_iterator;
+  traversal_map_["post-order"] = &ET_Iterator_Factory::make_post_order_tree_iterator;
+  traversal_map_["level-order"] = &ET_Iterator_Factory::make_level_order_tree_iterator;
 }
 
 ET_Iter_Impl *
-Expression_Tree_Iterator_Factory::make_level_order_tree_iterator (Expression_Tree &tree,
-                                                                  bool end_iter)
+ET_Iterator_Factory::make_level_order_tree_iterator (Expression_Tree &tree,
+                                                     bool end_iter)
 { 
   return new Level_Order_ET_Iter_Impl (tree, end_iter);
 }
 
 ET_Iter_Impl *
-Expression_Tree_Iterator_Factory::make_in_order_tree_iterator (Expression_Tree &tree,
-                                                               bool end_iter)
+ET_Iterator_Factory::make_in_order_tree_iterator (Expression_Tree &tree,
+                                                  bool end_iter)
 { 
   return new In_Order_ET_Iter_Impl (tree, end_iter);
 }
 
 ET_Iter_Impl *
-Expression_Tree_Iterator_Factory::make_pre_order_tree_iterator (Expression_Tree &tree,
-                                                                bool end_iter)
+ET_Iterator_Factory::make_pre_order_tree_iterator (Expression_Tree &tree,
+                                                   bool end_iter)
 { 
   return new Pre_Order_ET_Iter_Impl (tree, end_iter);
 }
 
 ET_Iter_Impl *
-Expression_Tree_Iterator_Factory::make_post_order_tree_iterator (Expression_Tree &tree,
-                                                                 bool end_iter)
+ET_Iterator_Factory::make_post_order_tree_iterator (Expression_Tree &tree,
+                                                    bool end_iter)
 { 
   return new Post_Order_ET_Iter_Impl (tree, end_iter);
 }
 
 ET_Iter_Impl *
-Expression_Tree_Iterator_Factory::make_tree_iterator (Expression_Tree &tree, 
-                                                      const std::string &traversal_order,
-                                                      bool end_iter)
+ET_Iterator_Factory::make_iterator (Expression_Tree &tree,
+                                    const std::string &traversal_order,
+                                    bool end_iter)
 {  
   auto iter = traversal_map_.find (traversal_order);
   if (iter == traversal_map_.end ())
-    {
       // We don't understand the type. Convert the type to a string
       // and pass it back via an exception
 
       throw Expression_Tree::Invalid_Iterator (traversal_order);
-    }
   else
-    {
-      Expression_Tree_Iterator_Factory::TRAVERSAL_PTMF ptmf = iter->second;
-      return (*ptmf) (tree, end_iter);
-    }
+      return (*iter->second) (tree, end_iter);
 }
 
 // Define a single instance of a factory that's local to this class.
-static Expression_Tree_Iterator_Factory tree_iterator_factory;
+static ET_Iterator_Factory tree_iterator_factory;
 
 // Default ctor
 
@@ -206,17 +201,10 @@ Expression_Tree::right ()
 Expression_Tree::iterator
 Expression_Tree::begin (const std::string &traversal_order)
 {
-  /* 
-  if (traversal_order == "Pre-order")
-    return Express_Tree_Iterator (new Pre_Order_Tree_Iterator_Impl (*this, false));
-  else if (traversal_order == "Level-order")
-    return Express_Tree_Iterator (new Level_Order_Tree_Iterator_Impl (*this, false));
-  */
-
   return Expression_Tree::iterator 
-    (tree_iterator_factory.make_tree_iterator (*this, 
-                                               traversal_order, 
-                                               false));
+    (tree_iterator_factory.make_iterator(*this,
+                                         traversal_order,
+                                         false));
 }
 
 // Return an end iterator of a specified type.
@@ -225,9 +213,9 @@ Expression_Tree::iterator
 Expression_Tree::end (const std::string &traversal_order)
 {
   return Expression_Tree::iterator 
-	(tree_iterator_factory.make_tree_iterator (*this, 
-                                               traversal_order, 
-                                               true));
+    (tree_iterator_factory.make_iterator(*this,
+                                         traversal_order,
+                                         true));
 }
 
 // Return a begin iterator of a specified type.
@@ -236,9 +224,9 @@ Expression_Tree_Const_Iterator
 Expression_Tree::begin (const std::string &traversal_order) const
 {
   auto *non_const_this = const_cast <Expression_Tree *> (this);
-  return Expression_Tree::const_iterator (tree_iterator_factory.make_tree_iterator (*non_const_this, 
-                                                                                    traversal_order,
-                                                                                    false));
+  return Expression_Tree::const_iterator (tree_iterator_factory.make_iterator(*non_const_this,
+                                                                              traversal_order,
+                                                                              false));
 }
 
 // Return an end iterator of a specified type.
@@ -247,9 +235,9 @@ Expression_Tree_Const_Iterator
 Expression_Tree::end (const std::string &traversal_order) const
 {
   auto *non_const_this = const_cast <Expression_Tree *> (this);
-  return Expression_Tree::const_iterator (tree_iterator_factory.make_tree_iterator (*non_const_this,
-                                                                                    traversal_order,
-                                                                                    true));
+  return Expression_Tree::const_iterator (tree_iterator_factory.make_iterator(*non_const_this,
+                                                                              traversal_order,
+                                                                              true));
 }
 
 /// Accept a visitor to perform some action on the Expression_Tree.

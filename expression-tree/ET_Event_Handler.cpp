@@ -9,16 +9,16 @@
 #include "ET_State.h"
 
 std::unique_ptr<Event_Handler>
-Expression_Tree_Event_Handler::make_handler (bool verbose)
+ET_Event_Handler::make_handler (bool verbose)
 {
   if (verbose)
-    return std::make_unique<Verbose_Expression_Tree_Event_Handler>();
+    return std::make_unique<Verbose_Mode_ET_Event_Handler>();
   else
-    return std::make_unique<Macro_Command_Expression_Tree_Event_Handler>();
+    return std::make_unique<Succinct_Mode_ET_Event_Handler>();
 }
 
 void 
-Expression_Tree_Event_Handler::handle_input ()
+ET_Event_Handler::handle_input ()
 {
   prompt_user ();
 
@@ -54,38 +54,38 @@ Expression_Tree_Event_Handler::handle_input ()
 }
 
 bool
-Expression_Tree_Event_Handler::get_input (std::string &input)
+ET_Event_Handler::get_input (std::string &input)
 {
   std::getline (std::cin, input);
   return !std::cin.eof();
 }
 
 bool
-Expression_Tree_Event_Handler::execute_command (User_Command &command)
+ET_Event_Handler::execute_command (User_Command &command)
 {
   return command.execute ();
 }
 
-Expression_Tree_Event_Handler::Expression_Tree_Event_Handler ()
+ET_Event_Handler::ET_Event_Handler ()
   : tree_context_ (),
     command_factory_ (tree_context_),
     last_valid_command_ (new Null_Command (tree_context_))
 {
 }
 
-Expression_Tree_Event_Handler::~Expression_Tree_Event_Handler ()
+ET_Event_Handler::~ET_Event_Handler ()
 = default;
 
-Verbose_Expression_Tree_Event_Handler::Verbose_Expression_Tree_Event_Handler (void)
+Verbose_Mode_ET_Event_Handler::Verbose_Mode_ET_Event_Handler (void)
   : prompted_ (false)
 {
 }
 
-Verbose_Expression_Tree_Event_Handler::~Verbose_Expression_Tree_Event_Handler ()
+Verbose_Mode_ET_Event_Handler::~Verbose_Mode_ET_Event_Handler ()
 = default;
 
 void
-Verbose_Expression_Tree_Event_Handler::prompt_user ()
+Verbose_Mode_ET_Event_Handler::prompt_user ()
 {
   if (!prompted_)
     {
@@ -102,26 +102,26 @@ Verbose_Expression_Tree_Event_Handler::prompt_user ()
 }
 
 User_Command
-Verbose_Expression_Tree_Event_Handler::make_command (const std::string &input)
+Verbose_Mode_ET_Event_Handler::make_command (const std::string &input)
 {
   return command_factory_.make_command (input);
 }
 
-Macro_Command_Expression_Tree_Event_Handler::Macro_Command_Expression_Tree_Event_Handler ()
+Succinct_Mode_ET_Event_Handler::Succinct_Mode_ET_Event_Handler ()
 = default;
 
-Macro_Command_Expression_Tree_Event_Handler::~Macro_Command_Expression_Tree_Event_Handler ()
+Succinct_Mode_ET_Event_Handler::~Succinct_Mode_ET_Event_Handler ()
 = default;
 
 void
-Macro_Command_Expression_Tree_Event_Handler::prompt_user ()
+Succinct_Mode_ET_Event_Handler::prompt_user ()
 {
   std::cout << "> ";
   std::cout.flush ();
 }
 
 User_Command
-Macro_Command_Expression_Tree_Event_Handler::make_command (const std::string &input)
+Succinct_Mode_ET_Event_Handler::make_command (const std::string &input)
 {
   return command_factory_.make_macro_command (input);
 }
