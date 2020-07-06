@@ -1,0 +1,57 @@
+  for (int index = 0;
+       index < input.length();
+       ++index) {
+    char c = input[index];
+
+    while (isspace(c)) 
+      c = input[++index];
+
+    if (isalnum(c)) {
+      int j = 1;
+      for (; index + j < input.length () && isdigit (input[index + j]); ++j) 
+        continue;
+
+      stack.push(new Number_Expr (input.substr (index, j)));
+
+      index += j - 1;
+    } else {
+      auto right_expr = stack.top();
+      stack.pop();
+      switch (c) {
+      case '+': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Add_Expr(top,
+                                right_expr));
+        break;
+      }
+      case '-': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Subtract_Expr(top,
+                                     right_expr));
+        break;
+      }
+      case '~': {
+        stack.push(new Negate_Expr(right_expr));
+        break;
+      } 
+      case '*': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Multiply_Expr(top,
+                                     right_expr));
+        break;
+      }
+      case '/': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Divide_Expr(top,
+                                   right_expr));
+        break;
+      }
+      default:
+        throw std::invalid_argument("invalid symbol");
+      }
+    }
+  }

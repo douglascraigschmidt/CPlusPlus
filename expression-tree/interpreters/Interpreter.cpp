@@ -869,69 +869,95 @@ Post_Order_Interpreter::Post_Order_Interpreter ()
 Post_Order_Interpreter::~Post_Order_Interpreter ()
 = default;
 
-Expr *
-Post_Order_Interpreter::build_parse_tree(const std::string &input) {
-  std::stack<Expr *> stack;
+class Post_Order_Iterator : public std::iterator <std::forward_iterator_tag, Expr *> {
+public:
+  Post_Order_Iterator ()
+    : index_ (0),
+      input_ (nullptr),
+      stack_(nullptr) {
+  }
 
-  std::cout << "\ninput = " << input << std::endl;
+  Post_Order_Iterator (const std::string &input, std::stack<Expr *> &stack)
+    : index_(0),
+      input_(&input),
+      stack_(&stack) {
+  }
 
-  for (int index = 0;
-       index < input.length();
-       ++index) {
-    char c = input[index];
+  bool operator != (const Post_Order_Iterator &rhs) {
+    return index_ < input_->length();
+  }
+
+  Expr *operator *() {
+    char c = (*input_)[index_];
 
     while (isspace(c)) 
-      c = input[++index];
+      c = (*input_)[++index_];
 
     if (isalnum(c)) {
       int j = 1;
-      for (; index + j < input.length () && isdigit (input[index + j]); ++j) 
+      for (; index_ + j < input_->length () && isdigit ((*input_)[index_ + j]); ++j)
         continue;
 
-      stack.push(new Number_Expr (input.substr (index, j)));
+      auto expr = new Number_Expr ((*input_).substr (index_, j));
 
-      index += j - 1;
+      index_ += j - 1;
+
+      return expr;
     } else {
-      auto right_expr = stack.top();
-      stack.pop();
+      auto right_expr = stack_->top();
+      stack_->pop();
       switch (c) {
       case '+': {
-        auto top = stack.top();
-        stack.pop();
-        stack.push(new Add_Expr(top,
-                                right_expr));
-        break;
+        auto top = stack_->top();
+        stack_->pop();
+        return new Add_Expr(top, right_expr);
       }
       case '-': {
-        auto top = stack.top();
-        stack.pop();
-        stack.push(new Subtract_Expr(top,
-                                     right_expr));
-        break;
+        auto top = stack_->top();
+        stack_->pop();
+        return new Subtract_Expr(top, right_expr);
       }
       case '~': {
-        stack.push(new Negate_Expr(right_expr));
-        break;
+        return new Negate_Expr(right_expr);
       } 
       case '*': {
-        auto top = stack.top();
-        stack.pop();
-        stack.push(new Multiply_Expr(top,
-                                     right_expr));
-        break;
+        auto top = stack_->top();
+        stack_->pop();
+        return new Multiply_Expr(top, right_expr);
       }
       case '/': {
-        auto top = stack.top();
-        stack.pop();
-        stack.push(new Divide_Expr(top,
-                                   right_expr));
-        break;
+        auto top = stack_->top();
+        stack_->pop();
+        return new Divide_Expr(top, right_expr);
       }
       default:
         throw std::invalid_argument("invalid symbol");
       }
     }
+
   }
+
+  void operator++ () { 
+    ++index_;
+  }
+
+private:
+  int index_;
+  
+  const std::string *input_;
+
+  std::stack<Expr *> *stack_;
+};
+
+Expr *
+Post_Order_Interpreter::build_parse_tree(const std::string &input) {
+  std::stack<Expr *> stack;
+
+  for (Post_Order_Iterator iter = Post_Order_Iterator(input, stack);
+       iter != Post_Order_Iterator();
+       ++iter)
+    stack.push(*iter);
+
   return stack.top();
 }
     
