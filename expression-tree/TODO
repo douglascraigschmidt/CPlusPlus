@@ -7,6 +7,5 @@
 . Remove memory leaks
 . Create unit tests.
 
-. Refactor code into subdirectories
-. Create a ET_Post_Order_Interpreter
+. Create a Post_Order_Interpreter
 . Add Prototype slides to presentation

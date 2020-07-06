@@ -4,6 +4,8 @@
 #include <iostream>
 #include <memory>
 #include <cstdlib>
+#include <cctype>
+#include <stack>
 
 #include "composites/Component_Node.h"
 #include "composites/Leaf_Node.h"
@@ -113,6 +115,8 @@ public:
   /// constructor
   Subtract_Expr ();
 
+  Subtract_Expr(Expr *left, Expr *right);
+
   /// destructor
   ~Subtract_Expr () override;
 
@@ -134,6 +138,8 @@ class Add_Expr : public Binary_Expr
 public:
   /// constructor
   Add_Expr ();
+
+  Add_Expr(Expr *left, Expr *right);
 
   /// destructor
   ~Add_Expr () override;
@@ -157,6 +163,8 @@ public:
   /// constructor
   Negate_Expr ();
 
+  Negate_Expr (Expr *right);
+
   /// destructor
   ~Negate_Expr () override;
 
@@ -178,6 +186,8 @@ class Multiply_Expr : public Binary_Expr
 public:
   /// constructor
   Multiply_Expr ();
+
+  Multiply_Expr(Expr *left, Expr *right);
 
   /// destructor
   ~Multiply_Expr () override;
@@ -201,6 +211,8 @@ public:
   /// constructor
   Divide_Expr ();
 
+  Divide_Expr(Expr *left, Expr *right);
+
   /// destructor
   ~Divide_Expr () override;
 
@@ -213,30 +225,30 @@ public:
 };
 
 // constructor
-ET_Interpreter_Context::ET_Interpreter_Context ()
+Interpreter_Context::Interpreter_Context ()
 = default;
 
 // destructor
-ET_Interpreter_Context::~ET_Interpreter_Context ()
+Interpreter_Context::~Interpreter_Context ()
 = default;
 
 // return the value of a variable
 int
-ET_Interpreter_Context::get (const std::string& variable)
+Interpreter_Context::get (const std::string& variable)
 {
   return map_[variable];
 }
 
 // set the value of a variable
 void
-ET_Interpreter_Context::set (const std::string& variable, int value)
+Interpreter_Context::set (const std::string& variable, int value)
 {
   map_[variable] = value;
 }
 
 // print all variables and their values
 void
-ET_Interpreter_Context::print ()
+Interpreter_Context::print ()
 {
   for (auto & i : map_)
     std::cout << i.first << "=" << i.second << "\n";
@@ -244,7 +256,7 @@ ET_Interpreter_Context::print ()
 
 // clear all variables and their values
 void
-ET_Interpreter_Context::reset ()
+Interpreter_Context::reset ()
 {
   map_.clear ();
 }
@@ -320,6 +332,11 @@ Negate_Expr::Negate_Expr ()
 {
 }
 
+Negate_Expr::Negate_Expr (Expr *right)
+  : Unary_Expr (right, 3)
+{
+}
+
 // destructor
 Negate_Expr::~Negate_Expr ()
 = default;
@@ -341,6 +358,11 @@ Negate_Expr::build ()
 // constructor
 Add_Expr::Add_Expr ()
   : Binary_Expr (nullptr, nullptr, 1)
+{
+}
+
+Add_Expr::Add_Expr (Expr *left, Expr *right)
+  : Binary_Expr (left, right)
 {
 }
 
@@ -368,6 +390,11 @@ Subtract_Expr::Subtract_Expr ()
 {
 }
 
+Subtract_Expr::Subtract_Expr (Expr *left, Expr *right)
+  : Binary_Expr (left, right)
+{
+}
+
 // destructor
 Subtract_Expr::~Subtract_Expr ()
 = default;
@@ -389,6 +416,11 @@ Subtract_Expr::build ()
 // constructor
 Multiply_Expr::Multiply_Expr ()
   : Binary_Expr (nullptr, nullptr, 2)
+{
+}
+
+Multiply_Expr::Multiply_Expr (Expr *left, Expr *right)
+  : Binary_Expr (left, right)
 {
 }
 
@@ -416,6 +448,11 @@ Divide_Expr::Divide_Expr ()
 {
 }
 
+Divide_Expr::Divide_Expr (Expr *left, Expr *right)
+  : Binary_Expr (left, right)
+{
+}
+
 // destructor
 Divide_Expr::~Divide_Expr ()
 = default;
@@ -434,7 +471,7 @@ Divide_Expr::build ()
   return new Composite_Divide_Node (left_->build (), right_->build ());
 }
 
-Interpreter::Interpreter(ET_Interpreter_Impl *impl)
+Interpreter::Interpreter(Interpreter_Impl *impl)
         : interpreter_(impl) {
 
 }
@@ -447,7 +484,7 @@ Interpreter::interpret (const std::string &input) {
 }
 
 Expression_Tree 
-ET_Interpreter_Impl::interpret (const std::string &input) {
+Interpreter_Impl::interpret (const std::string &input) {
   std::unique_ptr<Expr> parse_tree (build_parse_tree(input));
 
   // if (!parse_tree) {
@@ -460,22 +497,22 @@ ET_Interpreter_Impl::interpret (const std::string &input) {
 }
 
 void
-ET_Interpreter_Impl::optimize_parse_tree(Expr *parse_tree) {
+Interpreter_Impl::optimize_parse_tree(Expr *parse_tree) {
 }
 
-ET_Interpreter_Impl::~ET_Interpreter_Impl() = default;
+Interpreter_Impl::~Interpreter_Impl() = default;
 
 // constructor
-ET_In_Order_Interpreter::ET_In_Order_Interpreter ()
+In_Order_Interpreter::In_Order_Interpreter ()
 = default;
 
 // destructor
-ET_In_Order_Interpreter::~ET_In_Order_Interpreter ()
+In_Order_Interpreter::~In_Order_Interpreter ()
 = default;
 
 // method for checking if a character is a valid operator
 bool
-ET_In_Order_Interpreter::is_operator (char input)
+In_Order_Interpreter::is_operator (char input)
 {
   return input == '+' 
     || input == '-' 
@@ -485,7 +522,7 @@ ET_In_Order_Interpreter::is_operator (char input)
 
 // method for checking if a character is a number
 bool
-ET_In_Order_Interpreter::is_number (char input)
+In_Order_Interpreter::is_number (char input)
 {
   return input >= '0' && input <= '9';
 }
@@ -493,7 +530,7 @@ ET_In_Order_Interpreter::is_number (char input)
 // method for checking if a character is a candidate
 // for a part of a variable name
 bool
-ET_In_Order_Interpreter::is_alphanumeric (char input)
+In_Order_Interpreter::is_alphanumeric (char input)
 {
   return (input >= 'a' && input <= 'z') 
     || (input >= 'A' && input <= 'Z') 
@@ -503,8 +540,8 @@ ET_In_Order_Interpreter::is_alphanumeric (char input)
 
 // inserts a terminal into the parse tree
 void
-ET_In_Order_Interpreter::terminal_insert (Expr *terminal,
-                                 std::list<Expr *>& list) {
+In_Order_Interpreter::terminal_insert (Expr *terminal,
+                                       std::list<Expr *>& list) {
   if (!list.empty ()) {
     // Something exists in the list, so make this number the rightmost child
 
@@ -526,11 +563,11 @@ ET_In_Order_Interpreter::terminal_insert (Expr *terminal,
 
 // inserts a variable (leaf node / number) into the parse tree
 void
-ET_In_Order_Interpreter::variable_insert (const std::string &input,
-                                          std::string::size_type &i,
-                                          int & accumulated_precedence,
-                                          std::list<Expr *>& list,
-                                          Expr *& lastValidInput) {
+In_Order_Interpreter::variable_insert (const std::string &input,
+                                       std::string::size_type &i,
+                                       int & accumulated_precedence,
+                                       std::list<Expr *>& list,
+                                       Expr *& lastValidInput) {
   // merge all consecutive number chars into a single
   // Number_Expr symbol, eg '123' = int (123). Scope of j needs
   // to be outside of the for loop.
@@ -561,11 +598,11 @@ ET_In_Order_Interpreter::variable_insert (const std::string &input,
 
 // inserts a leaf node / number into the parse tree
 void
-ET_In_Order_Interpreter::number_insert (const std::string &input,
-                               std::string::size_type &i,
-                               int & accumulated_precedence,
-                               std::list<Expr *>& list,
-                               Expr *& lastValidInput)
+In_Order_Interpreter::number_insert (const std::string &input,
+                                     std::string::size_type &i,
+                                     int & accumulated_precedence,
+                                     std::list<Expr *>& list,
+                                     Expr *& lastValidInput)
 {
   // merge all consecutive number chars into a single Number_Expr symbol,
   // eg '123' = int (123). Scope of j needs to be outside of the for
@@ -591,8 +628,8 @@ ET_In_Order_Interpreter::number_insert (const std::string &input,
 
 // inserts a multiplication or division into the parse tree
 void 
-ET_In_Order_Interpreter::precedence_insert (Expr *op,
-                                            std::list<Expr *>& list) {
+In_Order_Interpreter::precedence_insert (Expr *op,
+                                         std::list<Expr *>& list) {
   if (!list.empty ()) {
     // if last element was a number, then make that our left_
 
@@ -651,12 +688,12 @@ ET_In_Order_Interpreter::precedence_insert (Expr *op,
 }
 
 void
-ET_In_Order_Interpreter::main_loop (const std::string &input,
-                                    std::string::size_type &i,
-                                    Expr *& lastValidInput,
-                                    bool & handled,
-                                    int & accumulated_precedence,
-                                    std::list<Expr *>& list) {
+In_Order_Interpreter::main_loop (const std::string &input,
+                                 std::string::size_type &i,
+                                 Expr *& lastValidInput,
+                                 bool & handled,
+                                 int & accumulated_precedence,
+                                 std::list<Expr *>& list) {
   handled = false;
   if (is_number (input[i])) {
     handled = true;
@@ -731,12 +768,12 @@ ET_In_Order_Interpreter::main_loop (const std::string &input,
 }
 
 void 
-ET_In_Order_Interpreter::handle_parenthesis (const std::string &input,
-                                             std::string::size_type &i,
-                                             Expr *& lastValidInput,
-                                             bool & handled,
-                                             int & accumulated_precedence,
-                                             std::list<Expr *>& master_list) {
+In_Order_Interpreter::handle_parenthesis (const std::string &input,
+                                          std::string::size_type &i,
+                                          Expr *& lastValidInput,
+                                          bool & handled,
+                                          int & accumulated_precedence,
+                                          std::list<Expr *>& master_list) {
   /* handle parenthesis is a lot like handling a new interpret.
      the difference is that we have to worry about how the calling
      function has its list setup */
@@ -785,7 +822,7 @@ ET_In_Order_Interpreter::handle_parenthesis (const std::string &input,
 }
 
 Expr *
-ET_In_Order_Interpreter::build_parse_tree(const std::string &input) {
+In_Order_Interpreter::build_parse_tree(const std::string &input) {
   std::list<Expr *> list;
   Expr * lastValidInput = nullptr;
   bool handled = false;
@@ -809,7 +846,99 @@ ET_In_Order_Interpreter::build_parse_tree(const std::string &input) {
 // converts a string into a parse tree, and builds an expression tree
 // out of the parse tree.
 Expression_Tree 
-ET_In_Order_Interpreter::build_expression_tree (Expr *parse_tree) {
+In_Order_Interpreter::build_expression_tree (Expr *parse_tree) {
+  // if the list has an element in it, then return the back of the list.
+  // if (!list.empty ()) {
+
+  // Invoke a recursive Expression_Tree build starting with the root
+  // symbol. This is an example of the builder pattern. See pg 97 in
+  // GoF book.
+
+  return Expression_Tree (parse_tree->build ());
+
+  // If we reach this, we didn't have any symbols.
+  // return Expression_Tree ();
+}
+
+// ----------------------------------------
+// constructor
+Post_Order_Interpreter::Post_Order_Interpreter ()
+= default;
+
+// destructor
+Post_Order_Interpreter::~Post_Order_Interpreter ()
+= default;
+
+Expr *
+Post_Order_Interpreter::build_parse_tree(const std::string &input) {
+  std::stack<Expr *> stack;
+
+  std::cout << "\ninput = " << input << std::endl;
+
+  for (int index = 0;
+       index < input.length();
+       ++index) {
+    char c = input[index];
+
+    while (isspace(c)) 
+      c = input[++index];
+
+    if (isalnum(c)) {
+      int j = 1;
+      for (; index + j < input.length () && isdigit (input[index + j]); ++j) 
+        continue;
+
+      stack.push(new Number_Expr (input.substr (index, j)));
+
+      index += j - 1;
+    } else {
+      auto right_expr = stack.top();
+      stack.pop();
+      switch (c) {
+      case '+': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Add_Expr(top,
+                                right_expr));
+        break;
+      }
+      case '-': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Subtract_Expr(top,
+                                     right_expr));
+        break;
+      }
+      case '~': {
+        stack.push(new Negate_Expr(right_expr));
+        break;
+      } 
+      case '*': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Multiply_Expr(top,
+                                     right_expr));
+        break;
+      }
+      case '/': {
+        auto top = stack.top();
+        stack.pop();
+        stack.push(new Divide_Expr(top,
+                                   right_expr));
+        break;
+      }
+      default:
+        throw std::invalid_argument("invalid symbol");
+      }
+    }
+  }
+  return stack.top();
+}
+    
+// converts a string into a parse tree, and builds an expression tree
+// out of the parse tree.
+Expression_Tree 
+Post_Order_Interpreter::build_expression_tree (Expr *parse_tree) {
   // if the list has an element in it, then return the back of the list.
   // if (!list.empty ()) {
 
@@ -824,4 +953,3 @@ ET_In_Order_Interpreter::build_expression_tree (Expr *parse_tree) {
 }
 
 #endif // _INTERPRETER_CPP_
-

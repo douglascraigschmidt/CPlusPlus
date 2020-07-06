@@ -17,7 +17,7 @@
 void 
 Print_Visitor::visit (const Leaf_Node &node)
 {
-  std::cout << node.item () << " ";
+  std::cout << " " << node.item ();
 }
 
 /// visit function - prints Composite_Negate_Node contents to std::cout

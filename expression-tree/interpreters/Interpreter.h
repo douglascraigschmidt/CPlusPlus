@@ -11,19 +11,19 @@
 class Expr;
 
 /**
- * @class ET_Interpreter_Context
+ * @class Interpreter_Context
  * @brief This class stores variables and their values for use by the Interpreters.
  *
  *        This class plays the role of the "context" in the Interpreter pattern.
  */
-class ET_Interpreter_Context
+class Interpreter_Context
 {
 public:
   /// Constructor.
-  ET_Interpreter_Context ();
+  Interpreter_Context ();
 
   /// Destructor.
-  ~ET_Interpreter_Context ();
+  ~Interpreter_Context ();
 
   /// Return the value of a variable.
   int get (const std::string& variable);
@@ -42,7 +42,7 @@ private:
   std::map<std::string, int> map_;
 };
 
-class ET_Interpreter_Impl;
+class Interpreter_Impl;
 
 /**
  * @class Interpreter
@@ -57,7 +57,7 @@ class Interpreter
 {
 public:
   /// Constructor.
-  explicit Interpreter (ET_Interpreter_Impl *impl);
+  explicit Interpreter (Interpreter_Impl *impl);
 
   /// destructor
   virtual ~Interpreter ();
@@ -67,19 +67,19 @@ public:
   Expression_Tree interpret (const std::string &input);
 
 private:
-  Refcounter<ET_Interpreter_Impl> interpreter_;
+  Refcounter<Interpreter_Impl> interpreter_;
 };
 
 /**
- * @class ET_Interpreter_Impl
+ * @class Interpreter_Impl
  */
-class ET_Interpreter_Impl {
+class Interpreter_Impl {
 public:
   /// Converts a string and context into a parse tree, and builds an
   /// expression tree out of the parse tree.
   virtual Expression_Tree interpret (const std::string &input);
 
-  virtual ~ET_Interpreter_Impl();
+  virtual ~Interpreter_Impl();
 
 protected:
   virtual Expr *build_parse_tree(const std::string &input) = 0;
@@ -88,11 +88,11 @@ protected:
 
   virtual Expression_Tree build_expression_tree (Expr *parse_tree) = 0;
 
-  ET_Interpreter_Context context_;
+  Interpreter_Context context_;
 };
 
 /**
- * @class ET_In_Order_Interpreter
+ * @class In_Order_Interpreter
  * @brief Parses incoming in-order expression strings into a parse
  *        tree and generates an expression tree from the parse tree.
  *
@@ -100,14 +100,14 @@ protected:
  *        Intepreter pattern.  It also uses the Builder pattern to
  *        generate the nodes in the expression tree.
  */
-class ET_In_Order_Interpreter : public ET_Interpreter_Impl
+class In_Order_Interpreter : public Interpreter_Impl
 {
 public:
   /// Constructor.
-  ET_In_Order_Interpreter ();
+  In_Order_Interpreter ();
 
   /// destructor
-  virtual ~ET_In_Order_Interpreter ();
+  virtual ~In_Order_Interpreter ();
 
   Expr *build_parse_tree(const std::string &input) override;
 
@@ -162,4 +162,30 @@ private:
                            std::list<Expr *>& list);
 };
 
+/**
+ * @class Post_Order_Interpreter
+ * @brief Parses incoming post-order expression strings into a parse
+ *        tree and generates an expression tree from the parse tree.
+ *
+ *        This class plays the role of the "interpreter" in the
+ *        Intepreter pattern.  It also uses the Builder pattern to
+ *        generate the nodes in the expression tree.
+ */
+class Post_Order_Interpreter : public Interpreter_Impl
+{
+public:
+  /// Constructor.
+  Post_Order_Interpreter ();
+
+  /// destructor
+  ~Post_Order_Interpreter () override;
+
+  Expr *build_parse_tree(const std::string &input) override;
+
+  /// Converts a string and context into a parse tree, and builds an
+  /// expression tree out of the parse tree.
+  Expression_Tree build_expression_tree (Expr *parse_tree) override;
+};
+
 #endif /* _INTERPRETER_H_ */
+

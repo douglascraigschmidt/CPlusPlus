@@ -60,7 +60,7 @@ public:
   /// Persistent interpreter context for variables. Our interpreter
   /// will change values inside of this, so I just stuck the variable
   /// in the public section. 
-  ET_Interpreter_Context int_context;
+  Interpreter_Context int_context;
 
 private:
   /// Keep track of the current state that we're in.  We use an @a

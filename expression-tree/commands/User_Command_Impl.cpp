@@ -39,7 +39,7 @@ Format_Command::print_valid_commands ()
   std::cout << "1. expr [expression]\n";
   std::cout << "2a. eval [post-order]\n";
   std::cout << "2b. print [in-order | pre-order | post-order | level-order]\n";
-  std::cout << "0a. format [in-order]\n";
+  std::cout << "0a. format [in-order | post-order]\n";
   std::cout << "0b. set [variable=value]\n";
   std::cout << "0c. quit\n";
   std::cout << "\n";
@@ -66,7 +66,7 @@ Expr_Command::print_valid_commands ()
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
   std::cout << "1b. print [in-order | pre-order | post-order | level-order]\n";
-  std::cout << "0a. format [in-order]\n";
+  std::cout << "0a. format [in-order | post-order]\n";
   std::cout << "0b. set [variable=value]\n";
   std::cout << "0c. quit\n";
   std::cout << "\n";
@@ -92,7 +92,7 @@ Print_Command::print_valid_commands ()
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
   std::cout << "1b. print [in-order | pre-order | post-order | level-order]\n";
-  std::cout << "0a. format [in-order]\n";
+  std::cout << "0a. format [in-order | post-order]\n";
   std::cout << "0b. set [variable=value]\n";
   std::cout << "0c. quit\n";
   std::cout << "\n";
@@ -118,7 +118,7 @@ Eval_Command::print_valid_commands ()
   std::cout << "\n";
   std::cout << "1a. eval [post-order]\n";
   std::cout << "1b. print [in-order | pre-order | post-order | level-order]\n";
-  std::cout << "0a. format [in-order]\n";
+  std::cout << "0a. format [in-order | post-order]\n";
   std::cout << "0b. set [variable=value]\n";
   std::cout << "0c. quit\n";
   std::cout << "\n";
@@ -150,7 +150,7 @@ Set_Command::print_valid_commands ()
   char abc [3] = { 'a','b','c' };
   int step = 1;
   int sub_step = 0;
-  std::string formatMessage (". format [in-order]");
+  std::string formatMessage (". format [in-order | post-order]");
 
   if (!tree_context_.formatted())
     std::cout << step++ << formatMessage << "\n";
@@ -242,7 +242,7 @@ Null_Command::execute ()
 void 
 Null_Command::print_valid_commands ()
 {
-  std::cout << "\n1a. format [in-order]\n";
+  std::cout << "\n1a. format [in-order | post-order]\n";
   std::cout << "1b. set [variable=value]\n";
   std::cout << "2. expr [expression]\n";
   std::cout << "3a. eval [post-order]\n";

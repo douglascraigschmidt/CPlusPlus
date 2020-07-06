@@ -87,16 +87,15 @@ Verbose_Mode_Event_Handler::~Verbose_Mode_Event_Handler ()
 void
 Verbose_Mode_Event_Handler::prompt_user ()
 {
-  if (!prompted_)
-    {
-      std::cout << "1a. format [in-order]\n";
-      std::cout << "1b. set [variable=value]\n";
-      std::cout << "2. expr [expression]\n";
-      std::cout << "3a. eval [post-order]\n";
-      std::cout << "3b. print [in-order | pre-order | post-order | level-order]\n";
-      std::cout << "0. quit\n";
-      prompted_ = true;
-    }
+  if (!prompted_) {
+    std::cout << "1a. format [in-order | post-order]\n";
+    std::cout << "1b. set [variable=value]\n";
+    std::cout << "2. expr [expression]\n";
+    std::cout << "3a. eval [post-order]\n";
+    std::cout << "3b. print [in-order | pre-order | post-order | level-order]\n";
+    std::cout << "0. quit\n";
+    prompted_ = true;
+  }
   std::cout << "> ";
   std::cout.flush ();
 }
