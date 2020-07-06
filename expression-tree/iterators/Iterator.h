@@ -5,7 +5,7 @@
 #include <string>
 
 #include "utils/Refcounter.h"
-#include "ET_Iterator_Impl.h"
+#include "Iterator_Impl.h"
 
 // Forward declarations.
 class User_Command_Factory;

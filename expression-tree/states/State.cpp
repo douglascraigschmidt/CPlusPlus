@@ -2,17 +2,17 @@
 #include <iostream>
 #include <algorithm>
 
-#include "ET_Context.h"
-#include "iterators/ET_Iterator.h"
+#include "Tree_Context.h"
+#include "iterators/Iterator.h"
 #include "visitors/Print_Visitor.h"
 #include "visitors/Evaluation_Visitor.h"
 #include "trees/Expression_Tree.h"
 
 /// this method traverses the tree in with a given traversal strategy
 void 
-ET_State::print_tree (const Expression_Tree &tree,
-                      const std::string &traversal_order,
-                      std::ostream &os)
+State::print_tree (const Expression_Tree &tree,
+                   const std::string &traversal_order,
+                   std::ostream &os)
 {
   os << "traverse tree using strategy '" << traversal_order
      << "':" << std::endl;
@@ -39,9 +39,9 @@ ET_State::print_tree (const Expression_Tree &tree,
 }
 
 void 
-ET_State::evaluate_tree (const Expression_Tree &tree,
-                         const std::string &traversal_order,
-                         std::ostream &os)
+State::evaluate_tree (const Expression_Tree &tree,
+                      const std::string &traversal_order,
+                      std::ostream &os)
 {
   // os << "Evaluating tree using strategy '" << traversal_order
   // << "':" << std::endl;
@@ -65,35 +65,35 @@ ET_State::evaluate_tree (const Expression_Tree &tree,
 }
 
 void 
-ET_State::format (Tree_Context &,
-                  const std::string &)
+State::format (Tree_Context &,
+               const std::string &)
 {
-  throw ET_State::Invalid_State (
-    "ET_State::format called in invalid state");
+  throw State::Invalid_State (
+    "State::format called in invalid state");
 }           
 
 void 
-ET_State::make_tree (Tree_Context &,
-                     const std::string &)
+State::make_tree (Tree_Context &,
+                  const std::string &)
 {
-  throw ET_State::Invalid_State (
-    "ET_State::expr called in invalid state");
+  throw State::Invalid_State (
+    "State::expr called in invalid state");
 }                
 
 void 
-ET_State::print (Tree_Context &,
-                 const std::string &)
+State::print (Tree_Context &,
+              const std::string &)
 {
-  throw ET_State::Invalid_State (
-    "ET_State::print called in invalid state");
+  throw State::Invalid_State (
+    "State::print called in invalid state");
 }
 
 void 
-ET_State::evaluate (Tree_Context &,
-                    const std::string &)
+State::evaluate (Tree_Context &,
+                 const std::string &)
 {
-  throw ET_State::Invalid_State (
-    "ET_State::evaluate called in invalid state");
+  throw State::Invalid_State (
+    "State::evaluate called in invalid state");
 }
 
 // Static data member definitions.
@@ -115,31 +115,31 @@ Uninitialized_State::Uninitialized_State_Factory::Uninitialized_State_Factory (v
     = &Uninitialized_State::Uninitialized_State_Factory::make_level_order_uninitialized_state;
 }
 
-ET_State *
+State *
 Uninitialized_State::Uninitialized_State_Factory::make_level_order_uninitialized_state (void)
 { 
   return new Level_Order_Uninitialized_State ();
 }
 
-ET_State *
+State *
 Uninitialized_State::Uninitialized_State_Factory::make_in_order_uninitialized_state (void)
 { 
   return new In_Order_Uninitialized_State ();
 }
 
-ET_State *
+State *
 Uninitialized_State::Uninitialized_State_Factory::make_pre_order_uninitialized_state (void)
 { 
   return new Pre_Order_Uninitialized_State ();
 }
 
-ET_State *
+State *
 Uninitialized_State::Uninitialized_State_Factory::make_post_order_uninitialized_state (void)
 { 
   return new Post_Order_Uninitialized_State ();
 }
 
-ET_State *
+State *
 Uninitialized_State::Uninitialized_State_Factory::make_uninitialized_state (const std::string &format) {
   auto iter = uninit_state_map_.find (format);
 
@@ -168,13 +168,13 @@ Pre_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
 void 
 Pre_Order_Initialized_State::print (Tree_Context &context,
                                     const std::string &format) {
-  ET_State::print_tree (context.tree (), format, std::cout);
+  State::print_tree (context.tree (), format, std::cout);
 }
 
 void 
 Pre_Order_Initialized_State::evaluate (Tree_Context &context,
                                        const std::string &param) {
-  ET_State::evaluate_tree (context.tree (), param, std::cout);
+  State::evaluate_tree (context.tree (), param, std::cout);
 }
 
 void 
@@ -185,13 +185,13 @@ Post_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
 void 
 Post_Order_Initialized_State::print (Tree_Context &context,
                                      const std::string &format) {
-  ET_State::print_tree (context.tree (), format, std::cout);
+  State::print_tree (context.tree (), format, std::cout);
 }
 
 void 
 Post_Order_Initialized_State::evaluate (Tree_Context &context,
                                         const std::string &param) {
-  ET_State::evaluate_tree (context.tree (), "param", std::cout);
+  State::evaluate_tree (context.tree (), "param", std::cout);
 }
 
 void 
@@ -202,19 +202,19 @@ Level_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
 void 
 Level_Order_Initialized_State::print (Tree_Context &context,
                                       const std::string &format) {
-  ET_State::print_tree (context.tree (), format, std::cout);
+  State::print_tree (context.tree (), format, std::cout);
 }
 
 void 
 Level_Order_Initialized_State::evaluate (Tree_Context &context,
                                          const std::string &param) {
-  ET_State::evaluate_tree (context.tree (), param, std::cout);
+  State::evaluate_tree (context.tree (), param, std::cout);
 }
 
 void 
 In_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
                                          const std::string &expr) {
-  ET_Interpreter interpreter(new ET_In_Order_Interpreter);
+  Interpreter interpreter(new ET_In_Order_Interpreter);
 
   tree_context.tree (interpreter.interpret (expr));
 
@@ -233,6 +233,6 @@ void
 In_Order_Initialized_State::evaluate (Tree_Context &context,
                                       const std::string &param)
 {
-  ET_State::evaluate_tree (context.tree (), param, std::cout);
+  State::evaluate_tree (context.tree (), param, std::cout);
 }
 

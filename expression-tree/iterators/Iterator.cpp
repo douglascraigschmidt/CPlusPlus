@@ -6,7 +6,7 @@
 #include <sstream>
 
 #include "utils/Refcounter.h"
-#include "iterators/ET_Iterator.h"
+#include "iterators/Iterator.h"
 #include "trees/Expression_Tree.h"
 
 /// Copy ctor - needed for reference counting.

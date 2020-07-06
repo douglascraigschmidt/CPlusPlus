@@ -10,8 +10,8 @@
 #include <stdexcept>
 
 #include "composites/Component_Node.h"
-#include "iterators/ET_Iterator.h"
-#include "iterators/ET_Iterator_Impl.h"
+#include "iterators/Iterator.h"
+#include "iterators/Iterator_Impl.h"
 #include "Expression_Tree.h"
 
 /**

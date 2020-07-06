@@ -4,8 +4,8 @@
 
 #include <string>
 #include <map>
-#include "commands/ET_User_Command.h"
-#include "states/ET_Context.h"
+#include "commands/User_Command.h"
+#include "states/Tree_Context.h"
 #include "utils/Refcounter.h"
 
 // Forward declarations.

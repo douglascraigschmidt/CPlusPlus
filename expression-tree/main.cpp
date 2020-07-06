@@ -5,7 +5,7 @@
 
 #include "utils/Options.h"
 #include "input/Reactor.h"
-#include "input/ET_Event_Handler.h"
+#include "input/Event_Handler.h"
 
 int 
 main (int argc, char *argv[])
@@ -25,7 +25,7 @@ main (int argc, char *argv[])
   // reactor, which is responsible for triggering the deletion of
   // the event handler.
   reactor->register_input_handler
-    (ET_Event_Handler::make_handler (options->verbose ()));
+    (Event_Handler::make_handler (options->verbose ()));
 
   // Run the reactor's event loop, which drives all the processing via
   // callbacks to registered event handlers.

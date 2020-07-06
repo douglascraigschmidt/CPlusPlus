@@ -5,9 +5,9 @@
 #include <algorithm>
 #include <iostream>
 #include <utility>
-#include "states/ET_Context.h"
-#include "ET_Command_Factory_Impl.h"
-#include "ET_User_Command_Impl.h"
+#include "states/Tree_Context.h"
+#include "User_Command_Factory_Impl.h"
+#include "User_Command_Impl.h"
 
 User_Command_Impl::User_Command_Impl (Tree_Context &context)
   : tree_context_ (context)

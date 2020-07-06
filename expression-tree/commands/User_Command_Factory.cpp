@@ -1,8 +1,8 @@
 #ifndef _ET_COMMAND_FACTORY_CPP
 #define _ET_COMMAND_FACTORY_CPP
 
-#include "ET_Command_Factory.h"
-#include "ET_Command_Factory_Impl.h"
+#include "User_Command_Factory.h"
+#include "User_Command_Factory_Impl.h"
 
 // Default constructor.
 User_Command_Factory::User_Command_Factory (Tree_Context &tree_context)

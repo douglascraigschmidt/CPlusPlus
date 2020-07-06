@@ -5,8 +5,8 @@
 #include <memory>
 
 #include "trees/Expression_Tree.h"
-#include "states/ET_State.h"
-#include "interpreters/ET_Interpreter.h"
+#include "states/State.h"
+#include "interpreters/Interpreter.h"
 
 /**
  * @class Tree_Context
@@ -41,12 +41,12 @@ public:
   /// Sets the variable to its corresponding value.
   void set (const std::string &key_value_pair);
 
-  /// Return a pointer to the current @a ET_State.
-  [[nodiscard]] ET_State *state () const;
+  /// Return a pointer to the current @a State.
+  [[nodiscard]] State *state () const;
 
-  /// Set the current @a ET_State to the designated @a
+  /// Set the current @a State to the designated @a
   /// new_state pointer.
-  void state (ET_State *new_state);
+  void state (State *new_state);
 
   /// Return a reference to the current @a Expression_Tree.
   Expression_Tree &tree ();
@@ -65,7 +65,7 @@ public:
 private:
   /// Keep track of the current state that we're in.  We use an @a
   /// std::auto_ptr to simplify memory management and avoid memory leaks.
-  std::unique_ptr <ET_State> state_;
+  std::unique_ptr <State> state_;
   
   /// Current expression tree.
   Expression_Tree tree_;

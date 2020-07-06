@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-#include "ET_Command_Factory_Impl.h"
+#include "User_Command_Factory_Impl.h"
 
 User_Command
 User_Command_Factory_Impl::make_format_command (const std::string &param)

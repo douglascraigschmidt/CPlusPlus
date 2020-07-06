@@ -1,6 +1,6 @@
 #include <cstdlib>
 
-#include "ET_Context.h"
+#include "Tree_Context.h"
 
 Tree_Context::Tree_Context (void)
   : state_ (new Uninitialized_State), formatted_(false)
@@ -72,14 +72,14 @@ Tree_Context::set (const std::string &key_value_pair)
   else throw std::domain_error("Must have = sign present");
 }
 
-ET_State *
+State *
 Tree_Context::state () const
 {
   return state_.get ();
 }
 
 void
-Tree_Context::state (ET_State *state)
+Tree_Context::state (State *state)
 {
   state_.reset (state);
 }

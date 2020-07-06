@@ -12,7 +12,7 @@
 #include "composites/Composite_Subtract_Node.h"
 #include "composites/Composite_Divide_Node.h"
 #include "composites/Composite_Multiply_Node.h"
-#include "interpreters/ET_Interpreter.h"
+#include "interpreters/Interpreter.h"
 
 /**
  * @class Expr
@@ -434,15 +434,15 @@ Divide_Expr::build ()
   return new Composite_Divide_Node (left_->build (), right_->build ());
 }
 
-ET_Interpreter::ET_Interpreter(ET_Interpreter_Impl *impl)
+Interpreter::Interpreter(ET_Interpreter_Impl *impl)
         : interpreter_(impl) {
 
 }
 
-ET_Interpreter::~ET_Interpreter() = default;
+Interpreter::~Interpreter() = default;
 
 Expression_Tree
-ET_Interpreter::interpret (const std::string &input) {
+Interpreter::interpret (const std::string &input) {
     return interpreter_->interpret(input);
 }
 

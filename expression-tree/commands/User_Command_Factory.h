@@ -3,12 +3,12 @@
 #define _ET_COMMAND_FACTORY_H_
 
 #include <string>
-#include "commands/ET_User_Command.h"
-#include "ET_Command_Factory_Impl.h"
+#include "commands/User_Command.h"
+#include "User_Command_Factory_Impl.h"
 #include "utils/Refcounter.h"
 
 // Forward declarations.
-class ET_Iter_Impl;
+class Iter_Impl;
 class Tree_Context;
 
 /**

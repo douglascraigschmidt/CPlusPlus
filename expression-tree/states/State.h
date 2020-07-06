@@ -9,7 +9,7 @@
 class Tree_Context;
 
 /**
- * @class ET_State
+ * @class State
  * @brief Implementation of the State pattern that is used to define 
  *        the various states that affect how users operations are
  *        processed.   
@@ -18,7 +18,7 @@ class Tree_Context;
  *        pattern that is used as the basis for the subclasses that
  *        actually define the various user operation states.
  */
-class ET_State
+class State
 {
 public:
   /// Exception class for Invalid States exceptions
@@ -68,7 +68,7 @@ public:
  * @class Uninitialized_State
  * @brief This is the initial state, which only allows @a format commands.
  */
-class Uninitialized_State : public ET_State
+class Uninitialized_State : public State
 {
 public:
   /// Sets the @a context's state to correspond to the designated @a
@@ -82,7 +82,7 @@ private:
   /**
    * @class Uninitialized_State_Factory
    * @brief Implementation of a factory pattern that dynamically
-   *        allocates the appropriate @a ET_State object.
+   *        allocates the appropriate @a State object.
    * 
    *        This is a variant of the Abstract Factory pattern that has a
    *        set of related factory methods but which doesn't use
@@ -94,28 +94,28 @@ private:
     /// Constructor.
     Uninitialized_State_Factory ();
 
-    /// Dynamically allocate a new @a ET_State
+    /// Dynamically allocate a new @a State
     /// object based on the designated @a traversal_order and @a end_iter.
-    static ET_State *make_uninitialized_state (const std::string &format);
+    static State *make_uninitialized_state (const std::string &format);
 
   private:
     /// Dynamically allocate a new @a Level_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static ET_State *make_in_order_uninitialized_state ();
+    static State *make_in_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Pre_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static ET_State *make_pre_order_uninitialized_state ();
+    static State *make_pre_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Post_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static ET_State *make_post_order_uninitialized_state ();
+    static State *make_post_order_uninitialized_state ();
 
     /// Dynamically allocate a new @a Level_Order_Uninitialized_State
     /// object based on the designated @a end_iter.
-    static ET_State *make_level_order_uninitialized_state ();
+    static State *make_level_order_uninitialized_state ();
 
-    typedef ET_State *(*UNINIT_STATE_PTF) ();
+    typedef State *(*UNINIT_STATE_PTF) ();
     typedef std::map <std::string, UNINIT_STATE_PTF> UNINITIALIZED_STATE_MAP;
 
     static UNINITIALIZED_STATE_MAP uninit_state_map_;

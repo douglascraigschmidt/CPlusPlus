@@ -28,28 +28,26 @@ add_executable(expression_tree
         input/Event_Handler.h
         trees/Expression_Tree.cpp
         trees/Expression_Tree.h
-        commands/ET_User_Command.cpp
-        commands/ET_User_Command.h
-        commands/ET_Command_Factory.cpp
-        commands/ET_Command_Factory.h
-        commands/ET_Command_Factory_Impl.cpp
-        commands/ET_Command_Factory_Impl.h
-        commands/ET_User_Command_Impl.cpp
-        commands/ET_User_Command_Impl.h
-        states/ET_Context.cpp
-        states/ET_Context.h
-        input/ET_Event_Handler.cpp
-        input/ET_Event_Handler.h
-        iterators/ET_Iterator.cpp
-        iterators/ET_Iterator.h
-        iterators/ET_Iterator_Impl.cpp
-        iterators/ET_Iterator_Impl.h
-        states/ET_State.cpp
-        states/ET_State.h
+        commands/User_Command.cpp
+        commands/User_Command.h
+        commands/User_Command_Factory.cpp
+        commands/User_Command_Factory.h
+        commands/User_Command_Factory_Impl.cpp
+        commands/User_Command_Factory_Impl.h
+        commands/User_Command_Impl.cpp
+        commands/User_Command_Impl.h
+        states/Tree_Context.cpp
+        states/Tree_Context.h
+        iterators/Iterator.cpp
+        iterators/Iterator.h
+        iterators/Iterator_Impl.cpp
+        iterators/Iterator_Impl.h
+        states/State.cpp
+        states/State.h
         utils/getopt.cpp
         utils/getopt.h
-        interpreters/ET_Interpreter.cpp
-        interpreters/ET_Interpreter.h
+        interpreters/Interpreter.cpp
+        interpreters/Interpreter.h
         composites/Leaf_Node.cpp
         composites/Leaf_Node.h
         main.cpp

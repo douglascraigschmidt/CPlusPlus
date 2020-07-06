@@ -3,7 +3,7 @@
 #define _TREE_ITERATOR_IMPL_CPP
 
 #include "trees/Expression_Tree.h"
-#include "iterators/ET_Iterator_Impl.h"
+#include "iterators/Iterator_Impl.h"
 #include "composites/Component_Node.h"
 
 const size_t LQUEUE_SIZE = 40;

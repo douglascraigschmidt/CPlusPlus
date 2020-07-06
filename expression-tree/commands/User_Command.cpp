@@ -2,8 +2,8 @@
 #ifndef _EXPRESSION_TREE_COMMAND_CPP
 #define _EXPRESSION_TREE_COMMAND_CPP
 
-#include "commands/ET_User_Command.h"
-#include "ET_User_Command_Impl.h"
+#include "commands/User_Command.h"
+#include "User_Command_Impl.h"
 
 User_Command::User_Command (User_Command_Impl *impl)
   : command_impl_ (impl)

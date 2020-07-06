@@ -14,7 +14,7 @@ class Expr;
  * @class ET_Interpreter_Context
  * @brief This class stores variables and their values for use by the Interpreters.
  *
- *        This class plays the role of the "context" in the ET_Interpreter pattern.
+ *        This class plays the role of the "context" in the Interpreter pattern.
  */
 class ET_Interpreter_Context
 {
@@ -45,7 +45,7 @@ private:
 class ET_Interpreter_Impl;
 
 /**
- * @class ET_Interpreter
+ * @class Interpreter
  * @brief Parses incoming expression strings into a parse tree and
  *        generates an expression tree from the parse tree.
  *
@@ -53,14 +53,14 @@ class ET_Interpreter_Impl;
  *        Intepreter pattern.  It also uses the Builder pattern to
  *        generate the nodes in the expression tree.
  */
-class ET_Interpreter
+class Interpreter
 {
 public:
   /// Constructor.
-  explicit ET_Interpreter (ET_Interpreter_Impl *impl);
+  explicit Interpreter (ET_Interpreter_Impl *impl);
 
   /// destructor
-  virtual ~ET_Interpreter ();
+  virtual ~Interpreter ();
 
   /// Converts a string and context into a parse tree, and builds an
   /// expression tree out of the parse tree.
