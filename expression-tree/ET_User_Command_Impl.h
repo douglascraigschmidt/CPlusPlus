@@ -137,7 +137,7 @@ private:
 
 /**
  * @class Set_Command
- * @brief Sets a variable into the Interpreter_Context stored
+ * @brief Sets a variable into the ET_Interpreter_Context stored
  *        inside of Tree_Context.
  */
 class Set_Command : public User_Command_Impl

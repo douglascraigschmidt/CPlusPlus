@@ -6,7 +6,7 @@
 
 #include "Expression_Tree.h"
 #include "ET_State.h"
-#include "Interpreter.h"
+#include "ET_Interpreter.h"
 
 /**
  * @class Tree_Context
@@ -60,7 +60,7 @@ public:
   /// Persistent interpreter context for variables. Our interpreter
   /// will change values inside of this, so I just stuck the variable
   /// in the public section. 
-  Interpreter_Context int_context;
+  ET_Interpreter_Context int_context;
 
 private:
   /// Keep track of the current state that we're in.  We use an @a

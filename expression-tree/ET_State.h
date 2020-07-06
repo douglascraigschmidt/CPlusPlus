@@ -115,10 +115,10 @@ private:
     /// object based on the designated @a end_iter.
     static ET_State *make_level_order_uninitialized_state ();
 
-    typedef ET_State *(*UNINITIALIZED_STATE_PTF) ();
-    typedef std::map <std::string, UNINITIALIZED_STATE_PTF> UNINITIALIZED_STATE_MAP;
+    typedef ET_State *(*UNINIT_STATE_PTF) ();
+    typedef std::map <std::string, UNINIT_STATE_PTF> UNINITIALIZED_STATE_MAP;
 
-    static UNINITIALIZED_STATE_MAP uninitialized_state_map_;
+    static UNINITIALIZED_STATE_MAP uninit_state_map_;
   };
 
   static Uninitialized_State_Factory uninitialized_state_factory;

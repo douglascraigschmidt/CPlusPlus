@@ -48,8 +48,8 @@ add_executable(expression_tree
         ET_State.h
         getopt.cpp
         getopt.h
-        Interpreter.cpp
-        Interpreter.h
+        ET_Interpreter.cpp
+        ET_Interpreter.h
         Leaf_Node.cpp
         Leaf_Node.h
         main.cpp
