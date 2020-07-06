@@ -1,0 +1,12 @@
+. Make Visitor hierarchy use the Bridge pattern
+. Make a factory that creates the appropriate concrete visitor
+. Consolidate all the factories into a single abstract/concrete factory object.
+. Update Refcounter to use STL shared_ptr.
+. Add Instrumented_Expression_Tree and Synchronized_Expression_Tree.
+
+. Remove memory leaks
+. Create unit tests.
+
+. Refactor code into subdirectories
+. Create a ET_Post_Order_Interpreter
+. Add Prototype slides to presentation

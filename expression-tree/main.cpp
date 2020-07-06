@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <memory>
 
-#include "Options.h"
-#include "Reactor.h"
-#include "ET_Event_Handler.h"
+#include "utils/Options.h"
+#include "input/Reactor.h"
+#include "input/ET_Event_Handler.h"
 
 int 
 main (int argc, char *argv[])
