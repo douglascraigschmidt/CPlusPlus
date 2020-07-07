@@ -32,7 +32,7 @@ public:
   Expression_Tree_Iterator (const Expression_Tree_Iterator &ts);
   
   /// Copy ctor for impl *.
-  explicit Expression_Tree_Iterator (ET_Iter_Impl *impl);
+  explicit Expression_Tree_Iterator (Iterator_Impl *impl);
 
   /// Dereference operator returns a reference to the item contained
   /// at the current position
@@ -67,7 +67,7 @@ public:
   typedef int difference_type;
 
 private:
-  Refcounter<ET_Iter_Impl> impl_;
+  Refcounter<Iterator_Impl> impl_;
 };
 
 /**
@@ -91,7 +91,7 @@ public:
   Expression_Tree_Const_Iterator (const Expression_Tree_Const_Iterator &ts);
   
   /// Copy ctor for impl *.
-  explicit Expression_Tree_Const_Iterator (ET_Iter_Impl *impl);
+  explicit Expression_Tree_Const_Iterator (Iterator_Impl *impl);
   
   /// Returns a const reference to the item contained at the current position
   const Expression_Tree operator* () const;
@@ -121,7 +121,7 @@ public:
 private:
   /// Pointer to actual implementation, i.e., the "bridge", which is
   /// reference counted to automate memory management. 
-  Refcounter <ET_Iter_Impl> impl_;
+  Refcounter <Iterator_Impl> impl_;
 };
 
 #endif /* _ET_ITERATOR_H_ */

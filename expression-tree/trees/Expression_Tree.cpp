@@ -17,7 +17,7 @@
 /**
  * @class ET_Iterator_Factory
  * @brief Implementation of a factory pattern that dynamically allocates
- *        the appropriate @a ET_Iter_Impl object.
+ *        the appropriate @a Iterator_Impl object.
  * 
  *        This is a variant of the Abstract Factory pattern that
  *        has a set of related factory methods but which doesn't use
@@ -34,34 +34,34 @@ public:
   /// Constructor.
   ET_Iterator_Factory ();
 
-  /// Dynamically allocate a new @a ET_Iter_Impl
+  /// Dynamically allocate a new @a Iterator_Impl
   /// object based on the designated @a traversal_order and @a end_iter.
-  ET_Iter_Impl *make_iterator (Expression_Tree &tree,
-                               const std::string &traversal_order,
-                               bool end_iter);
+  Iterator_Impl *make_iterator (Expression_Tree &tree,
+                                const std::string &traversal_order,
+                                bool end_iter);
 
 private:
   /// Dynamically allocate a new @a Expression_Tree_Level_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  static ET_Iter_Impl *make_in_order_tree_iterator (Expression_Tree &tree,
-                                                    bool end_iter);
+  static Iterator_Impl *make_in_order_tree_iterator (Expression_Tree &tree,
+                                                     bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Pre_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  static ET_Iter_Impl *make_pre_order_tree_iterator (Expression_Tree &tree,
-                                                     bool end_iter);
+  static Iterator_Impl *make_pre_order_tree_iterator (Expression_Tree &tree,
+                                                      bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Post_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  static ET_Iter_Impl *make_post_order_tree_iterator (Expression_Tree &tree,
-                                                      bool end_iter);
+  static Iterator_Impl *make_post_order_tree_iterator (Expression_Tree &tree,
+                                                       bool end_iter);
 
   /// Dynamically allocate a new @a Expression_Tree_Level_Order_Iterator_Impl
   /// object based on the designated @a end_iter.
-  static ET_Iter_Impl *make_level_order_tree_iterator (Expression_Tree &tree,
-                                                       bool end_iter);
+  static Iterator_Impl *make_level_order_tree_iterator (Expression_Tree &tree,
+                                                        bool end_iter);
 
-  typedef ET_Iter_Impl *(*TRAVERSAL_PTMF) (Expression_Tree &tree, bool end_iter);
+  typedef Iterator_Impl *(*TRAVERSAL_PTMF) (Expression_Tree &tree, bool end_iter);
   typedef std::map <std::string, TRAVERSAL_PTMF> TRAVERSAL_MAP;
 
   TRAVERSAL_MAP traversal_map_;
@@ -75,35 +75,35 @@ ET_Iterator_Factory::ET_Iterator_Factory ()
   traversal_map_["level-order"] = &ET_Iterator_Factory::make_level_order_tree_iterator;
 }
 
-ET_Iter_Impl *
+Iterator_Impl *
 ET_Iterator_Factory::make_level_order_tree_iterator (Expression_Tree &tree,
                                                      bool end_iter)
 { 
-  return new Level_Order_ET_Iter_Impl (tree, end_iter);
+  return new Level_Order_Iter_Impl (tree, end_iter);
 }
 
-ET_Iter_Impl *
+Iterator_Impl *
 ET_Iterator_Factory::make_in_order_tree_iterator (Expression_Tree &tree,
                                                   bool end_iter)
 { 
-  return new In_Order_ET_Iter_Impl (tree, end_iter);
+  return new In_Order_Iterator_Impl (tree, end_iter);
 }
 
-ET_Iter_Impl *
+Iterator_Impl *
 ET_Iterator_Factory::make_pre_order_tree_iterator (Expression_Tree &tree,
                                                    bool end_iter)
 { 
-  return new Pre_Order_ET_Iter_Impl (tree, end_iter);
+  return new Pre_Order_Iterator_Impl (tree, end_iter);
 }
 
-ET_Iter_Impl *
+Iterator_Impl *
 ET_Iterator_Factory::make_post_order_tree_iterator (Expression_Tree &tree,
                                                     bool end_iter)
 { 
-  return new Post_Order_ET_Iter_Impl (tree, end_iter);
+  return new Post_Order_Iterator_Impl (tree, end_iter);
 }
 
-ET_Iter_Impl *
+Iterator_Impl *
 ET_Iterator_Factory::make_iterator (Expression_Tree &tree,
                                     const std::string &traversal_order,
                                     bool end_iter)

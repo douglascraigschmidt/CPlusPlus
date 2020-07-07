@@ -9,7 +9,7 @@
 #include "utils/Refcounter.h"
 
 // Forward declarations.
-class Iter_Impl;
+class Iterator_Impl;
 class Tree_Context;
 
 /**

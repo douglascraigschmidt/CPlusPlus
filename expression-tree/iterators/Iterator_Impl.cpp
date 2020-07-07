@@ -6,23 +6,19 @@
 #include "iterators/Iterator_Impl.h"
 #include "composites/Component_Node.h"
 
-const size_t LQUEUE_SIZE = 40;
-
-// Constructor for ET_Iter_Impl that takes a tree
+// Constructor for Iterator_Impl that takes a tree
 // to iterate over
-
-ET_Iter_Impl::ET_Iter_Impl (const Expression_Tree &tree)
+Iterator_Impl::Iterator_Impl (const Expression_Tree &tree)
   : tree_ (tree)
 {
 }
 
 // Destructor
-
-ET_Iter_Impl::~ET_Iter_Impl ()
+Iterator_Impl::~Iterator_Impl ()
 = default;
 
 template<typename T> bool
-ET_Iter_Impl::is_equal_stack(T *lhs, const ET_Iter_Impl &rhs) {
+Iterator_Impl::is_equal_stack(T *lhs, const Iterator_Impl &rhs) {
   // if the rhs was not an iterator for type T then we've already
   // discovered the relation is false.
   if (auto rhs_downcast = dynamic_cast <decltype(lhs)> (&rhs)) {
@@ -56,12 +52,12 @@ ET_Iter_Impl::is_equal_stack(T *lhs, const ET_Iter_Impl &rhs) {
   return false;
 }
 
-/// Construct an In_Order_ET_Iter_Impl. If end_iter is set to true,
+/// Construct an In_Order_Iterator_Impl. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-In_Order_ET_Iter_Impl::In_Order_ET_Iter_Impl (const Expression_Tree &tree,
-                                              bool end_iter)
-  : ET_Iter_Impl (tree),
+In_Order_Iterator_Impl::In_Order_Iterator_Impl (const Expression_Tree &tree,
+                                                bool end_iter)
+  : Iterator_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -78,13 +74,13 @@ In_Order_ET_Iter_Impl::In_Order_ET_Iter_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-In_Order_ET_Iter_Impl::~In_Order_ET_Iter_Impl ()
+In_Order_Iterator_Impl::~In_Order_Iterator_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-In_Order_ET_Iter_Impl::operator* ()
+In_Order_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -92,7 +88,7 @@ In_Order_ET_Iter_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-In_Order_ET_Iter_Impl::operator* () const
+In_Order_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -100,7 +96,7 @@ In_Order_ET_Iter_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-In_Order_ET_Iter_Impl::operator++ ()
+In_Order_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -128,7 +124,7 @@ In_Order_ET_Iter_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-In_Order_ET_Iter_Impl::operator->()
+In_Order_Iterator_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -136,7 +132,7 @@ In_Order_ET_Iter_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-In_Order_ET_Iter_Impl::operator-> () const
+In_Order_Iterator_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -144,14 +140,14 @@ In_Order_ET_Iter_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-In_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
-  return ET_Iter_Impl::is_equal_stack(this, rhs);
+In_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const {
+  return Iterator_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
  
 bool 
-In_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
+In_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
 {
   return !(*this == rhs);
 }
@@ -159,18 +155,18 @@ In_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-ET_Iter_Impl *
-In_Order_ET_Iter_Impl::clone ()
+Iterator_Impl *
+In_Order_Iterator_Impl::clone ()
 {
-  return new In_Order_ET_Iter_Impl (*this);
+  return new In_Order_Iterator_Impl (*this);
 }
 
 /// Construct an Pre_Order_Expression_Tree_Iterator. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-Pre_Order_ET_Iter_Impl::Pre_Order_ET_Iter_Impl (const Expression_Tree &tree,
-                                                bool end_iter)
-  : ET_Iter_Impl (tree),
+Pre_Order_Iterator_Impl::Pre_Order_Iterator_Impl (const Expression_Tree &tree,
+                                                  bool end_iter)
+  : Iterator_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -181,13 +177,13 @@ Pre_Order_ET_Iter_Impl::Pre_Order_ET_Iter_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-Pre_Order_ET_Iter_Impl::~Pre_Order_ET_Iter_Impl ()
+Pre_Order_Iterator_Impl::~Pre_Order_Iterator_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Pre_Order_ET_Iter_Impl::operator* ()
+Pre_Order_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -195,7 +191,7 @@ Pre_Order_ET_Iter_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Pre_Order_ET_Iter_Impl::operator* () const
+Pre_Order_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -203,7 +199,7 @@ Pre_Order_ET_Iter_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Pre_Order_ET_Iter_Impl::operator++ ()
+Pre_Order_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -230,7 +226,7 @@ Pre_Order_ET_Iter_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Pre_Order_ET_Iter_Impl::operator->()
+Pre_Order_Iterator_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -238,7 +234,7 @@ Pre_Order_ET_Iter_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Pre_Order_ET_Iter_Impl::operator-> () const
+Pre_Order_Iterator_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -246,15 +242,15 @@ Pre_Order_ET_Iter_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Pre_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const
+Pre_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const
 {
-  return ET_Iter_Impl::is_equal_stack(this, rhs);
+  return Iterator_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
  
 bool 
-Pre_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
+Pre_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
 {
   return !(*this == rhs);
 }
@@ -263,18 +259,18 @@ Pre_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-ET_Iter_Impl *
-Pre_Order_ET_Iter_Impl::clone ()
+Iterator_Impl *
+Pre_Order_Iterator_Impl::clone ()
 {
-  return new Pre_Order_ET_Iter_Impl (*this);
+  return new Pre_Order_Iterator_Impl (*this);
 }
 
 /// Construct an Post_Order_Expression_Tree_Iterator. If end_iter is set to true,
 /// the iterator points to the end of the tree
 
-Post_Order_ET_Iter_Impl::Post_Order_ET_Iter_Impl (const Expression_Tree &tree,
-                                                  bool end_iter)
-  : ET_Iter_Impl (tree),
+Post_Order_Iterator_Impl::Post_Order_Iterator_Impl (const Expression_Tree &tree,
+                                                    bool end_iter)
+  : Iterator_Impl (tree),
     stack_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -308,13 +304,13 @@ Post_Order_ET_Iter_Impl::Post_Order_ET_Iter_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-Post_Order_ET_Iter_Impl::~Post_Order_ET_Iter_Impl ()
+Post_Order_Iterator_Impl::~Post_Order_Iterator_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Post_Order_ET_Iter_Impl::operator* ()
+Post_Order_Iterator_Impl::operator* ()
 {
   return stack_.top ();
 }
@@ -322,7 +318,7 @@ Post_Order_ET_Iter_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Post_Order_ET_Iter_Impl::operator* () const
+Post_Order_Iterator_Impl::operator* () const
 {
   return stack_.top ();
 }
@@ -330,7 +326,7 @@ Post_Order_ET_Iter_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Post_Order_ET_Iter_Impl::operator++ ()
+Post_Order_Iterator_Impl::operator++ ()
 {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
@@ -376,7 +372,7 @@ Post_Order_ET_Iter_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Post_Order_ET_Iter_Impl::operator->()
+Post_Order_Iterator_Impl::operator->()
 {
   return &stack_.top ();
 }
@@ -384,7 +380,7 @@ Post_Order_ET_Iter_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Post_Order_ET_Iter_Impl::operator-> () const
+Post_Order_Iterator_Impl::operator-> () const
 {
   return &stack_.top ();
 }
@@ -392,14 +388,14 @@ Post_Order_ET_Iter_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Post_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const
+Post_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const
 {
-  return ET_Iter_Impl::is_equal_stack(this, rhs);}
+  return Iterator_Impl::is_equal_stack(this, rhs);}
 
 /// checks two iterators for inequality
  
 bool 
-Post_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
+Post_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
 {
   return ! (*this == rhs);
 }
@@ -407,18 +403,18 @@ Post_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-ET_Iter_Impl *
-Post_Order_ET_Iter_Impl::clone ()
+Iterator_Impl *
+Post_Order_Iterator_Impl::clone ()
 {
-  return new Post_Order_ET_Iter_Impl (*this);
+  return new Post_Order_Iterator_Impl (*this);
 }
 
 /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
 /// true, the iterator points to the end of the tree
 
-Level_Order_ET_Iter_Impl::Level_Order_ET_Iter_Impl (const Expression_Tree &tree,
-                                                    bool end_iter)
-  : ET_Iter_Impl (tree),
+Level_Order_Iter_Impl::Level_Order_Iter_Impl (const Expression_Tree &tree,
+                                              bool end_iter)
+  : Iterator_Impl (tree),
     queue_ ()
 {
   // if the caller doesn't want an end iterator, insert the root tree
@@ -429,13 +425,13 @@ Level_Order_ET_Iter_Impl::Level_Order_ET_Iter_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-Level_Order_ET_Iter_Impl::~Level_Order_ET_Iter_Impl ()
+Level_Order_Iter_Impl::~Level_Order_Iter_Impl ()
 = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
  
 Expression_Tree 
-Level_Order_ET_Iter_Impl::operator* ()
+Level_Order_Iter_Impl::operator* ()
 {
   return queue_.front ();
 }
@@ -443,7 +439,7 @@ Level_Order_ET_Iter_Impl::operator* ()
 /// Returns the Node that the iterator is pointing to (const version)
  
 const Expression_Tree 
-Level_Order_ET_Iter_Impl::operator* () const
+Level_Order_Iter_Impl::operator* () const
 {
   return queue_.front ();
 }
@@ -451,7 +447,7 @@ Level_Order_ET_Iter_Impl::operator* () const
 /// moves the iterator to the next node (pre-increment)
  
 void
-Level_Order_ET_Iter_Impl::operator++ ()
+Level_Order_Iter_Impl::operator++ ()
 {
   if (!queue_.empty ())
     {
@@ -473,7 +469,7 @@ Level_Order_ET_Iter_Impl::operator++ ()
 /// Delegation operator.
  
 Expression_Tree *
-Level_Order_ET_Iter_Impl::operator->()
+Level_Order_Iter_Impl::operator->()
 {
   return &queue_.front ();
 }
@@ -481,7 +477,7 @@ Level_Order_ET_Iter_Impl::operator->()
 /// Delegation operator.
  
 const Expression_Tree *
-Level_Order_ET_Iter_Impl::operator-> () const
+Level_Order_Iter_Impl::operator-> () const
 {
   return &queue_.front ();
 }
@@ -489,7 +485,7 @@ Level_Order_ET_Iter_Impl::operator-> () const
 /// checks two iterators for equality
  
 bool 
-Level_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
+Level_Order_Iter_Impl::operator== (const Iterator_Impl &rhs) const {
   // if the rhs was not a level_order iterator then we've already
   // discovered the relation is false.
   if (auto level_order_rhs = dynamic_cast<decltype(this)> (&rhs)) {
@@ -525,7 +521,7 @@ Level_Order_ET_Iter_Impl::operator== (const ET_Iter_Impl &rhs) const {
 /// checks two iterators for inequality
  
 bool 
-Level_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
+Level_Order_Iter_Impl::operator!= (const Iterator_Impl &rhs) const
 {
   return !(*this == rhs);
 }
@@ -533,10 +529,10 @@ Level_Order_ET_Iter_Impl::operator!= (const ET_Iter_Impl &rhs) const
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
  
-ET_Iter_Impl *
-Level_Order_ET_Iter_Impl::clone ()
+Iterator_Impl *
+Level_Order_Iter_Impl::clone ()
 {
-  return new Level_Order_ET_Iter_Impl (*this);
+  return new Level_Order_Iter_Impl (*this);
 }
 
 #endif /* _TREE_ITERATOR_IMPL_CPP */

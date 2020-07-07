@@ -19,7 +19,7 @@ Expression_Tree_Iterator::Expression_Tree_Iterator (const Expression_Tree_Iterat
   
 /// Copy ctor for impl *.
 
-Expression_Tree_Iterator::Expression_Tree_Iterator (ET_Iter_Impl *impl)
+Expression_Tree_Iterator::Expression_Tree_Iterator (Iterator_Impl *impl)
   : impl_ (impl)
 {
 }
@@ -104,7 +104,7 @@ Expression_Tree_Const_Iterator::Expression_Tree_Const_Iterator (const Expression
   
 /// Copy ctor for impl *.
 
-Expression_Tree_Const_Iterator::Expression_Tree_Const_Iterator (ET_Iter_Impl * impl)
+Expression_Tree_Const_Iterator::Expression_Tree_Const_Iterator (Iterator_Impl * impl)
   : impl_ (impl)
 {
 }
