@@ -7,11 +7,11 @@ class Visitor;
 
 /**
  * @class Composite_Subtract_Node
+ *
  * @brief A composite node containing left and right
  *        children. The meaning of this node is left - right
  */
-class Composite_Subtract_Node : public Composite_Binary_Node
-{
+class Composite_Subtract_Node : public Composite_Binary_Node {
 public:
   /// Ctor
   Composite_Subtract_Node (Component_Node *left, Component_Node *right);

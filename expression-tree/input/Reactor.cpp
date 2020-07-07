@@ -12,16 +12,13 @@ Reactor *
 Reactor::instance_ = 0;
 
 Reactor::Reactor ()
-  : run_event_loop_ (true)
-{
+  : run_event_loop_ (true) {
 }
 
-Reactor::~Reactor ()
-= default;
+Reactor::~Reactor () = default;
 
 Reactor *
-Reactor::instance ()
-{
+Reactor::instance () {
   if (Reactor::instance_ == nullptr)
     Reactor::instance_ = new Reactor;
 
@@ -29,14 +26,12 @@ Reactor::instance ()
 }
 
 void
-Reactor::register_input_handler (std::unique_ptr<Event_Handler> eh)
-{
+Reactor::register_input_handler (std::unique_ptr<Event_Handler> eh) {
   dispatch_table_.emplace_back (eh.release());
 }
 
 void
-Reactor::remove_input_handler (std::unique_ptr<Event_Handler> eh)
-{
+Reactor::remove_input_handler (std::unique_ptr<Event_Handler> eh) {
   auto itr = std::remove (dispatch_table_.begin (),
                           dispatch_table_.end (),
                           eh);
@@ -45,8 +40,7 @@ Reactor::remove_input_handler (std::unique_ptr<Event_Handler> eh)
 }
 
 void 
-Reactor::run_event_loop ()
-{
+Reactor::run_event_loop () {
   while (run_event_loop_)
     std::for_each (dispatch_table_.begin (),
                    dispatch_table_.end (),
@@ -54,8 +48,7 @@ Reactor::run_event_loop ()
 }
 
 void
-Reactor::end_event_loop ()
-{
+Reactor::end_event_loop () {
   run_event_loop_ = false;
 }
 

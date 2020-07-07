@@ -1,11 +1,12 @@
 /* -*- C++ -*- */
-#ifndef _COMPOSITE_UNARY_NODE_H_
-#define _COMPOSITE_UNARY_NODE_H_
+#ifndef _COMPOSITE_UNARY_NODE_H
+#define _COMPOSITE_UNARY_NODE_H
 
 #include "Component_Node.h"
 
 /**
  * @class Composite_Unary_Node
+ * *
  * @brief Defines a right child (but not a left one) and thus is useful for unary operations.
  * @see Composite_Binary_Node
  */
@@ -26,4 +27,4 @@ private:
   std::unique_ptr<Component_Node> right_;
 };
 
-#endif /* _COMPOSITE_UNARY_NODE_H_ */
+#endif /* _COMPOSITE_UNARY_NODE_H */

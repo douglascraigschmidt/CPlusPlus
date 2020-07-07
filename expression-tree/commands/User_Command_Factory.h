@@ -1,8 +1,9 @@
 /* -*- C++ -*- */
-#ifndef _ET_COMMAND_FACTORY_H_
-#define _ET_COMMAND_FACTORY_H_
+#ifndef _USER_COMMAND_FACTORY_H
+#define _USER_COMMAND_FACTORY_H
 
 #include <string>
+
 #include "commands/User_Command.h"
 #include "User_Command_Factory_Impl.h"
 #include "utils/Refcounter.h"
@@ -13,13 +14,14 @@ class Tree_Context;
 
 /**
  * @class User_Command_Factory
- * @brief Interface for the Abstract Factory pattern that is used
- *        create the appropriate @a User_Command based on a
- *        string supplied by the caller.  
+ *
+ * @brief Interface for the Factory Method pattern used create the
+ *        appropriate @a User_Command based on a string supplied by
+ *        the caller.
  *
  *        Plays the role of the "abstraction" class in the Bridge
- *        pattern and delegates to the appropriate "implementor"
- *        that creates the designated commands.
+ *        pattern and delegates to the appropriate "implementor" that
+ *        creates the designated commands.
  */
 class User_Command_Factory
 {
@@ -36,18 +38,17 @@ public:
   /// Dtor.
   ~User_Command_Factory ();
 
-  /// Make the requested command.  This method is the primary method
-  /// used by clients.  
+  /// Factory method that makes the requested command.  This method is
+  /// the primary method used by clients.
   User_Command make_command (const std::string &command);
 
-  /// Make the requested macro command.  This method is used in the
-  /// implementation of the various commands.
+  /// Factory method that makes the requested macro command.
   User_Command make_macro_command (const std::string &);
 
 private:
   /// Pointer to actual implementation, i.e., the "bridge", which is
-  /// reference counted to automate memory management. 
+  /// reference counted to automate memory management.
   Refcounter <User_Command_Factory_Impl> factory_impl_;
 };
 
-#endif /* _ET_COMMAND_FACTORY_H_ */
+#endif /* _USER_COMMAND_FACTORY_H */

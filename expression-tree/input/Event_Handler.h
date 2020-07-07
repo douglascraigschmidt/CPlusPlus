@@ -1,5 +1,6 @@
-#ifndef _EVENT_HANDLER_H_
-#define _EVENT_HANDLER_H_
+/* -*- C++ -*- */
+#ifndef _EVENT_HANDLER_H
+#define _EVENT_HANDLER_H
 
 #include <memory>
 
@@ -8,18 +9,17 @@
 
 /**
  * @class Event_Handler
- * @brief Provides an abstract interface for handling input events
- *        and commands associated with the expression tree application. 
+ *
+ * @brief Provides an abstract interface for handling input events and
+ *        commands associated with the expression tree application.
  *
  *        This class plays the role of "event handler" in the Reactor
  *        pattern and defines methods for use in the Template Method
- *        pattern that is used to process user input commands. 
+ *        pattern that is used to process user input commands.
  *
- * @see   Verbose_Mode_Event_Handler and
- *        Succinct_Mode_Event_Handler.
+ * @see Verbose_Mode_Event_Handler and Succinct_Mode_Event_Handler.
  */
-class Event_Handler
-{
+class Event_Handler {
 public:
   /// Constructor.
   Event_Handler ();
@@ -28,8 +28,7 @@ public:
   virtual ~Event_Handler ();
 
   /// Factory that creates the appropriate subclass of @a
-  /// ET_Event_Handler, i.e., @a
-  /// Verbose_Mode_ET_Event_Handler or @a
+  /// ET_Event_Handler, i.e., @a Verbose_Mode_ET_Event_Handler or @a
   /// Succinct_Mode_ET_Event_Handler.
   static std::unique_ptr<Event_Handler> make_handler (bool verbose);
 
@@ -66,16 +65,16 @@ protected:
 
 /**
  * @class Verbose_Mode_Event_Handler
- * @brief Provides a concrete interface for verbosely handling input
- *        events associated with the expression tree application. 
  *
- *        This class plays the role of "concrete event handler" in the Reactor
- *        pattern and overrides several hook methods for use in the
- *        Template Method pattern. 
+ * @brief Provides a concrete interface for verbosely handling input
+ *        events associated with the expression tree application.
+ *
+ *        This class plays the role of "concrete event handler" in the
+ *        Reactor pattern and overrides several hook methods for use
+ *        in the Template Method pattern.
  */
 class Verbose_Mode_Event_Handler
-  : public Event_Handler
-{
+  : public Event_Handler {
 public:
   /// Constructor.
   Verbose_Mode_Event_Handler ();
@@ -98,16 +97,17 @@ private:
 
 /**
  * @class Succinct_Mode_Event_Handler
- * @brief Provides a concrete interface for less verbosely handling input
- *        events associated with the expression tree application. 
  *
- *        This class plays the role of "concrete event handler" in the Reactor
- *        pattern and overrides several hook methods for use in the
- *        Template Method pattern. 
+ * @brief Provides a concrete interface for less verbosely handling
+ *        input events associated with the expression tree
+ *        application.
+ *
+ *        This class plays the role of "concrete event handler" in the
+ *        Reactor pattern and overrides several hook methods for use
+ *        in the Template Method pattern.
  */
 class Succinct_Mode_Event_Handler
-  : public Event_Handler
-{
+  : public Event_Handler {
 public:
   /// Constructor.
   Succinct_Mode_Event_Handler ();
@@ -127,4 +127,4 @@ protected:
 // Forward declaration.
 class Reactor;
 
-#endif /* _EVENT_HANDLER_H_ */
+#endif /* _EVENT_HANDLER_H */

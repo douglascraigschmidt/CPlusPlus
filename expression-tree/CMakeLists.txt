@@ -48,6 +48,10 @@ add_executable(expression_tree
         utils/getopt.h
         interpreters/Interpreter.cpp
         interpreters/Interpreter.h
+        interpreters/Interpreter_Impl.cpp
+        interpreters/Interpreter_Impl.h
+        interpreters/Expr.cpp
+        interpreters/Expr.h
         composites/Leaf_Node.cpp
         composites/Leaf_Node.h
         main.cpp

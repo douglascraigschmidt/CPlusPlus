@@ -12,8 +12,7 @@
 void 
 State::print_tree (const Expression_Tree &tree,
                    const std::string &traversal_order,
-                   std::ostream &os)
-{
+                   std::ostream &os) {
   os << "traverse tree using strategy '" << traversal_order
      << "':" << std::endl;
   
@@ -180,7 +179,9 @@ Pre_Order_Initialized_State::evaluate (Tree_Context &context,
 void 
 Post_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
                                            const std::string &expr) {
-  Interpreter interpreter(new Post_Order_Interpreter);
+  Interpreter interpreter
+    (new Post_Order_Interpreter
+       (tree_context.interpreter_context_));
 
   tree_context.tree (interpreter.interpret (expr));
 
@@ -219,7 +220,9 @@ Level_Order_Initialized_State::evaluate (Tree_Context &context,
 void 
 In_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
                                          const std::string &expr) {
-  Interpreter interpreter(new In_Order_Interpreter);
+  Interpreter interpreter
+    (new In_Order_Interpreter
+       (tree_context.interpreter_context_));
 
   tree_context.tree (interpreter.interpret (expr));
 

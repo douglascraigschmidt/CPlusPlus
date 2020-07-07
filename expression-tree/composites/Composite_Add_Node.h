@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _ADD_NODE_H_
-#define _ADD_NODE_H_
+#ifndef _COMPOSITE_ADD_NODE_H
+#define _COMPOSITE_ADD_NODE_H
 
 #include "Composite_Binary_Node.h"
 
@@ -10,11 +10,11 @@ class Visitor;
 
 /**
  * @class Composite_Add_Node
- * @brief A composite node containing left and right
- *        children. The meaning of this node is left + right
+ *
+ * @brief A composite node containing left and right children. The
+ *        meaning of this node is left + right.
  */
-class Composite_Add_Node : public Composite_Binary_Node
-{
+class Composite_Add_Node : public Composite_Binary_Node {
 public:
   /// Ctor
   Composite_Add_Node (Component_Node *left, 
@@ -27,4 +27,4 @@ public:
   void accept (Visitor &visitor) const override;
 };
 
-#endif /* _ADD_NODE_H_ */
+#endif /* _COMPOSITE_ADD_NODE_H */

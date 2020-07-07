@@ -38,35 +38,28 @@ Tree_Context::evaluate (const std::string &format)
 }
 
 void
-Tree_Context::set (const std::string &key_value_pair)
-{
-  // this is quite enough function calls. 
-  // we'll just go ahead and parse all of this now.
-
+Tree_Context::set (const std::string &key_value_pair) {
+  // We'll just go ahead and parse all of this now.
   std::string input = key_value_pair;
 
-  // used for keeping track of found characters
+  // Used to keep track of characters found.
   std::string::size_type pos;
 
-  // get rid of all spaces
-  while ( (pos = input.find (' ')) != std::string::npos)
-    input.erase(pos,1);
+  // Get rid of all whitespaces
+  while ((pos = input.find (' ')) != std::string::npos)
+    input.erase(pos, 1);
 
   // input should be key=value
-  if ( (pos = input.find ('=')) != std::string::npos)
-  {
-    // if the position is not the first char (eg '=value')
-    // and position is not the last char (eg 'key=')
-    // then split the string and set the interpreter context
-    // accordingly
-    if (pos != 0 && pos < input.length() - 1)
-    {
+  if ((pos = input.find ('=')) != std::string::npos) {
+    // if the position is not the first char (eg '=value') and
+    // position is not the last char (eg 'key=') then split the string
+    // and set the interpreter context accordingly
+    if (pos != 0 && pos < input.length() - 1) {
       std::string key = input.substr(0,pos);
       std::string value = input.substr(pos+1);
 
-      int_context.set (key, ::atoi (value.c_str ()));
-    }
-    else
+      interpreter_context_.set (key, ::atoi (value.c_str ()));
+    } else
       throw std::domain_error("Must be in the form key=value");
   }
   else throw std::domain_error("Must have = sign present");

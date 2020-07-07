@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <interpreters/Interpreter_Impl.h>
 
 #include "trees/Expression_Tree.h"
 #include "states/State.h"
@@ -55,12 +56,12 @@ public:
   void tree (const Expression_Tree &new_tree);
 
   /// Returns whether or not a successful format call has been called
-  bool formatted() const { return formatted_; }
+  [[nodiscard]] bool formatted() const { return formatted_; }
 
   /// Persistent interpreter context for variables. Our interpreter
   /// will change values inside of this, so I just stuck the variable
-  /// in the public section. 
-  Interpreter_Context int_context;
+  /// in the public section.
+  Interpreter_Context interpreter_context_;
 
 private:
   /// Keep track of the current state that we're in.  We use an @a

@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _COMPONENT_NODE_H_
-#define _COMPONENT_NODE_H_
+#ifndef _COMPONENT_NODE_H
+#define _COMPONENT_NODE_H
 
 #include <string>
 #include <memory>
@@ -11,6 +11,7 @@ class Visitor;
 
 /**
  * @class Component_Node
+ *
  * @brief An abstract base class defines a simple abstract
  *        implementation of an expression tree node.
  *
@@ -24,14 +25,14 @@ class Visitor;
  * @see   See Composite_Unary_Node and Composite_Binary_Node for nodes
  *        with right only and left and right children, respectively.
  */
-class Component_Node
-{
+class Component_Node {
 public:
   /// Exception classes for Component_Node exceptions
   class Invalid_Function_Call : public std::domain_error
   {
   public:
-    explicit Invalid_Function_Call (const std::string &message): std::domain_error(message) {}
+    explicit Invalid_Function_Call (const std::string &message)
+      : std::domain_error(message) {}
   }; 
 
   /// Dtor
@@ -53,4 +54,4 @@ public:
   virtual void accept (Visitor &visitor) const;
 };
 
-#endif /* _COMPONENT_NODE_H_ */
+#endif /* _COMPONENT_NODE_H */

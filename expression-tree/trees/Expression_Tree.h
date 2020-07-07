@@ -15,24 +15,23 @@ class Expression_Tree_Const_Iterator;
 
 /**
  * @class Expression_Tree
+ *
  * @brief Interface for the Composite pattern that is used to contain
- *        all the operator and operand nodes in the expression tree. 
+ *        all the operator and operand nodes in the expression tree.
  * 
  *        Plays the role of the "abstraction" class in the Bridge
- *        pattern and delegates to the appropriate "implementor"
- *        that performs the expression tree operations.  Also
- *        defines the STL factory methods that create the desired
- *        begin and end iterators.
+ *        pattern and delegates to the appropriate "implementor" that
+ *        performs the expression tree operations.  Also defines the
+ *        STL factory methods that create the desired begin and end
+ *        iterators.
  */
-class Expression_Tree
-{
+class Expression_Tree {
 public:
-
   /// Exception class for Invalid States exceptions
-  class Invalid_Iterator : public std::domain_error
-  {
+  class Invalid_Iterator : public std::domain_error {
   public:
-    explicit Invalid_Iterator(const std::string &message) : std::domain_error(message) {}
+    explicit Invalid_Iterator(const std::string &message) 
+      : std::domain_error(message) {}
   }; 
 
   // Define a "trait"
@@ -45,7 +44,8 @@ public:
 
   /// Ctor that takes a @a Node * that contains all the nodes in the
   /// expression tree.
-  explicit Expression_Tree (Component_Node *root, bool increase_count = false);
+  explicit Expression_Tree (Component_Node *root,
+                            bool increase_count = false);
 
   // Copy ctor
   Expression_Tree (const Expression_Tree &t);

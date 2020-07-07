@@ -1,3 +1,4 @@
+/* -*- C++ -*- */
 #ifndef _REACTOR_H
 #define _REACTOR_H
 
@@ -9,15 +10,15 @@ class Event_Handler;
 
 /**
  * @class Reactor
+ *
  * @brief An object-oriented event demultiplexor and dispatcher of
  *        event handler callback methods in response to input events.
  *
- *        This class plays the role of the "reactor" in the
- *        Reactor pattern.  It is access as a singleton and uses the
- *        Iterator pattern to dispatch the various event handlers.
+ *        This class plays the role of the "reactor" in the Reactor
+ *        pattern.  It is access as a singleton and uses the Iterator
+ *        pattern to dispatch the various event handlers.
  */
-class Reactor
-{
+class Reactor {
 public:
   /// Singleton access point.
   static Reactor *instance ();
