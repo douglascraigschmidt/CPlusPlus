@@ -6,15 +6,15 @@
 
 /**
  * @class Refcounter
+ *
  * @brief This template class provides transparent reference counting
- *        of its template parameter @a T. 
+ *        of its template parameter @a T.
  *
  *        This class can be used to automate the implementation of the
- *        Bridge pattern in C++.  
+ *        Bridge pattern in C++.
  */
 template <typename T>
-class Refcounter
-{
+class Refcounter {
 public:
   /// default Ctor
   Refcounter ();
@@ -48,7 +48,7 @@ public:
   const T *operator-> () const;
 
   /// get the underlying pointer
-  T *get_ptr ();
+  [[nodiscard]] T *get_ptr ();
 
   /// get the underlying pointer
   [[nodiscard]] Component_Node *get_ptr () const;

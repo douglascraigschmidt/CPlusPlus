@@ -12,10 +12,8 @@ Options *
 Options::instance_ = nullptr;
 
 Options*
-Options::instance ()
-{
+Options::instance () {
   // Create the options implementation if it hasn't already been done
-
   if (instance_ == nullptr)
     instance_ = new Options;
 
@@ -24,38 +22,32 @@ Options::instance ()
 
 // Ctor
 Options::Options ()
-  : verbose_ (false)
-{
+  : verbose_ (false) {
 }
 
 // Dtor
-Options::~Options ()
-= default;
+Options::~Options () = default;
 
 // Return exe name.
 std::string
-Options::exe () const
-{
+Options::exe () const {
   return exe_;
 }
 
 // Return path name.
 std::string
-Options::path () const
-{
+Options::path () const {
   return path_;
 }
 
 bool
-Options::verbose () const
-{
+Options::verbose () const {
   return verbose_;
 }
 
 // Parse the command line arguments.
 bool
-Options::parse_args (int argc, char *argv[])
-{
+Options::parse_args (int argc, char *argv[]) {
   // set exe_ to the first arg.
   exe_ = parsing::getfilename (argv[0]);
   path_ = parsing::getpath (argv[0]);
@@ -84,8 +76,7 @@ Options::parse_args (int argc, char *argv[])
 
 // Parse the command line arguments.
 void
-Options::print_usage ()
-{
+Options::print_usage () {
   std::cout << "\nHelp Invoked on " << path_ + exe_ << "\n\n";
   std::cout << "Usage: " << exe_ << " [-h|-v]\n\n" << 
     "  -h: invoke help\n" <<

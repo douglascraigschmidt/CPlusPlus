@@ -6,16 +6,13 @@
 #include "iterators/Iterator_Impl.h"
 #include "composites/Component_Node.h"
 
-// Constructor for Iterator_Impl that takes a tree
-// to iterate over
+// Constructor for Iterator_Impl that takes a tree to iterate over.
 Iterator_Impl::Iterator_Impl (const Expression_Tree &tree)
-  : tree_ (tree)
-{
+  : tree_ (tree) {
 }
 
 // Destructor
-Iterator_Impl::~Iterator_Impl ()
-= default;
+Iterator_Impl::~Iterator_Impl () = default;
 
 template<typename T> bool
 Iterator_Impl::is_equal_stack(T *lhs, const Iterator_Impl &rhs) {
@@ -54,121 +51,97 @@ Iterator_Impl::is_equal_stack(T *lhs, const Iterator_Impl &rhs) {
 
 /// Construct an In_Order_Iterator_Impl. If end_iter is set to true,
 /// the iterator points to the end of the tree
-
 In_Order_Iterator_Impl::In_Order_Iterator_Impl (const Expression_Tree &tree,
                                                 bool end_iter)
   : Iterator_Impl (tree),
-    stack_ ()
-{
+    stack_ () {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !tree_.is_null ())
-    {
-      stack_.push (tree);
+  if (!end_iter && !tree_.is_null ()) {
+    stack_.push (tree);
 
-      // start at the smallest element (left-most)
-      while (!stack_.top ().left ().is_null ())
-        stack_.push (stack_.top ().left ());
-    }
+    // start at the smallest element (left-most)
+    while (!stack_.top ().left ().is_null ())
+      stack_.push (stack_.top ().left ());
+  }
 }
 
 /// destructor - nothing to do
 
-In_Order_Iterator_Impl::~In_Order_Iterator_Impl ()
-= default;
+In_Order_Iterator_Impl::~In_Order_Iterator_Impl () = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
- 
 Expression_Tree 
-In_Order_Iterator_Impl::operator* ()
-{
+In_Order_Iterator_Impl::operator* () {
   return stack_.top ();
 }
 
 /// Returns the Node that the iterator is pointing to (const version)
- 
 const Expression_Tree 
-In_Order_Iterator_Impl::operator* () const
-{
+In_Order_Iterator_Impl::operator* () const {
   return stack_.top ();
 }
 
 /// moves the iterator to the next node (pre-increment)
- 
 void
-In_Order_Iterator_Impl::operator++ ()
-{
-  // we know that at this point there is no left () of top ()
-  // because we would have already visited it.
+In_Order_Iterator_Impl::operator++ () {
+  // we know that at this point there is no left () of top () because
+  // we would have already visited it.
 
-  if (!stack_.empty ())
-    {
-      // if we have nodes greater than ourselves
-      if (!stack_.top ().right ().is_null ())
-        {
-          auto right_child = stack_.top().right ();
-          // Push the right child node onto the stack and pop the old
-          // parent (it's been visited now).
-          stack_.pop();
-          stack_.push (right_child);
+  if (!stack_.empty ()) {
+    // if we have nodes greater than ourselves
+    if (!stack_.top ().right ().is_null ()) {
+      auto right_child = stack_.top().right ();
+      // Push the right child node onto the stack and pop the old
+      // parent (it's been visited now).
+      stack_.pop();
+      stack_.push (right_child);
 
-          // keep pushing until we get to the left most child
-          while (!stack_.top ().left ().is_null ())
-            stack_.push (stack_.top ().left ());
-        }
-      else
-        stack_.pop ();
-    }
+      // keep pushing until we get to the left most child
+      while (!stack_.top ().left ().is_null ())
+        stack_.push (stack_.top ().left ());
+    } else
+      stack_.pop ();
+  }
 }
 
 /// Delegation operator.
- 
 Expression_Tree *
-In_Order_Iterator_Impl::operator->()
-{
+In_Order_Iterator_Impl::operator->() {
   return &stack_.top ();
 }
 
 /// Delegation operator.
- 
 const Expression_Tree *
-In_Order_Iterator_Impl::operator-> () const
-{
+In_Order_Iterator_Impl::operator-> () const {
   return &stack_.top ();
 }
 
 /// checks two iterators for equality
- 
 bool 
 In_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const {
   return Iterator_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
- 
 bool 
-In_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
-{
+In_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const {
   return !(*this == rhs);
 }
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
- 
 Iterator_Impl *
-In_Order_Iterator_Impl::clone ()
-{
+In_Order_Iterator_Impl::clone () {
   return new In_Order_Iterator_Impl (*this);
 }
 
-/// Construct an Pre_Order_Expression_Tree_Iterator. If end_iter is set to true,
-/// the iterator points to the end of the tree
-
+/// Construct an Pre_Order_Expression_Tree_Iterator. If end_iter is
+/// set to true, the iterator points to the end of the tree
 Pre_Order_Iterator_Impl::Pre_Order_Iterator_Impl (const Expression_Tree &tree,
                                                   bool end_iter)
   : Iterator_Impl (tree),
-    stack_ ()
-{
+    stack_ () {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
   if (!end_iter && !tree_.is_null ())
@@ -177,246 +150,195 @@ Pre_Order_Iterator_Impl::Pre_Order_Iterator_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-Pre_Order_Iterator_Impl::~Pre_Order_Iterator_Impl ()
-= default;
+Pre_Order_Iterator_Impl::~Pre_Order_Iterator_Impl () = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
- 
 Expression_Tree 
-Pre_Order_Iterator_Impl::operator* ()
-{
+Pre_Order_Iterator_Impl::operator* () {
   return stack_.top ();
 }
 
 /// Returns the Node that the iterator is pointing to (const version)
- 
 const Expression_Tree 
-Pre_Order_Iterator_Impl::operator* () const
-{
+Pre_Order_Iterator_Impl::operator* () const {
   return stack_.top ();
 }
 
 /// moves the iterator to the next node (pre-increment)
- 
 void
-Pre_Order_Iterator_Impl::operator++ ()
-{
-  // we know that at this point there is no left () of top ()
-  // because we would have already visited it.
+Pre_Order_Iterator_Impl::operator++ () {
+  // we know that at this point there is no left () of top () because
+  // we would have already visited it.
 
-  if (!stack_.empty ())
-    {
-      // we need to pop the node off the stack before pushing the
-      // children, or else we'll revisit this node later
+  if (!stack_.empty ()) {
+    // we need to pop the node off the stack before pushing the
+    // children, or else we'll revisit this node later
 
-      Expression_Tree current = stack_.top ();
-      stack_.pop();
+    Expression_Tree current = stack_.top ();
+    stack_.pop();
 
-      // note the order here: right first, then left. Since this is
-      // LIFO, this results in the left child being the first
-      // evaluated, which fits into the Pre-order traversal strategy
+    // note the order here: right first, then left. Since this is
+    // LIFO, this results in the left child being the first
+    // evaluated, which fits into the Pre-order traversal strategy
 
-      if (!current.right ().is_null ())
-        stack_.push (current.right ());
-      if (!current.left ().is_null ())
-        stack_.push (current.left ());
-    }
+    if (!current.right ().is_null ())
+      stack_.push (current.right ());
+    if (!current.left ().is_null ())
+      stack_.push (current.left ());
+  }
 }
 
 /// Delegation operator.
- 
 Expression_Tree *
-Pre_Order_Iterator_Impl::operator->()
-{
+Pre_Order_Iterator_Impl::operator->() {
   return &stack_.top ();
 }
 
 /// Delegation operator.
- 
 const Expression_Tree *
-Pre_Order_Iterator_Impl::operator-> () const
-{
+Pre_Order_Iterator_Impl::operator-> () const {
   return &stack_.top ();
 }
 
 /// checks two iterators for equality
- 
 bool 
-Pre_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const
-{
+Pre_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const {
   return Iterator_Impl::is_equal_stack(this, rhs);
 }
 
 /// checks two iterators for inequality
- 
 bool 
-Pre_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
-{
+Pre_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const {
   return !(*this == rhs);
 }
 
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
- 
 Iterator_Impl *
-Pre_Order_Iterator_Impl::clone ()
-{
+Pre_Order_Iterator_Impl::clone () {
   return new Pre_Order_Iterator_Impl (*this);
 }
 
-/// Construct an Post_Order_Expression_Tree_Iterator. If end_iter is set to true,
-/// the iterator points to the end of the tree
-
+/// Construct an Post_Order_Expression_Tree_Iterator. If end_iter is
+/// set to true, the iterator points to the end of the tree
 Post_Order_Iterator_Impl::Post_Order_Iterator_Impl (const Expression_Tree &tree,
                                                     bool end_iter)
   : Iterator_Impl (tree),
-    stack_ ()
-{
+    stack_ () {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
-  if (!end_iter && !tree_.is_null ())
-    {
-      Expression_Tree current = const_cast <Expression_Tree &> (tree);
-      stack_.push (current);
+  if (!end_iter && !tree_.is_null ()) {
+    Expression_Tree current = const_cast <Expression_Tree &> (tree);
+    stack_.push (current);
 
-// the commented code does not work on unary operator nodes with no left child, but 
-// a right child - or at least, there is a certain depth that this will not go down
+    // the commented code does not work on unary operator nodes with no left child, but 
+    // a right child - or at least, there is a certain depth that this will not go down
 
-      while (!current.is_null ())
-        {
-          if (!current.right ().is_null ())
-            stack_.push (current.right ());
-          if (!current.left ().is_null ())
-            {
-              // if there was a left, then update current
-              // this is the case for all non-negations
-              stack_.push (current.left ());
-              current = current.left ();
-            }
-          else
-            // if there was not a left, then current = current->right_
-            // this handles cases of unary nodes, like negations
-            current = current.right ();
-        }
+    while (!current.is_null ()) {
+      if (!current.right ().is_null ())
+        stack_.push (current.right ());
+      if (!current.left ().is_null ()) {
+        // if there was a left, then update current
+        // this is the case for all non-negations
+        stack_.push (current.left ());
+        current = current.left ();
+      } else
+        // if there was not a left, then current = current->right_
+        // this handles cases of unary nodes, like negations
+        current = current.right ();
     }
+  }
 }
 
 /// destructor - nothing to do
-
-Post_Order_Iterator_Impl::~Post_Order_Iterator_Impl ()
-= default;
+Post_Order_Iterator_Impl::~Post_Order_Iterator_Impl () = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
- 
 Expression_Tree 
-Post_Order_Iterator_Impl::operator* ()
-{
+Post_Order_Iterator_Impl::operator* () {
   return stack_.top ();
 }
 
 /// Returns the Node that the iterator is pointing to (const version)
- 
 const Expression_Tree 
-Post_Order_Iterator_Impl::operator* () const
-{
+Post_Order_Iterator_Impl::operator* () const {
   return stack_.top ();
 }
 
 /// moves the iterator to the next node (pre-increment)
- 
 void
-Post_Order_Iterator_Impl::operator++ ()
-{
+Post_Order_Iterator_Impl::operator++ () {
   // we know that at this point there is no left () of top ()
   // because we would have already visited it.
 
-  if (!stack_.empty ())
-    {
-      // we need to pop the node off the stack before pushing the
-      // children, or else we'll revisit this node later
+  if (!stack_.empty ()) {
+    // we need to pop the node off the stack before pushing the
+    // children, or else we'll revisit this node later
 
-      Expression_Tree current = stack_.top ();
-      stack_.pop();
+    Expression_Tree current = stack_.top ();
+    stack_.pop();
 
-      // This is where stuff gets a little confusing.
+    // This is where stuff gets a little confusing.
 
-      if (!stack_.empty ()
-          && stack_.top ().left ().get_root () != current.get_root ()
-          && stack_.top ().right ().get_root () != current.get_root () )
-        {
-          current = stack_.top ();
+    if (!stack_.empty ()
+        && stack_.top ().left ().get_root () != current.get_root ()
+        && stack_.top ().right ().get_root () != current.get_root ()) {
+      current = stack_.top ();
 
-          while (!current.is_null ())
-            {
-              if (!current.right ().is_null ())
-                stack_.push (current.right ());
-              if (!current.left ().is_null ())
-                {
-                  // if there was a left, then update current
-                  // this is the case for all non-negations
-                  stack_.push (current.left ());
-                  current = current.left ();
-                }
-              else
-                {
-                  // if there was not a left, then current = current->right_
-                  // this handles cases of unary nodes, like negations
-                  current = current.right ();
-                }
-            }
-        }
+      while (!current.is_null ()) {
+        if (!current.right ().is_null ())
+          stack_.push (current.right ());
+        if (!current.left ().is_null ()) {
+          // if there was a left, then update current
+          // this is the case for all non-negations
+          stack_.push (current.left ());
+          current = current.left ();
+        } else 
+          // if there was not a left, then current = current->right_
+          // this handles cases of unary nodes, like negations
+          current = current.right ();
+      }
     }
+  }
 }
 
 /// Delegation operator.
- 
 Expression_Tree *
-Post_Order_Iterator_Impl::operator->()
-{
+Post_Order_Iterator_Impl::operator->() {
   return &stack_.top ();
 }
 
 /// Delegation operator.
- 
 const Expression_Tree *
-Post_Order_Iterator_Impl::operator-> () const
-{
+Post_Order_Iterator_Impl::operator-> () const {
   return &stack_.top ();
 }
 
 /// checks two iterators for equality
- 
 bool 
-Post_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const
-{
+Post_Order_Iterator_Impl::operator== (const Iterator_Impl &rhs) const {
   return Iterator_Impl::is_equal_stack(this, rhs);}
 
 /// checks two iterators for inequality
- 
 bool 
-Post_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const
-{
+Post_Order_Iterator_Impl::operator!= (const Iterator_Impl &rhs) const {
   return ! (*this == rhs);
 }
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
- 
 Iterator_Impl *
-Post_Order_Iterator_Impl::clone ()
-{
+Post_Order_Iterator_Impl::clone () {
   return new Post_Order_Iterator_Impl (*this);
 }
 
 /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
 /// true, the iterator points to the end of the tree
-
 Level_Order_Iter_Impl::Level_Order_Iter_Impl (const Expression_Tree &tree,
                                               bool end_iter)
   : Iterator_Impl (tree),
-    queue_ ()
-{
+    queue_ () {
   // if the caller doesn't want an end iterator, insert the root tree
   // into the queue.
   if (!end_iter && !tree_.is_null ())
@@ -425,65 +347,51 @@ Level_Order_Iter_Impl::Level_Order_Iter_Impl (const Expression_Tree &tree,
 
 /// destructor - nothing to do
 
-Level_Order_Iter_Impl::~Level_Order_Iter_Impl ()
-= default;
+Level_Order_Iter_Impl::~Level_Order_Iter_Impl () = default;
 
 /// Returns the Node that the iterator is pointing to (non-const version)
- 
 Expression_Tree 
-Level_Order_Iter_Impl::operator* ()
-{
+Level_Order_Iter_Impl::operator* () {
   return queue_.front ();
 }
 
 /// Returns the Node that the iterator is pointing to (const version)
- 
 const Expression_Tree 
-Level_Order_Iter_Impl::operator* () const
-{
+Level_Order_Iter_Impl::operator* () const {
   return queue_.front ();
 }
 
 /// moves the iterator to the next node (pre-increment)
- 
 void
-Level_Order_Iter_Impl::operator++ ()
-{
-  if (!queue_.empty ())
-    {
-      // If the queue is not empty, dequeue an element
-      Expression_Tree root = queue_.front ();
-      queue_.pop();
+Level_Order_Iter_Impl::operator++ () {
+  if (!queue_.empty ()) {
+    // If the queue is not empty, dequeue an element
+    Expression_Tree root = queue_.front ();
+    queue_.pop();
 
-      if (!root.is_null ())
-        {
-          // If the element wasn't null, enqueue its children
-          if (!root.left ().is_null ())
-            queue_.push (root.left ());
-          if (!root.right ().is_null ())
-            queue_.push (root.right ());
-        }
+    if (!root.is_null ()) {
+      // If the element wasn't null, enqueue its children
+      if (!root.left ().is_null ())
+        queue_.push (root.left ());
+      if (!root.right ().is_null ())
+        queue_.push (root.right ());
     }
+  }
 }
 
 /// Delegation operator.
- 
 Expression_Tree *
-Level_Order_Iter_Impl::operator->()
-{
+Level_Order_Iter_Impl::operator->() {
   return &queue_.front ();
 }
 
 /// Delegation operator.
- 
 const Expression_Tree *
-Level_Order_Iter_Impl::operator-> () const
-{
+Level_Order_Iter_Impl::operator-> () const {
   return &queue_.front ();
 }
 
 /// checks two iterators for equality
- 
 bool 
 Level_Order_Iter_Impl::operator== (const Iterator_Impl &rhs) const {
   // if the rhs was not a level_order iterator then we've already
@@ -519,19 +427,15 @@ Level_Order_Iter_Impl::operator== (const Iterator_Impl &rhs) const {
 }
 
 /// checks two iterators for inequality
- 
 bool 
-Level_Order_Iter_Impl::operator!= (const Iterator_Impl &rhs) const
-{
+Level_Order_Iter_Impl::operator!= (const Iterator_Impl &rhs) const {
   return !(*this == rhs);
 }
 
 /// Method for cloning an impl. Necessary for post increments (bridge)
 /// @see Expression_Tree_Iterator
- 
 Iterator_Impl *
-Level_Order_Iter_Impl::clone ()
-{
+Level_Order_Iter_Impl::clone () {
   return new Level_Order_Iter_Impl (*this);
 }
 

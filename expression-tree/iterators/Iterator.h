@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
-#ifndef _ET_ITERATOR_H_
-#define _ET_ITERATOR_H_
+#ifndef _ITERATOR_H
+#define _ITERATOR_H
 
 #include <string>
 
@@ -13,20 +13,22 @@ class Component_Node;
 
 /**
  * @class Expression_Tree_Iterator
+ *
  * @brief Interface for the Iterator pattern that is used traverse
  *        through all the nodes in the expression tree in a non-const
  *        manner. 
  * 
  *        Plays the role of the "abstraction" class in the Bridge
- *        pattern and delegates to the appropriate "implementor"
- *        that performs the appropriate expression tree iterator
- *        operations. 
+ *        pattern and delegates to the appropriate "implementor" that
+ *        performs the appropriate expression tree iterator
+ *        operations.
  *
- * @see   Expression_Tree_Level_Order_Iterator_Impl, Expression_Tree_In_Order_Iterator_Impl, 
- *        Expression_Tree_Pre_Order_Iterator_Impl, and Expression_Tree_Post_Order_Iterator_Impl.
+ * @see Expression_Tree_Level_Order_Iterator_Impl,
+ *        Expression_Tree_In_Order_Iterator_Impl,
+ *        Expression_Tree_Pre_Order_Iterator_Impl, and
+ *        Expression_Tree_Post_Order_Iterator_Impl.
  */
-class Expression_Tree_Iterator
-{
+class Expression_Tree_Iterator {
 public:
   /// Copy ctor - needed for reference counting.
   Expression_Tree_Iterator (const Expression_Tree_Iterator &ts);
@@ -38,7 +40,8 @@ public:
   /// at the current position
   Expression_Tree operator* ();
 
-  /// Returns a const reference to the item contained at the current position
+  /// Returns a const reference to the item contained at the current
+  /// position
   const Expression_Tree operator* () const;
 
   /// Preincrement operator
@@ -72,17 +75,20 @@ private:
 
 /**
  * @class Expression_Tree_Const_Iterator
+ *
  * @brief Interface for the Iterator pattern that is used traverse
  *        through all the nodes in the expression tree in a const
- *        manner. 
+ *        manner.
  * 
  *        Plays the role of the "abstraction" class in the Bridge
  *        pattern and delegates to the appropriate "implementation"
  *        that performs the appropriate expression tree iterator
- *        operations. 
+ *        operations.
  *
- * @see   Expression_Tree_Level_Order_Iterator_Impl, Expression_Tree_In_Order_Iterator_Impl, 
- *        Expression_Tree_Pre_Order_Iterator_Impl, and Expression_Tree_Post_Order_Iterator_Impl.
+ * @see   Expression_Tree_Level_Order_Iterator_Impl,
+ *        Expression_Tree_In_Order_Iterator_Impl,
+ *        Expression_Tree_Pre_Order_Iterator_Impl, and
+ *        Expression_Tree_Post_Order_Iterator_Impl.
  */
 class Expression_Tree_Const_Iterator
 {
@@ -93,7 +99,8 @@ public:
   /// Copy ctor for impl *.
   explicit Expression_Tree_Const_Iterator (Iterator_Impl *impl);
   
-  /// Returns a const reference to the item contained at the current position
+  /// Returns a const reference to the item contained at the current
+  /// position
   const Expression_Tree operator* () const;
 
   /// Preincrement operator
@@ -124,4 +131,4 @@ private:
   Refcounter <Iterator_Impl> impl_;
 };
 
-#endif /* _ET_ITERATOR_H_ */
+#endif /* _ITERATOR_H */

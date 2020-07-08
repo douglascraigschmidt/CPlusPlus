@@ -1,5 +1,5 @@
-#ifndef _ET_STATE_H_
-#define _ET_STATE_H_
+#ifndef _STATE_H
+#define _STATE_H
 
 #include <string>
 #include <iostream>
@@ -10,9 +10,10 @@ class Tree_Context;
 
 /**
  * @class State
- * @brief Implementation of the State pattern that is used to define 
+ *
+ * @brief Implementation of the State pattern that is used to define
  *        the various states that affect how users operations are
- *        processed.   
+ *        processed.
  * 
  *        Plays the role of the "state" base class in the State
  *        pattern that is used as the basis for the subclasses that
@@ -25,7 +26,8 @@ public:
   class Invalid_State : public std::domain_error
   {
   public:
-    explicit Invalid_State(const std::string &message) : std::domain_error(message) {}
+    explicit Invalid_State(const std::string &message) 
+      : std::domain_error(message) {}
   }; 
 
   /// Set the desired format to the designated @a new_format, updating
@@ -66,6 +68,7 @@ public:
 
 /**
  * @class Uninitialized_State
+ *
  * @brief This is the initial state, which only allows @a format commands.
  */
 class Uninitialized_State : public State
@@ -81,21 +84,21 @@ public:
 private:
   /**
    * @class Uninitialized_State_Factory
+   *
    * @brief Implementation of a factory pattern that dynamically
    *        allocates the appropriate @a State object.
    * 
-   *        This is a variant of the Abstract Factory pattern that has a
-   *        set of related factory methods but which doesn't use
+   *        This is a variant of the Abstract Factory pattern that has
+   *        a set of related factory methods but which doesn't use
    *        inheritance.
    */
-  class Uninitialized_State_Factory
-  {
+  class Uninitialized_State_Factory {
   public:
     /// Constructor.
     Uninitialized_State_Factory ();
 
-    /// Dynamically allocate a new @a State
-    /// object based on the designated @a traversal_order and @a end_iter.
+    /// Dynamically allocate a new @a State object based on the
+    /// designated @a traversal_order and @a end_iter.
     static State *make_uninitialized_state (const std::string &format);
 
   private:
@@ -126,28 +129,28 @@ private:
 
 /**
  * @class Pre_Order_Uninitialized_State
- * @brief Now that the user has provided a format command
- *        indicating "pre-order" input this state will interpret the 
- *        subsequent expression accordingly.
+ *
+ * @brief Now that the user has provided a format command indicating
+ *        "pre-order" input this state will interpret the subsequent
+ *        expression accordingly.
  */
-class Pre_Order_Uninitialized_State : public Uninitialized_State
-{
+class Pre_Order_Uninitialized_State : public Uninitialized_State {
 public:
   /// Process the @a expression using a pre-order interpreter and
   /// update the state of the @a context to the @a
-  /// Pre_Order_Initialized_State.  
+  /// Pre_Order_Initialized_State.
   virtual void make_tree (Tree_Context &context,
                           const std::string &expression);
 };
 
 /**
  * @class Pre_Order_Initialized_State
+ *
  * @brief Now that the user has provided a expr command this state
  *        will print or evaluate the subsequent expression
- *        accordingly. 
+ *        accordingly.
  */
-class Pre_Order_Initialized_State : public Pre_Order_Uninitialized_State
-{
+class Pre_Order_Initialized_State : public Pre_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
@@ -162,12 +165,12 @@ public:
 
 /**
  * @class Post_Order_Uninitialized_State
- * @brief Now that the user has provided a format command
- *        indicating "post-order" input this state will interpret the 
- *        subsequent expression accordingly.
+ *
+ * @brief Now that the user has provided a format command indicating
+ *        "post-order" input this state will interpret the subsequent
+ *        expression accordingly.
  */
-class Post_Order_Uninitialized_State : public Uninitialized_State
-{
+class Post_Order_Uninitialized_State : public Uninitialized_State {
 public:
   /// Process the @a expression using a post-order interpreter and
   /// update the state of the @a context to the @a
@@ -178,12 +181,12 @@ public:
 
 /**
  * @class Post_Order_Initialized_State
+ *
  * @brief Now that the user has provided a expr command this state
  *        will print or evaluate the subsequent expression
- *        accordingly. 
+ *        accordingly.
  */
-class Post_Order_Initialized_State : public Post_Order_Uninitialized_State
-{
+class Post_Order_Initialized_State : public Post_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
@@ -198,28 +201,28 @@ public:
 
 /**
  * @class In_Order_Uninitialized_State
- * @brief Now that the user has provided a format command
- *        indicating "in-order" input this state will interpret the 
- *        subsequent expression accordingly.
+ *
+ * @brief Now that the user has provided a format command indicating
+ *        "in-order" input this state will interpret the subsequent
+ *        expression accordingly.
  */
-class In_Order_Uninitialized_State : public Uninitialized_State
-{
+class In_Order_Uninitialized_State : public Uninitialized_State {
 public:
   /// Process the @a expression using an in-order interpreter and
   /// update the state of the @a context to the @a
-  /// In_Order_Initialized_State.  
+  /// In_Order_Initialized_State.
   virtual void make_tree (Tree_Context &context,
                           const std::string &expression);
 };
 
 /**
  * @class In_Order_Initialized_State
+ *
  * @brief Now that the user has provided a expr command this state
  *        will print or evaluate the subsequent expression
- *        accordingly. 
+ *        accordingly.
  */
-class In_Order_Initialized_State : public In_Order_Uninitialized_State
-{
+class In_Order_Initialized_State : public In_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
@@ -234,28 +237,28 @@ public:
 
 /**
  * @class Level_Order_Uninitialized_State
- * @brief Now that the user has provided a format command
- *        indicating "level-order" input this state will interpret the 
- *        subsequent expression accordingly.
+ *
+ * @brief Now that the user has provided a format command indicating
+ *        "level-order" input this state will interpret the subsequent
+ *        expression accordingly.
  */
-class Level_Order_Uninitialized_State : public Uninitialized_State
-{
+class Level_Order_Uninitialized_State : public Uninitialized_State {
 public:
   /// Process the @a expression using a level-order interpreter and
   /// update the state of the @a context to the @a
-  /// Level_Order_Initialized_State.  
+  /// Level_Order_Initialized_State.
   virtual void make_tree (Tree_Context &context,
                           const std::string &expression);
 };
 
 /**
  * @class Level_Order_Initialized_State
+ *
  * @brief Now that the user has provided a expr command this state
  *        will print or evaluate the subsequent expression
- *        accordingly. 
+ *        accordingly.
  */
-class Level_Order_Initialized_State : public Level_Order_Uninitialized_State
-{
+class Level_Order_Initialized_State : public Level_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
@@ -268,4 +271,4 @@ public:
                          const std::string &format);
 };
 
-#endif /* TREE_STATE_H_ */
+#endif /* _STATE_H */

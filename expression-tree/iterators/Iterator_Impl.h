@@ -79,11 +79,13 @@ protected:
   /// The tree we are iterating over.
   const Expression_Tree &tree_;
 
-  template<typename T> static bool is_equal_stack(T *lhs, const Iterator_Impl &rhs);
+  template<typename T> static bool is_equal_stack(T *lhs,
+                                                  const Iterator_Impl &rhs);
 };
 
 /**
  * @class In_Order_Iterator_Impl
+ *
  * @brief Iterates through an @a Expression_Tree in in-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
@@ -94,9 +96,9 @@ class In_Order_Iterator_Impl : public Iterator_Impl
   friend class Expression_Tree_Iterator;
   friend class Refcounter<Iterator_Impl>;
 public:
-  /// Construct an In_Order_Iterator_Impl. If end_iter
-  /// is set to true, the iterator points to the end of the
-  /// tree. Otherwise, the iterator starts with a free tree.
+  /// Construct an In_Order_Iterator_Impl. If end_iter is set to true,
+  /// the iterator points to the end of the tree. Otherwise, the
+  /// iterator starts with a free tree.
   explicit In_Order_Iterator_Impl (const Expression_Tree &tree,
                                    bool end_iter = false);
 
@@ -147,6 +149,7 @@ private:
 
 /**
  * @class Pre_Order_Iterator_Impl
+ *
  * @brief Iterates through an @a Expression_Tree in level-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
@@ -211,6 +214,7 @@ private:
 
 /**
  * @class Post_Order_Iterator_Impl
+ *
  * @brief Iterates through an @a Expression_Tree in post-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
@@ -275,6 +279,7 @@ private:
 
 /**
  * @class Level_Order_Iter_Impl
+ *
  * @brief Iterates through an @a Expression_Tree in level-order.
  *
  *        Plays the role of the "implementor" class in the Bridge
@@ -286,9 +291,9 @@ class Level_Order_Iter_Impl : public Iterator_Impl
   friend class Refcounter<Iterator_Impl>;
 public:
 
-  /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter is set to
-  /// true, the iterator points to the end of the tree. Otherwise, the
-  /// iterator starts with a free tree.
+  /// Construct an Level_Order_Expression_Tree_Iterator. If end_iter
+  /// is set to true, the iterator points to the end of the
+  /// tree. Otherwise, the iterator starts with a free tree.
   explicit Level_Order_Iter_Impl (const Expression_Tree &tree,
                                   bool end_iter = false);
 

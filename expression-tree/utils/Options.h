@@ -9,14 +9,14 @@
 
 /**
  * @class Options
+ *
  * @brief Defines a singleton class to handle command-line option
  *        processing. 
  *
  *        This class implements the Singleton pattern since there's a
- *        need for just one set of command-line options. 
+ *        need for just one set of command-line options.
  */
-class Options
-{
+class Options {
 public:
   /// Method to return the one and only instance.
   static Options *instance ();
