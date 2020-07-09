@@ -23,7 +23,7 @@ class Component_Node;
  *        performs the appropriate expression tree iterator
  *        operations.
  *
- * @see Expression_Tree_Level_Order_Iterator_Impl,
+ * @see   Expression_Tree_Level_Order_Iterator_Impl,
  *        Expression_Tree_In_Order_Iterator_Impl,
  *        Expression_Tree_Pre_Order_Iterator_Impl, and
  *        Expression_Tree_Post_Order_Iterator_Impl.

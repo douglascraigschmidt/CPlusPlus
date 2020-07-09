@@ -1,7 +1,7 @@
 /* -*- C++ -*- */
 
-#ifndef _EXPRESSION_TREE_H_
-#define _EXPRESSION_TREE_H_
+#ifndef _EXPRESSION_TREE_H
+#define _EXPRESSION_TREE_H
 
 #include <string>
 #include <stdexcept>
@@ -97,4 +97,4 @@ private:
   Refcounter <Component_Node> root_;
 };
 
-#endif /* _EXPRESSION_TREE_H_ */
+#endif /* _EXPRESSION_TREE_H */

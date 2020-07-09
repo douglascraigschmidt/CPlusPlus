@@ -144,7 +144,7 @@ private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
 
-  friend class Iter_Impl;
+  friend class Iterator_Impl;
 };
 
 /**
@@ -209,7 +209,7 @@ private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
 
-  friend class Iter_Impl;
+  friend class Iterator_Impl;
 };
 
 /**
@@ -274,7 +274,7 @@ private:
   /// Our current position in the iteration.
   std::stack <Expression_Tree> stack_;
 
-  friend class Iter_Impl;
+  friend class Iterator_Impl;
 };
 
 /**

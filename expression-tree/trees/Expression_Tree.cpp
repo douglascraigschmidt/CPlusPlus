@@ -1,7 +1,4 @@
 /* -*- C++ -*- */
-#ifndef _EXPRESSION_TREE_CPP_
-#define _EXPRESSION_TREE_CPP_
-
 #include <stdlib.h>
 #include <algorithm>
 #include <sstream>
@@ -202,7 +199,7 @@ Expression_Tree::end (const std::string &traversal_order) {
 
 // Return a begin iterator of a specified type.
 
-Const_Iterator
+Expression_Tree::const_iterator
 Expression_Tree::begin (const std::string &traversal_order) const {
   auto *non_const_this = const_cast <Expression_Tree *> (this);
   return Expression_Tree::const_iterator (tree_iterator_factory.make_iterator(*non_const_this,
@@ -212,7 +209,7 @@ Expression_Tree::begin (const std::string &traversal_order) const {
 
 // Return an end iterator of a specified type.
 
-Const_Iterator
+Expression_Tree::const_iterator
 Expression_Tree::end (const std::string &traversal_order) const {
   auto *non_const_this = const_cast <Expression_Tree *> (this);
   return Expression_Tree::const_iterator (tree_iterator_factory.make_iterator(*non_const_this,
@@ -225,5 +222,3 @@ void
 Expression_Tree::accept (Visitor &visitor) const {
   root_->accept (visitor);
 }
-
-#endif /* _EXPRESSION_TREE_CPP_ */
