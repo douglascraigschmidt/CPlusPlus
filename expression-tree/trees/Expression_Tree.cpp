@@ -6,10 +6,10 @@
 #include <map>
 #include <stdexcept>
 
+#include "Expression_Tree.h"
 #include "composites/Component_Node.h"
 #include "iterators/Iterator.h"
 #include "iterators/Iterator_Impl.h"
-#include "Expression_Tree.h"
 
 /**
  * @class Iterator_Factory

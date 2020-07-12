@@ -69,8 +69,8 @@ State::format (Tree_Context &,
 }           
 
 void 
-State::make_tree (Tree_Context &,
-                  const std::string &) {
+State::expr (Tree_Context &,
+             const std::string &) {
   throw State::Invalid_State ("State::expr called in invalid state");
 }                
 
@@ -145,8 +145,8 @@ Uninitialized_State::format (Tree_Context &context,
 }           
 
 void 
-Pre_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
-                                          const std::string &expr) {
+Pre_Order_Uninitialized_State::expr (Tree_Context &context,
+                                     const std::string &expression) {
 }                
 
 void 
@@ -162,8 +162,8 @@ Pre_Order_Initialized_State::evaluate (Tree_Context &context,
 }
 
 void 
-Post_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
-                                           const std::string &expr) {
+Post_Order_Uninitialized_State::expr (Tree_Context &tree_context,
+                                      const std::string &expr) {
   Interpreter interpreter
     (new Post_Order_Interpreter
      (tree_context.interpreter_context_));
@@ -186,8 +186,8 @@ Post_Order_Initialized_State::evaluate (Tree_Context &context,
 }
 
 void 
-Level_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
-                                            const std::string &expr) {
+Level_Order_Uninitialized_State::expr (Tree_Context &tree_context,
+                                       const std::string &expr) {
 }                
 
 void 
@@ -203,8 +203,8 @@ Level_Order_Initialized_State::evaluate (Tree_Context &context,
 }
 
 void 
-In_Order_Uninitialized_State::make_tree (Tree_Context &tree_context,
-                                         const std::string &expr) {
+In_Order_Uninitialized_State::expr (Tree_Context &tree_context,
+                                    const std::string &expr) {
   Interpreter interpreter
     (new In_Order_Interpreter
        (tree_context.interpreter_context_));

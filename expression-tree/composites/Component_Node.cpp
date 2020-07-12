@@ -8,6 +8,11 @@
 Component_Node::~Component_Node (void) = default;
 
 int
+Component_Node::get_type () const {
+  return type_;
+}
+
+int
 Component_Node::item () const {
   throw Invalid_Function_Call ("Component_Node::item() called improperly");
   return 0;

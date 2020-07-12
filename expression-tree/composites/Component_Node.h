@@ -35,8 +35,43 @@ public:
       : std::domain_error(message) {}
   }; 
 
+  /*
+   * The following constants uniquely identify the type of each
+   * terminal symbol.
+   */
+  static const int MULTIPLICATION = 0;
+  static const int DIVISION = 1;
+  static const int ADDITION = 2;
+  static const int SUBTRACTION = 3;
+  static const int NEGATION = 4;
+  static const int LPAREN = 5;
+  static const int RPAREN = 6;
+  static const int ID = 7;
+  static const int NUMBER = 8;
+  static const int DELIMITER = 9;
+
+  /**
+   * The relative precedence of each terminal symbol above when it
+   * appears at the top of the stack.
+   */
+  constexpr static const int top_of_stack_precedence_[] = {
+    12, 11, 7, 6, 10, 2, 3, 15, 14, 1
+  };
+
+  /**
+   * The relative precedence of each terminal symbol above when it
+   * appears as the current token.
+   */
+   constexpr static const int current_token_precedence_[] = {
+     9, 8, 5, 4, 13, 18, 2, 17, 16, 1
+   };
+
   /// Dtor
   virtual ~Component_Node () = 0;
+
+  /// Returns the type of the component node (used by the
+  /// In_Order_Interpreter's operator-precedence parsing algorithm).
+  [[nodiscard]] int get_type() const;
 
   /// Return the item stored in the node (throws std::domain_error if
   /// called directly).
@@ -52,6 +87,11 @@ public:
   /// completely arbitrary visitor template (throws std::domain_error
   /// if called directly).
   virtual void accept (Visitor &visitor) const;
+
+private:
+  /// Stores the type of the component node (used by the
+  /// In_Order_Interpreter's operator-precedence parsing algorithm).
+  int type_;
 };
 
 #endif /* _COMPONENT_NODE_H */

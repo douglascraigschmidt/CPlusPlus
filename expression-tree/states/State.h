@@ -38,8 +38,8 @@ public:
   /// Make an expression tree based on the designated @a expression
   /// using the previously designated format, updating the state of
   /// the @context accordingly.
-  virtual void make_tree (Tree_Context &context,
-                          const std::string &expression);
+  virtual void expr (Tree_Context &context,
+                     const std::string &expression);
 
   /// Print the most recently created expression tree using the
   /// designated @a format, updating the state of the @context
@@ -139,8 +139,8 @@ public:
   /// Process the @a expression using a pre-order interpreter and
   /// update the state of the @a context to the @a
   /// Pre_Order_Initialized_State.
-  virtual void make_tree (Tree_Context &context,
-                          const std::string &expression);
+  void expr (Tree_Context &context,
+             const std::string &expression) override;
 };
 
 /**
@@ -175,8 +175,8 @@ public:
   /// Process the @a expression using a post-order interpreter and
   /// update the state of the @a context to the @a
   /// Post_Order_Initialized_State.  
-  virtual void make_tree (Tree_Context &context,
-                          const std::string &expression);
+  virtual void expr (Tree_Context &context,
+                     const std::string &expression);
 };
 
 /**
@@ -211,8 +211,8 @@ public:
   /// Process the @a expression using an in-order interpreter and
   /// update the state of the @a context to the @a
   /// In_Order_Initialized_State.
-  virtual void make_tree (Tree_Context &context,
-                          const std::string &expression);
+  virtual void expr (Tree_Context &context,
+                     const std::string &expression);
 };
 
 /**
@@ -247,8 +247,8 @@ public:
   /// Process the @a expression using a level-order interpreter and
   /// update the state of the @a context to the @a
   /// Level_Order_Initialized_State.
-  virtual void make_tree (Tree_Context &context,
-                          const std::string &expression);
+  virtual void expr (Tree_Context &context,
+                     const std::string &expression);
 };
 
 /**

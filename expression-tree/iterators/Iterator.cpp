@@ -3,8 +3,8 @@
 #include <sstream>
 
 #include "utils/Refcounter.h"
-#include "iterators/Iterator.h"
 #include "trees/Expression_Tree.h"
+#include "iterators/Iterator.h"
 
 /// Copy ctor - needed for reference counting.
 

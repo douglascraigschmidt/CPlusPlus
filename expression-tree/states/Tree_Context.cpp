@@ -22,7 +22,7 @@ Tree_Context::format (const std::string &new_format)
 void
 Tree_Context::expr (const std::string &expression)
 {
-  state_->make_tree (*this, expression);
+    state_->expr(*this, expression);
 }
 
 void

@@ -28,7 +28,7 @@ public:
   ~Interpreter_Context ();
 
   /// Return the value of a variable.
-  int get (const std::string& variable) const;
+  [[nodiscard]] int get (const std::string& variable) const;
 
   /// Set the value of a variable.
   void set (const std::string& variable, int value);
@@ -50,11 +50,10 @@ private:
  * @brief Plays the role of the "implementor" base class in the Bridge
  *        pattern that is used as the basis for the subclasses that
  *        actually define the various interpreters.
-
  */
 class Interpreter_Impl {
 public:
-  Interpreter_Impl(const Interpreter_Context &);
+  explicit Interpreter_Impl(const Interpreter_Context &);
 
   /// Converts a string into a parse tree and builds an expression
   /// tree out of the parse tree.
@@ -76,7 +75,7 @@ protected:
   /// with the root expression of the parse tree.  The Builder pattern
   /// is used at each node to create the appropriate subclass of @
   /// Component_Node.
-  virtual Expression_Tree build_expression_tree (Expr *parse_tree) = 0;
+  virtual Expression_Tree build_expression_tree (Expr *parse_tree);
 
   /// Plays the context role in the Interpreter pattern.
   const Interpreter_Context &context_;
@@ -96,7 +95,7 @@ class In_Order_Interpreter : public Interpreter_Impl
 {
 public:
   /// Constructor.
-  In_Order_Interpreter (const Interpreter_Context &context);
+  explicit In_Order_Interpreter (const Interpreter_Context &context);
 
   /// Destructor.
   ~In_Order_Interpreter () override;
@@ -104,56 +103,56 @@ public:
   /// Return the root of a parse tree corresponding to the @a input.
   Expr *build_parse_tree(const std::string &input) override;
 
-  /// Invoke a recursive build of the @a Expression_Tree, starting
-  /// with the root expression of the parse tree.  The Builder pattern
-  /// is used at each node to create the appropriate subclass of @
-  /// Component_Node.
-  Expression_Tree build_expression_tree (Expr *parse_tree) override;
-
-  /// Method for checking if a character is a number.
-  static bool is_number (char input);
-  
-  /// Method for checking if a character is a candidate for a part of
-  /// a variable name.
-  static bool is_alphanumeric (char input);
-
 private:
-  /// Inserts a terminal into the parse tree.
-  static void terminal_insert (Expr *op,
-                               std::list<Expr *>& list);
+  Expr *make_unary_expr(std::stack<Expr *> &handle_stack,
+                        Expr *expr);
 
-  /// Inserts a variable (leaf node / number) into the parse tree.
-  void variable_insert (const std::string &input,
-                        std::string::size_type &i,
-                        int & accumulated_precedence,
-                        std::list<Expr *>& list,
-                        Expr *& lastValidInput);
+  Expr *make_binary_expr(std::stack<Expr *> &handle_stack,
+                         Expr *expr);
 
-  /// Inserts a leaf node / number into the parse tree.
-  static void number_insert (const std::string &input,
-                      std::string::size_type &i,
-                      int & accumulated_precedence,
-                      std::list<Expr *>& list,
-                      Expr *& lastValidInput);
+  /**
+   * @class In_Order_Iterator
+   *
+   * @brief Iterates through the user input expression and converts it
+   * into a parse tree.
+   */
+  class In_Order_Iterator 
+    : public std::iterator <std::forward_iterator_tag, Expr *> {
+  public:
+    /// Constructor that initializes the iterator.
+    In_Order_Iterator (const std::string &input);
 
-  /// Inserts a multiplication or division into the parse tree.
-  static void precedence_insert (Expr *op, std::list<Expr *>& list);
+    /// No-op constructor (corresponds to the "end" of the iteration).
+    In_Order_Iterator ();
 
-  /// Run the main loop of the interpreter.
-  void main_loop (const std::string &input,
-                  std::string::size_type &i,
-                  Expr *& lastValidInput,
-                  bool & handled,
-                  int & accumulated_precedence,
-                  std::list<Expr *>& list);
+    /// Inequality operator.
+    bool operator != (const In_Order_Iterator &rhs);
 
-  /// Inserts parentheses into the parse tree.
-  void handle_parenthesis (const std::string &input,
-                           std::string::size_type &i,
-                           Expr *& lastValidInput,
-                           bool & handled,
-                           int & accumulated_precedence,
-                           std::list<Expr *>& list);
+    /// Dereference operator.
+    Expr *operator *();
+
+    /// Advance the iterator by one.
+    void operator++ ();
+
+  private:
+    /// Factory method that makes a number (terminal expression).
+    Expr *make_number();
+
+    /// Current index into the user input expression. 
+    int index_;
+  
+    /// Pointer to the user input expression.
+    const std::string *input_;
+
+    /// Pointer to the prior Expr.
+    Expr *prior_expr_;
+  };
+
+  /// Factory method that creates the first In_Order_Iterator.
+  static In_Order_Iterator begin(const std::string &input);
+
+  /// Factory method that creates the last In_Order_Iterator.
+  static In_Order_Iterator end();
 };
 
 /**
@@ -169,19 +168,13 @@ private:
 class Post_Order_Interpreter : public Interpreter_Impl {
 public:
   /// Constructor.
-  Post_Order_Interpreter (const Interpreter_Context &context);
+  explicit Post_Order_Interpreter (const Interpreter_Context &context);
 
   /// destructor
   ~Post_Order_Interpreter () override;
 
   /// Return the root of a parse tree corresponding to the @a input.
   Expr *build_parse_tree(const std::string &input) override;
-
-  /// Invoke a recursive build of the @a Expression_Tree, starting
-  /// with the root expression of the parse tree.  The Builder pattern
-  /// is used at each node to create the appropriate subclass of @
-  /// Component_Node.
-  Expression_Tree build_expression_tree (Expr *parse_tree) override;
 
 private:
   /**
@@ -214,8 +207,7 @@ private:
 
     /// Factory method that makes a non-terminal expression (e.g.,
     /// Add_Expr, Multiply_Expr, etc.).
-    template <typename T> Expr *
-    make_expr(std::stack<Expr *> *stack, Expr *right_expr);
+    template <typename T> Expr *make_expr(Expr *right_expr);
 
     /// Current index into the user input expression. 
     int index_;
