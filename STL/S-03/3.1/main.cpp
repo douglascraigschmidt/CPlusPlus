@@ -102,19 +102,19 @@
  * Unordered associative containers 
  */
 
-// set - Defines where the elements' values are the keys and
+// unordered_set - Defines where the elements' values are the keys and
 // duplicates are not allowed. It has fast lookup using the key.
 #include <unordered_set>
 
-// multiset - Defines where the elements' values are the keys and
+// unordered_multiset - Defines where the elements' values are the keys and
 // duplicates are allowed. It has fast lookup using the key.
 #include <unordered_set>
 
-// map - Key-to-value mapping where a single key can only be mapped to
+// unordered_map - Key-to-value mapping where a single key can only be mapped to
 // one value,
 #include <unordered_map>
 
-// multimap - Key-to-value mapping where a single key can be mapped to
+// unordered_multimap - Key-to-value mapping where a single key can be mapped to
 // many values.
 #include <unordered_map>
 
