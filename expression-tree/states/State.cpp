@@ -142,23 +142,6 @@ Uninitialized_State::format (Tree_Context &context,
   // Call factory method to initialize the context state.
   context.state (Uninitialized_State_Factory::make_uninitialized_state 
                  (new_format));
-}           
-
-void 
-Pre_Order_Uninitialized_State::expr (Tree_Context &context,
-                                     const std::string &expression) {
-}                
-
-void 
-Pre_Order_Initialized_State::print (Tree_Context &context,
-                                    const std::string &format) {
-  State::print_tree (context.tree (), format, std::cout);
-}
-
-void 
-Pre_Order_Initialized_State::evaluate (Tree_Context &context,
-                                       const std::string &param) {
-  State::evaluate_tree (context.tree (), param, std::cout);
 }
 
 void 
@@ -186,23 +169,6 @@ Post_Order_Initialized_State::evaluate (Tree_Context &context,
 }
 
 void 
-Level_Order_Uninitialized_State::expr (Tree_Context &tree_context,
-                                       const std::string &expr) {
-}                
-
-void 
-Level_Order_Initialized_State::print (Tree_Context &context,
-                                      const std::string &format) {
-  State::print_tree (context.tree (), format, std::cout);
-}
-
-void 
-Level_Order_Initialized_State::evaluate (Tree_Context &context,
-                                         const std::string &param) {
-  State::evaluate_tree (context.tree (), param, std::cout);
-}
-
-void 
 In_Order_Uninitialized_State::expr (Tree_Context &tree_context,
                                     const std::string &expr) {
   Interpreter interpreter
@@ -217,7 +183,7 @@ In_Order_Uninitialized_State::expr (Tree_Context &tree_context,
 void 
 In_Order_Initialized_State::print (Tree_Context &context,
                                    const std::string &format) {
-  print_tree (context.tree (), format, std::cout);
+  State::print_tree (context.tree (), format, std::cout);
   
 }
 
@@ -227,3 +193,38 @@ In_Order_Initialized_State::evaluate (Tree_Context &context,
   State::evaluate_tree (context.tree (), param, std::cout);
 }
 
+
+void
+Pre_Order_Uninitialized_State::expr (Tree_Context &context,
+                                     const std::string &expression) {
+}
+
+void
+Pre_Order_Initialized_State::print (Tree_Context &context,
+                                    const std::string &format) {
+    State::print_tree (context.tree (), format, std::cout);
+}
+
+void
+Pre_Order_Initialized_State::evaluate (Tree_Context &context,
+                                       const std::string &param) {
+    State::evaluate_tree (context.tree (), param, std::cout);
+}
+
+
+void
+Level_Order_Uninitialized_State::expr (Tree_Context &tree_context,
+                                       const std::string &expr) {
+}
+
+void
+Level_Order_Initialized_State::print (Tree_Context &context,
+                                      const std::string &format) {
+    State::print_tree (context.tree (), format, std::cout);
+}
+
+void
+Level_Order_Initialized_State::evaluate (Tree_Context &context,
+                                         const std::string &param) {
+    State::evaluate_tree (context.tree (), param, std::cout);
+}

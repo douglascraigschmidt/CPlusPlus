@@ -154,13 +154,13 @@ class Pre_Order_Initialized_State : public Pre_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
-  virtual void print (Tree_Context &context,
-                      const std::string &format);
+  void print (Tree_Context &context,
+                      const std::string &format) override;
 
   /// Evaluate the yield of the current expression tree in the @a
   /// context using the designed @a format.
-  virtual void evaluate (Tree_Context &context,
-                         const std::string &format);
+  void evaluate (Tree_Context &context,
+                         const std::string &format) override;
 };
 
 /**
@@ -175,8 +175,8 @@ public:
   /// Process the @a expression using a post-order interpreter and
   /// update the state of the @a context to the @a
   /// Post_Order_Initialized_State.  
-  virtual void expr (Tree_Context &context,
-                     const std::string &expression);
+  void expr (Tree_Context &context,
+                     const std::string &expression) override;
 };
 
 /**
@@ -190,13 +190,13 @@ class Post_Order_Initialized_State : public Post_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
-  virtual void print (Tree_Context &context,
-                      const std::string &format);
+  void print (Tree_Context &context,
+                      const std::string &format) override;
 
   /// Evaluate the yield of the current expression tree in the @a
   /// context using the designed @a format.
-  virtual void evaluate (Tree_Context &context,
-                         const std::string &format);
+  void evaluate (Tree_Context &context,
+                         const std::string &format) override;
 };
 
 /**
@@ -211,8 +211,8 @@ public:
   /// Process the @a expression using an in-order interpreter and
   /// update the state of the @a context to the @a
   /// In_Order_Initialized_State.
-  virtual void expr (Tree_Context &context,
-                     const std::string &expression);
+  void expr (Tree_Context &context,
+                     const std::string &expression) override;
 };
 
 /**
@@ -226,13 +226,13 @@ class In_Order_Initialized_State : public In_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
-  virtual void print (Tree_Context &context,
-                      const std::string &format);
+  void print (Tree_Context &context,
+                      const std::string &format) override;
 
   /// Evaluate the yield of the current expression tree in the @a
   /// context using the designed @a format.
-  virtual void evaluate (Tree_Context &context,
-                         const std::string &format);
+  void evaluate (Tree_Context &context,
+                         const std::string &format) override;
 };
 
 /**
@@ -247,8 +247,8 @@ public:
   /// Process the @a expression using a level-order interpreter and
   /// update the state of the @a context to the @a
   /// Level_Order_Initialized_State.
-  virtual void expr (Tree_Context &context,
-                     const std::string &expression);
+  void expr (Tree_Context &context,
+                     const std::string &expression) override;
 };
 
 /**
@@ -262,13 +262,13 @@ class Level_Order_Initialized_State : public Level_Order_Uninitialized_State {
 public:
   /// Print the current expression tree in the @a context using the
   /// designed @a format.
-  virtual void print (Tree_Context &context,
-                      const std::string &format);
+  void print (Tree_Context &context,
+                      const std::string &format) override;
 
   /// Evaluate the yield of the current expression tree in the @a
   /// context using the designed @a format.
-  virtual void evaluate (Tree_Context &context,
-                         const std::string &format);
+  void evaluate (Tree_Context &context,
+                         const std::string &format) override;
 };
 
 #endif /* _STATE_H */

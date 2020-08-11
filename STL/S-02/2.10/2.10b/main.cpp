@@ -27,7 +27,7 @@ constexpr long long
 cfactorial(const long long in,
            const long long sum = 1) {
   if (in > 1)
-    return cfactorial(in - 1,sum * in);
+    return cfactorial(in - 1, sum * in);
   else
     return sum;
 }

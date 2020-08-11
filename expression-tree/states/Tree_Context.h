@@ -65,7 +65,7 @@ public:
 
 private:
   /// Keep track of the current state that we're in.  We use an @a
-  /// std::auto_ptr to simplify memory management and avoid memory leaks.
+  /// std::unique_ptr to simplify memory management and avoid memory leaks.
   std::unique_ptr <State> state_;
   
   /// Current expression tree.
