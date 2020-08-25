@@ -31,8 +31,8 @@ template<typename T, template <typename ...> class sequential_container>
 stack<T, sequential_container> &
 stack<T, sequential_container>::operator=(stack<T, sequential_container> &&rhs)  noexcept {
   if (this != &rhs) {
-    size_ = rhs.size_;
-    stack_ = rhs.stack_;
+    size_ = std::move(rhs.size_);
+    stack_ = std::move(rhs.stack_);
   }
   return *this;
 }
