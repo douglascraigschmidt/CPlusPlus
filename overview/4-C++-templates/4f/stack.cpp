@@ -14,8 +14,8 @@ stack<T, sequential_container>::stack(const stack<T, sequential_container> &rhs)
 
 template<typename T, template <typename ...> class sequential_container>
 stack<T, sequential_container>::stack(stack &&rhs) noexcept
-  : size_(rhs.size_),
-    stack_(rhs.stack_) {
+  : size_(std::move(rhs.size_)),
+    stack_(std::move(rhs.stack_)) {
 }
 
 template<typename T, template <typename ...> class sequential_container>
