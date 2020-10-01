@@ -45,6 +45,7 @@ State::evaluate_tree (const Expression_Tree &tree,
   // << "':" << std::endl;
 
   Evaluation_Visitor evaluation_visitor;
+  // Visitor visitor = Visitor_Factory.make_visitor("Evaluation_Visitor");
   
   std::for_each (tree.begin (traversal_order),
                  tree.end (traversal_order),
