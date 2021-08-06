@@ -66,7 +66,7 @@ int main() {
   for (auto i : a)
     p(i);
 
-  cout << endl << fun.count() << " objects printed." << endl;
+  cout << endl << p.count() << " objects printed." << endl;
 
   return 0;
 }
