@@ -28,11 +28,9 @@ int main() {
        d.end() - 1,
        ostream_iterator<int>(cout, " + "));
 
-  auto total = 0;
-
   cout << *(d.end() - 1)
-       << " = " 
-       << accumulate(d.begin(), d.end(), total) 
+       << " = "
+       << accumulate(d.begin(), d.end(), 0)
        << endl;
 
   return 0;

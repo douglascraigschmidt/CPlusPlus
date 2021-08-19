@@ -44,12 +44,10 @@ int main () {
         v.end () - 1,
         os_iter (std::cout, " + "));
 
-  Vector::value_type sum = 0;
-
   if (!v.empty())
     cout << v.back () 
          << " = "  
-         << accumulate (v.begin (), v.end (), sum)
+         << accumulate (v.begin (), v.end (), 0)
          << endl;
 
   return 0;
